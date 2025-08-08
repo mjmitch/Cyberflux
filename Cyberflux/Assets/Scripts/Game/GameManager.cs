@@ -14,12 +14,17 @@ public class GameManager : MonoBehaviour
     // UI Stuff
     public Image playerHPBar;
     public TMP_Text playerHPText;
+    public TMP_Text playerAmmoText;
 
     [SerializeField] GameObject menuActive;
     [SerializeField] GameObject menuPause;
     [SerializeField] GameObject menuWin;
     [SerializeField] GameObject menuLose;
 
+    [SerializeField] public GameObject bossHPUI; 
+    [SerializeField] public Image bossHPBar;
+    [SerializeField] public TMP_Text bossNameText;
+    
     void Awake()
     {
         instance = this;
