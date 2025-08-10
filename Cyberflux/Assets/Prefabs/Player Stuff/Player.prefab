@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 269072012841348476}
   m_Layer: 6
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -57,7 +57,7 @@ MonoBehaviour:
   playerHeight: 2
   whatIsGround:
     serializedVersion: 2
-    m_Bits: 2048
+    m_Bits: 2049
   orientation: {fileID: 5485711972677828236}
 --- !u!54 &269072012841348476
 Rigidbody:
@@ -131,7 +131,7 @@ GameObject:
   - component: {fileID: 1845807806574764027}
   m_Layer: 0
   m_Name: PlayerModel
-  m_TagString: Untagged
+  m_TagString: PlayerModel
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
