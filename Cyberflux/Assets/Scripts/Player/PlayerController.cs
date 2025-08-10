@@ -1,7 +1,7 @@
 using System.Security.Cryptography.X509Certificates;
 using UnityEngine;
 
-public class PlayerController : MonoBehaviour
+public class PlayerController : MonoBehaviour, IDamage
 {
     [Header("Movement")]
     [SerializeField] float moveSpeed;
@@ -16,6 +16,8 @@ public class PlayerController : MonoBehaviour
     [Header("KeyBinds")]
     public KeyCode jumpKey = KeyCode.Space;
 
+    [Header("Stats")]
+    [SerializeField] int HP;
 
     [Header("Ground Check")]
     [SerializeField] float playerHeight;
@@ -27,6 +29,7 @@ public class PlayerController : MonoBehaviour
 
     float horizontalInput;
     float verticalInput;
+    int HPOriginal;
 
     Vector3 moveDir;
 
@@ -36,6 +39,7 @@ public class PlayerController : MonoBehaviour
 
     void Start()
     {
+        HPOriginal = HP;
         readyToJump = true;
         rb = GetComponent<Rigidbody>();
         rb.freezeRotation = true;
@@ -119,5 +123,17 @@ public class PlayerController : MonoBehaviour
     private void ResetJump()
     {
         readyToJump = true;
+    }
+
+    //Damage Interface
+
+    public void TakeDamage(int dmg)
+    {
+        HP -= dmg;
+    }
+
+    public int GetHP()
+    {
+        return HP;
     }
 }
