@@ -2,15 +2,15 @@ using UnityEngine;
 
 public class ButtonFunctions : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+   
+
+    public void StartGame()
     {
-        
+        GameManager.instance.StartGame();
     }
 
-    // Update is called once per frame
-    void Update()
+    public void QuitGame()
     {
-        
+        GameManager.instance.QuitGame();
     }
 }
