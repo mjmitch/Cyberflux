@@ -381,6 +381,8 @@ GameObject:
   - component: {fileID: 1459986816}
   - component: {fileID: 1459986815}
   - component: {fileID: 1459986814}
+  - component: {fileID: 1459986820}
+  - component: {fileID: 1459986819}
   m_Layer: 11
   m_Name: Electrical Hazard
   m_TagString: Hazard
@@ -403,11 +405,11 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
+  m_Size: {x: 1.02, y: 1.7, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!23 &1459986815
 MeshRenderer:
@@ -489,12 +491,60 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ec146253b1c8a6146aca4ba473638b93, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: 1
-  rb: {fileID: 0}
+  type: 2
+  rb: {fileID: 1459986819}
   damageAmount: 1
-  damageRate: 0
+  damageRate: 0.5
   speed: 0
   destroyTime: 0
+--- !u!54 &1459986819
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1459986813}
+  serializedVersion: 5
+  m_Mass: 1
+  m_LinearDamping: 0
+  m_AngularDamping: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 1
+--- !u!65 &1459986820
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1459986813}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &2077853608
 PrefabInstance:
   m_ObjectHideFlags: 0
