@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Security.Cryptography.X509Certificates;
 using UnityEngine;
 
@@ -7,7 +8,10 @@ public class PlayerController : MonoBehaviour, IDamage
     private float moveSpeed;
     [SerializeField] float walkSpeed;
     [SerializeField] float sprintSpeed;
+    [SerializeField] float slideSpeed;
 
+    private float desiredMoveSpeed;
+    private float lastDesiredMoveSpeed;
 
     [SerializeField] float groundDrag;
 
@@ -59,8 +63,11 @@ public class PlayerController : MonoBehaviour, IDamage
         walking,
         sprinting,
         crouching,
+        sliding,
         air
     }
+
+    public bool sliding;
 
     void Start()
     {
@@ -127,25 +134,42 @@ public class PlayerController : MonoBehaviour, IDamage
     private void StateHandler()
     {
 
+        //Sliding
+        if(sliding)
+        {
+            state = MovementState.sliding;
+
+            if(OnSlope() && rb.linearVelocity.y < 0.1f)
+            {
+                desiredMoveSpeed = slideSpeed;
+            }
+            else
+            {
+                desiredMoveSpeed = sprintSpeed;
+            }
+
+        }
+
+
         //Crouching
         if(Input.GetKeyDown(crouchKey))
         {
             state = MovementState.crouching;
-            moveSpeed = crouchSpeed;
+            desiredMoveSpeed = crouchSpeed;
         }
 
         //Sprinting
         if(grounded && Input.GetKey(sprintKey))
         {
             state = MovementState.sprinting;
-            moveSpeed = sprintSpeed;
+            desiredMoveSpeed = sprintSpeed;
         }
 
         // Walking
         else if(grounded)
         {
             state = MovementState.walking;
-            moveSpeed = walkSpeed;
+            desiredMoveSpeed = walkSpeed;
         }
 
         //In the air
@@ -153,6 +177,37 @@ public class PlayerController : MonoBehaviour, IDamage
         {
             state = MovementState.air;
         }
+
+        //Check if the desired Speed has change drastically
+        if(Mathf.Abs(desiredMoveSpeed - lastDesiredMoveSpeed) < 4f && moveSpeed != 0)
+        {
+            StopAllCoroutines();
+            StartCoroutine(LerpMoveSpeed());
+        }
+        else
+        {
+            moveSpeed = desiredMoveSpeed;
+        }
+
+        lastDesiredMoveSpeed = desiredMoveSpeed;
+    }
+    //Still working on this 
+
+    private IEnumerator LerpMoveSpeed()
+    {
+        float time = 0;
+        //Mathf.Abs = Absolute Value
+        float difference = Mathf.Abs(desiredMoveSpeed - moveSpeed);
+        float startValue = moveSpeed;
+
+        while(time < difference)
+        {
+            moveSpeed = Mathf.Lerp(startValue, desiredMoveSpeed, time / difference);
+            time += Time.deltaTime;
+            yield return null;
+        }
+
+        moveSpeed = desiredMoveSpeed;
     }
 
 
@@ -160,30 +215,28 @@ public class PlayerController : MonoBehaviour, IDamage
     {
         //Calculate Movement Direction
         moveDir = orientation.forward * verticalInput + orientation.right * horizontalInput;
-       
+
+        Debug.Log(moveSpeed);
         //Slope Handling
 
         if (OnSlope() && !slopeExit)
         {
-            rb.AddForce(GetSlopeMoveDirection() * moveSpeed * 20f, ForceMode.Force);
+            rb.AddForce(GetSlopeMoveDirection(moveDir) * moveSpeed * 20f, ForceMode.Force);
 
-            if(rb.linearVelocity.y > 0)
-            {
-                rb.AddForce(Vector3.down * 80f, ForceMode.Force);
+            if(rb.linearVelocity.y < 0)
+            {               
+                rb.AddForce(Vector3.down * 100f, ForceMode.Force);
             }
 
         }              
         //Just like controller.Move()
         if (grounded)
         {
-            Debug.Log("Grounded");
             rb.AddForce(moveDir.normalized * moveSpeed * 10f, ForceMode.Force);
-
         }
 
         else if (!grounded)
         {
-            Debug.Log("In the Air");
             rb.AddForce(moveDir.normalized * moveSpeed * 10f * airMultiplier, ForceMode.Force);
         }
 
@@ -200,9 +253,7 @@ public class PlayerController : MonoBehaviour, IDamage
             if(rb.linearVelocity.magnitude > moveSpeed)
             {
                 rb.linearVelocity = rb.linearVelocity.normalized * moveSpeed;
-            }
-
-            
+            }          
            
         }
         //Making sure that you can't move faster on the ground
@@ -237,7 +288,7 @@ public class PlayerController : MonoBehaviour, IDamage
         slopeExit = false;
     }
 
-    private bool OnSlope()
+    public bool OnSlope()
     {
         if(Physics.Raycast(transform.position, Vector3.down, out slopeHit, playerHeight * 0.5f + 0.3f))
         {
@@ -248,9 +299,9 @@ public class PlayerController : MonoBehaviour, IDamage
         return false;
     }
     
-    private Vector3 GetSlopeMoveDirection()
+    public Vector3 GetSlopeMoveDirection(Vector3 direction)
     {
-        return Vector3.ProjectOnPlane(moveDir, slopeHit.normal).normalized;
+        return Vector3.ProjectOnPlane(direction, slopeHit.normal).normalized;
     }
 
     //Damage Interface
