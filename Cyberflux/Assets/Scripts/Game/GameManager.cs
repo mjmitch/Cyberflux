@@ -51,6 +51,7 @@ public class GameManager : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        GameStatePause();
         minutes = 0;
         seconds = 0;
         miliseconds = 0;
@@ -61,19 +62,30 @@ public class GameManager : MonoBehaviour
     void Update()
     {
         if (!isPaused) {
-            
+            UpdateLevelTimer();
         }
-        UpdateLevelTimer();
+        
     }
 
     public void GameStatePause()
     {
-        
+        isPaused = !isPaused;
+        Time.timeScale = 0;
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
     }
 
     public void GameStateResume()
     {
-        
+        isPaused = !isPaused;
+        //Time.timeScale = timescaleOriginal;
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
+        if (menuActive != null)
+        {
+            menuActive.SetActive(false);
+        }
+        menuActive = null;
     }
 
     public void StartGame()
