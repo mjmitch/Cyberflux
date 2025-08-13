@@ -6,22 +6,37 @@ public class EnemyAI : MonoBehaviour, IDamage
     
     [SerializeField] Renderer model;
     [SerializeField] NavMeshAgent agent;
-    [SerializeField] Transform shootPos;
-    [SerializeField] Transform headPos;
+    [SerializeField] Transform attackPosition;
+    [SerializeField] Transform headPosition;
     [SerializeField] GameObject bullet;
-    [SerializeField] float shootRate;
+    [SerializeField] float attackRate;
     [SerializeField] int HP;
     [SerializeField] int fov;
     [SerializeField] int faceTargetSpeed;
     [SerializeField] int roamDis;
     [SerializeField] int roamPauseTime;
+    [SerializeField] private bool slowImmune;
+    [Range(0f, 1f)] [SerializeField] private float slowModifier;
+    private bool isSlowed;
+    [SerializeField] private bool isEliteEnemy;
+    
+    private enum enemyType
+    {
+        melee,
+        ranged,
+        exploding,
+        swarm,
+        flying
+    }
+
+    [SerializeField] private enemyType type;
     
     [SerializeField] int dropChance;
     private GameObject player;
     private Vector3 playerDirection;
     private AudioSource audioPlayer;
     
-    float shootTimer;
+    float attackTimer;
     float angleToPlayer;
     float roamTime;
     float agentStopDisOrig;
@@ -44,11 +59,29 @@ public class EnemyAI : MonoBehaviour, IDamage
     // Update is called once per frame
     void Update()
     {
-        if(agent.remainingDistance <= 0.01f)
-            roamTime += Time.deltaTime;
-        if (!playerInTrigger || (playerInTrigger && CanSeePlayer()))
-            RoamCheck();
-
+        /*
+        switch (type)
+        {
+            case enemyType.melee:
+                break;
+            case enemyType.ranged:
+                break;
+            case enemyType.exploding:
+                break;
+            case enemyType.swarm:
+                break;
+            case enemyType.flying:
+                break;
+        }
+        */
+        
+        if (type != enemyType.flying && !isEliteEnemy)
+        {
+            if(agent.remainingDistance <= 0.01f)
+                roamTime += Time.deltaTime;
+            if (!playerInTrigger || (playerInTrigger && CanSeePlayer()))
+                RoamCheck();
+        }
         if (isInCombat)
             Combat();
     }
@@ -74,10 +107,10 @@ public class EnemyAI : MonoBehaviour, IDamage
     {
         if (isInCombat)
             return true;
-        playerDirection = player.transform.position - headPos.position;
+        playerDirection = player.transform.position - headPosition.position;
         angleToPlayer = Vector3.Angle(playerDirection, transform.forward);
         RaycastHit hit;
-        if (Physics.Raycast(headPos.position, playerDirection, out hit))
+        if (Physics.Raycast(headPosition.position, playerDirection, out hit))
         {
             if (hit.collider.CompareTag("Player") && angleToPlayer < fov)
             {
@@ -141,11 +174,11 @@ public class EnemyAI : MonoBehaviour, IDamage
 
     public void TakeSlow()
     {
-        throw new System.NotImplementedException();
+        isSlowed = true;
     }
 
     public void RemoveSlow()
     {
-        throw new System.NotImplementedException();
+        isSlowed = false;
     }
 }
