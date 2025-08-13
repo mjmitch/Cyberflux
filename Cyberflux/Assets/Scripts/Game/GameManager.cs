@@ -1,8 +1,9 @@
+using NUnit.Framework;
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
-using TMPro;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
@@ -29,7 +30,13 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] CanvasGroup OptionPanel;
 
-
+    int minutes;
+    public TMP_Text TimerMinutes;
+    int seconds;
+    public TMP_Text TimerSeconds;
+    float miliseconds;
+    public TMP_Text TimerMiliseconds;
+ 
     enum GameState { Title, Playing, Win, Lose }
     GameState _state = GameState.Title;
 
@@ -37,20 +44,26 @@ public class GameManager : MonoBehaviour
     {
         instance = this;
         player = GameObject.FindWithTag("Player");
-
+        
         ShowTitle();
     }
     
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        
+        minutes = 0;
+        seconds = 0;
+        miliseconds = 0;
+        UpdateTimerText();
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        if (!isPaused) {
+            
+        }
+        UpdateLevelTimer();
     }
 
     public void GameStatePause()
@@ -110,5 +123,54 @@ public class GameManager : MonoBehaviour
       
     }
 
+    void UpdateLevelTimer()
+    {
+        if (!isPaused)
+        {
+            if (miliseconds < 1) {
+                miliseconds += 1 * Time.deltaTime;
+                UpdateTimerText();
 
+            }
+
+            if (miliseconds >= 1 && seconds < 59)
+            {
+                miliseconds = 0;
+                seconds += 1;
+                UpdateTimerText();
+            }
+            
+            if (miliseconds >= 1 && seconds == 59 && minutes < 59)
+            {
+                minutes += 1;
+                seconds = 0;
+                miliseconds = 0;
+
+                UpdateTimerText();
+            }
+
+            if (seconds == 59 && minutes == 59 && miliseconds >= 1)
+            {
+                TimerMiliseconds.text = "99";
+            }
+        }
+            
+    }
+
+    void UpdateTimerText()
+    {
+        float temp = miliseconds % 1 * 100;
+        int tempmiliseconds = (int)temp;
+        TimerMiliseconds.text = tempmiliseconds.ToString();
+
+        if (seconds < 10)
+            TimerSeconds.text = "0" + seconds.ToString() + ".";
+        else
+            TimerSeconds.text = seconds.ToString() + ".";
+
+        if (minutes < 10)
+            TimerMinutes.text = "0" + minutes.ToString() + ".";
+        else
+            TimerMinutes.text = minutes.ToString() + ".";
+    }
 }
