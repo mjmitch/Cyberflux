@@ -23,10 +23,10 @@ public class JumpPad : MonoBehaviour
             cooldownTimer-= Time.deltaTime;
             
         }
-        if (cooldownTimer <= 0 && gameObject.layer == 11)
-        {
-            gameObject.layer = 13;
-        }
+        //if (cooldownTimer <= 0 && gameObject.layer == 11)
+        //{
+        //    gameObject.layer = 13;
+        //}
         
     }
 
@@ -45,7 +45,7 @@ public class JumpPad : MonoBehaviour
             GameObject.FindWithTag("Player").GetComponent<Rigidbody>().AddForce(transform.forward * launchStrength, ForceMode.Force);
             cooldownTimer = cooldownTime;
 
-            StartCoroutine(JumpDelay());
+            //StartCoroutine(JumpDelay());
         }
 
 
@@ -69,7 +69,7 @@ public class JumpPad : MonoBehaviour
             GameObject.FindWithTag("Player").GetComponent<Rigidbody>().linearVelocity = Vector3.zero;
             GameObject.FindWithTag("Player").GetComponent<Rigidbody>().AddForce(transform.forward * launchStrength, ForceMode.Force);
             cooldownTimer = cooldownTime;
-            StartCoroutine(JumpDelay());
+            //StartCoroutine(JumpDelay());
         }
 
 
@@ -79,9 +79,9 @@ public class JumpPad : MonoBehaviour
 
     }
 
-    IEnumerator JumpDelay()
-    {
-        yield return new WaitForSeconds(.5f);
-        gameObject.layer = 11;
-    }
+    //IEnumerator JumpDelay()
+    //{
+    //    yield return new WaitForSeconds(.5f);
+    //    gameObject.layer = 11;
+    //}
 }
