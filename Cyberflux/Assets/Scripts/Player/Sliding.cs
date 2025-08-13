@@ -43,6 +43,7 @@ public class Sliding : MonoBehaviour
         if(Input.GetKeyDown(slideKey) && (horizontalInput != 0 || verticalInput != 0) && playerScript.grounded)
         {
             StartSlide();
+            
         }
 
         if(Input.GetKeyUp(slideKey) && playerScript.sliding) 
@@ -54,9 +55,12 @@ public class Sliding : MonoBehaviour
     //Fixed update is for Physics, not input handling
     private void FixedUpdate()
     {
+        
+
         if(playerScript.sliding)
         {
             SlidingMovement();
+            
         }
     }
 

@@ -6,13 +6,24 @@ public class PlayerController : MonoBehaviour, IDamage, IHeal
 {
     [Header("Movement")]
     private float moveSpeed;
+    private float desiredMoveSpeed;
+    private float lastDesiredMoveSpeed;
     [SerializeField] float walkSpeed;
     [SerializeField] float sprintSpeed;
     [SerializeField] float slideSpeed;
+    [SerializeField] float wallrunSpeed;
+    [Range(0.01f, 0.99f)] [SerializeField] private float slowModifier;
 
-    private float desiredMoveSpeed;
-    private float lastDesiredMoveSpeed;
-
+    [Header("Camera")]
+    public float NormalFov;
+    public Camera cam;
+    [SerializeField] float slidingFOV;
+    [SerializeField] float wallRunningFov;
+    [SerializeField] float sprintingFov;
+    public float fovChangeSpeed;
+    private float TargetFov;
+   
+    
     [SerializeField] float groundDrag;
 
     [Header("Jumping")]
@@ -63,12 +74,15 @@ public class PlayerController : MonoBehaviour, IDamage, IHeal
     {
         walking,
         sprinting,
+        wallrunning,
         crouching,
         sliding,
         air
     }
 
+    public bool wallrunning;
     public bool sliding;
+    public bool sprinting;
 
     void Start()
     {
@@ -77,6 +91,8 @@ public class PlayerController : MonoBehaviour, IDamage, IHeal
         rb = GetComponent<Rigidbody>();
         rb.freezeRotation = true;
         startingHeight = transform.localScale.y;
+        NormalFov = cam.fieldOfView;
+        cam = Camera.main.GetComponent<Camera>();
 
     }
 
@@ -85,14 +101,11 @@ public class PlayerController : MonoBehaviour, IDamage, IHeal
     {
         grounded = Physics.Raycast(transform.position, Vector3.down, playerHeight * 0.5f + 0.2f, whatIsGround);
 
-        
+        Debug.Log(cam.fieldOfView);
 
         MyInput();
         SpeedControl();
         StateHandler();
-        
-
-       
 
         //Handle Drag
         if (grounded)
@@ -145,10 +158,19 @@ public class PlayerController : MonoBehaviour, IDamage, IHeal
     private void StateHandler()
     {
 
+        //WallRunning 
+        if(wallrunning)
+        {
+            state = MovementState.wallrunning;
+            desiredMoveSpeed = wallrunSpeed;
+        }
+
         //Sliding
         if(sliding)
         {
             state = MovementState.sliding;
+
+            cam.fieldOfView = Mathf.Lerp(cam.fieldOfView, slidingFOV, Time.deltaTime * fovChangeSpeed);
 
             if(OnSlope() && rb.linearVelocity.y < 0.1f)
             {
@@ -172,6 +194,9 @@ public class PlayerController : MonoBehaviour, IDamage, IHeal
         else if(grounded && Input.GetKey(sprintKey))
         {
             state = MovementState.sprinting;
+
+            cam.fieldOfView = Mathf.Lerp(cam.fieldOfView, sprintingFov, Time.deltaTime * fovChangeSpeed);
+
             desiredMoveSpeed = sprintSpeed;
         }
 
@@ -199,6 +224,8 @@ public class PlayerController : MonoBehaviour, IDamage, IHeal
         {
             moveSpeed = desiredMoveSpeed;
         }
+
+        cam.fieldOfView = Mathf.Lerp(cam.fieldOfView, NormalFov, Time.deltaTime * fovChangeSpeed);
 
         lastDesiredMoveSpeed = desiredMoveSpeed;
     }
@@ -252,7 +279,7 @@ public class PlayerController : MonoBehaviour, IDamage, IHeal
         }
 
         //Turn off Gravity when on a slope (No more slidey slide)
-        rb.useGravity = !OnSlope();
+        if(!wallrunning) rb.useGravity = !OnSlope();
     }
 
     //To make sure you can't go faster than the selected move speed
@@ -329,18 +356,18 @@ public class PlayerController : MonoBehaviour, IDamage, IHeal
 
     public void TakeSlow()
     {
-        walkSpeed /= 2;
-        sprintSpeed /= 2;
-        slideSpeed /= 2;
-        crouchSpeed /= 2;
+        walkSpeed *= slowModifier;
+        sprintSpeed *= slowModifier;
+        slideSpeed *= slowModifier;
+        crouchSpeed *= slowModifier;
     }
 
     public void RemoveSlow()
     {
-        walkSpeed *= 2;
-        sprintSpeed *= 2;
-        slideSpeed *= 2;
-        crouchSpeed *= 2;
+        walkSpeed /= slowModifier;
+        sprintSpeed /= slowModifier;
+        slideSpeed /= slowModifier;
+        crouchSpeed /= slowModifier;
     }
 
     public bool Heal(int amount)

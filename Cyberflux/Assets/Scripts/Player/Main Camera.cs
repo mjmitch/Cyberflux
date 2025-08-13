@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class MainCamera : MonoBehaviour
@@ -5,6 +6,8 @@ public class MainCamera : MonoBehaviour
 
     public float sensX;
     public float sensY;
+
+    public Camera cam;
 
     public Transform orientation;
 
@@ -33,4 +36,5 @@ public class MainCamera : MonoBehaviour
         transform.rotation = Quaternion.Euler(xRotation, yRotation, 0);
         orientation.rotation = Quaternion.Euler(0, yRotation, 0);
     }
+
 }
