@@ -138,4 +138,14 @@ public class EnemyAI : MonoBehaviour, IDamage
     {
         return HP;
     }
+
+    public void TakeSlow()
+    {
+        throw new System.NotImplementedException();
+    }
+
+    public void RemoveSlow()
+    {
+        throw new System.NotImplementedException();
+    }
 }

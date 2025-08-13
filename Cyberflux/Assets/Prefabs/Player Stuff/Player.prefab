@@ -121,6 +121,7 @@ GameObject:
   - component: {fileID: 8085989986708616326}
   - component: {fileID: 280831597712182119}
   - component: {fileID: 7962889560883757391}
+  - component: {fileID: 8744238162476625676}
   m_Layer: 6
   m_Name: PlayerController
   m_TagString: Player
@@ -160,6 +161,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   walkSpeed: 12
   sprintSpeed: 18
+  slideSpeed: 0
   groundDrag: 4
   jumpForce: 12
   jumpCooldown: 0.25
@@ -169,7 +171,7 @@ MonoBehaviour:
   jumpKey: 32
   sprintKey: 304
   crouchKey: 306
-  HP: 10
+  HP: 100
   playerHeight: 2
   whatIsGround:
     serializedVersion: 2
@@ -177,6 +179,7 @@ MonoBehaviour:
   maxSlopeAngle: 40
   orientation: {fileID: 2253439677119928108}
   state: 0
+  sliding: 0
 --- !u!54 &7962889560883757391
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -204,6 +207,29 @@ Rigidbody:
   m_Interpolate: 1
   m_Constraints: 112
   m_CollisionDetection: 1
+--- !u!136 &8744238162476625676
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 582248119451382777}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.5
+  m_Height: 1
+  m_Direction: 1
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &1379884792544498658
 GameObject:
   m_ObjectHideFlags: 0
@@ -260,7 +286,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1014074056099352219}
   m_Layer: 0
-  m_Name: PLAYER
+  m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

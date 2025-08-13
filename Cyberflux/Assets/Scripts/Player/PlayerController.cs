@@ -327,6 +327,22 @@ public class PlayerController : MonoBehaviour, IDamage, IHeal
         return HP;
     }
 
+    public void TakeSlow()
+    {
+        walkSpeed /= 2;
+        sprintSpeed /= 2;
+        slideSpeed /= 2;
+        crouchSpeed /= 2;
+    }
+
+    public void RemoveSlow()
+    {
+        walkSpeed *= 2;
+        sprintSpeed *= 2;
+        slideSpeed *= 2;
+        crouchSpeed *= 2;
+    }
+
     public bool Heal(int amount)
     {
         if (HP < HPOriginal)
