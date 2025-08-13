@@ -13,4 +13,10 @@ public class ButtonFunctions : MonoBehaviour
     {
         GameManager.instance.QuitGame();
     }
+
+    public void GoToCredits()
+    {
+       
+        GameManager.instance.LoadLevel(11);
+    }
 }
