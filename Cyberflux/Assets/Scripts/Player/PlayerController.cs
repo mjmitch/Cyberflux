@@ -6,12 +6,15 @@ public class PlayerController : MonoBehaviour, IDamage, IHeal
 {
     [Header("Movement")]
     private float moveSpeed;
+    private float desiredMoveSpeed;
+    private float lastDesiredMoveSpeed;
     [SerializeField] float walkSpeed;
     [SerializeField] float sprintSpeed;
     [SerializeField] float slideSpeed;
+    [SerializeField] float wallrunSpeed;
 
-    private float desiredMoveSpeed;
-    private float lastDesiredMoveSpeed;
+
+   
 
     [SerializeField] float groundDrag;
 
@@ -63,11 +66,13 @@ public class PlayerController : MonoBehaviour, IDamage, IHeal
     {
         walking,
         sprinting,
+        wallrunning,
         crouching,
         sliding,
         air
     }
 
+    public bool wallrunning;
     public bool sliding;
 
     void Start()
@@ -90,9 +95,6 @@ public class PlayerController : MonoBehaviour, IDamage, IHeal
         MyInput();
         SpeedControl();
         StateHandler();
-        
-
-       
 
         //Handle Drag
         if (grounded)
@@ -144,6 +146,13 @@ public class PlayerController : MonoBehaviour, IDamage, IHeal
 
     private void StateHandler()
     {
+
+        //WallRunning 
+        if(wallrunning)
+        {
+            state = MovementState.wallrunning;
+            desiredMoveSpeed = wallrunSpeed;
+        }
 
         //Sliding
         if(sliding)
