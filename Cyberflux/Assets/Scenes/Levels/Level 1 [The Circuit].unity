@@ -911,6 +911,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4340230380250090284, guid: 978f962633e6a484292c3caf6e9cecbe, type: 3}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 5814340485721310996, guid: 978f962633e6a484292c3caf6e9cecbe, type: 3}
       propertyPath: m_Name
       value: Electrical Hazard
@@ -3545,6 +3549,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 424553122664585970, guid: 48336de922d670f4e9fc9598a557dff7, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1518813813051868083, guid: 48336de922d670f4e9fc9598a557dff7, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -3631,23 +3639,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7864089454844122865, guid: 48336de922d670f4e9fc9598a557dff7, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 0.33110368
       objectReference: {fileID: 0}
     - target: {fileID: 7864089454844122865, guid: 48336de922d670f4e9fc9598a557dff7, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7864089454844122865, guid: 48336de922d670f4e9fc9598a557dff7, type: 3}
       propertyPath: m_AnchorMin.x
-      value: 0
+      value: 0.33110368
       objectReference: {fileID: 0}
     - target: {fileID: 8317006937342610605, guid: 48336de922d670f4e9fc9598a557dff7, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 0.33110368
       objectReference: {fileID: 0}
     - target: {fileID: 8317006937342610605, guid: 48336de922d670f4e9fc9598a557dff7, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -4624,7 +4632,7 @@ PrefabInstance:
       objectReference: {fileID: 1068437601}
     - target: {fileID: 280831597712182119, guid: 2a43059ae07f44340b28e40e2efb2107, type: 3}
       propertyPath: slowModifier
-      value: 0.01
+      value: 0.3
       objectReference: {fileID: 0}
     - target: {fileID: 1014074056099352219, guid: 2a43059ae07f44340b28e40e2efb2107, type: 3}
       propertyPath: m_LocalPosition.x
