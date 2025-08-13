@@ -12,6 +12,7 @@ public class PlayerController : MonoBehaviour, IDamage, IHeal
     [SerializeField] float sprintSpeed;
     [SerializeField] float slideSpeed;
     [SerializeField] float wallrunSpeed;
+    [Range(0.01f, 0.99f)] [SerializeField] private float slowModifier;
 
 
    
@@ -338,18 +339,18 @@ public class PlayerController : MonoBehaviour, IDamage, IHeal
 
     public void TakeSlow()
     {
-        walkSpeed /= 2;
-        sprintSpeed /= 2;
-        slideSpeed /= 2;
-        crouchSpeed /= 2;
+        walkSpeed *= slowModifier;
+        sprintSpeed *= slowModifier;
+        slideSpeed *= slowModifier;
+        crouchSpeed *= slowModifier;
     }
 
     public void RemoveSlow()
     {
-        walkSpeed *= 2;
-        sprintSpeed *= 2;
-        slideSpeed *= 2;
-        crouchSpeed *= 2;
+        walkSpeed /= slowModifier;
+        sprintSpeed /= slowModifier;
+        slideSpeed /= slowModifier;
+        crouchSpeed /= slowModifier;
     }
 
     public bool Heal(int amount)

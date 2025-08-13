@@ -162,7 +162,6 @@ public class GameManager : MonoBehaviour
             }
             UpdateTimerText();
         }
-            
     }
 
     void UpdateTimerText()

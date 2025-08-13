@@ -1,27 +1,50 @@
+using System;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
+using Random = UnityEngine.Random;
 
 public class EnemyAI : MonoBehaviour, IDamage
 {
     
     [SerializeField] Renderer model;
     [SerializeField] NavMeshAgent agent;
-    [SerializeField] Transform shootPos;
-    [SerializeField] Transform headPos;
+    [SerializeField] Transform attackPosition;
+    [SerializeField] Transform headPosition;
     [SerializeField] GameObject bullet;
-    [SerializeField] float shootRate;
+    [SerializeField] float attackRate;
     [SerializeField] int HP;
     [SerializeField] int fov;
     [SerializeField] int faceTargetSpeed;
     [SerializeField] int roamDis;
     [SerializeField] int roamPauseTime;
+    [SerializeField] private bool slowImmune;
+    [Range(0f, 1f)] [SerializeField] private float slowModifier;
+    private bool isSlowed;
+    [SerializeField] private bool isEliteEnemy;
+    [Range(0.5f, 3f)] [SerializeField] private float moveCoverTime;
+    float moveCoverTimer;
+
+    [Range(0, 3)] [SerializeField] private int explosionSize;
+    [Range(5, 25)] [SerializeField] private int explosionDamage;
+    
+    private enum enemyType
+    {
+        melee,
+        ranged,
+        exploding,
+        swarm,
+        flying
+    }
+
+    [SerializeField] private enemyType type;
     
     [SerializeField] int dropChance;
     private GameObject player;
     private Vector3 playerDirection;
     private AudioSource audioPlayer;
     
-    float shootTimer;
+    float attackTimer;
     float angleToPlayer;
     float roamTime;
     float agentStopDisOrig;
@@ -44,13 +67,21 @@ public class EnemyAI : MonoBehaviour, IDamage
     // Update is called once per frame
     void Update()
     {
-        if(agent.remainingDistance <= 0.01f)
-            roamTime += Time.deltaTime;
-        if (!playerInTrigger || (playerInTrigger && CanSeePlayer()))
-            RoamCheck();
-
+        if (type != enemyType.flying && !isInCombat)
+        {
+            if(agent.remainingDistance <= 0.01f)
+                roamTime += Time.deltaTime;
+            if (!playerInTrigger || (playerInTrigger && CanSeePlayer()))
+                RoamCheck();
+        }
         if (isInCombat)
+        {
+            if (isEliteEnemy)
+                EliteCombatMovement();
+            else
+                BasicCombatMovement();
             Combat();
+        }
     }
 
     void RoamCheck()
@@ -74,10 +105,10 @@ public class EnemyAI : MonoBehaviour, IDamage
     {
         if (isInCombat)
             return true;
-        playerDirection = player.transform.position - headPos.position;
+        playerDirection = player.transform.position - headPosition.position;
         angleToPlayer = Vector3.Angle(playerDirection, transform.forward);
         RaycastHit hit;
-        if (Physics.Raycast(headPos.position, playerDirection, out hit))
+        if (Physics.Raycast(headPosition.position, playerDirection, out hit))
         {
             if (hit.collider.CompareTag("Player") && angleToPlayer < fov)
             {
@@ -112,21 +143,133 @@ public class EnemyAI : MonoBehaviour, IDamage
         }
     }
 
-    void Attack()
+    void MeleeAttack()
     {
         
     }
 
-    void CombatMovement()
+    void RangedAttack()
     {
         
+    }
+
+    void FlyingAttack()
+    {
+        
+    }
+
+    void ExplodingAttack()
+    {
+        
+    }
+
+    void SwarmAttack()
+    {
+        
+    }
+    
+    void BasicCombatMovement()
+    {
+        switch (type)
+        {
+            case enemyType.melee:
+                agent.stoppingDistance = 0.5f;
+                break;
+            case enemyType.ranged:
+                agent.stoppingDistance = 5000;
+                break;
+            case enemyType.exploding:
+                agent.stoppingDistance = 0;
+                break;
+            case enemyType.swarm:
+                agent.stoppingDistance = 0;
+                break;
+            case enemyType.flying:
+                FlyingMovement();
+                break;
+        }
+    }
+
+    void EliteCombatMovement()
+    {
+        switch (type)
+        {
+            case enemyType.melee:
+                agent.stoppingDistance = 5000;
+                FindNextClosestCover();
+                break;
+            case enemyType.ranged:
+                agent.stoppingDistance = 5000;
+                FindCover();
+                break;
+            case enemyType.exploding:
+                agent.stoppingDistance = 5000;
+                FindNextClosestCover();
+                break;
+            case enemyType.swarm:
+                agent.stoppingDistance = 0;
+                break;
+            case enemyType.flying:
+                FlyingMovement();
+                break;
+        }
     }
 
     void Combat()
     {
+        if (isEliteEnemy)
+        {
+            switch (type)
+            {
+                case enemyType.melee:
+                    break;
+                case enemyType.ranged:
+                    break;
+                case enemyType.exploding:
+                    if((player.transform.position - this.transform.position).magnitude < explosionSize)
+                        ExplodingAttack();
+                    break;
+                case enemyType.swarm:
+                    break;
+                case enemyType.flying:
+                    break;
+            }
+        }
 
+        else
+        {
+            switch (type)
+            {
+                case enemyType.melee:
+                    break;
+                case enemyType.ranged:
+                    break;
+                case enemyType.exploding:
+                    if((player.transform.position - this.transform.position).magnitude < explosionSize)
+                        ExplodingAttack();
+                    break;
+                case enemyType.swarm:
+                    
+                    break;
+                case enemyType.flying:
+                    break;
+            }
+        }
+    }
 
-        Attack();
+    void FindCover()
+    {
+        
+    }
+
+    void FindNextClosestCover()
+    {
+        
+    }
+
+    void FlyingMovement()
+    {
+        
     }
 
     public void TakeDamage(int dmg)
@@ -141,11 +284,11 @@ public class EnemyAI : MonoBehaviour, IDamage
 
     public void TakeSlow()
     {
-        throw new System.NotImplementedException();
+        isSlowed = true;
     }
 
     public void RemoveSlow()
     {
-        throw new System.NotImplementedException();
+        isSlowed = false;
     }
 }
