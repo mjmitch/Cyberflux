@@ -48,7 +48,7 @@ public class GameManager : MonoBehaviour
         player = GameObject.FindWithTag("Player");
         playerScript = player.GetComponent<PlayerController>();
 
-        ShowTitle();
+        //ShowTitle();
     }
     
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -144,30 +144,23 @@ public class GameManager : MonoBehaviour
         {
             if (miliseconds < 1) {
                 miliseconds += 1 * Time.deltaTime;
-                UpdateTimerText();
-
             }
-
-            if (miliseconds >= 1 && seconds < 59)
+            else if (seconds < 59)
             {
                 miliseconds = 0;
                 seconds += 1;
-                UpdateTimerText();
             }
-            
-            if (miliseconds >= 1 && seconds == 59 && minutes < 59)
+            else if (minutes < 59)
             {
                 minutes += 1;
                 seconds = 0;
                 miliseconds = 0;
-
-                UpdateTimerText();
             }
-
-            if (seconds == 59 && minutes == 59 && miliseconds >= 1)
+            else
             {
                 TimerMiliseconds.text = "99";
             }
+            UpdateTimerText();
         }
             
     }
