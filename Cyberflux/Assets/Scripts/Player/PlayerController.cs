@@ -216,7 +216,7 @@ public class PlayerController : MonoBehaviour, IDamage
         //Calculate Movement Direction
         moveDir = orientation.forward * verticalInput + orientation.right * horizontalInput;
 
-        Debug.Log(moveSpeed);
+        //Debug.Log(moveSpeed);
         //Slope Handling
 
         if (OnSlope() && !slopeExit)
