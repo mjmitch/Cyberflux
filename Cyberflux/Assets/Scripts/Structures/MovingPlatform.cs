@@ -84,11 +84,16 @@ public class MovingPlatform : MonoBehaviour
             Rigidbody playerRb = GameManager.instance.player.gameObject.GetComponent<Rigidbody>();
             playerRb.interpolation = RigidbodyInterpolation.None;
 
-              other.transform.root.SetParent(transform, true);
-           
+            other.transform.root.SetParent(transform, true);
+
         }
         else
         {
+            if (other.GetComponent<Rigidbody>() != null)
+            {
+                other.GetComponent<Rigidbody>().interpolation = RigidbodyInterpolation.None;
+            }
+    
             other.transform.root.SetParent(transform, true);
         }
 
@@ -110,6 +115,10 @@ public class MovingPlatform : MonoBehaviour
         }
         else
         {
+            if (other.GetComponent<Rigidbody>() != null)
+            {
+                other.GetComponent<Rigidbody>().interpolation = RigidbodyInterpolation.Interpolate;
+            }
             other.transform.root.parent = null;
         }
         

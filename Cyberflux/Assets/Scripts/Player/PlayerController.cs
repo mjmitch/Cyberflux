@@ -2,7 +2,7 @@ using System.Collections;
 using System.Security.Cryptography.X509Certificates;
 using UnityEngine;
 
-public class PlayerController : MonoBehaviour, IDamage
+public class PlayerController : MonoBehaviour, IDamage, IHeal
 {
     [Header("Movement")]
     private float moveSpeed;
@@ -34,6 +34,7 @@ public class PlayerController : MonoBehaviour, IDamage
 
     [Header("Stats")]
     [SerializeField] int HP;
+    
 
     [Header("Ground Check")]
     [SerializeField] float playerHeight;
@@ -216,7 +217,7 @@ public class PlayerController : MonoBehaviour, IDamage
         //Calculate Movement Direction
         moveDir = orientation.forward * verticalInput + orientation.right * horizontalInput;
 
-        Debug.Log(moveSpeed);
+        //Debug.Log(moveSpeed);
         //Slope Handling
 
         if (OnSlope() && !slopeExit)
@@ -316,19 +317,20 @@ public class PlayerController : MonoBehaviour, IDamage
         return HP;
     }
 
-    public void TakeSlow()
+    public bool Heal(int amount)
     {
-        walkSpeed /= 2;
-        sprintSpeed /= 2;
-        slideSpeed /= 2;
-        crouchSpeed /= 2;
-    }
+        if (HP < HPOriginal)
+        {
+            //StartCoroutine(HealFlashScreen());
+            HP += amount;
 
-    public void RemoveSlow()
-    {
-        walkSpeed *= 2;
-        sprintSpeed *= 2;
-        slideSpeed *= 2;
-        crouchSpeed *= 2;
+            if (HP > HPOriginal)
+            {
+                HP = HPOriginal;
+            }
+           // updatePlayerUI();
+            return true;
+        }
+        return false;
     }
 }
