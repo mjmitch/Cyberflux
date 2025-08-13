@@ -40,7 +40,7 @@ public class PlayerController : MonoBehaviour, IDamage, IHeal
     [Header("Ground Check")]
     [SerializeField] float playerHeight;
     [SerializeField] LayerMask whatIsGround;
-    bool grounded;
+    public bool grounded;
 
     [Header("Slope Handling")]
     [SerializeField] float maxSlopeAngle;
@@ -86,15 +86,25 @@ public class PlayerController : MonoBehaviour, IDamage, IHeal
     {
         grounded = Physics.Raycast(transform.position, Vector3.down, playerHeight * 0.5f + 0.2f, whatIsGround);
 
+        
+
         MyInput();
         SpeedControl();
         StateHandler();
+        
+
+       
 
         //Handle Drag
         if (grounded)
+        {
             rb.linearDamping = groundDrag;
+        }
         else
+        {
             rb.linearDamping = 0;
+        }
+            
    
     }
 
@@ -152,16 +162,15 @@ public class PlayerController : MonoBehaviour, IDamage, IHeal
 
         }
 
-
         //Crouching
-        if(Input.GetKeyDown(crouchKey))
+        else if(Input.GetKeyDown(crouchKey))
         {
             state = MovementState.crouching;
             desiredMoveSpeed = crouchSpeed;
         }
 
         //Sprinting
-        if(grounded && Input.GetKey(sprintKey))
+        else if(grounded && Input.GetKey(sprintKey))
         {
             state = MovementState.sprinting;
             desiredMoveSpeed = sprintSpeed;
@@ -181,10 +190,11 @@ public class PlayerController : MonoBehaviour, IDamage, IHeal
         }
 
         //Check if the desired Speed has change drastically
-        if(Mathf.Abs(desiredMoveSpeed - lastDesiredMoveSpeed) < 4f && moveSpeed != 0)
+        if(Mathf.Abs(desiredMoveSpeed - lastDesiredMoveSpeed) > 4f && moveSpeed != 0)
         {
             StopAllCoroutines();
-            StartCoroutine(LerpMoveSpeed());
+            //StartCoroutine(LerpMoveSpeed());
+            
         }
         else
         {
@@ -195,22 +205,22 @@ public class PlayerController : MonoBehaviour, IDamage, IHeal
     }
     //Still working on this 
 
-    private IEnumerator LerpMoveSpeed()
-    {
-        float time = 0;
-        //Mathf.Abs = Absolute Value
-        float difference = Mathf.Abs(desiredMoveSpeed - moveSpeed);
-        float startValue = moveSpeed;
+    //private IEnumerator LerpMoveSpeed()
+    //{
+    //    float time = 0;
+    //    //Mathf.Abs = Absolute Value
+    //    float difference = Mathf.Abs(desiredMoveSpeed - moveSpeed);
+    //    float startValue = moveSpeed;
 
-        while(time < difference)
-        {
-            moveSpeed = Mathf.Lerp(startValue, desiredMoveSpeed, time / difference);
-            time += Time.deltaTime;
-            yield return null;
-        }
+    //    while (time < difference)
+    //    {
+    //        moveSpeed = Mathf.Lerp(startValue, desiredMoveSpeed, time / difference);
+    //        time += Time.deltaTime;
+    //        yield return null;
+    //    }
 
-        moveSpeed = desiredMoveSpeed;
-    }
+    //    moveSpeed = desiredMoveSpeed;
+    //}
 
 
     private void MovePlayer()
