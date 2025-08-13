@@ -12,6 +12,8 @@ public class GameManager : MonoBehaviour
     
     public GameObject player;
 
+    public PlayerController playerScript;
+
     public bool isPaused;
 
     // UI Stuff
@@ -44,14 +46,15 @@ public class GameManager : MonoBehaviour
     {
         instance = this;
         player = GameObject.FindWithTag("Player");
-        
+        playerScript = player.GetComponent<PlayerController>();
+
         ShowTitle();
     }
     
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        GameStatePause();
+        //GameStatePause();
         minutes = 0;
         seconds = 0;
         miliseconds = 0;
