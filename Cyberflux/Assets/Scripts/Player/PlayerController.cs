@@ -2,7 +2,7 @@ using System.Collections;
 using System.Security.Cryptography.X509Certificates;
 using UnityEngine;
 
-public class PlayerController : MonoBehaviour, IDamage
+public class PlayerController : MonoBehaviour, IDamage, IHeal
 {
     [Header("Movement")]
     private float moveSpeed;
@@ -34,6 +34,7 @@ public class PlayerController : MonoBehaviour, IDamage
 
     [Header("Stats")]
     [SerializeField] int HP;
+    
 
     [Header("Ground Check")]
     [SerializeField] float playerHeight;
@@ -314,5 +315,22 @@ public class PlayerController : MonoBehaviour, IDamage
     public int GetHP()
     {
         return HP;
+    }
+
+    public bool Heal(int amount)
+    {
+        if (HP < HPOriginal)
+        {
+            //StartCoroutine(HealFlashScreen());
+            HP += amount;
+
+            if (HP > HPOriginal)
+            {
+                HP = HPOriginal;
+            }
+           // updatePlayerUI();
+            return true;
+        }
+        return false;
     }
 }
