@@ -40,7 +40,7 @@ public class Sliding : MonoBehaviour
         horizontalInput = Input.GetAxisRaw("Horizontal");
         verticalInput = Input.GetAxisRaw("Vertical");
 
-        if(Input.GetKeyDown(slideKey) && (horizontalInput != 0 || verticalInput != 0))
+        if(Input.GetKeyDown(slideKey) && (horizontalInput != 0 || verticalInput != 0) && playerScript.grounded)
         {
             StartSlide();
         }
@@ -87,9 +87,7 @@ public class Sliding : MonoBehaviour
         //If sliding on a slope
         else
         {
-
             rb.AddForce(playerScript.GetSlopeMoveDirection(inputDir) * slideForce, ForceMode.Force);
-
         }
 
 
