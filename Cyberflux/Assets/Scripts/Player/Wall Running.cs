@@ -1,3 +1,4 @@
+using Unity.VisualScripting.Antlr3.Runtime.Tree;
 using UnityEngine;
 
 public class WallRunning : MonoBehaviour
@@ -6,10 +7,18 @@ public class WallRunning : MonoBehaviour
     [SerializeField] LayerMask whatIsWall;
     [SerializeField] LayerMask whatIsGround;
     [SerializeField] float wallRunForce;
+    [SerializeField] float wallJumpUpForce;
+    [SerializeField] float wallJumpSideForce;
+    [SerializeField] float wallClimbSpeed;
     [SerializeField] float maxWallRunTime;
     private float wallRunTimer;
 
     [Header("Input")]
+    [SerializeField] KeyCode jumpKey = KeyCode.Space;
+    [SerializeField] KeyCode upwardsRunKey = KeyCode.LeftShift;
+    [SerializeField] KeyCode downwardsRunKey = KeyCode.LeftControl;
+    bool upwardsRunning;
+    bool downwardsRunning;
     private float horizontalInput;
     private float verticalInput;
 
@@ -20,6 +29,16 @@ public class WallRunning : MonoBehaviour
     private RaycastHit rightWallhit;
     private bool wallLeft;
     private bool wallRight;
+
+    [Header("Exiting")]
+    private bool exitingWall;
+    [SerializeField] float exitWallTime;
+    private float exitWallTimer;
+
+    [Header("Gravity")]
+    public bool useGravity;
+    [SerializeField] float gravityCounterForce;
+
 
     [Header("References")]
     public Transform orientation;
@@ -64,8 +83,11 @@ public class WallRunning : MonoBehaviour
         horizontalInput = Input.GetAxisRaw("Horizontal");
         verticalInput = Input.GetAxisRaw("Vertical");
 
+        upwardsRunning = Input.GetKey(upwardsRunKey);
+        downwardsRunning = Input.GetKey(downwardsRunKey);
+
         //State 1 - Wallrunning
-        if ((wallLeft || wallRight) && verticalInput > 0 && AboveGround())
+        if ((wallLeft || wallRight) && verticalInput > 0 && AboveGround() && !exitingWall)
         {
             //Start Wallrunning
             if(!playerScript.wallrunning)
@@ -73,10 +95,46 @@ public class WallRunning : MonoBehaviour
                 StartWallRun();
             }
 
+            if(wallRunTimer > 0)
+            {
+                wallRunTimer -= Time.deltaTime;
+            }
+
+            if(wallRunTimer <=0 && playerScript.wallrunning)
+            {
+                exitingWall = true;
+                exitWallTimer = exitWallTime;
+            }
+
+            if(Input.GetKeyDown(jumpKey))
+            {
+                WallJump();
+            }
+
         }
-        else
+        //State 2
+        else if(exitingWall)
         {
             if(playerScript.wallrunning)
+            {
+                StopWallRun();
+            }
+
+            if(exitWallTimer > 0)
+            {
+                exitWallTimer -= Time.deltaTime;
+            }
+
+            if(exitWallTimer <= 0)
+            {
+                exitingWall = false;
+            }
+        }
+
+        //State 3
+        else
+        {
+            if (playerScript.wallrunning)
             {
                 StopWallRun();
             }
@@ -87,16 +145,18 @@ public class WallRunning : MonoBehaviour
     private void StartWallRun()
     {
         playerScript.wallrunning = true;
+
+        wallRunTimer = maxWallRunTime;
+
+        rb.linearVelocity = new Vector3(rb.linearVelocity.x, 0f, rb.linearVelocity.z);
     }
 
     private void WallRunningMovement()
     {
-        rb.useGravity = false;
-
-        rb.linearVelocity = new Vector3(rb.linearVelocity.x, 0f, rb.linearVelocity.z);
+        rb.useGravity = useGravity;
+        
 
         Vector3 wallNormal = wallRight ? rightWallhit.normal : leftWallhit.normal;
-
         Vector3 wallForward = Vector3.Cross(wallNormal, transform.up);
 
         if ((orientation.forward - wallForward).magnitude > (orientation.forward - -wallForward).magnitude)
@@ -107,18 +167,47 @@ public class WallRunning : MonoBehaviour
         //Forward Force
         rb.AddForce(wallForward * wallRunForce, ForceMode.Force);
 
+        if(upwardsRunning)
+        {
+            rb.linearVelocity = new Vector3(rb.linearVelocity.x, wallClimbSpeed, rb.linearVelocity.z);
+        }
+        if (downwardsRunning)
+        {
+            rb.linearVelocity = new Vector3(rb.linearVelocity.x, -wallClimbSpeed, rb.linearVelocity.z);
+        }
         //Push towards wall
         if (!(wallLeft && horizontalInput > 0) && !(wallRight && horizontalInput < 0))
         {
             rb.AddForce(-wallNormal * 100, ForceMode.Force);
         }
 
-    }     
+        //weaken the gravity so it won't instantly pull you down
+        if(useGravity)
+        {
+            rb.AddForce(transform.up * gravityCounterForce, ForceMode.Force);
+        }
 
-        
+    }     
 
     private void StopWallRun()
     {
         playerScript.wallrunning = false;
     }
+
+    private void WallJump()
+    {
+        //Exiting Wall State
+        exitingWall = true;
+        exitWallTimer = exitWallTime;
+
+        Vector3 wallNormal = wallRight ? rightWallhit.normal : leftWallhit.normal;
+
+        Vector3 forceToApply = transform.up * wallJumpUpForce + wallNormal * wallJumpSideForce;
+
+        //Reset the Y vel and add force
+        rb.linearVelocity = new Vector3(rb.linearVelocity.x, 0f, rb.linearVelocity.z);
+        rb.AddForce(forceToApply, ForceMode.Impulse);
+    }
+
+
 }

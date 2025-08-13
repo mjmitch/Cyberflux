@@ -156,14 +156,23 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   whatIsWall:
     serializedVersion: 2
-    m_Bits: 2048
+    m_Bits: 6144
   whatIsGround:
     serializedVersion: 2
-    m_Bits: 2048
+    m_Bits: 6144
   wallRunForce: 200
-  maxWallRunTime: 1.5
+  wallJumpUpForce: 10
+  wallJumpSideForce: 15
+  wallClimbSpeed: 8
+  maxWallRunTime: 0.8
+  jumpKey: 32
+  upwardsRunKey: 304
+  downwardsRunKey: 306
   wallCheckDistance: 0.7
   minJumpHeight: 2
+  exitWallTime: 0.2
+  useGravity: 0
+  gravityCounterForce: 25
   orientation: {fileID: 750361587}
 --- !u!1 &248047348
 GameObject:
@@ -813,6 +822,11 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 453470823}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!20 &461169955 stripped
+Camera:
+  m_CorrespondingSourceObject: {fileID: 7443088924458907976, guid: 2a43059ae07f44340b28e40e2efb2107, type: 3}
+  m_PrefabInstance: {fileID: 1502616190996623691}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &605087916
 GameObject:
   m_ObjectHideFlags: 0
@@ -3229,28 +3243,56 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 280831597712182119, guid: 2a43059ae07f44340b28e40e2efb2107, type: 3}
+      propertyPath: cam
+      value: 
+      objectReference: {fileID: 461169955}
+    - target: {fileID: 280831597712182119, guid: 2a43059ae07f44340b28e40e2efb2107, type: 3}
+      propertyPath: NormalFov
+      value: 90
+      objectReference: {fileID: 0}
+    - target: {fileID: 280831597712182119, guid: 2a43059ae07f44340b28e40e2efb2107, type: 3}
       propertyPath: crouchKey
       value: 99
       objectReference: {fileID: 0}
     - target: {fileID: 280831597712182119, guid: 2a43059ae07f44340b28e40e2efb2107, type: 3}
       propertyPath: walkSpeed
-      value: 12
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 280831597712182119, guid: 2a43059ae07f44340b28e40e2efb2107, type: 3}
       propertyPath: slideSpeed
-      value: 25
+      value: 17
+      objectReference: {fileID: 0}
+    - target: {fileID: 280831597712182119, guid: 2a43059ae07f44340b28e40e2efb2107, type: 3}
+      propertyPath: slidingFOV
+      value: 120
       objectReference: {fileID: 0}
     - target: {fileID: 280831597712182119, guid: 2a43059ae07f44340b28e40e2efb2107, type: 3}
       propertyPath: sprintSpeed
-      value: 18
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 280831597712182119, guid: 2a43059ae07f44340b28e40e2efb2107, type: 3}
+      propertyPath: spritingFov
+      value: 110
       objectReference: {fileID: 0}
     - target: {fileID: 280831597712182119, guid: 2a43059ae07f44340b28e40e2efb2107, type: 3}
       propertyPath: slowModifier
       value: 0.01
       objectReference: {fileID: 0}
     - target: {fileID: 280831597712182119, guid: 2a43059ae07f44340b28e40e2efb2107, type: 3}
+      propertyPath: sprintingFov
+      value: 110
+      objectReference: {fileID: 0}
+    - target: {fileID: 280831597712182119, guid: 2a43059ae07f44340b28e40e2efb2107, type: 3}
       propertyPath: wallrunSpeed
-      value: 15
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 280831597712182119, guid: 2a43059ae07f44340b28e40e2efb2107, type: 3}
+      propertyPath: fovChangeSpeed
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 280831597712182119, guid: 2a43059ae07f44340b28e40e2efb2107, type: 3}
+      propertyPath: wallRunningFov
+      value: 120
       objectReference: {fileID: 0}
     - target: {fileID: 1014074056099352219, guid: 2a43059ae07f44340b28e40e2efb2107, type: 3}
       propertyPath: m_LocalPosition.x

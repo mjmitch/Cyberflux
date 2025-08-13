@@ -14,9 +14,16 @@ public class PlayerController : MonoBehaviour, IDamage, IHeal
     [SerializeField] float wallrunSpeed;
     [Range(0.01f, 0.99f)] [SerializeField] private float slowModifier;
 
-
+    [Header("Camera")]
+    public float NormalFov;
+    public Camera cam;
+    [SerializeField] float slidingFOV;
+    [SerializeField] float wallRunningFov;
+    [SerializeField] float sprintingFov;
+    public float fovChangeSpeed;
+    private float TargetFov;
    
-
+    
     [SerializeField] float groundDrag;
 
     [Header("Jumping")]
@@ -75,6 +82,7 @@ public class PlayerController : MonoBehaviour, IDamage, IHeal
 
     public bool wallrunning;
     public bool sliding;
+    public bool sprinting;
 
     void Start()
     {
@@ -83,6 +91,8 @@ public class PlayerController : MonoBehaviour, IDamage, IHeal
         rb = GetComponent<Rigidbody>();
         rb.freezeRotation = true;
         startingHeight = transform.localScale.y;
+        NormalFov = cam.fieldOfView;
+        cam = Camera.main.GetComponent<Camera>();
 
     }
 
@@ -91,7 +101,7 @@ public class PlayerController : MonoBehaviour, IDamage, IHeal
     {
         grounded = Physics.Raycast(transform.position, Vector3.down, playerHeight * 0.5f + 0.2f, whatIsGround);
 
-        
+        Debug.Log(cam.fieldOfView);
 
         MyInput();
         SpeedControl();
@@ -160,6 +170,8 @@ public class PlayerController : MonoBehaviour, IDamage, IHeal
         {
             state = MovementState.sliding;
 
+            cam.fieldOfView = Mathf.Lerp(cam.fieldOfView, slidingFOV, Time.deltaTime * fovChangeSpeed);
+
             if(OnSlope() && rb.linearVelocity.y < 0.1f)
             {
                 desiredMoveSpeed = slideSpeed;
@@ -182,6 +194,9 @@ public class PlayerController : MonoBehaviour, IDamage, IHeal
         else if(grounded && Input.GetKey(sprintKey))
         {
             state = MovementState.sprinting;
+
+            cam.fieldOfView = Mathf.Lerp(cam.fieldOfView, sprintingFov, Time.deltaTime * fovChangeSpeed);
+
             desiredMoveSpeed = sprintSpeed;
         }
 
@@ -209,6 +224,8 @@ public class PlayerController : MonoBehaviour, IDamage, IHeal
         {
             moveSpeed = desiredMoveSpeed;
         }
+
+        cam.fieldOfView = Mathf.Lerp(cam.fieldOfView, NormalFov, Time.deltaTime * fovChangeSpeed);
 
         lastDesiredMoveSpeed = desiredMoveSpeed;
     }
@@ -262,7 +279,7 @@ public class PlayerController : MonoBehaviour, IDamage, IHeal
         }
 
         //Turn off Gravity when on a slope (No more slidey slide)
-        rb.useGravity = !OnSlope();
+        if(!wallrunning) rb.useGravity = !OnSlope();
     }
 
     //To make sure you can't go faster than the selected move speed
