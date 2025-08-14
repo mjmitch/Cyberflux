@@ -4,7 +4,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
-
+using UnityEngine.InputSystem;
 
 
 public class GameManager : MonoBehaviour
@@ -70,30 +70,59 @@ public class GameManager : MonoBehaviour
         if (!isPaused) {
             UpdateLevelTimer();
         }
+
         
-        
-        
+        if (Keyboard.current != null && Keyboard.current.escapeKey.wasPressedThisFrame)
+        {
+            if (!isPaused) GameStatePause();
+            else GameStateResume();
+        }
+
     }
 
     public void GameStatePause()
     {
-        isPaused = !isPaused;
-        Time.timeScale = 0;
+        if (isPaused) return;
+
+        isPaused = true;
+        Time.timeScale = 0f;
+
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
-        
+
+        if (menuPause) menuPause.SetActive(true);
+        menuActive = menuPause;
+
+        // If Options is open, make sure it blocks input while paused
+        if (OptionPanel)
+        {
+            OptionPanel.alpha = OptionPanel.alpha; // no visual change, just keep state
+            OptionPanel.blocksRaycasts = true;
+        }
+
     }
 
     public void GameStateResume()
     {
-        isPaused = !isPaused;
-        //Time.timeScale = timescaleOriginal;
+        if (!isPaused) return;
+
+        // Hide pause and any active menu
+        if (menuActive) menuActive.SetActive(false);
+        if (menuPause) menuPause.SetActive(false);
+
+        // Hide options panel if it was opened from pause
+        if (OptionPanel)
+        {
+            OptionPanel.alpha = 0f;
+            OptionPanel.blocksRaycasts = false;
+        }
+
+        isPaused = false;
+        Time.timeScale = 1f;
+
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
-        if (menuActive != null)
-        {
-            menuActive.SetActive(false);
-        }
+
         menuActive = null;
     }
 
@@ -124,13 +153,62 @@ public class GameManager : MonoBehaviour
     
     public void YouWin()
     {
-       
+        isPaused = true;
+        Time.timeScale = 0f;
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
+
+        if (menuLose) menuLose.SetActive(false);
+        if (menuWin) menuWin.SetActive(true);
+        menuActive = menuWin;
     }
 
     public void YouLose()
     {
+        isPaused = true;
+        Time.timeScale = 0f;
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
 
+        if (menuWin) menuWin.SetActive(false);
+        if (menuLose) menuLose.SetActive(true);
+        menuActive = menuLose;
     }
+
+    public void ContinueFromWin()   // Next Level
+    {
+        // hide UI & resume before scene change
+        if (menuWin) menuWin.SetActive(false);
+        isPaused = false;
+        Time.timeScale = 1f;
+
+        int next = SceneManager.GetActiveScene().buildIndex + 1;
+        int last = SceneManager.sceneCountInBuildSettings - 1;
+
+        if (next <= last) LoadLevel(next);
+        else LoadLevel(0);   // loop back to Title when out of levels
+    }
+
+    public void RestartLevel()
+    {
+        if (menuWin) menuWin.SetActive(false);
+        if (menuLose) menuLose.SetActive(false);
+        isPaused = false;
+        Time.timeScale = 1f;
+
+        LoadLevel(SceneManager.GetActiveScene().buildIndex);
+    }
+
+    public void ReturnToTitle()
+    {
+        if (menuWin) menuWin.SetActive(false);
+        if (menuLose) menuLose.SetActive(false);
+        isPaused = false;
+        Time.timeScale = 1f;
+
+        LoadLevel(0); // Title Screen index
+    }
+
 
     public void UpdateUI()
     {
