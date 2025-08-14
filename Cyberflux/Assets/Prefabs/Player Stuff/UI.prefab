@@ -2192,7 +2192,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3773189781489293838}
-  - component: {fileID: 3677967961947465798}
   - component: {fileID: 4009418386724794839}
   m_Layer: 5
   m_Name: Slider
@@ -2224,22 +2223,6 @@ RectTransform:
   m_AnchoredPosition: {x: -45.33333, y: -59.6}
   m_SizeDelta: {x: 160, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &3677967961947465798
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2701226838849119669}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e7057d2418846bb4eb779e8b7697f3df, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  sensXSlider: {fileID: 0}
-  sensXValue: {fileID: 0}
-  sensYSlider: {fileID: 0}
-  sensYValue: {fileID: 0}
 --- !u!114 &4009418386724794839
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5674,7 +5657,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6815292288621224518}
-  - component: {fileID: 3438668590074375647}
   - component: {fileID: 6593521128139277740}
   m_Layer: 5
   m_Name: Slider
@@ -5706,22 +5688,6 @@ RectTransform:
   m_AnchoredPosition: {x: -45.33333, y: -36.466667}
   m_SizeDelta: {x: 160, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &3438668590074375647
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8447809249769380702}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e7057d2418846bb4eb779e8b7697f3df, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  sensXSlider: {fileID: 0}
-  sensXValue: {fileID: 0}
-  sensYSlider: {fileID: 0}
-  sensYValue: {fileID: 0}
 --- !u!114 &6593521128139277740
 MonoBehaviour:
   m_ObjectHideFlags: 0
