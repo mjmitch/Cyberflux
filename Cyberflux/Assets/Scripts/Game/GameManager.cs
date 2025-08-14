@@ -5,9 +5,11 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
+
+
 public class GameManager : MonoBehaviour
 {
-    
+    public SceneFader fader; 
     public static GameManager instance;
     
     public GameObject player;
@@ -97,7 +99,10 @@ public class GameManager : MonoBehaviour
 
     public void StartGame()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1); // Assuming 1 is the main game scene
+        if (fader)
+            fader.FadeToScene(SceneManager.GetActiveScene().buildIndex + 1);
+        else
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 
     public void Option()
@@ -134,7 +139,10 @@ public class GameManager : MonoBehaviour
 
     public void LoadLevel(int lvl)
     {
-        SceneManager.LoadScene(lvl);
+        if (fader)
+            fader.FadeToScene(lvl);
+        else
+            SceneManager.LoadScene(lvl);
     }
 
     void ShowTitle()
