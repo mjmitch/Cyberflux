@@ -55,6 +55,7 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         //GameStatePause();
+        
         minutes = 0;
         seconds = 0;
         miliseconds = 0;
