@@ -23,7 +23,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Levels/Level 5 [Forced Spiral].unity
     guid: 3a5aa145be85fa442b91d16c719ae22f
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Levels/Level 6 [Respite].unity
     guid: 90be06bbf55e5444989c1c0a6ecf5f80
   - enabled: 1
@@ -32,7 +32,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Levels/Level 7 [Midnight].unity
     guid: ef97e92bbe0810a42b071402d99907bf
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Levels/Level 9 [Dawn].unity
     guid: 2693cca0c436eca478c2b8cf9f609f6d
   - enabled: 1

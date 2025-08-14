@@ -17,6 +17,6 @@ public class ButtonFunctions : MonoBehaviour
     public void GoToCredits()
     {
        
-        GameManager.instance.LoadLevel(11);
+        GameManager.instance.LoadLevel(9);
     }
 }
