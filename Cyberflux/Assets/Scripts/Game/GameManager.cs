@@ -55,6 +55,7 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         //GameStatePause();
+        
         minutes = 0;
         seconds = 0;
         miliseconds = 0;
@@ -68,6 +69,8 @@ public class GameManager : MonoBehaviour
             UpdateLevelTimer();
         }
         
+        
+        
     }
 
     public void GameStatePause()
@@ -76,6 +79,7 @@ public class GameManager : MonoBehaviour
         Time.timeScale = 0;
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
+        
     }
 
     public void GameStateResume()

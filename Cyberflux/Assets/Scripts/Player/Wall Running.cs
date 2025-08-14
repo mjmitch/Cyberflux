@@ -27,8 +27,8 @@ public class WallRunning : MonoBehaviour
     [SerializeField] float minJumpHeight;
     private RaycastHit leftWallhit;
     private RaycastHit rightWallhit;
-    private bool wallLeft;
-    private bool wallRight;
+    public bool wallLeft;
+    public bool wallRight;
 
     [Header("Exiting")]
     private bool exitingWall;
@@ -44,12 +44,15 @@ public class WallRunning : MonoBehaviour
     public Transform orientation;
     private PlayerController playerScript;
     private Rigidbody rb;
+    
+    
 
 
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
         playerScript = GetComponent<PlayerController>();
+        
     }
 
     private void Update()
@@ -166,16 +169,21 @@ public class WallRunning : MonoBehaviour
 
         //Forward Force
         rb.AddForce(wallForward * wallRunForce, ForceMode.Force);
-
-        if(upwardsRunning)
-        {
-            rb.linearVelocity = new Vector3(rb.linearVelocity.x, wallClimbSpeed, rb.linearVelocity.z);
-        }
-        if (downwardsRunning)
-        {
-            rb.linearVelocity = new Vector3(rb.linearVelocity.x, -wallClimbSpeed, rb.linearVelocity.z);
-        }
+        
+        
+        //If you Uncomment these lines it will add back the controlled Wall Running
+        //if(upwardsRunning)
+        //{
+        //    rb.linearVelocity = new Vector3(rb.linearVelocity.x, wallClimbSpeed, rb.linearVelocity.z);
+        //}
+        //if (downwardsRunning)
+        //{
+        //    rb.linearVelocity = new Vector3(rb.linearVelocity.x, -wallClimbSpeed, rb.linearVelocity.z);
+        //}
         //Push towards wall
+        
+        
+        
         if (!(wallLeft && horizontalInput > 0) && !(wallRight && horizontalInput < 0))
         {
             rb.AddForce(-wallNormal * 100, ForceMode.Force);
