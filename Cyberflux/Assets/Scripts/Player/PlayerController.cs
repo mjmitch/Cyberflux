@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Security.Cryptography.X509Certificates;
 using UnityEngine;
+using UnityEngine.Tilemaps;
 
 public class PlayerController : MonoBehaviour, IDamage, IHeal
 {
@@ -22,6 +23,12 @@ public class PlayerController : MonoBehaviour, IDamage, IHeal
     [SerializeField] float sprintingFov;
     public float fovChangeSpeed;
     private float TargetFov;
+    [SerializeField] float tiltAmount;
+    [SerializeField] float tiltTime;
+    private float currentTilt;
+    private float targetTilt;
+    private Coroutine tiltRoutine;
+    private WallRunning wallRunScript;
    
     
     [SerializeField] float groundDrag;
@@ -93,6 +100,7 @@ public class PlayerController : MonoBehaviour, IDamage, IHeal
         startingHeight = transform.localScale.y;
         NormalFov = cam.fieldOfView;
         cam = Camera.main.GetComponent<Camera>();
+        wallRunScript = this.GetComponent<WallRunning>();
 
     }
 
@@ -163,6 +171,46 @@ public class PlayerController : MonoBehaviour, IDamage, IHeal
         {
             state = MovementState.wallrunning;
             desiredMoveSpeed = wallrunSpeed;
+
+            if (wallRunScript.wallRight)
+            {
+                cam.transform.Rotate(0, 0, tiltAmount);
+            }
+            else if (!wallRunScript.wallRight)
+            {
+                cam.transform.Rotate(0, 0, -tiltAmount);
+            }
+
+            if (wallRunScript.wallLeft)
+            {
+                cam.transform.Rotate(0, 0, -tiltAmount);
+            }
+            else if (!wallRunScript.wallLeft)
+            {
+                cam.transform.Rotate(0, 0, tiltAmount);
+            }
+
+            //Below is the In-Progress Lerp Code
+
+            //if (wallRunScript.wallRight)
+            //{
+            //    targetTilt = tiltAmount;
+            //}
+               
+            //else if (wallRunScript.wallLeft)
+            //{
+            //    targetTilt = -tiltAmount;
+            //}
+                
+
+            //// Smoothly approach target every frame
+            //currentTilt = Mathf.MoveTowards(currentTilt, targetTilt, tiltTime * Time.deltaTime);
+
+            //// Apply to camera
+            //Vector3 camEuler = cam.transform.localEulerAngles;
+            //camEuler.z = currentTilt;
+            //cam.transform.localEulerAngles = camEuler;
+
         }
 
         //Sliding
@@ -229,6 +277,8 @@ public class PlayerController : MonoBehaviour, IDamage, IHeal
 
         lastDesiredMoveSpeed = desiredMoveSpeed;
     }
+
+
     //Still working on this 
 
     //private IEnumerator LerpMoveSpeed()

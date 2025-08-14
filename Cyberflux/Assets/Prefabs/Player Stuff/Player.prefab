@@ -94,7 +94,7 @@ CapsuleCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 154856117571811934}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: f01a83bc9b6d1ed4aa24df1d60119852, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -120,6 +120,8 @@ GameObject:
   m_Component:
   - component: {fileID: 8085989986708616326}
   - component: {fileID: 280831597712182119}
+  - component: {fileID: 5984326432896172127}
+  - component: {fileID: 3977238701265099289}
   - component: {fileID: 7962889560883757391}
   - component: {fileID: 8744238162476625676}
   m_Layer: 6
@@ -159,9 +161,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9130b477f553e00409c24a1883f6516c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  walkSpeed: 12
-  sprintSpeed: 18
-  slideSpeed: 0
+  walkSpeed: 7
+  sprintSpeed: 10
+  slideSpeed: 17
+  wallrunSpeed: 8
+  slowModifier: 0.01
+  NormalFov: 90
+  cam: {fileID: 7443088924458907976}
+  slidingFOV: 120
+  wallRunningFov: 120
+  sprintingFov: 110
+  fovChangeSpeed: 3
+  tiltAmount: 2
+  tiltTime: 0.2
   groundDrag: 4
   jumpForce: 12
   jumpCooldown: 0.25
@@ -170,16 +182,71 @@ MonoBehaviour:
   crouchHeight: 0.5
   jumpKey: 32
   sprintKey: 304
-  crouchKey: 306
+  crouchKey: 99
   HP: 100
   playerHeight: 2
   whatIsGround:
     serializedVersion: 2
     m_Bits: 2049
+  grounded: 0
   maxSlopeAngle: 40
   orientation: {fileID: 2253439677119928108}
   state: 0
+  wallrunning: 0
   sliding: 0
+  sprinting: 0
+--- !u!114 &5984326432896172127
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 582248119451382777}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cbc2ef252e09aba41a1b86bdb559e3ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  orientation: {fileID: 2253439677119928108}
+  playerObject: {fileID: 5737250247000977712}
+  maxSlideTime: 0.75
+  slideForce: 200
+  slideHeight: 0.5
+  slideKey: 306
+--- !u!114 &3977238701265099289
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 582248119451382777}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 24e8d450e04159840bcb02b7c663f672, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  whatIsWall:
+    serializedVersion: 2
+    m_Bits: 6144
+  whatIsGround:
+    serializedVersion: 2
+    m_Bits: 6144
+  wallRunForce: 200
+  wallJumpUpForce: 10
+  wallJumpSideForce: 15
+  wallClimbSpeed: 8
+  maxWallRunTime: 0.8
+  jumpKey: 32
+  upwardsRunKey: 304
+  downwardsRunKey: 306
+  wallCheckDistance: 0.7
+  minJumpHeight: 2
+  wallLeft: 0
+  wallRight: 0
+  exitWallTime: 0.2
+  useGravity: 0
+  gravityCounterForce: 25
+  orientation: {fileID: 2253439677119928108}
 --- !u!54 &7962889560883757391
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -214,7 +281,7 @@ CapsuleCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 582248119451382777}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: f01a83bc9b6d1ed4aa24df1d60119852, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -286,7 +353,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1014074056099352219}
   m_Layer: 0
-  m_Name: Player
+  m_Name: PLAYER
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -301,7 +368,7 @@ Transform:
   m_GameObject: {fileID: 4967382356259595116}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 8.89369, y: 0, z: -4.5119}
+  m_LocalPosition: {x: 14.86, y: 0, z: -19.4}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -420,6 +487,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sensX: 400
   sensY: 400
+  cam: {fileID: 0}
   orientation: {fileID: 2253439677119928108}
 --- !u!20 &7443088924458907976
 Camera:
