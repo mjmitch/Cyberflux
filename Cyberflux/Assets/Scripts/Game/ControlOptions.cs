@@ -2,7 +2,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class SliderFunctions : MonoBehaviour
+public class ControlOptions : MonoBehaviour
 {
     public Slider sensXSlider;
     public TMP_Text sensXValue;
