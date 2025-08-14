@@ -64,6 +64,20 @@ public class PlayerController : MonoBehaviour, IDamage, IHeal
     private RaycastHit slopeHit;
     private bool slopeExit;
 
+    [Header("Audio")]
+    [SerializeField] AudioSource audioPlayer;
+    
+    //Dont know what all audio we are going to have, just putting these here for now.
+    [SerializeField] AudioClip[] audJump;
+    [SerializeField] AudioClip[] audHurt;
+    [SerializeField] AudioClip[] audStep;
+
+
+    [SerializeField] public float masterVol;
+    [SerializeField] public float musicVol;
+    [SerializeField] public float sfxVol;
+
+
 
     [SerializeField] Transform orientation;
 
