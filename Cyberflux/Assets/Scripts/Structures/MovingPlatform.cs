@@ -16,8 +16,10 @@ public class MovingPlatform : MonoBehaviour
     float delayTimer;
     bool stopped;
     int positionNum;
+    bool playerInTrigger;
     void Start()
     {
+        playerInTrigger = false;
         stopped = true;
         delayTimer = 0;
         Transform[] childrendest = GetComponentsInChildren<Transform>();
@@ -79,22 +81,38 @@ public class MovingPlatform : MonoBehaviour
         {
             return;
         }
-        if (other.transform.root.CompareTag("Player"))
+        
+        if (other.transform.CompareTag("PlayerModel"))
         {
-            Rigidbody playerRb = GameManager.instance.player.gameObject.GetComponent<Rigidbody>();
-            playerRb.interpolation = RigidbodyInterpolation.None;
+            {
+                if (playerInTrigger)
+                {
+                    return;
+                }
+                Rigidbody playerRb = GameManager.instance.player.gameObject.GetComponent<Rigidbody>();
+                playerRb.interpolation = RigidbodyInterpolation.None;
+
+                GameManager.instance.player.transform.SetParent(transform, true);
+                playerInTrigger = true;
+            }
+        }
+        else if (other.transform.root.gameObject.layer == 7)
+        {
+            if (other.transform.root.GetComponent<Rigidbody>() != null)
+            {
+                other.transform.root.GetComponent<Rigidbody>().interpolation = RigidbodyInterpolation.None;
+            }
 
             other.transform.root.SetParent(transform, true);
-
         }
-        else
+        else if (other.gameObject.layer == 7)
         {
+
             if (other.GetComponent<Rigidbody>() != null)
             {
                 other.GetComponent<Rigidbody>().interpolation = RigidbodyInterpolation.None;
             }
-    
-            other.transform.root.SetParent(transform, true);
+            other.transform.SetParent(transform, true);
         }
 
      
@@ -108,19 +126,31 @@ public class MovingPlatform : MonoBehaviour
         }
         if (other.transform.CompareTag("PlayerModel"))
         {
-            
+            if (!playerInTrigger)
+            {
+                return;
+            }
             Rigidbody playerRb = GameManager.instance.player.gameObject.GetComponent<Rigidbody>();
             playerRb.interpolation = RigidbodyInterpolation.Interpolate;
             GameManager.instance.player.gameObject.transform.parent = null;
+            playerInTrigger = false;
         }
-        else
+        else if (other.transform.root.gameObject.layer == 7)
         {
+            if (other.transform.root.GetComponent<Rigidbody>() != null)
+            {
+                other.transform.root.GetComponent<Rigidbody>().interpolation = RigidbodyInterpolation.Interpolate;
+            }
+            other.transform.root.parent = null;
+        }
+        else if (other.gameObject.layer == 7)
+        {
+
             if (other.GetComponent<Rigidbody>() != null)
             {
                 other.GetComponent<Rigidbody>().interpolation = RigidbodyInterpolation.Interpolate;
             }
-            other.transform.root.parent = null;
+            other.transform.parent = null;
         }
-        
     }
 }

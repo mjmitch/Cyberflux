@@ -19,4 +19,9 @@ public class ButtonFunctions : MonoBehaviour
        
         GameManager.instance.LoadLevel(9);
     }
+
+    public void SelectItem1()
+    {
+
+    }
 }

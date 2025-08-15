@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using UnityEngine.InputSystem;
+using Unity.VisualScripting;
 
 
 public class GameManager : MonoBehaviour
@@ -27,6 +28,10 @@ public class GameManager : MonoBehaviour
     [SerializeField] GameObject menuPause;
     [SerializeField] GameObject menuWin;
     [SerializeField] GameObject menuLose;
+    [SerializeField] GameObject menuItemSelect;
+    [SerializeField] GameObject menuItemUnlock;
+    [SerializeField] public ItemSelection itemSelectionObject;
+    [SerializeField] public ItemUnlock itemUnlockObject;
 
     [SerializeField] public GameObject bossHPUI; 
     [SerializeField] public Image bossHPBar;
@@ -40,7 +45,10 @@ public class GameManager : MonoBehaviour
     public TMP_Text TimerSeconds;
     float miliseconds;
     public TMP_Text TimerMiliseconds;
- 
+
+
+    // item stuff
+    [SerializeField] public List<Augment> itemPool;
     enum GameState { Title, Playing, Win, Lose }
     GameState _state = GameState.Title;
 
@@ -57,7 +65,7 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         //GameStatePause();
-        
+        menuItemSelect.SetActive(false);
         minutes = 0;
         seconds = 0;
         miliseconds = 0;
@@ -71,11 +79,18 @@ public class GameManager : MonoBehaviour
             UpdateLevelTimer();
         }
 
-        
+
         if (Keyboard.current != null && Keyboard.current.escapeKey.wasPressedThisFrame)
         {
-            if (!isPaused) GameStatePause();
-            else GameStateResume();
+            if (menuItemSelect.active)
+            {
+
+            }
+            else
+            {
+                if (!isPaused) GameStatePause();
+                else GameStateResume();
+            }
         }
 
     }
@@ -83,7 +98,7 @@ public class GameManager : MonoBehaviour
     public void GameStatePause()
     {
         if (isPaused) return;
-
+        
         isPaused = true;
         Time.timeScale = 0f;
 
@@ -105,7 +120,11 @@ public class GameManager : MonoBehaviour
     public void GameStateResume()
     {
         if (!isPaused) return;
-
+if (menuItemSelect)
+        {
+            menuItemSelect.SetActive(false);
+           // menuActive.SetActive(false);
+        }
         // Hide pause and any active menu
         if (menuActive) menuActive.SetActive(false);
         if (menuPause) menuPause.SetActive(false);
@@ -237,7 +256,7 @@ public class GameManager : MonoBehaviour
             }
             else if (seconds < 59)
             {
-                miliseconds = 0;
+                miliseconds -= 1;
                 seconds += 1;
             }
             else if (minutes < 59)
@@ -269,5 +288,14 @@ public class GameManager : MonoBehaviour
             TimerMinutes.text = "0" + minutes.ToString() + ".";
         else
             TimerMinutes.text = minutes.ToString() + ".";
+    }
+    public void SelectItem()
+    {
+        isPaused = true;
+        Time.timeScale = 0f;
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
+        
+        menuItemSelect.SetActive(true);
     }
 }
