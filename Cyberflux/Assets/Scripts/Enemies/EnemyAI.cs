@@ -9,7 +9,6 @@ using Random = UnityEngine.Random;
 
 public class EnemyAI : MonoBehaviour, IDamage
 {
-    
     [SerializeField] Renderer model;
     [SerializeField] NavMeshAgent agent;
     [SerializeField] Transform attackPosition;
@@ -34,6 +33,7 @@ public class EnemyAI : MonoBehaviour, IDamage
     [SerializeField] private GameObject explosionEffect;
     [SerializeField] private AudioClip explosionSound;
     private bool isExploding = false;
+    [SerializeField] public int score;
     
     
     private enum enemyType
@@ -163,12 +163,14 @@ public class EnemyAI : MonoBehaviour, IDamage
 
     void MeleeAttack()
     {
+        attackTimer = 0;
         StartCoroutine(SwordSwing());
     }
 
     void RangedAttack()
     {
-        
+        attackTimer = 0;
+        Instantiate(bullet, attackPosition.position, transform.rotation);
     }
 
     void FlyingAttack()
@@ -178,11 +180,12 @@ public class EnemyAI : MonoBehaviour, IDamage
 
     void ExplodingAttack()
     {
-        if(!isExploding)
+        if (!isExploding)
+        {
             Instantiate(explosionEffect, transform.position, Quaternion.identity);
+            audioPlayer.PlayOneShot(explosionSound, GameManager.instance.playerScript.sfxVol);
+        }
         isExploding = true;
-        audioPlayer.PlayOneShot(explosionSound, GameManager.instance.playerScript.sfxVol);
-        //Debug.Log("SOUND PLAYED");
         Destroy(gameObject);
     }
 
@@ -210,6 +213,7 @@ public class EnemyAI : MonoBehaviour, IDamage
                 break;
             case enemyType.swarm:
                 agent.stoppingDistance = 0;
+                agent.destination = player.transform.position;
                 break;
             case enemyType.flying:
                 FlyingMovement();
@@ -244,6 +248,7 @@ public class EnemyAI : MonoBehaviour, IDamage
 
     void Combat()
     {
+        attackTimer += Time.deltaTime;
         if (isEliteEnemy)
         {
             switch (type)
@@ -268,16 +273,12 @@ public class EnemyAI : MonoBehaviour, IDamage
             {
                 case enemyType.melee:
                     //Debug.Log("melee");
-                    attackTimer += Time.deltaTime;
-                    if ((player.transform.position - this.transform.position).magnitude <= agent.stoppingDistance+0.5f &&
-                        attackTimer >= attackRate)
-                    {
-                        //Debug.Log("ATTACK");
-                        attackTimer = 0;
+                    if ((player.transform.position - this.transform.position).magnitude <= agent.stoppingDistance+0.5f && attackTimer >= attackRate)
                         MeleeAttack();
-                    }
                     break;
                 case enemyType.ranged:
+                    if (attackTimer >= attackRate)
+                        RangedAttack();
                     break;
                 case enemyType.exploding:
                     if((player.transform.position - this.transform.position).magnitude < explosionSize)

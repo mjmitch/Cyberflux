@@ -32,7 +32,7 @@ public class damage : MonoBehaviour
 
             if (type == damagetype.moving)
             {
-                rb.linearVelocity = transform.forward * speed;
+                rb.linearVelocity = (GameManager.instance.player.transform.position - transform.position).normalized * speed;
             }
         }
     }
