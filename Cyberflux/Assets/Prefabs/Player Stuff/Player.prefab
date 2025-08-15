@@ -168,7 +168,7 @@ MonoBehaviour:
   slideSpeed: 17
   wallrunSpeed: 8
   dashSpeed: 17
-  slowModifier: 0.01
+  slowModifier: 0.3
   scytheModel: {fileID: 0}
   NormalFov: 90
   cam: {fileID: 7443088924458907976}
@@ -189,6 +189,7 @@ MonoBehaviour:
   sprintKey: 304
   crouchKey: 99
   HP: 100
+  playerItems: []
   playerHeight: 2
   whatIsGround:
     serializedVersion: 2
