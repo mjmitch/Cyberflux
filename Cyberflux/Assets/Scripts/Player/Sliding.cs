@@ -55,8 +55,6 @@ public class Sliding : MonoBehaviour
     //Fixed update is for Physics, not input handling
     private void FixedUpdate()
     {
-        
-
         if(playerScript.sliding)
         {
             SlidingMovement();

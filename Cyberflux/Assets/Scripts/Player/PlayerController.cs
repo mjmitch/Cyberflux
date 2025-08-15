@@ -13,6 +13,7 @@ public class PlayerController : MonoBehaviour, IDamage, IHeal
     [SerializeField] float sprintSpeed;
     [SerializeField] float slideSpeed;
     [SerializeField] float wallrunSpeed;
+    [SerializeField] float dashSpeed;
     [Range(0.01f, 0.99f)] [SerializeField] private float slowModifier;
 
     [Header("Camera")]
@@ -21,6 +22,7 @@ public class PlayerController : MonoBehaviour, IDamage, IHeal
     [SerializeField] float slidingFOV;
     [SerializeField] float wallRunningFov;
     [SerializeField] float sprintingFov;
+    [SerializeField] float dashingFov;
     public float fovChangeSpeed;
     private float TargetFov;
     [SerializeField] float tiltAmount;
@@ -66,7 +68,7 @@ public class PlayerController : MonoBehaviour, IDamage, IHeal
 
     [Header("Audio")]
     [SerializeField] AudioSource audioPlayer;
-    
+   
     //Dont know what all audio we are going to have, just putting these here for now.
     [SerializeField] AudioClip[] audJump;
     [SerializeField] AudioClip[] audHurt;
@@ -98,12 +100,14 @@ public class PlayerController : MonoBehaviour, IDamage, IHeal
         wallrunning,
         crouching,
         sliding,
+        dashing,
         air
     }
 
     public bool wallrunning;
     public bool sliding;
     public bool sprinting;
+    public bool dashing;
 
     void Start()
     {
@@ -123,7 +127,7 @@ public class PlayerController : MonoBehaviour, IDamage, IHeal
     {
         grounded = Physics.Raycast(transform.position, Vector3.down, playerHeight * 0.5f + 0.2f, whatIsGround);
 
-        Debug.Log(cam.fieldOfView);
+        
 
         MyInput();
         SpeedControl();
@@ -180,8 +184,17 @@ public class PlayerController : MonoBehaviour, IDamage, IHeal
     private void StateHandler()
     {
 
+        //dashing
+        if(dashing)
+        {
+            state = MovementState.dashing;
+            desiredMoveSpeed = dashSpeed;
+
+            cam.fieldOfView = Mathf.Lerp(cam.fieldOfView, dashingFov, Time.deltaTime * fovChangeSpeed);
+        }
+
         //WallRunning 
-        if(wallrunning)
+        else if(wallrunning)
         {
             state = MovementState.wallrunning;
             desiredMoveSpeed = wallrunSpeed;
@@ -228,7 +241,7 @@ public class PlayerController : MonoBehaviour, IDamage, IHeal
         }
 
         //Sliding
-        if(sliding)
+        else if(sliding)
         {
             state = MovementState.sliding;
 
