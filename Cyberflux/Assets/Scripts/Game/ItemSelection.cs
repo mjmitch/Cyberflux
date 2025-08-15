@@ -29,9 +29,12 @@ public class ItemSelection : MonoBehaviour
         }
         if (other.transform.CompareTag("PlayerModel"))
         {
-            GameManager.instance.itemSelectionObject.UpdateItems();
-            GameManager.instance.SelectItem();
-            Destroy(gameObject);
+            
+                GameManager.instance.itemSelectionObject.UpdateItems();
+                GameManager.instance.SelectItem();
+            
+            
+                Destroy(gameObject);
         }
     }
 

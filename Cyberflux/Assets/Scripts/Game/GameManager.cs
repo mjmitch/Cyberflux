@@ -29,7 +29,9 @@ public class GameManager : MonoBehaviour
     [SerializeField] GameObject menuWin;
     [SerializeField] GameObject menuLose;
     [SerializeField] GameObject menuItemSelect;
+    [SerializeField] GameObject menuItemUnlock;
     [SerializeField] public ItemSelection itemSelectionObject;
+    [SerializeField] public ItemUnlock itemUnlockObject;
 
     [SerializeField] public GameObject bossHPUI; 
     [SerializeField] public Image bossHPBar;
@@ -63,7 +65,7 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         //GameStatePause();
-        
+        menuItemSelect.SetActive(false);
         minutes = 0;
         seconds = 0;
         miliseconds = 0;
@@ -80,7 +82,7 @@ public class GameManager : MonoBehaviour
 
         if (Keyboard.current != null && Keyboard.current.escapeKey.wasPressedThisFrame)
         {
-            if (menuItemSelect)
+            if (menuItemSelect.active)
             {
 
             }
