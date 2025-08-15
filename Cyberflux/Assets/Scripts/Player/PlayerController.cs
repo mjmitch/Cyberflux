@@ -17,6 +17,7 @@ public class PlayerController : MonoBehaviour, IDamage, IHeal
     [Range(0.01f, 0.99f)] [SerializeField] private float slowModifier;
 
     [Header("Camera")]
+    [SerializeField] GameObject scytheModel;
     public float NormalFov;
     public Camera cam;
     [SerializeField] float slidingFOV;
@@ -325,7 +326,7 @@ public class PlayerController : MonoBehaviour, IDamage, IHeal
     //    moveSpeed = desiredMoveSpeed;
     //}
 
-
+    
     private void MovePlayer()
     {
         //Calculate Movement Direction
