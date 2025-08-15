@@ -23,6 +23,7 @@ public class GameManager : MonoBehaviour
     public Image playerHPBar;
     public TMP_Text playerHPText;
     public TMP_Text playerAmmoText;
+    public Image playerStaminaBar;
 
     [SerializeField] GameObject menuActive;
     [SerializeField] GameObject menuPause;
@@ -344,4 +345,19 @@ if (menuItemUnlock)
         menuItemUnlock.SetActive(true);
     }
 
+
+    public void UpdateHealthUI(int currentHP, int maxHP)
+    {
+        if (playerHPBar != null)
+            playerHPBar.fillAmount = (float)currentHP / maxHP;
+
+        if (playerHPText != null)
+            playerHPText.text = currentHP + " / " + maxHP;
+    }
+
+    public void UpdateStaminaUI(float currentStamina, float maxStamina)
+    {
+        if (playerStaminaBar != null)
+            playerStaminaBar.fillAmount = currentStamina / maxStamina;
+    }
 }
