@@ -122,6 +122,7 @@ GameObject:
   - component: {fileID: 280831597712182119}
   - component: {fileID: 5984326432896172127}
   - component: {fileID: 3977238701265099289}
+  - component: {fileID: 5400869238766034153}
   - component: {fileID: 7962889560883757391}
   - component: {fileID: 8744238162476625676}
   m_Layer: 6
@@ -165,12 +166,14 @@ MonoBehaviour:
   sprintSpeed: 10
   slideSpeed: 17
   wallrunSpeed: 8
+  dashSpeed: 17
   slowModifier: 0.01
   NormalFov: 90
   cam: {fileID: 7443088924458907976}
   slidingFOV: 120
   wallRunningFov: 120
   sprintingFov: 110
+  dashingFov: 140
   fovChangeSpeed: 3
   tiltAmount: 2
   tiltTime: 0.2
@@ -190,11 +193,19 @@ MonoBehaviour:
     m_Bits: 2049
   grounded: 0
   maxSlopeAngle: 40
+  audioPlayer: {fileID: 0}
+  audJump: []
+  audHurt: []
+  audStep: []
+  masterVol: 0
+  musicVol: 0
+  sfxVol: 0
   orientation: {fileID: 2253439677119928108}
   state: 0
   wallrunning: 0
   sliding: 0
   sprinting: 0
+  dashing: 0
 --- !u!114 &5984326432896172127
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -246,6 +257,23 @@ MonoBehaviour:
   exitWallTime: 0.2
   useGravity: 0
   gravityCounterForce: 25
+  orientation: {fileID: 2253439677119928108}
+--- !u!114 &5400869238766034153
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 582248119451382777}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 01862310c553f6e428ede1ab6a83fa03, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dashForce: 25
+  maxDashTime: 0.2
+  dashCooldown: 2
+  dashKey: 101
   orientation: {fileID: 2253439677119928108}
 --- !u!54 &7962889560883757391
 Rigidbody:
@@ -353,7 +381,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1014074056099352219}
   m_Layer: 0
-  m_Name: PLAYER
+  m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
