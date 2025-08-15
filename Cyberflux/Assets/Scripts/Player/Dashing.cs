@@ -36,7 +36,7 @@ public class Dashing : MonoBehaviour
 
     private void Update()
     {
-        Debug.Log(dashCooldownTimer);
+        //Debug.Log(dashCooldownTimer);
 
         horizontalInput = Input.GetAxisRaw("Horizontal");
         verticalInput = Input.GetAxisRaw("Vertical");
