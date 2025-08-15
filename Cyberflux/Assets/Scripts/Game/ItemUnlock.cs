@@ -5,10 +5,10 @@ using UnityEngine.UI;
 public class ItemUnlock : MonoBehaviour
 {
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    [SerializeField] Augment item;
+    [SerializeField] public Augment item;
 
-    [SerializeField] Image itemImage;
-    [SerializeField] TMP_Text itemText;
+    [SerializeField] public Image itemImage;
+    [SerializeField] public TMP_Text itemText;
 
     public Button confirm;
 
@@ -20,13 +20,28 @@ public class ItemUnlock : MonoBehaviour
         }
         if (other.transform.CompareTag("PlayerModel"))
         {
+            UpdateItem();
+            GameManager.instance.UnlockItem();
 
+            Destroy(gameObject);
         }
     }
 
     public void UpdateItem()
     {
-        itemImage.sprite = item.icon;
-        itemText.text = item.itemDescription;
+        GameManager.instance.itemUnlockObject.item = item;
+        GameManager.instance.itemUnlockObject.itemImage.sprite = item.icon;
+        GameManager.instance.itemUnlockObject.itemText.text = item.itemDescription;
+    }
+
+    public void Continue()
+    {
+        item.OnPickup();
+        GameManager.instance.playerScript.AddItem(item);
+        if (!item.multipleCopies)
+        {
+            GameManager.instance.itemPool.Remove(item);
+        }
+        GameManager.instance.GameStateResume();
     }
 }
