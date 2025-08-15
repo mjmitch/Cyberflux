@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 6834138060715777843}
   - component: {fileID: 8830201922192537177}
   - component: {fileID: 4618339226518742392}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Exploding Enemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -58,6 +58,7 @@ MonoBehaviour:
   attackPosition: {fileID: 3722592552510063279}
   headPosition: {fileID: 5372168034428335953}
   bullet: {fileID: 0}
+  weapon: {fileID: 0}
   attackRate: 0
   HP: 50
   fov: 90
