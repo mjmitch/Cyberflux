@@ -179,21 +179,11 @@ public class PlayerController : MonoBehaviour, IDamage, IHeal
             Heal(5);
         }
 
-        if (Input.GetKey(sprintKey) && stamina > 0)
+        if (!Input.GetKey(sprintKey) && stamina < staminaMax)
         {
-            stamina -= 1; // drain
-            if (stamina < 0) stamina = 0;
+            stamina += 1;
+            if (stamina > staminaMax) stamina = staminaMax;
             GameManager.instance.UpdateStaminaUI(stamina, staminaMax);
-        }
-
-        else
-        {
-            if (stamina < staminaMax)
-            {
-                stamina += 1; // recover
-                if (stamina > staminaMax) stamina = staminaMax;
-                GameManager.instance.UpdateStaminaUI(stamina, staminaMax);
-            }
         }
     }
 
@@ -316,14 +306,24 @@ public class PlayerController : MonoBehaviour, IDamage, IHeal
             desiredMoveSpeed = crouchSpeed;
         }
 
-        //Sprinting
-        else if(grounded && Input.GetKey(sprintKey))
+        // Sprinting
+        else if (grounded && Input.GetKey(sprintKey) && stamina > 0)
         {
             state = MovementState.sprinting;
-
             cam.fieldOfView = Mathf.Lerp(cam.fieldOfView, sprintingFov, Time.deltaTime * fovChangeSpeed);
-
             desiredMoveSpeed = sprintSpeed;
+
+            // Drain stamina while sprinting
+            stamina -= 1;
+            if (stamina < 0) stamina = 0;
+            GameManager.instance.UpdateStaminaUI(stamina, staminaMax);
+        }
+
+        // Out of stamina — force walk
+        else if (grounded && stamina <= 0)
+        {
+            state = MovementState.walking;
+            desiredMoveSpeed = walkSpeed;
         }
 
         // Walking
