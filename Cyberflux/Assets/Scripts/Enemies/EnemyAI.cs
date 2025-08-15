@@ -1,7 +1,10 @@
 using System;
+using System.Collections;
+using System.Diagnostics;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
+using Debug = UnityEngine.Debug;
 using Random = UnityEngine.Random;
 
 public class EnemyAI : MonoBehaviour, IDamage
@@ -12,6 +15,7 @@ public class EnemyAI : MonoBehaviour, IDamage
     [SerializeField] Transform attackPosition;
     [SerializeField] Transform headPosition;
     [SerializeField] GameObject bullet;
+    [SerializeField] private GameObject weapon;
     [SerializeField] float attackRate;
     [SerializeField] int HP;
     [SerializeField] int fov;
@@ -71,11 +75,13 @@ public class EnemyAI : MonoBehaviour, IDamage
             explosionEffect.GetComponent<damage>().damageAmount = explosionDamage;
             explosionEffect.transform.localScale = new Vector3(explosionSize*2, explosionSize*2, explosionSize*2);
         }
+        agentStopDisOrig = agent.stoppingDistance;
     }
 
     // Update is called once per frame
     void Update()
     {
+        playerDirection = player.transform.position - headPosition.position;
         if (type != enemyType.flying && !isInCombat)
         {
             if(agent.remainingDistance <= 0.01f)
@@ -117,10 +123,14 @@ public class EnemyAI : MonoBehaviour, IDamage
         playerDirection = player.transform.position - headPosition.position;
         angleToPlayer = Vector3.Angle(playerDirection, transform.forward);
         RaycastHit hit;
+        //Debug.Log("CAN SEE PLAYER");
+        Debug.DrawRay(headPosition.position, playerDirection, Color.red);
         if (Physics.Raycast(headPosition.position, playerDirection, out hit))
         {
+            //Debug.Log(hit.collider.name + " / " + angleToPlayer + " / " + fov);
             if (hit.collider.CompareTag("Player") && angleToPlayer < fov)
             {
+                //Debug.Log("CAN SEE PLAYER -- COMBAT");
                 isInCombat = true;
                 return true;
             }
@@ -131,8 +141,7 @@ public class EnemyAI : MonoBehaviour, IDamage
 
     void FaceTarget()
     {
-        Quaternion rot = Quaternion.LookRotation(new Vector3(playerDirection.x, transform.position.y, playerDirection.z));
-        transform.rotation = Quaternion.Lerp(transform.rotation, rot, faceTargetSpeed * Time.deltaTime);
+        transform.LookAt(player.transform);
     }
 
     private void OnTriggerEnter(Collider other)
@@ -154,7 +163,7 @@ public class EnemyAI : MonoBehaviour, IDamage
 
     void MeleeAttack()
     {
-        
+        StartCoroutine(SwordSwing());
     }
 
     void RangedAttack()
@@ -184,10 +193,13 @@ public class EnemyAI : MonoBehaviour, IDamage
     
     void BasicCombatMovement()
     {
+        FaceTarget();
+        
         switch (type)
         {
             case enemyType.melee:
-                agent.stoppingDistance = 0.5f;
+                agent.stoppingDistance = agentStopDisOrig;
+                agent.destination = player.transform.position;
                 break;
             case enemyType.ranged:
                 agent.stoppingDistance = 5000;
@@ -250,12 +262,20 @@ public class EnemyAI : MonoBehaviour, IDamage
                     break;
             }
         }
-
         else
         {
             switch (type)
             {
                 case enemyType.melee:
+                    //Debug.Log("melee");
+                    attackTimer += Time.deltaTime;
+                    if ((player.transform.position - this.transform.position).magnitude <= agent.stoppingDistance+0.5f &&
+                        attackTimer >= attackRate)
+                    {
+                        //Debug.Log("ATTACK");
+                        attackTimer = 0;
+                        MeleeAttack();
+                    }
                     break;
                 case enemyType.ranged:
                     break;
@@ -319,5 +339,16 @@ public class EnemyAI : MonoBehaviour, IDamage
     public void RemoveSlow()
     {
         isSlowed = false;
+    }
+
+    public IEnumerator SwordSwing()
+    {
+        weapon.transform.Rotate(45,0,playerDirection.z);
+        yield return new WaitForSeconds(0.1f);
+        weapon.transform.Rotate(45,0, playerDirection.z);
+        yield return new WaitForSeconds(0.1f);
+        weapon.transform.Rotate(-45,0, -playerDirection.z);
+        yield return new WaitForSeconds(0.1f);
+        weapon.transform.localRotation = Quaternion.Euler(0,0,0);
     }
 }
