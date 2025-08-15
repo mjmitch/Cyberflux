@@ -63,6 +63,7 @@ public class PlayerController : MonoBehaviour, IDamage, IHeal
 
     [Header("Item Stuff")]
     [SerializeField] public List<Augment> playerItems;
+    public bool brokenClock = false;
 
 
     [Header("Ground Check")]
