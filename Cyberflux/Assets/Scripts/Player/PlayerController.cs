@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using System.Security.Cryptography.X509Certificates;
 using UnityEngine;
 using UnityEngine.Tilemaps;
@@ -55,7 +56,10 @@ public class PlayerController : MonoBehaviour, IDamage, IHeal
 
     [Header("Stats")]
     [SerializeField] int HP;
-    
+
+    [Header("Item Stuff")]
+    [SerializeField] public List<Augment> playerItems;
+
 
     [Header("Ground Check")]
     [SerializeField] float playerHeight;
@@ -463,5 +467,16 @@ public class PlayerController : MonoBehaviour, IDamage, IHeal
             return true;
         }
         return false;
+    }
+
+    public void SetMaxHP(int val)
+    {
+        HPOriginal = HPOriginal + val;
+        HP += val;
+    }
+
+    public void AddItem(Augment item)
+    {
+        playerItems.Add(item);
     }
 }
