@@ -189,10 +189,13 @@ public class EnemyAI : MonoBehaviour, IDamage
         Destroy(gameObject);
     }
 
-    void SwarmAttack()
+    /*
+     void SwarmAttack()
+     
     {
         
     }
+    */
     
     void BasicCombatMovement()
     {
@@ -321,7 +324,6 @@ public class EnemyAI : MonoBehaviour, IDamage
                 Instantiate(explosionEffect, transform.position, Quaternion.identity);
                 audioPlayer.PlayOneShot(explosionSound, GameManager.instance.playerScript.sfxVol);
             }
-            
             
             Destroy(gameObject);
         }
