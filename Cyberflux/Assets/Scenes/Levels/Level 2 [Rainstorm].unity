@@ -5060,6 +5060,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 280831597712182119, guid: 2a43059ae07f44340b28e40e2efb2107, type: 3}
+      propertyPath: dashSpeed
+      value: 45
+      objectReference: {fileID: 0}
     - target: {fileID: 1014074056099352219, guid: 2a43059ae07f44340b28e40e2efb2107, type: 3}
       propertyPath: m_LocalPosition.x
       value: -25.77
@@ -7538,10 +7542,6 @@ PrefabInstance:
     - target: {fileID: 4328753042861354789, guid: 5a05deecbdafd2b41a06cffef30ccf5c, type: 3}
       propertyPath: m_Name
       value: Car
-      objectReference: {fileID: 0}
-    - target: {fileID: 6574887129370894343, guid: 5a05deecbdafd2b41a06cffef30ccf5c, type: 3}
-      propertyPath: speed
-      value: 30
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
