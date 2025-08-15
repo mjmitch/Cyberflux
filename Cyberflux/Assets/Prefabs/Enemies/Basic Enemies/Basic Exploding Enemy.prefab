@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: 8830201922192537177}
   - component: {fileID: 4618339226518742392}
   m_Layer: 7
-  m_Name: Exploding Enemy
+  m_Name: Basic Exploding Enemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
