@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Security.Cryptography.X509Certificates;
 using UnityEngine;
 using UnityEngine.Tilemaps;
+using UnityEngine.UI; 
 
 public class PlayerController : MonoBehaviour, IDamage, IHeal
 {
@@ -89,12 +90,16 @@ public class PlayerController : MonoBehaviour, IDamage, IHeal
     [SerializeField] public float musicVol;
     [SerializeField] public float sfxVol;
 
-
+    
 
     [SerializeField] Transform orientation;
 
     float horizontalInput;
     float verticalInput;
+    
+ 
+    private int stamina;
+    private int staminaMax = 100;
     int HPOriginal;
 
     Vector3 moveDir;
@@ -122,6 +127,7 @@ public class PlayerController : MonoBehaviour, IDamage, IHeal
     void Start()
     {
         HPOriginal = HP;
+        stamina = staminaMax;
         readyToJump = true;
         rb = GetComponent<Rigidbody>();
         rb.freezeRotation = true;
@@ -129,12 +135,20 @@ public class PlayerController : MonoBehaviour, IDamage, IHeal
         NormalFov = cam.fieldOfView;
         cam = Camera.main.GetComponent<Camera>();
         wallRunScript = this.GetComponent<WallRunning>();
+       
+        GameManager.instance.UpdateStaminaUI(stamina, staminaMax);
 
+       
+
+        
     }
 
     // Update is called once per frame
     void Update()
     {
+
+        Debug.Log("PlayerController is running");
+
         grounded = Physics.Raycast(transform.position, Vector3.down, playerHeight * 0.5f + 0.2f, whatIsGround);
 
         
@@ -152,8 +166,25 @@ public class PlayerController : MonoBehaviour, IDamage, IHeal
         {
             rb.linearDamping = 0;
         }
-            
-   
+
+        // TEMP: test health bar by pressing H to take 10 damage
+        if (Input.GetKeyDown(KeyCode.H))
+        {
+            TakeDamage(10);
+        }
+
+        // TEMP: test heal by pressing J to heal 5 HP
+        if (Input.GetKeyDown(KeyCode.J))
+        {
+            Heal(5);
+        }
+
+        if (!Input.GetKey(sprintKey) && stamina < staminaMax)
+        {
+            stamina += 1;
+            if (stamina > staminaMax) stamina = staminaMax;
+            GameManager.instance.UpdateStaminaUI(stamina, staminaMax);
+        }
     }
 
     private void FixedUpdate()
@@ -275,14 +306,24 @@ public class PlayerController : MonoBehaviour, IDamage, IHeal
             desiredMoveSpeed = crouchSpeed;
         }
 
-        //Sprinting
-        else if(grounded && Input.GetKey(sprintKey))
+        // Sprinting
+        else if (grounded && Input.GetKey(sprintKey) && stamina > 0)
         {
             state = MovementState.sprinting;
-
             cam.fieldOfView = Mathf.Lerp(cam.fieldOfView, sprintingFov, Time.deltaTime * fovChangeSpeed);
-
             desiredMoveSpeed = sprintSpeed;
+
+            // Drain stamina while sprinting
+            stamina -= 1;
+            if (stamina < 0) stamina = 0;
+            GameManager.instance.UpdateStaminaUI(stamina, staminaMax);
+        }
+
+        // Out of stamina — force walk
+        else if (grounded && stamina <= 0)
+        {
+            state = MovementState.walking;
+            desiredMoveSpeed = walkSpeed;
         }
 
         // Walking
@@ -434,6 +475,13 @@ public class PlayerController : MonoBehaviour, IDamage, IHeal
     public void TakeDamage(int dmg)
     {
         HP -= dmg;
+        if (HP < 0) HP = 0;
+
+
+        GameManager.instance.UpdateHealthUI(HP, HPOriginal);
+
+        if (HP <= 0)
+            GameManager.instance.YouLose();
     }
 
     public int GetHP()
@@ -461,14 +509,10 @@ public class PlayerController : MonoBehaviour, IDamage, IHeal
     {
         if (HP < HPOriginal)
         {
-            //StartCoroutine(HealFlashScreen());
             HP += amount;
+            if (HP > HPOriginal) HP = HPOriginal;
 
-            if (HP > HPOriginal)
-            {
-                HP = HPOriginal;
-            }
-           // updatePlayerUI();
+            GameManager.instance.UpdateHealthUI(HP, HPOriginal);
             return true;
         }
         return false;

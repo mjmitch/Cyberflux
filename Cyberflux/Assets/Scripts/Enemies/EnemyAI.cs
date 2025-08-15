@@ -27,14 +27,20 @@ public class EnemyAI : MonoBehaviour, IDamage
     [SerializeField] private bool isEliteEnemy;
     [Range(0.5f, 3f)] [SerializeField] private float moveCoverTime;
     float moveCoverTimer;
-
+    [Header("How much score do you get from killing this enemy?")]
+    [SerializeField] public int score;
+    [Header("Exploding Enemy Stuff\nLeave blank if not Exploding enemy")]
     [Range(0, 3)] [SerializeField] private int explosionSize;
     [Range(5, 25)] [SerializeField] private int explosionDamage;
     [SerializeField] private GameObject explosionEffect;
     [SerializeField] private AudioClip explosionSound;
     private bool isExploding = false;
-    [SerializeField] public int score;
-    
+    [Header("Flying Enemy Stuff\nLeave blank if not Flying enemy")]
+    [Range(0, 5)] [SerializeField] private int minFlyHeight;
+    [Range(5, 9)] [SerializeField] private int maxFlyHeight;
+    //[Range(4, 15)] [SerializeField] private int attackRange;
+    [Range(5, 25)] [SerializeField] private int circleRange;
+    private bool isBobbing = false;
     
     private enum enemyType
     {
@@ -62,7 +68,6 @@ public class EnemyAI : MonoBehaviour, IDamage
     private bool isInCombat;
     private bool hasFoundCover;
     
-    
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -75,20 +80,21 @@ public class EnemyAI : MonoBehaviour, IDamage
             explosionEffect.GetComponent<damage>().damageAmount = explosionDamage;
             explosionEffect.transform.localScale = new Vector3(explosionSize*2, explosionSize*2, explosionSize*2);
         }
+        else if (type == enemyType.flying)
+        {
+            agent.baseOffset = Random.Range(minFlyHeight, maxFlyHeight);
+            roamDis = circleRange;
+        }
         agentStopDisOrig = agent.stoppingDistance;
+        
     }
 
     // Update is called once per frame
     void Update()
     {
         playerDirection = player.transform.position - headPosition.position;
-        if (type != enemyType.flying && !isInCombat)
-        {
-            if(agent.remainingDistance <= 0.01f)
-                roamTime += Time.deltaTime;
-            if (!playerInTrigger || (playerInTrigger && CanSeePlayer()))
-                RoamCheck();
-        }
+        
+        
         if (isInCombat)
         {
             if (isEliteEnemy)
@@ -97,6 +103,16 @@ public class EnemyAI : MonoBehaviour, IDamage
                 BasicCombatMovement();
             Combat();
         }
+        else
+        {
+            if(agent.remainingDistance <= 0.01f)
+                roamTime += Time.deltaTime;
+            if (!playerInTrigger || (playerInTrigger && CanSeePlayer()))
+                RoamCheck();
+        }
+
+        if (type == enemyType.flying && !isBobbing)
+            StartCoroutine(FlyingMovement());
     }
 
     void RoamCheck()
@@ -175,7 +191,13 @@ public class EnemyAI : MonoBehaviour, IDamage
 
     void FlyingAttack()
     {
-        
+        attackTimer = 0;
+        if(!isEliteEnemy)
+            RangedAttack();
+        else
+        {
+            // Elite Attack
+        }
     }
 
     void ExplodingAttack()
@@ -188,14 +210,6 @@ public class EnemyAI : MonoBehaviour, IDamage
         isExploding = true;
         Destroy(gameObject);
     }
-
-    /*
-     void SwarmAttack()
-     
-    {
-        
-    }
-    */
     
     void BasicCombatMovement()
     {
@@ -219,7 +233,12 @@ public class EnemyAI : MonoBehaviour, IDamage
                 agent.destination = player.transform.position;
                 break;
             case enemyType.flying:
-                FlyingMovement();
+                //FlyingMovement();
+                //agent.stoppingDistance = 5000;
+                //agent.destination = transform.position;
+                agent.speed = 0;
+                agent.acceleration = 0;
+                agent.isStopped = true;
                 break;
         }
     }
@@ -244,7 +263,8 @@ public class EnemyAI : MonoBehaviour, IDamage
                 agent.stoppingDistance = 0;
                 break;
             case enemyType.flying:
-                FlyingMovement();
+                //FlyingMovement();
+                agent.stoppingDistance = 5000;
                 break;
         }
     }
@@ -252,47 +272,27 @@ public class EnemyAI : MonoBehaviour, IDamage
     void Combat()
     {
         attackTimer += Time.deltaTime;
-        if (isEliteEnemy)
+        switch (type)
         {
-            switch (type)
-            {
-                case enemyType.melee:
-                    break;
-                case enemyType.ranged:
-                    break;
-                case enemyType.exploding:
-                    if((player.transform.position - this.transform.position).magnitude < explosionSize)
-                        ExplodingAttack();
-                    break;
-                case enemyType.swarm:
-                    break;
-                case enemyType.flying:
-                    break;
-            }
-        }
-        else
-        {
-            switch (type)
-            {
-                case enemyType.melee:
-                    //Debug.Log("melee");
-                    if ((player.transform.position - this.transform.position).magnitude <= agent.stoppingDistance+0.5f && attackTimer >= attackRate)
-                        MeleeAttack();
-                    break;
-                case enemyType.ranged:
-                    if (attackTimer >= attackRate)
-                        RangedAttack();
-                    break;
-                case enemyType.exploding:
-                    if((player.transform.position - this.transform.position).magnitude < explosionSize)
-                        ExplodingAttack();
-                    break;
-                case enemyType.swarm:
-                    
-                    break;
-                case enemyType.flying:
-                    break;
-            }
+            case enemyType.melee:
+                if ((player.transform.position - transform.position).magnitude <= agent.stoppingDistance + 0.5f && attackTimer >= attackRate)
+                    MeleeAttack();
+                break;
+            case enemyType.ranged:
+                if (attackTimer >= attackRate)
+                    RangedAttack();
+                break;
+            case enemyType.exploding:
+                if ((player.transform.position - transform.position).magnitude < explosionSize)
+                    ExplodingAttack();
+                break;
+            case enemyType.swarm:
+                // Handled with collider
+                break;
+            case enemyType.flying:
+                if (attackTimer >= attackRate)
+                    FlyingAttack();
+                break;
         }
     }
 
@@ -306,9 +306,13 @@ public class EnemyAI : MonoBehaviour, IDamage
         
     }
 
-    void FlyingMovement()
+    IEnumerator FlyingMovement()
     {
-        
+        isBobbing = true;
+        //transform.Rotate(0, 0, Random.Range(-15, 15));
+        agent.baseOffset = Math.Clamp(agent.baseOffset + Random.Range(-0.1f, 0.1f), minFlyHeight, maxFlyHeight);
+        yield return new WaitForSeconds(0.1f);
+        isBobbing = false;
     }
 
     public void TakeDamage(int dmg)

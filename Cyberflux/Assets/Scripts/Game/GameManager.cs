@@ -23,6 +23,7 @@ public class GameManager : MonoBehaviour
     public Image playerHPBar;
     public TMP_Text playerHPText;
     public TMP_Text playerAmmoText;
+    public Image playerStaminaBar;
 
     [SerializeField] GameObject menuActive;
     [SerializeField] GameObject menuPause;
@@ -57,7 +58,17 @@ public class GameManager : MonoBehaviour
     {
         instance = this;
         player = GameObject.FindWithTag("Player");
-        playerScript = player.GetComponent<PlayerController>();
+           var p = GameObject.FindWithTag("Player");
+    if (p != null)
+    {
+        player = p;
+        playerScript = p.GetComponent<PlayerController>();
+    }
+    else
+    {
+        player = null;
+        playerScript = null;
+    }
 
         //ShowTitle();
     }
@@ -334,4 +345,19 @@ if (menuItemUnlock)
         menuItemUnlock.SetActive(true);
     }
 
+
+    public void UpdateHealthUI(int currentHP, int maxHP)
+    {
+        if (playerHPBar != null)
+            playerHPBar.fillAmount = (float)currentHP / maxHP;
+
+        if (playerHPText != null)
+            playerHPText.text = currentHP + " / " + maxHP;
+    }
+
+    public void UpdateStaminaUI(float currentStamina, float maxStamina)
+    {
+        if (playerStaminaBar != null)
+            playerStaminaBar.fillAmount = currentStamina / maxStamina;
+    }
 }
