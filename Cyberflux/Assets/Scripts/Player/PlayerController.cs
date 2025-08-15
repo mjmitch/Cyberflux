@@ -38,6 +38,7 @@ public class PlayerController : MonoBehaviour, IDamage, IHeal
     [SerializeField] float groundDrag;
 
     [Header("Jumping")]
+    [SerializeField] int jumpCount;
     [SerializeField] float jumpForce;
     [SerializeField] float jumpCooldown;
     [SerializeField] float airMultiplier;
@@ -56,6 +57,9 @@ public class PlayerController : MonoBehaviour, IDamage, IHeal
 
     [Header("Stats")]
     [SerializeField] int HP;
+
+    [Header("Stat Modifiers")]
+    [SerializeField] float sdf;
 
     [Header("Item Stuff")]
     [SerializeField] public List<Augment> playerItems;
