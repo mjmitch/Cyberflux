@@ -20,8 +20,7 @@ public class damage : MonoBehaviour
     [SerializeField] public int speed;
     [SerializeField] public float destroyTime;
     bool exploded = false;
-      
-
+    
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -107,5 +106,4 @@ public class damage : MonoBehaviour
         d.RemoveSlow();
         isSlowing = false;
     }
-
 }
