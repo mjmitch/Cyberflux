@@ -57,7 +57,17 @@ public class GameManager : MonoBehaviour
     {
         instance = this;
         player = GameObject.FindWithTag("Player");
-        playerScript = player.GetComponent<PlayerController>();
+           var p = GameObject.FindWithTag("Player");
+    if (p != null)
+    {
+        player = p;
+        playerScript = p.GetComponent<PlayerController>();
+    }
+    else
+    {
+        player = null;
+        playerScript = null;
+    }
 
         //ShowTitle();
     }
