@@ -20,12 +20,11 @@ public class FixedSpawner : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (startSpawning)
+        if (startSpawning && objectSpawn != null)
         {
             spawnTimer += Time.deltaTime;
-
             if (spawnTimer >= spawnRate && spawnCount < spawnAmount)
-            {
+            { 
                 spawn();
             }
         }
