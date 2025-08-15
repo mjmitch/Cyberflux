@@ -27,6 +27,10 @@ public class EnemyAI : MonoBehaviour, IDamage
 
     [Range(0, 3)] [SerializeField] private int explosionSize;
     [Range(5, 25)] [SerializeField] private int explosionDamage;
+    [SerializeField] private GameObject explosionEffect;
+    [SerializeField] private AudioClip explosionSound;
+    private bool isExploding = false;
+    
     
     private enum enemyType
     {
@@ -62,6 +66,11 @@ public class EnemyAI : MonoBehaviour, IDamage
         agentStopDisOrig = agent.stoppingDistance;
         player = GameObject.FindGameObjectWithTag("Player");
         audioPlayer = GetComponent<AudioSource>();
+        if (type == enemyType.exploding && explosionEffect != null)
+        {
+            explosionEffect.GetComponent<damage>().damageAmount = explosionDamage;
+            explosionEffect.transform.localScale = new Vector3(explosionSize*2, explosionSize*2, explosionSize*2);
+        }
     }
 
     // Update is called once per frame
@@ -160,7 +169,12 @@ public class EnemyAI : MonoBehaviour, IDamage
 
     void ExplodingAttack()
     {
-        
+        if(!isExploding)
+            Instantiate(explosionEffect, transform.position, Quaternion.identity);
+        isExploding = true;
+        audioPlayer.PlayOneShot(explosionSound, GameManager.instance.playerScript.sfxVol);
+        //Debug.Log("SOUND PLAYED");
+        Destroy(gameObject);
     }
 
     void SwarmAttack()
@@ -180,6 +194,7 @@ public class EnemyAI : MonoBehaviour, IDamage
                 break;
             case enemyType.exploding:
                 agent.stoppingDistance = 0;
+                agent.destination = player.transform.position;
                 break;
             case enemyType.swarm:
                 agent.stoppingDistance = 0;
@@ -275,6 +290,20 @@ public class EnemyAI : MonoBehaviour, IDamage
     public void TakeDamage(int dmg)
     {
         HP -= dmg;
+
+        if (HP <= 0)
+        {
+            if (type == enemyType.exploding && !isExploding)
+            {
+                explosionEffect.GetComponent<damage>().damageAmount /= 2;
+                explosionEffect.transform.localScale /= 2;
+                Instantiate(explosionEffect, transform.position, Quaternion.identity);
+                audioPlayer.PlayOneShot(explosionSound, GameManager.instance.playerScript.sfxVol);
+            }
+            
+            
+            Destroy(gameObject);
+        }
     }
 
     public int GetHP()

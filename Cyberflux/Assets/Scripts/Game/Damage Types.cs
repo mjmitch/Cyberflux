@@ -15,10 +15,11 @@ public class damage : MonoBehaviour
     [SerializeField] bool slowEffect;
 
     [Header("Object Manipulation")]
-    [SerializeField] int damageAmount;
-    [SerializeField] float damageRate;
-    [SerializeField] int speed;
-    [SerializeField] float destroyTime;
+    [SerializeField] public int damageAmount;
+    [SerializeField] public float damageRate;
+    [SerializeField] public int speed;
+    [SerializeField] public float destroyTime;
+    bool exploded = false;
       
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
