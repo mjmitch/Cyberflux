@@ -49,6 +49,7 @@ public class GameManager : MonoBehaviour
 
     // item stuff
     [SerializeField] public List<Augment> itemPool;
+   
     enum GameState { Title, Playing, Win, Lose }
     GameState _state = GameState.Title;
 
@@ -66,6 +67,7 @@ public class GameManager : MonoBehaviour
     {
         //GameStatePause();
         menuItemSelect.SetActive(false);
+        menuItemUnlock.SetActive(false);
         minutes = 0;
         seconds = 0;
         miliseconds = 0;
@@ -82,7 +84,7 @@ public class GameManager : MonoBehaviour
 
         if (Keyboard.current != null && Keyboard.current.escapeKey.wasPressedThisFrame)
         {
-            if (menuItemSelect.active)
+            if (menuItemSelect.active || menuItemUnlock.active)
             {
 
             }
@@ -123,7 +125,10 @@ public class GameManager : MonoBehaviour
 if (menuItemSelect)
         {
             menuItemSelect.SetActive(false);
-           // menuActive.SetActive(false);
+        }
+if (menuItemUnlock)
+        {
+            menuItemUnlock.SetActive(false);
         }
         // Hide pause and any active menu
         if (menuActive) menuActive.SetActive(false);
@@ -256,8 +261,28 @@ if (menuItemSelect)
             }
             else if (seconds < 59)
             {
-                miliseconds -= 1;
-                seconds += 1;
+                if (playerScript.brokenClock && Random.Range(1,101) <= 10)
+                {
+                    miliseconds -= 1;
+                    seconds -= 1;
+                    
+                    if (seconds < 0 && minutes > 0)
+                    {
+
+                        seconds = 59;
+                        minutes -= 1;
+                    }
+                    else if (seconds < 0 && minutes < 0)
+                    {
+                        seconds -= 1;
+                    }
+                   
+                }
+                else
+                {
+                    miliseconds -= 1;
+                    seconds += 1;
+                }
             }
             else if (minutes < 59)
             {
@@ -284,7 +309,7 @@ if (menuItemSelect)
         else
             TimerSeconds.text = seconds.ToString() + ".";
 
-        if (minutes < 10)
+        if (minutes < 10 && minutes >= 0)
             TimerMinutes.text = "0" + minutes.ToString() + ".";
         else
             TimerMinutes.text = minutes.ToString() + ".";
@@ -298,4 +323,15 @@ if (menuItemSelect)
         
         menuItemSelect.SetActive(true);
     }
+    public void UnlockItem()
+    {
+        isPaused = true;
+        Time.timeScale = 0f;
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
+        
+       
+        menuItemUnlock.SetActive(true);
+    }
+
 }
