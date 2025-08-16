@@ -190,7 +190,10 @@ public class PlayerController : MonoBehaviour, IDamage, IHeal
             Heal(5);
         }
 
-        
+        if (Input.GetKeyDown(KeyCode.T))
+        {
+            GameManager.instance.ShowTutorial("Press Shift to Sprint!", 3f);
+        }
     }
 
     private void FixedUpdate()

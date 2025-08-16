@@ -48,16 +48,21 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] TutorialPrompt tutorialPrompt;
 
-    int minutes;
+    
     [SerializeField] public AudioSource UIAudioSource;
     [SerializeField] public AudioMixer audioMixer;
 
     [Header("Timers")]
     [HideInInspector] public int minutes;
+
     public TMP_Text TimerMinutes;
+
     [HideInInspector] public int seconds;
+
     public TMP_Text TimerSeconds;
+
     [HideInInspector] public float miliseconds;
+
     public TMP_Text TimerMiliseconds;
 
 
