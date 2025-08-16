@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using UnityEngine.InputSystem;
 using Unity.VisualScripting;
+using UnityEngine.Audio;
 
 
 public class GameManager : MonoBehaviour
@@ -42,6 +43,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] public GameObject optionsControls;
     [SerializeField] public GameObject optionsAudio;
 
+    [SerializeField] public AudioSource globalAudioSource;
+    [SerializeField] public AudioMixer audioMixer;
     int minutes;
     public TMP_Text TimerMinutes;
     int seconds;
@@ -82,6 +85,9 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         //GameStatePause();
+        audioMixer.SetFloat("masterVolume", playerScript.masterVol);
+        audioMixer.SetFloat("sfxVolume", playerScript.sfxVol);
+        audioMixer.SetFloat("musicVolume", playerScript.musicVol);
         menuItemSelect.SetActive(false);
         menuItemUnlock.SetActive(false);
         OptionPanel.gameObject.SetActive(false);

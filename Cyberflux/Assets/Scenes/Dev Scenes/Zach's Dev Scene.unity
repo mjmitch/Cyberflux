@@ -738,6 +738,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8120164286636555745, guid: 48336de922d670f4e9fc9598a557dff7, type: 3}
+      propertyPath: audioMixer
+      value: 
+      objectReference: {fileID: 24100000, guid: 166f7127cd5aad44d840c8cf69142e2b, type: 2}
+    - target: {fileID: 8120164286636555745, guid: 48336de922d670f4e9fc9598a557dff7, type: 3}
       propertyPath: 'itemPool.Array.data[1]'
       value: 
       objectReference: {fileID: 628329921}
