@@ -95,15 +95,16 @@ public class GameManager : MonoBehaviour
 
         if (Keyboard.current != null && Keyboard.current.escapeKey.wasPressedThisFrame)
         {
-            if (menuItemSelect.active || menuItemUnlock.active)
+            if ((menuItemSelect && menuItemSelect.activeSelf) ||
+        (menuItemUnlock && menuItemUnlock.activeSelf) ||
+        (menuWin && menuWin.activeSelf) ||
+        (menuLose && menuLose.activeSelf))
             {
+                return; // do nothing
+            }
 
-            }
-            else
-            {
-                if (!isPaused) GameStatePause();
-                else GameStateResume();
-            }
+            if (!isPaused) GameStatePause();
+            else GameStateResume();
         }
 
     }
