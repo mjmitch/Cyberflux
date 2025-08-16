@@ -10,6 +10,7 @@ public class ScytheCombat : MonoBehaviour, IDamage
 
     //Events
     public event Action OnSlash;
+    public event Action OnSpecialAttack;
 
     [Header("Scythe")]
     [SerializeField] LayerMask enemyLayer;
@@ -51,6 +52,7 @@ public class ScytheCombat : MonoBehaviour, IDamage
     public PlayerController playerScript = GameManager.instance.playerScript;
 
     [Header("Momentum Attack")]
+    public bool specialAttackReady;
 
 
 
@@ -64,7 +66,8 @@ public class ScytheCombat : MonoBehaviour, IDamage
     //Left Mouse Button
     [SerializeField] KeyCode attackKey = KeyCode.Mouse0;
     [SerializeField] KeyCode slashKey = KeyCode.Q;
-    [SerializeField] KeyCode heavyAttackKey = KeyCode.Mouse1;
+    [SerializeField] KeyCode slamAttackKey = KeyCode.Mouse1;
+    [SerializeField] KeyCode specialAttackKey = KeyCode.Mouse2;
 
     
 
@@ -117,7 +120,7 @@ public class ScytheCombat : MonoBehaviour, IDamage
 
     private void FixedUpdate()
     {
-        if (Time.time >= nextSlamTime && Input.GetKey(heavyAttackKey) && playerCam.forward.y < -0.93f && !playerScript.grounded)
+        if (Time.time >= nextSlamTime && Input.GetKey(slamAttackKey) && playerCam.forward.y < -0.93f && !playerScript.grounded)
         {
             SlamAttack();
             nextSlamTime = Time.time + slamCooldown;
@@ -141,13 +144,20 @@ public class ScytheCombat : MonoBehaviour, IDamage
         
     }
 
-    
 
     public void SlamAttack()
     {
         playerScript.desiredMoveSpeed = slamForce;
 
         isSlamming = true; 
+    }
+
+    void MomentumAttack()
+    {
+
+        //Invoke the Action if Action isn't null
+        OnSpecialAttack?.Invoke();
+
     }
 
     public void SlashAttack()

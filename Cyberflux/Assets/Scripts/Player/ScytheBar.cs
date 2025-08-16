@@ -9,6 +9,8 @@ public class ScytheBar : MonoBehaviour
 
     [SerializeField] ScytheCombat scytheScript;
 
+
+
     private void Start()
     {
         scytheScript.OnSlash += ResetBar;
