@@ -402,11 +402,14 @@ MonoBehaviour:
   slowModifier: 0.56
   isEliteEnemy: 0
   moveCoverTime: 2.5
+  score: 0
   explosionSize: 0
   explosionDamage: 5
   explosionEffect: {fileID: 0}
   explosionSound: {fileID: 0}
-  score: 0
+  minFlyHeight: 0
+  maxFlyHeight: 5
+  circleRange: 5
   type: 0
   dropChance: 0
 --- !u!195 &5763905321607710119
