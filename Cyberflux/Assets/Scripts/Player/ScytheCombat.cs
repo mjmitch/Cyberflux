@@ -2,6 +2,8 @@ using NUnit.Framework;
 using UnityEngine;
 using System.Collections.Generic;
 using System;
+using UnityEditor;
+using Unity.VisualScripting;
 
 public class ScytheCombat : MonoBehaviour, IDamage
 {
@@ -26,24 +28,44 @@ public class ScytheCombat : MonoBehaviour, IDamage
     [SerializeField] Transform playerCam;
     [SerializeField] Transform orientation;
     [SerializeField] GameObject scytheProjectile;
+    
     [SerializeField] int slashProjectileCharges;
     public  float slashRechargeTime;
     
-    public float currentSlashTime;
-    public float nextSlashTime;
+    [HideInInspector] public float currentSlashTime; 
+    [HideInInspector] public float nextSlashTime;
 
     
+
+    [Header("Slam Attack")]
+    [SerializeField] GameObject slamAttack;
+    [SerializeField] float slamForce;
+    [SerializeField] float slamCooldown;
+    [SerializeField] AudioClip audioClip;
+    [SerializeField] LayerMask whatIsGround;
+    private bool closeToGround;
+    private Vector3 newGravity;
+    public bool isSlamming = false;
+    private Vector3 impactPoint;
+    private float nextSlamTime;
+
+    public PlayerController playerScript = GameManager.instance.playerScript;
+
+    [Header("Momentum Attack")]
 
     [Header("Input")]
     //Left Mouse Button
     [SerializeField] KeyCode attackKey = KeyCode.Mouse0;
     [SerializeField] KeyCode slashKey = KeyCode.Q;
+    [SerializeField] KeyCode heavyAttackKey = KeyCode.Mouse1;
 
     
 
     private void Update()
     {
-        if(Time.time >= nextAttackTime)
+        
+
+        if (Time.time >= nextAttackTime)
         {
             if(Input.GetKey(attackKey)) 
             {
@@ -54,7 +76,11 @@ public class ScytheCombat : MonoBehaviour, IDamage
             }    
         }
 
-       
+        if (playerScript.grounded && isSlamming)
+        {
+            Instantiate(slamAttack, attackPoint.position, orientation.rotation);
+            isSlamming = false;
+        }
 
         if (Time.time >= nextSlashTime) {
 
@@ -71,18 +97,44 @@ public class ScytheCombat : MonoBehaviour, IDamage
     }
 
 
+    private void FixedUpdate()
+    {
+        if (Time.time >= nextSlamTime && Input.GetKey(heavyAttackKey) && playerCam.forward.y < -0.93f && !playerScript.grounded)
+        {
+            SlamAttack();
+            nextSlamTime = Time.time + slamCooldown;
+        }
+    }
+
     void Attack()
     {
         //Attack Animation || Beta Task
-
-        //Detect Enemies in Range
-        Collider[] hitEnemies = Physics.OverlapSphere(attackPoint.position, attackRadius, enemyLayer);
         
+        
+        //Detect Enemies in Attack Range
+        Collider[] hitEnemies = Physics.OverlapSphere(attackPoint.position, attackRadius, enemyLayer);
+
         //Conflict Damage
-        foreach(Collider enemy in hitEnemies)
+        foreach (Collider enemy in hitEnemies)
         {
             enemy.GetComponent<IDamage>().TakeDamage(attackDamage);
         }
+
+    }
+
+    
+
+    public void SlamAttack()
+    {
+        Rigidbody rb = playerScript.GetComponent<Rigidbody>();
+
+        Vector3 vel = rb.linearVelocity;
+        vel.y = 0f;
+        rb.linearVelocity = vel;
+
+        rb.AddForce(Vector3.down * slamForce, ForceMode.Impulse);
+
+        isSlamming = true;
 
         
     }

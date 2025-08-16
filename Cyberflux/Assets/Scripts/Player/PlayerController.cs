@@ -17,9 +17,9 @@ public class PlayerController : MonoBehaviour, IDamage, IHeal
     [SerializeField] float wallrunSpeed;
     [SerializeField] float dashSpeed;
     [Range(0.01f, 0.99f)] [SerializeField] private float slowModifier;
+    public Vector3 gravityOrig;
 
     [Header("Camera")]
-    [SerializeField] GameObject scytheModel;
     public float NormalFov;
     public Camera cam;
     [SerializeField] float slidingFOV;
@@ -68,7 +68,7 @@ public class PlayerController : MonoBehaviour, IDamage, IHeal
 
 
     [Header("Ground Check")]
-    [SerializeField] float playerHeight;
+    public float playerHeight;
     [SerializeField] LayerMask whatIsGround;
     public bool grounded;
 
@@ -106,6 +106,8 @@ public class PlayerController : MonoBehaviour, IDamage, IHeal
 
     Rigidbody rb;
 
+    [Header("Movement States")]
+
     public MovementState state;
 
     public enum MovementState
@@ -135,8 +137,9 @@ public class PlayerController : MonoBehaviour, IDamage, IHeal
         NormalFov = cam.fieldOfView;
         cam = Camera.main.GetComponent<Camera>();
         wallRunScript = this.GetComponent<WallRunning>();
+        gravityOrig = Physics.gravity;
        
-        GameManager.instance.UpdateStaminaUI(stamina, staminaMax);
+        
 
        
 
@@ -147,7 +150,7 @@ public class PlayerController : MonoBehaviour, IDamage, IHeal
     void Update()
     {
 
-        Debug.Log("PlayerController is running");
+        Debug.Log(grounded);
 
         grounded = Physics.Raycast(transform.position, Vector3.down, playerHeight * 0.5f + 0.2f, whatIsGround);
 
@@ -179,12 +182,7 @@ public class PlayerController : MonoBehaviour, IDamage, IHeal
             Heal(5);
         }
 
-        if (!Input.GetKey(sprintKey) && stamina < staminaMax)
-        {
-            stamina += 1;
-            if (stamina > staminaMax) stamina = staminaMax;
-            GameManager.instance.UpdateStaminaUI(stamina, staminaMax);
-        }
+        
     }
 
     private void FixedUpdate()
@@ -307,23 +305,13 @@ public class PlayerController : MonoBehaviour, IDamage, IHeal
         }
 
         // Sprinting
-        else if (grounded && Input.GetKey(sprintKey) && stamina > 0)
+        else if (grounded && Input.GetKey(sprintKey))
         {
             state = MovementState.sprinting;
             cam.fieldOfView = Mathf.Lerp(cam.fieldOfView, sprintingFov, Time.deltaTime * fovChangeSpeed);
             desiredMoveSpeed = sprintSpeed;
 
-            // Drain stamina while sprinting
-            stamina -= 1;
-            if (stamina < 0) stamina = 0;
-            GameManager.instance.UpdateStaminaUI(stamina, staminaMax);
-        }
-
-        // Out of stamina — force walk
-        else if (grounded && stamina <= 0)
-        {
-            state = MovementState.walking;
-            desiredMoveSpeed = walkSpeed;
+            
         }
 
         // Walking
