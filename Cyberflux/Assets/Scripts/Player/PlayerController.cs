@@ -61,9 +61,10 @@ public class PlayerController : MonoBehaviour, IDamage, IHeal
     [SerializeField] int HP;
 
     [Header("Stat Modifiers")]
-    [SerializeField] float sdf;
+    //  [SerializeField] float sdf;
 
     [Header("Item Stuff")]
+    public int keys = 0;
     [SerializeField] public List<Augment> playerItems;
     public bool brokenClock = false;
 
