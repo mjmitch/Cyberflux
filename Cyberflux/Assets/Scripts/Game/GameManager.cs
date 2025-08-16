@@ -39,6 +39,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] public TMP_Text bossNameText;
 
     [SerializeField] CanvasGroup OptionPanel;
+    [SerializeField] public GameObject optionsControls;
+    [SerializeField] public GameObject optionsAudio;
 
     int minutes;
     public TMP_Text TimerMinutes;
@@ -82,6 +84,7 @@ public class GameManager : MonoBehaviour
         //GameStatePause();
         menuItemSelect.SetActive(false);
         menuItemUnlock.SetActive(false);
+        OptionPanel.gameObject.SetActive(false);
         minutes = 0;
         seconds = 0;
         miliseconds = 0;
@@ -174,11 +177,16 @@ if (menuItemUnlock)
 
     public void Option()
     {
+        OptionPanel.gameObject.SetActive(true);
         OptionPanel.alpha = 1;
         OptionPanel.blocksRaycasts = true;
+        optionsControls.SetActive(true);
+        optionsAudio.SetActive(false);
+
     }
     public void Back()
     {
+        OptionPanel.gameObject.SetActive(false);
         OptionPanel.alpha= 0;
         OptionPanel.blocksRaycasts = false;
     }

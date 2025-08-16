@@ -126,6 +126,7 @@ GameObject:
   - component: {fileID: 5400869238766034153}
   - component: {fileID: 7962889560883757391}
   - component: {fileID: 8744238162476625676}
+  - component: {fileID: 4948431690469598747}
   m_Layer: 6
   m_Name: PlayerController
   m_TagString: Player
@@ -169,7 +170,7 @@ MonoBehaviour:
   wallrunSpeed: 8
   dashSpeed: 17
   slowModifier: 0.3
-  scytheModel: {fileID: 0}
+  gravityOrig: {x: 0, y: 0, z: 0}
   NormalFov: 90
   cam: {fileID: 7443088924458907976}
   slidingFOV: 120
@@ -180,6 +181,7 @@ MonoBehaviour:
   tiltAmount: 2
   tiltTime: 0.2
   groundDrag: 4
+  jumpCount: 0
   jumpForce: 12
   jumpCooldown: 0.25
   airMultiplier: 0.4
@@ -189,20 +191,22 @@ MonoBehaviour:
   sprintKey: 304
   crouchKey: 99
   HP: 100
+  sdf: 0
   playerItems: []
+  brokenClock: 0
   playerHeight: 2
   whatIsGround:
     serializedVersion: 2
     m_Bits: 2049
   grounded: 0
   maxSlopeAngle: 40
-  audioPlayer: {fileID: 0}
+  audioPlayer: {fileID: 4948431690469598747}
   audJump: []
   audHurt: []
   audStep: []
-  masterVol: 0
-  musicVol: 0
-  sfxVol: 0
+  masterVol: 0.5
+  musicVol: 1
+  sfxVol: 1
   orientation: {fileID: 2253439677119928108}
   state: 0
   wallrunning: 0
@@ -328,6 +332,103 @@ CapsuleCollider:
   m_Height: 1
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!82 &4948431690469598747
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 582248119451382777}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_Resource: {fileID: 0}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &1379884792544498658
 GameObject:
   m_ObjectHideFlags: 0
@@ -672,7 +773,26 @@ MonoBehaviour:
   attackRate: 2
   attackDamage: 10
   scytheModel: {fileID: 5969235952933304655}
+  scytheBar: {fileID: 0}
+  playerCam: {fileID: 0}
+  orientation: {fileID: 0}
+  scytheProjectile: {fileID: 0}
+  slashProjectileCharges: 0
+  slashRechargeTime: 0
+  currentSlashTime: 0
+  nextSlashTime: 0
+  slamAttack: {fileID: 0}
+  slamForce: 0
+  slamCooldown: 0
+  audioClip: {fileID: 0}
+  whatIsGround:
+    serializedVersion: 2
+    m_Bits: 0
+  isSlamming: 0
+  playerScript: {fileID: 0}
   attackKey: 323
+  slashKey: 0
+  heavyAttackKey: 0
 --- !u!65 &8192394073945935188
 BoxCollider:
   m_ObjectHideFlags: 0

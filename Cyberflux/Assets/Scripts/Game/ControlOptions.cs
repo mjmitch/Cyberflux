@@ -35,5 +35,11 @@ public class ControlOptions : MonoBehaviour
         sensYValue.text = sens.ToString();
     }
 
-    
+    public void SwapToAudio()
+    {
+        gameObject.SetActive(false);
+        GameManager.instance.optionsAudio.SetActive(true);
+    }
+
+
 }

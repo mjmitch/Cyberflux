@@ -69,10 +69,14 @@ MonoBehaviour:
   slowModifier: 0.56
   isEliteEnemy: 0
   moveCoverTime: 0.5
+  score: 0
   explosionSize: 3
   explosionDamage: 15
   explosionEffect: {fileID: 7526138629604879622, guid: 020bc07bec3f6c44e819e28eafa59ac0, type: 3}
   explosionSound: {fileID: 8300000, guid: e1617e77f3c8b874b887496e1357d031, type: 3}
+  minFlyHeight: 0
+  maxFlyHeight: 2
+  circleRange: 5
   type: 2
   dropChance: 0
 --- !u!33 &375834084111833412

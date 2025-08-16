@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Security.Cryptography.X509Certificates;
 using UnityEngine;
+using UnityEngine.Audio;
 using UnityEngine.Tilemaps;
 using UnityEngine.UI; 
 
@@ -78,7 +79,11 @@ public class PlayerController : MonoBehaviour, IDamage, IHeal
     private bool slopeExit;
 
     [Header("Audio")]
-    [SerializeField] AudioSource audioPlayer;
+    [SerializeField] public AudioSource audioPlayer;
+   // [SerializeField] public AudioMixer audioMixer;
+    //[SerializeField] public AudioMixerGroup masterVol;
+    //[SerializeField] public AudioMixerGroup musicVol;
+    //[SerializeField] public AudioMixerGroup sfxVol;
    
     //Dont know what all audio we are going to have, just putting these here for now.
     [SerializeField] AudioClip[] audJump;
@@ -86,9 +91,9 @@ public class PlayerController : MonoBehaviour, IDamage, IHeal
     [SerializeField] AudioClip[] audStep;
 
 
-    [SerializeField] public float masterVol;
-    [SerializeField] public float musicVol;
-    [SerializeField] public float sfxVol;
+    [Range(0,1)] [SerializeField] public float masterVol;
+    [Range(0, 1)][SerializeField] public float musicVol;
+    [Range(0, 1)][SerializeField] public float sfxVol;
 
     
 

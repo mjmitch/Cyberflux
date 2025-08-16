@@ -4,6 +4,7 @@ using System.Diagnostics;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.Audio;
 using Debug = UnityEngine.Debug;
 using Random = UnityEngine.Random;
 
@@ -206,7 +207,8 @@ public class EnemyAI : MonoBehaviour, IDamage
         if (!isExploding)
         {
             Instantiate(explosionEffect, transform.position, Quaternion.identity);
-            audioPlayer.PlayOneShot(explosionSound, GameManager.instance.playerScript.sfxVol);
+            GameManager.instance.playerScript.audioPlayer.PlayOneShot(explosionSound, GameManager.instance.playerScript.sfxVol * GameManager.instance.playerScript.masterVol);
+            
         }
         isExploding = true;
         Destroy(gameObject);
@@ -327,7 +329,7 @@ public class EnemyAI : MonoBehaviour, IDamage
                 explosionEffect.GetComponent<damage>().damageAmount /= 2;
                 explosionEffect.transform.localScale /= 2;
                 Instantiate(explosionEffect, transform.position, Quaternion.identity);
-                audioPlayer.PlayOneShot(explosionSound, GameManager.instance.playerScript.sfxVol);
+                //audioPlayer.PlayOneShot(explosionSound, GameManager.instance.playerScript.sfxVol);
             }
             
             Destroy(gameObject);
