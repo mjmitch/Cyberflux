@@ -11,7 +11,7 @@ public class damage : MonoBehaviour
 
     [Header("Object Set-Up")]
     [SerializeField] damagetype type;
-    [SerializeField] Rigidbody rb;
+    [SerializeField] public Rigidbody rb;
     [SerializeField] bool slowEffect;
 
     [Header("Object Manipulation")]

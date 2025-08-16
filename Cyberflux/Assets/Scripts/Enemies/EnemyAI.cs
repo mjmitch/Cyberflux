@@ -37,7 +37,7 @@ public class EnemyAI : MonoBehaviour, IDamage
     private bool isExploding = false;
     [Header("Flying Enemy Stuff\nLeave blank if not Flying enemy")]
     [Range(0, 5)] [SerializeField] private int minFlyHeight;
-    [Range(5, 9)] [SerializeField] private int maxFlyHeight;
+    [Range(3, 9)] [SerializeField] private int maxFlyHeight;
     //[Range(4, 15)] [SerializeField] private int attackRange;
     [Range(5, 25)] [SerializeField] private int circleRange;
     private bool isBobbing = false;
@@ -186,7 +186,8 @@ public class EnemyAI : MonoBehaviour, IDamage
     void RangedAttack()
     {
         attackTimer = 0;
-        Instantiate(bullet, attackPosition.position, transform.rotation);
+        GameObject bullet1 = Instantiate(bullet, attackPosition.position, transform.rotation);
+        bullet1.GetComponent<damage>().rb.linearVelocity = (GameManager.instance.player.transform.position - transform.position).normalized * bullet1.GetComponent<damage>().speed;
     }
 
     void FlyingAttack()
