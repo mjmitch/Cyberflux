@@ -61,13 +61,25 @@ public class damage : MonoBehaviour
         IDamage dmg = other.GetComponent<IDamage>();
         if (dmg != null && type != damagetype.DOT)
         {
-            dmg.TakeDamage(damageAmount);
-            //Handles slows:
-            if(slowEffect == true && !isSlowing)
+            PlayerController player = other.GetComponent<PlayerController>();
+            if (player != null)
+            {
+                // Try to get a DeathCause message
+                string cause = GetComponentInParent<DeathCause>()?.GetMessage() ?? "Unknown";
+             
+                player.TakeDamage(damageAmount, cause);
+            }
+            else
+            {
+                dmg.TakeDamage(damageAmount);
+            }
+
+            if (slowEffect && !isSlowing)
             {
                 StartCoroutine(slowOther(dmg));
             }
         }
+
         if (type == damagetype.moving || type == damagetype.homing)
         {
             Destroy(gameObject);
@@ -97,7 +109,20 @@ public class damage : MonoBehaviour
     IEnumerator damageOther(IDamage d)
     {
         isDamaging = true;
-        d.TakeDamage(damageAmount);
+
+        // If the thing we are damaging is the player, send cause-of-death string
+        PlayerController player = d as PlayerController;
+        if (player != null)
+        {
+            string cause = GetComponentInParent<DeathCause>()?.GetMessage() ?? "Unknown";
+            player.TakeDamage(damageAmount, cause);
+        }
+        else
+        {
+            // Fallback for anything else that takes damage
+            d.TakeDamage(damageAmount);
+        }
+
         yield return new WaitForSeconds(damageRate);
         isDamaging = false;
     }

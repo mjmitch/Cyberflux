@@ -190,7 +190,10 @@ public class PlayerController : MonoBehaviour, IDamage, IHeal
             Heal(5);
         }
 
-        
+        if (Input.GetKeyDown(KeyCode.T))
+        {
+            GameManager.instance.ShowTutorial("Press Shift to Sprint!", 3f);
+        }
     }
 
     private void FixedUpdate()
@@ -473,16 +476,22 @@ public class PlayerController : MonoBehaviour, IDamage, IHeal
 
     public void TakeDamage(int dmg)
     {
+        TakeDamage(dmg, "Unknown");
+    }
+
+    // 2) Custom, adds cause of death text
+    public void TakeDamage(int dmg, string cause)
+    {
         HP -= dmg;
         if (HP < 0) HP = 0;
-
 
         GameManager.instance.UpdateHealthUI(HP, HPOriginal);
 
         if (HP <= 0)
-            GameManager.instance.YouLose();
+        {
+            GameManager.instance.YouLose(cause);
+        }
     }
-
     public int GetHP()
     {
         return HP;

@@ -4904,6 +4904,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7605051228005241568}
+  - component: {fileID: -2894977057478050866}
   - component: {fileID: 2500660614887861814}
   - component: {fileID: 4254366514349637598}
   - component: {fileID: 7141401481349220932}
@@ -4935,6 +4936,19 @@ Transform:
   - {fileID: 8980438384304107537}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &-2894977057478050866
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8815489685484177564}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 66c79b4d30e74a140a9714f32b45879d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  causeMessage: They ate you alive...
 --- !u!114 &2500660614887861814
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4963,11 +4977,14 @@ MonoBehaviour:
   slowModifier: 0.56
   isEliteEnemy: 0
   moveCoverTime: 0.5
+  score: 0
   explosionSize: 3
   explosionDamage: 15
   explosionEffect: {fileID: 0}
   explosionSound: {fileID: 0}
-  score: 0
+  minFlyHeight: 0
+  maxFlyHeight: 5
+  circleRange: 5
   type: 3
   dropChance: 0
 --- !u!114 &4254366514349637598
