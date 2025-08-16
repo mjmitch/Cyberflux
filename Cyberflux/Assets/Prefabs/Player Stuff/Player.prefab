@@ -180,6 +180,7 @@ MonoBehaviour:
   tiltAmount: 2
   tiltTime: 0.2
   groundDrag: 4
+  jumpCount: 0
   jumpForce: 12
   jumpCooldown: 0.25
   airMultiplier: 0.4
@@ -189,7 +190,9 @@ MonoBehaviour:
   sprintKey: 304
   crouchKey: 99
   HP: 100
+  sdf: 0
   playerItems: []
+  brokenClock: 0
   playerHeight: 2
   whatIsGround:
     serializedVersion: 2
@@ -672,7 +675,12 @@ MonoBehaviour:
   attackRate: 2
   attackDamage: 10
   scytheModel: {fileID: 5969235952933304655}
+  orientation: {fileID: 0}
+  scytheProjectile: {fileID: 0}
+  slashProjectileCharges: 0
+  slashRechargeRate: 0
   attackKey: 323
+  slashKey: 113
 --- !u!65 &8192394073945935188
 BoxCollider:
   m_ObjectHideFlags: 0
