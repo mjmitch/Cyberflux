@@ -12,6 +12,9 @@ public class AudioOptions : MonoBehaviour
     public Slider musicVolSlider;
     public TMP_Text musicValue;
 
+    AudioClip soundclip;
+    [SerializeField] AudioSource audiosource;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -38,23 +41,30 @@ public class AudioOptions : MonoBehaviour
         GameManager.instance.playerScript.masterVol = value;
         masterValue.text = ((int)(value * 100)).ToString();
         GameManager.instance.audioMixer.SetFloat("masterVolume", value);
+        GameManager.instance.UIAudioSource.volume = GameManager.instance.playerScript.masterVol * GameManager.instance.playerScript.sfxVol;
+        GameManager.instance.UIAudioSource.Play();
     }
     void SFXVolChanged(float value)
     {
         GameManager.instance.playerScript.sfxVol = value;
         sfxValue.text = ((int)(value * 100)).ToString();
         GameManager.instance.audioMixer.SetFloat("sfxVolume", value);
+        GameManager.instance.UIAudioSource.volume = GameManager.instance.playerScript.masterVol * GameManager.instance.playerScript.sfxVol;
+        GameManager.instance.UIAudioSource.Play();
     }
     void MusicVolChanged(float value)
     {
          GameManager.instance.playerScript.musicVol = value;
         musicValue.text = ((int)(value * 100)).ToString();
         GameManager.instance.audioMixer.SetFloat("musicVolume", value);
+        GameManager.instance.UIAudioSource.volume = GameManager.instance.playerScript.masterVol * GameManager.instance.playerScript.sfxVol; ;
+        GameManager.instance.UIAudioSource.Play();
     }
 
     public void SwapToControls()
     {
        gameObject.SetActive(false);
         GameManager.instance.optionsControls.SetActive(true);
+        GameManager.instance.UIAudioSource.Play();
     }
 }

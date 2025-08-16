@@ -39,6 +39,7 @@ public class ControlOptions : MonoBehaviour
     {
         gameObject.SetActive(false);
         GameManager.instance.optionsAudio.SetActive(true);
+        GameManager.instance.UIAudioSource.Play();
     }
 
 
