@@ -11,8 +11,9 @@ public class damage : MonoBehaviour
 
     [Header("Object Set-Up")]
     [SerializeField] damagetype type;
-    [SerializeField] Rigidbody rb;
+    [SerializeField] public Rigidbody rb;
     [SerializeField] bool slowEffect;
+    private GameObject player;
 
     [Header("Object Manipulation")]
     [SerializeField] public int damageAmount;
@@ -24,6 +25,8 @@ public class damage : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        player = GameObject.FindGameObjectWithTag("Player");
+
         //Handles removing temporary objects and applying movement:
         if (type == damagetype.moving || type == damagetype.homing || type == damagetype.explosion)
         {
@@ -31,7 +34,8 @@ public class damage : MonoBehaviour
 
             if (type == damagetype.moving)
             {
-                rb.linearVelocity = (GameManager.instance.player.transform.position - transform.position).normalized * speed;
+                //rb.linearVelocity = (GameManager.instance.player.transform.position - transform.position).normalized * speed;
+                rb.linearVelocity = transform.forward * speed;
             }
         }
     }
@@ -49,8 +53,10 @@ public class damage : MonoBehaviour
     //Deals damage for non-DOT types:
     private void OnTriggerEnter(Collider other)
     {
-
-        if (other.isTrigger) return;
+        if (other.isTrigger)
+        {
+            return;
+        }
 
         IDamage dmg = other.GetComponent<IDamage>();
         if (dmg != null && type != damagetype.DOT)
@@ -130,4 +136,6 @@ public class damage : MonoBehaviour
         d.RemoveSlow();
         isSlowing = false;
     }
+
+    
 }

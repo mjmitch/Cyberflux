@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Security.Cryptography.X509Certificates;
 using UnityEngine;
+using UnityEngine.Audio;
 using UnityEngine.Tilemaps;
 using UnityEngine.UI; 
 
@@ -9,7 +10,7 @@ public class PlayerController : MonoBehaviour, IDamage, IHeal
 {
     [Header("Movement")]
     private float moveSpeed;
-    private float desiredMoveSpeed;
+    public float desiredMoveSpeed;
     private float lastDesiredMoveSpeed;
     [SerializeField] float walkSpeed;
     [SerializeField] float sprintSpeed;
@@ -17,9 +18,10 @@ public class PlayerController : MonoBehaviour, IDamage, IHeal
     [SerializeField] float wallrunSpeed;
     [SerializeField] float dashSpeed;
     [Range(0.01f, 0.99f)] [SerializeField] private float slowModifier;
+    public Vector3 gravityOrig;
+    
 
     [Header("Camera")]
-    [SerializeField] GameObject scytheModel;
     public float NormalFov;
     public Camera cam;
     [SerializeField] float slidingFOV;
@@ -34,8 +36,10 @@ public class PlayerController : MonoBehaviour, IDamage, IHeal
     private float targetTilt;
     private Coroutine tiltRoutine;
     private WallRunning wallRunScript;
-   
+    private ScytheCombat scytheScript;
     
+
+
     [SerializeField] float groundDrag;
 
     [Header("Jumping")]
@@ -60,15 +64,16 @@ public class PlayerController : MonoBehaviour, IDamage, IHeal
     [SerializeField] int HP;
 
     [Header("Stat Modifiers")]
-    [SerializeField] float sdf;
+    //  [SerializeField] float sdf;
 
     [Header("Item Stuff")]
+    public int keys = 0;
     [SerializeField] public List<Augment> playerItems;
     public bool brokenClock = false;
 
 
     [Header("Ground Check")]
-    [SerializeField] float playerHeight;
+    public float playerHeight;
     [SerializeField] LayerMask whatIsGround;
     public bool grounded;
 
@@ -78,7 +83,11 @@ public class PlayerController : MonoBehaviour, IDamage, IHeal
     private bool slopeExit;
 
     [Header("Audio")]
-    [SerializeField] AudioSource audioPlayer;
+    [SerializeField] public AudioSource audioPlayer;
+   // [SerializeField] public AudioMixer audioMixer;
+    //[SerializeField] public AudioMixerGroup masterVol;
+    //[SerializeField] public AudioMixerGroup musicVol;
+    //[SerializeField] public AudioMixerGroup sfxVol;
    
     //Dont know what all audio we are going to have, just putting these here for now.
     [SerializeField] AudioClip[] audJump;
@@ -86,9 +95,9 @@ public class PlayerController : MonoBehaviour, IDamage, IHeal
     [SerializeField] AudioClip[] audStep;
 
 
-    [SerializeField] public float masterVol;
-    [SerializeField] public float musicVol;
-    [SerializeField] public float sfxVol;
+    [Range(0,1)] [SerializeField] public float masterVol;
+    [Range(0, 1)][SerializeField] public float musicVol;
+    [Range(0, 1)][SerializeField] public float sfxVol;
 
     
 
@@ -105,6 +114,8 @@ public class PlayerController : MonoBehaviour, IDamage, IHeal
     Vector3 moveDir;
 
     Rigidbody rb;
+
+    [Header("Movement States")]
 
     public MovementState state;
 
@@ -123,6 +134,7 @@ public class PlayerController : MonoBehaviour, IDamage, IHeal
     public bool sliding;
     public bool sprinting;
     public bool dashing;
+    
 
     void Start()
     {
@@ -135,10 +147,8 @@ public class PlayerController : MonoBehaviour, IDamage, IHeal
         NormalFov = cam.fieldOfView;
         cam = Camera.main.GetComponent<Camera>();
         wallRunScript = this.GetComponent<WallRunning>();
-       
-        GameManager.instance.UpdateStaminaUI(stamina, staminaMax);
-
-       
+        gravityOrig = Physics.gravity;
+        
 
         
     }
@@ -147,7 +157,8 @@ public class PlayerController : MonoBehaviour, IDamage, IHeal
     void Update()
     {
 
-        Debug.Log("PlayerController is running");
+        Debug.Log(grounded);
+
 
         grounded = Physics.Raycast(transform.position, Vector3.down, playerHeight * 0.5f + 0.2f, whatIsGround);
 
@@ -179,16 +190,7 @@ public class PlayerController : MonoBehaviour, IDamage, IHeal
             Heal(5);
         }
 
-
-        if (Input.GetKeyDown(KeyCode.T))
-        {
-            GameManager.instance.ShowTutorial("Press Shift to Sprint!", 3f);
-        }
-
-        if (Input.GetKeyDown(KeyCode.K)) // “kill” key
-        {
-            TakeDamage(999, "Test Kill (Debug)");
-        }
+        
     }
 
     private void FixedUpdate()
@@ -311,23 +313,13 @@ public class PlayerController : MonoBehaviour, IDamage, IHeal
         }
 
         // Sprinting
-        else if (grounded && Input.GetKey(sprintKey) && stamina > 0)
+        else if (grounded && Input.GetKey(sprintKey))
         {
             state = MovementState.sprinting;
             cam.fieldOfView = Mathf.Lerp(cam.fieldOfView, sprintingFov, Time.deltaTime * fovChangeSpeed);
             desiredMoveSpeed = sprintSpeed;
 
-            // Drain stamina while sprinting
-            stamina -= 1;
-            if (stamina < 0) stamina = 0;
-            GameManager.instance.UpdateStaminaUI(stamina, staminaMax);
-        }
-
-        // Out of stamina — force walk
-        else if (grounded && stamina <= 0)
-        {
-            state = MovementState.walking;
-            desiredMoveSpeed = walkSpeed;
+            
         }
 
         // Walking
@@ -426,8 +418,11 @@ public class PlayerController : MonoBehaviour, IDamage, IHeal
             }          
            
         }
+
+       
+
         //Making sure that you can't move faster on the ground
-        else
+        else 
         {
             Vector3 flatVel = new Vector3(rb.linearVelocity.x, 0f, rb.linearVelocity.z);
 

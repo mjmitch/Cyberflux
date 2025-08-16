@@ -4,6 +4,7 @@ using System.Diagnostics;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.Audio;
 using Debug = UnityEngine.Debug;
 using Random = UnityEngine.Random;
 
@@ -37,7 +38,7 @@ public class EnemyAI : MonoBehaviour, IDamage
     private bool isExploding = false;
     [Header("Flying Enemy Stuff\nLeave blank if not Flying enemy")]
     [Range(0, 5)] [SerializeField] private int minFlyHeight;
-    [Range(5, 9)] [SerializeField] private int maxFlyHeight;
+    [Range(2f, 9f)] [SerializeField] private float maxFlyHeight;
     //[Range(4, 15)] [SerializeField] private int attackRange;
     [Range(5, 25)] [SerializeField] private int circleRange;
     private bool isBobbing = false;
@@ -56,7 +57,7 @@ public class EnemyAI : MonoBehaviour, IDamage
     [SerializeField] int dropChance;
     private GameObject player;
     private Vector3 playerDirection;
-    private AudioSource audioPlayer;
+    [SerializeField] AudioSource audioPlayer;
     
     float attackTimer;
     float angleToPlayer;
@@ -186,7 +187,8 @@ public class EnemyAI : MonoBehaviour, IDamage
     void RangedAttack()
     {
         attackTimer = 0;
-        Instantiate(bullet, attackPosition.position, transform.rotation);
+        GameObject bullet1 = Instantiate(bullet, attackPosition.position, transform.rotation);
+        bullet1.GetComponent<damage>().rb.linearVelocity = (GameManager.instance.player.transform.position - transform.position).normalized * bullet1.GetComponent<damage>().speed;
     }
 
     void FlyingAttack()
@@ -205,7 +207,8 @@ public class EnemyAI : MonoBehaviour, IDamage
         if (!isExploding)
         {
             Instantiate(explosionEffect, transform.position, Quaternion.identity);
-            audioPlayer.PlayOneShot(explosionSound, GameManager.instance.playerScript.sfxVol);
+           audioPlayer.PlayOneShot(explosionSound, GameManager.instance.playerScript.sfxVol * GameManager.instance.playerScript.masterVol);
+            
         }
         isExploding = true;
         Destroy(gameObject);
@@ -326,7 +329,7 @@ public class EnemyAI : MonoBehaviour, IDamage
                 explosionEffect.GetComponent<damage>().damageAmount /= 2;
                 explosionEffect.transform.localScale /= 2;
                 Instantiate(explosionEffect, transform.position, Quaternion.identity);
-                audioPlayer.PlayOneShot(explosionSound, GameManager.instance.playerScript.sfxVol);
+                //audioPlayer.PlayOneShot(explosionSound, GameManager.instance.playerScript.sfxVol);
             }
             
             Destroy(gameObject);

@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using UnityEngine.InputSystem;
 using Unity.VisualScripting;
+using UnityEngine.Audio;
 
 
 public class GameManager : MonoBehaviour
@@ -14,7 +15,7 @@ public class GameManager : MonoBehaviour
     public static GameManager instance;
     
     public GameObject player;
-
+    
     public PlayerController playerScript;
 
     public bool isPaused;
@@ -42,14 +43,21 @@ public class GameManager : MonoBehaviour
     [SerializeField] public TMP_Text bossNameText;
 
     [SerializeField] CanvasGroup OptionPanel;
+    [SerializeField] public GameObject optionsControls;
+    [SerializeField] public GameObject optionsAudio;
 
     [SerializeField] TutorialPrompt tutorialPrompt;
 
     int minutes;
+    [SerializeField] public AudioSource UIAudioSource;
+    [SerializeField] public AudioMixer audioMixer;
+
+    [Header("Timers")]
+    [HideInInspector] public int minutes;
     public TMP_Text TimerMinutes;
-    int seconds;
+    [HideInInspector] public int seconds;
     public TMP_Text TimerSeconds;
-    float miliseconds;
+    [HideInInspector] public float miliseconds;
     public TMP_Text TimerMiliseconds;
 
 
@@ -59,6 +67,8 @@ public class GameManager : MonoBehaviour
     enum GameState { Title, Playing, Win, Lose }
     GameState _state = GameState.Title;
 
+    private int score;
+    
     void Awake()
     {
         instance = this;
@@ -75,15 +85,20 @@ public class GameManager : MonoBehaviour
         playerScript = null;
     }
 
-        //ShowTitle();
+    score = 0;
+    //ShowTitle();
     }
     
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         //GameStatePause();
+        audioMixer.SetFloat("masterVolume", playerScript.masterVol);
+        audioMixer.SetFloat("sfxVolume", playerScript.sfxVol);
+        audioMixer.SetFloat("musicVolume", playerScript.musicVol);
         menuItemSelect.SetActive(false);
         menuItemUnlock.SetActive(false);
+        OptionPanel.gameObject.SetActive(false);
         minutes = 0;
         seconds = 0;
         miliseconds = 0;
@@ -165,6 +180,7 @@ if (menuItemUnlock)
         Cursor.lockState = CursorLockMode.Locked;
 
         menuActive = null;
+        UIAudioSource.Play();
     }
 
     public void StartGame()
@@ -177,17 +193,25 @@ if (menuItemUnlock)
 
     public void Option()
     {
+        UIAudioSource.Play();
+        OptionPanel.gameObject.SetActive(true);
         OptionPanel.alpha = 1;
         OptionPanel.blocksRaycasts = true;
+        optionsControls.SetActive(true);
+        optionsAudio.SetActive(false);
+
     }
     public void Back()
     {
+        UIAudioSource.Play();
+        OptionPanel.gameObject.SetActive(false);
         OptionPanel.alpha= 0;
         OptionPanel.blocksRaycasts = false;
     }
      
     public void QuitGame()
     {
+        UIAudioSource.Play();
         Application.Quit();
        
     }
@@ -256,6 +280,7 @@ if (menuItemUnlock)
 
     public void RestartLevel()
     {
+        UIAudioSource.Play();
         if (menuWin) menuWin.SetActive(false);
         if (menuLose) menuLose.SetActive(false);
         isPaused = false;
@@ -266,6 +291,7 @@ if (menuItemUnlock)
 
     public void ReturnToTitle()
     {
+        UIAudioSource.Play();
         if (menuWin) menuWin.SetActive(false);
         if (menuLose) menuLose.SetActive(false);
         isPaused = false;
@@ -394,7 +420,7 @@ if (menuItemUnlock)
     public void ShowTutorial(string msg, float seconds = 3f)
     {
         if (!tutorialPrompt) return;
-        // don’t show over win/lose
+        // donï¿½t show over win/lose
         if ((menuWin && menuWin.activeSelf) || (menuLose && menuLose.activeSelf)) return;
         tutorialPrompt.Show(msg, seconds);
     }

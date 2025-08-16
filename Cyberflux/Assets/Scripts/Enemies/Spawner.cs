@@ -67,4 +67,13 @@ public class FixedSpawner : MonoBehaviour
         spawnCount++;
         spawnTimer = 0;
     }
+
+    public bool IsDoneSpawning()
+    {
+        if (spawnAmount >= spawnCount)
+        {
+            return true;
+        }
+        return false;
+    }
 }

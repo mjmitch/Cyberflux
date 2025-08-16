@@ -1,13 +1,20 @@
 using NUnit.Framework;
 using UnityEngine;
 using System.Collections.Generic;
+using System;
+using UnityEditor;
+using Unity.VisualScripting;
 
 public class ScytheCombat : MonoBehaviour, IDamage
 {
 
+    //Events
+    public event Action OnSlash;
+    public event Action OnSpecialAttack;
+
     [Header("Scythe")]
     [SerializeField] LayerMask enemyLayer;
-    [SerializeField] Transform attackPoint;
+    public Transform attackPoint;
     [SerializeField] float attackRadius;
     [SerializeField] float attackRate;
     [SerializeField] int attackDamage;
@@ -18,33 +25,77 @@ public class ScytheCombat : MonoBehaviour, IDamage
     //Grabbing all of the enemies Hit
 
     [Header("Slash Projectile Attack")]
+    [SerializeField] ScytheBar scytheBar; 
+    [SerializeField] Transform playerCam;
     [SerializeField] Transform orientation;
     [SerializeField] GameObject scytheProjectile;
-    [SerializeField] int slashProjectileCharges;
-    //Low number = slower || High Number = Faster fire rate
-    [SerializeField] float slashRechargeRate;
     
-    private float slashCount;
-    private float nextSlashTime;
+    [SerializeField] int slashProjectileCharges;
+    public  float slashRechargeTime;
+    
+    [HideInInspector] public float currentSlashTime; 
+    [HideInInspector] public float nextSlashTime;
+
+    
+
+    [Header("Slam Attack")]
+    public GameObject slamAttack;
+    [SerializeField] float slamForce;
+    [SerializeField] float slamCooldown;
+    [SerializeField] LayerMask whatIsGround;
+    private bool closeToGround;
+    private Vector3 newGravity;
+    public bool isSlamming = false;
+    private Vector3 impactPoint;
+    private float nextSlamTime;
+
+    public PlayerController playerScript = GameManager.instance.playerScript;
+
+    [Header("Momentum Attack")]
+    public bool specialAttackReady;
+
+
+
+    [Header("Audio")]
+    [SerializeField] AudioSource audioPlayer;
+    [SerializeField] AudioClip attackClip;
+    [SerializeField] AudioClip slashClip;
+
 
     [Header("Input")]
     //Left Mouse Button
     [SerializeField] KeyCode attackKey = KeyCode.Mouse0;
     [SerializeField] KeyCode slashKey = KeyCode.Q;
+    [SerializeField] KeyCode slamAttackKey = KeyCode.Mouse1;
+    [SerializeField] KeyCode specialAttackKey = KeyCode.Mouse2;
 
     
 
-
     private void Update()
     {
-        if(Time.time >= nextAttackTime)
+        
+
+        if (Time.time >= nextAttackTime)
         {
             if(Input.GetKey(attackKey)) 
             {
                 Attack();
+                //Attacks per second Method
                 nextAttackTime = Time.time + 1f / attackRate;
 
+                if (!GameManager.instance.isPaused)
+                {
+                    audioPlayer.PlayOneShot(attackClip);
+                }
+                
+
             }    
+        }
+
+        if(isSlamming && playerScript.grounded)
+        {
+            isSlamming = false;
+            Instantiate(slamAttack, attackPoint.position, orientation.rotation);   
         }
 
         if (Time.time >= nextSlashTime) {
@@ -52,24 +103,40 @@ public class ScytheCombat : MonoBehaviour, IDamage
             if (Input.GetKey(slashKey))
             {
                 SlashAttack();
-
-                nextSlashTime = Time.time + 1f / slashRechargeRate;
-
+                //Seconds until next attack
+                nextSlashTime = Time.time + slashRechargeTime;
+                //The "?" is just like having an if check to see if the parameter is null || SUPER USEFUL
+                
+                if (!GameManager.instance.isPaused)
+                {
+                    audioPlayer.PlayOneShot(slashClip);
+                }
+                OnSlash?.Invoke();
+                
             }
         }
-        
     }
 
+
+    private void FixedUpdate()
+    {
+        if (Time.time >= nextSlamTime && Input.GetKey(slamAttackKey) && playerCam.forward.y < -0.93f && !playerScript.grounded)
+        {
+            SlamAttack();
+            nextSlamTime = Time.time + slamCooldown;
+        }
+    }
 
     void Attack()
     {
         //Attack Animation || Beta Task
-
-        //Detect Enemies in Range
-        Collider[] hitEnemies = Physics.OverlapSphere(attackPoint.position, attackRadius, enemyLayer);
         
+        
+        //Detect Enemies in Attack Range
+        Collider[] hitEnemies = Physics.OverlapSphere(attackPoint.position, attackRadius, enemyLayer);
+
         //Conflict Damage
-        foreach(Collider enemy in hitEnemies)
+        foreach (Collider enemy in hitEnemies)
         {
             enemy.GetComponent<IDamage>().TakeDamage(attackDamage);
         }
@@ -77,15 +144,33 @@ public class ScytheCombat : MonoBehaviour, IDamage
         
     }
 
-    void SlashAttack()
+
+    public void SlamAttack()
+    {
+        playerScript.desiredMoveSpeed = slamForce;
+
+        isSlamming = true; 
+    }
+
+    void MomentumAttack()
     {
 
-        slashCount++;
+        //Invoke the Action if Action isn't null
+        OnSpecialAttack?.Invoke();
+
+    }
+
+    public void SlashAttack()
+    {
         
         if (slashProjectileCharges >= 0)
         {
-            Instantiate(scytheProjectile, attackPoint.position, orientation.rotation);
+            GameObject projectile = Instantiate(scytheProjectile, attackPoint.position, orientation.rotation);
+            //Making sure the projectile goes where the player is facing rather than straight
+            projectile.transform.forward = playerCam.forward;
         }
+
+        
     }
 
     //For Debugging and testing 
