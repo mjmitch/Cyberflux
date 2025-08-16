@@ -54,6 +54,8 @@ public class GameManager : MonoBehaviour
     enum GameState { Title, Playing, Win, Lose }
     GameState _state = GameState.Title;
 
+    private int score;
+    
     void Awake()
     {
         instance = this;
@@ -70,7 +72,8 @@ public class GameManager : MonoBehaviour
         playerScript = null;
     }
 
-        //ShowTitle();
+    score = 0;
+    //ShowTitle();
     }
     
     // Start is called once before the first execution of Update after the MonoBehaviour is created
