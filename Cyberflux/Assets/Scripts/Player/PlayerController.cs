@@ -10,7 +10,7 @@ public class PlayerController : MonoBehaviour, IDamage, IHeal
 {
     [Header("Movement")]
     private float moveSpeed;
-    private float desiredMoveSpeed;
+    public float desiredMoveSpeed;
     private float lastDesiredMoveSpeed;
     [SerializeField] float walkSpeed;
     [SerializeField] float sprintSpeed;
@@ -19,6 +19,7 @@ public class PlayerController : MonoBehaviour, IDamage, IHeal
     [SerializeField] float dashSpeed;
     [Range(0.01f, 0.99f)] [SerializeField] private float slowModifier;
     public Vector3 gravityOrig;
+    
 
     [Header("Camera")]
     public float NormalFov;
@@ -35,8 +36,10 @@ public class PlayerController : MonoBehaviour, IDamage, IHeal
     private float targetTilt;
     private Coroutine tiltRoutine;
     private WallRunning wallRunScript;
-   
+    private ScytheCombat scytheScript;
     
+
+
     [SerializeField] float groundDrag;
 
     [Header("Jumping")]
@@ -131,6 +134,7 @@ public class PlayerController : MonoBehaviour, IDamage, IHeal
     public bool sliding;
     public bool sprinting;
     public bool dashing;
+    
 
     void Start()
     {
@@ -144,10 +148,7 @@ public class PlayerController : MonoBehaviour, IDamage, IHeal
         cam = Camera.main.GetComponent<Camera>();
         wallRunScript = this.GetComponent<WallRunning>();
         gravityOrig = Physics.gravity;
-       
         
-
-       
 
         
     }
@@ -157,6 +158,7 @@ public class PlayerController : MonoBehaviour, IDamage, IHeal
     {
 
         Debug.Log(grounded);
+
 
         grounded = Physics.Raycast(transform.position, Vector3.down, playerHeight * 0.5f + 0.2f, whatIsGround);
 
@@ -416,8 +418,11 @@ public class PlayerController : MonoBehaviour, IDamage, IHeal
             }          
            
         }
+
+       
+
         //Making sure that you can't move faster on the ground
-        else
+        else 
         {
             Vector3 flatVel = new Vector3(rb.linearVelocity.x, 0f, rb.linearVelocity.z);
 

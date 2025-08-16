@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 4591870104969069020}
   - component: {fileID: 4267309418061483454}
   - component: {fileID: 701838788037589602}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: SLAMATTACK
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -51,7 +51,7 @@ MonoBehaviour:
   type: 4
   rb: {fileID: 701838788037589602}
   slowEffect: 1
-  damageAmount: 0
+  damageAmount: 25
   damageRate: 0
   speed: 0
   destroyTime: 0.1

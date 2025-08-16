@@ -13,6 +13,7 @@ public class damage : MonoBehaviour
     [SerializeField] damagetype type;
     [SerializeField] public Rigidbody rb;
     [SerializeField] bool slowEffect;
+    private GameObject player;
 
     [Header("Object Manipulation")]
     [SerializeField] public int damageAmount;
@@ -24,6 +25,8 @@ public class damage : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        player = GameObject.FindGameObjectWithTag("Player");
+
         //Handles removing temporary objects and applying movement:
         if (type == damagetype.moving || type == damagetype.homing || type == damagetype.explosion)
         {
@@ -54,6 +57,7 @@ public class damage : MonoBehaviour
         {
             return;
         }
+
         IDamage dmg = other.GetComponent<IDamage>();
         if (dmg != null && type != damagetype.DOT)
         {

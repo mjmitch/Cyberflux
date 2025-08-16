@@ -13,7 +13,7 @@ public class ScytheCombat : MonoBehaviour, IDamage
 
     [Header("Scythe")]
     [SerializeField] LayerMask enemyLayer;
-    [SerializeField] Transform attackPoint;
+    public Transform attackPoint;
     [SerializeField] float attackRadius;
     [SerializeField] float attackRate;
     [SerializeField] int attackDamage;
@@ -38,10 +38,9 @@ public class ScytheCombat : MonoBehaviour, IDamage
     
 
     [Header("Slam Attack")]
-    [SerializeField] GameObject slamAttack;
+    public GameObject slamAttack;
     [SerializeField] float slamForce;
     [SerializeField] float slamCooldown;
-    [SerializeField] AudioClip audioClip;
     [SerializeField] LayerMask whatIsGround;
     private bool closeToGround;
     private Vector3 newGravity;
@@ -52,6 +51,14 @@ public class ScytheCombat : MonoBehaviour, IDamage
     public PlayerController playerScript = GameManager.instance.playerScript;
 
     [Header("Momentum Attack")]
+
+
+
+    [Header("Audio")]
+    [SerializeField] AudioSource audioPlayer;
+    [SerializeField] AudioClip attackClip;
+    [SerializeField] AudioClip slashClip;
+
 
     [Header("Input")]
     //Left Mouse Button
@@ -73,13 +80,19 @@ public class ScytheCombat : MonoBehaviour, IDamage
                 //Attacks per second Method
                 nextAttackTime = Time.time + 1f / attackRate;
 
+                if (!GameManager.instance.isPaused)
+                {
+                    audioPlayer.PlayOneShot(attackClip);
+                }
+                
+
             }    
         }
 
-        if (playerScript.grounded && isSlamming)
+        if(isSlamming && playerScript.grounded)
         {
-            Instantiate(slamAttack, attackPoint.position, orientation.rotation);
             isSlamming = false;
+            Instantiate(slamAttack, attackPoint.position, orientation.rotation);   
         }
 
         if (Time.time >= nextSlashTime) {
@@ -90,6 +103,11 @@ public class ScytheCombat : MonoBehaviour, IDamage
                 //Seconds until next attack
                 nextSlashTime = Time.time + slashRechargeTime;
                 //The "?" is just like having an if check to see if the parameter is null || SUPER USEFUL
+                
+                if (!GameManager.instance.isPaused)
+                {
+                    audioPlayer.PlayOneShot(slashClip);
+                }
                 OnSlash?.Invoke();
                 
             }
@@ -120,23 +138,16 @@ public class ScytheCombat : MonoBehaviour, IDamage
             enemy.GetComponent<IDamage>().TakeDamage(attackDamage);
         }
 
+        
     }
 
     
 
     public void SlamAttack()
     {
-        Rigidbody rb = playerScript.GetComponent<Rigidbody>();
+        playerScript.desiredMoveSpeed = slamForce;
 
-        Vector3 vel = rb.linearVelocity;
-        vel.y = 0f;
-        rb.linearVelocity = vel;
-
-        rb.AddForce(Vector3.down * slamForce, ForceMode.Impulse);
-
-        isSlamming = true;
-
-        
+        isSlamming = true; 
     }
 
     public void SlashAttack()
