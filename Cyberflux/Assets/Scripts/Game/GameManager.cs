@@ -14,7 +14,7 @@ public class GameManager : MonoBehaviour
     public static GameManager instance;
     
     public GameObject player;
-
+    
     public PlayerController playerScript;
 
     public bool isPaused;

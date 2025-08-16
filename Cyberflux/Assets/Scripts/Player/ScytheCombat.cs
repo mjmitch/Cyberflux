@@ -1,9 +1,13 @@
 using NUnit.Framework;
 using UnityEngine;
 using System.Collections.Generic;
+using System;
 
 public class ScytheCombat : MonoBehaviour, IDamage
 {
+
+    //Events
+    public event Action OnSlash;
 
     [Header("Scythe")]
     [SerializeField] LayerMask enemyLayer;
@@ -18,14 +22,17 @@ public class ScytheCombat : MonoBehaviour, IDamage
     //Grabbing all of the enemies Hit
 
     [Header("Slash Projectile Attack")]
+    [SerializeField] ScytheBar scytheBar; 
+    [SerializeField] Transform playerCam;
     [SerializeField] Transform orientation;
     [SerializeField] GameObject scytheProjectile;
     [SerializeField] int slashProjectileCharges;
-    //Low number = slower || High Number = Faster fire rate
-    [SerializeField] float slashRechargeRate;
+    public  float slashRechargeTime;
     
-    private float slashCount;
-    private float nextSlashTime;
+    public float currentSlashTime;
+    public float nextSlashTime;
+
+    
 
     [Header("Input")]
     //Left Mouse Button
@@ -34,7 +41,6 @@ public class ScytheCombat : MonoBehaviour, IDamage
 
     
 
-
     private void Update()
     {
         if(Time.time >= nextAttackTime)
@@ -42,22 +48,26 @@ public class ScytheCombat : MonoBehaviour, IDamage
             if(Input.GetKey(attackKey)) 
             {
                 Attack();
+                //Attacks per second Method
                 nextAttackTime = Time.time + 1f / attackRate;
 
             }    
         }
+
+       
 
         if (Time.time >= nextSlashTime) {
 
             if (Input.GetKey(slashKey))
             {
                 SlashAttack();
-
-                nextSlashTime = Time.time + 1f / slashRechargeRate;
-
+                //Seconds until next attack
+                nextSlashTime = Time.time + slashRechargeTime;
+                //The "?" is just like having an if check to see if the parameter is null || SUPER USEFUL
+                OnSlash?.Invoke();
+                
             }
         }
-        
     }
 
 
@@ -77,15 +87,17 @@ public class ScytheCombat : MonoBehaviour, IDamage
         
     }
 
-    void SlashAttack()
+    public void SlashAttack()
     {
-
-        slashCount++;
         
         if (slashProjectileCharges >= 0)
         {
-            Instantiate(scytheProjectile, attackPoint.position, orientation.rotation);
+            GameObject projectile = Instantiate(scytheProjectile, attackPoint.position, orientation.rotation);
+            //Making sure the projectile goes where the player is facing rather than straight
+            projectile.transform.forward = playerCam.forward;
         }
+
+        
     }
 
     //For Debugging and testing 
