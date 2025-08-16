@@ -207,7 +207,7 @@ public class EnemyAI : MonoBehaviour, IDamage
         if (!isExploding)
         {
             Instantiate(explosionEffect, transform.position, Quaternion.identity);
-            GameManager.instance.playerScript.audioPlayer.PlayOneShot(explosionSound, GameManager.instance.playerScript.sfxVol * GameManager.instance.playerScript.masterVol);
+            GameManager.instance.globalAudioSource.PlayOneShot(explosionSound, GameManager.instance.playerScript.sfxVol * GameManager.instance.playerScript.masterVol);
             
         }
         isExploding = true;

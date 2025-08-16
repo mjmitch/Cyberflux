@@ -37,16 +37,19 @@ public class AudioOptions : MonoBehaviour
     {
         GameManager.instance.playerScript.masterVol = value;
         masterValue.text = ((int)(value * 100)).ToString();
+        GameManager.instance.audioMixer.SetFloat("masterVolume", value);
     }
     void SFXVolChanged(float value)
     {
         GameManager.instance.playerScript.sfxVol = value;
         sfxValue.text = ((int)(value * 100)).ToString();
+        GameManager.instance.audioMixer.SetFloat("sfxVolume", value);
     }
     void MusicVolChanged(float value)
     {
          GameManager.instance.playerScript.musicVol = value;
         musicValue.text = ((int)(value * 100)).ToString();
+        GameManager.instance.audioMixer.SetFloat("musicVolume", value);
     }
 
     public void SwapToControls()
