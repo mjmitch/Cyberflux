@@ -342,6 +342,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5847916795368422378}
+  - component: {fileID: 8944200260389478300}
   - component: {fileID: 5278595273558206816}
   - component: {fileID: 5763905321607710119}
   - component: {fileID: 4492488288988143049}
@@ -374,6 +375,19 @@ Transform:
   - {fileID: 4843819535907960120}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8944200260389478300
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7271726348477596054}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 66c79b4d30e74a140a9714f32b45879d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  causeMessage: Turned to swiss cheese...
 --- !u!114 &5278595273558206816
 MonoBehaviour:
   m_ObjectHideFlags: 0

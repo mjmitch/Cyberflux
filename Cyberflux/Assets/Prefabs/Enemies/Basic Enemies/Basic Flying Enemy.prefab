@@ -59,7 +59,7 @@ Transform:
   m_GameObject: {fileID: 3049526939338641214}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.19, z: 0.5}
+  m_LocalPosition: {x: 0, y: 0.004, z: 0.5}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -148,6 +148,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7453827202340416212}
+  - component: {fileID: -6795609240008296272}
   - component: {fileID: 4374264777453802300}
   - component: {fileID: 5205435808787254736}
   - component: {fileID: 4856548986638711857}
@@ -179,6 +180,19 @@ Transform:
   - {fileID: 2809460162186761285}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &-6795609240008296272
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5361638801964433537}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 66c79b4d30e74a140a9714f32b45879d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  causeMessage: Flying enemies shouldnt be that hard...
 --- !u!114 &4374264777453802300
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -202,7 +216,7 @@ MonoBehaviour:
   fov: 100
   faceTargetSpeed: 80
   roamDis: 15
-  roamPauseTime: 1
+  roamPauseTime: 3
   slowImmune: 1
   slowModifier: 0.56
   isEliteEnemy: 0
@@ -212,9 +226,9 @@ MonoBehaviour:
   explosionDamage: 5
   explosionEffect: {fileID: 0}
   explosionSound: {fileID: 0}
-  minFlyHeight: 1
-  maxFlyHeight: 2.5
-  circleRange: 18
+  minFlyHeight: 2
+  maxFlyHeight: 6
+  circleRange: 5
   type: 4
   dropChance: 0
 --- !u!195 &5205435808787254736
@@ -225,18 +239,18 @@ NavMeshAgent:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5361638801964433537}
   m_Enabled: 1
-  m_AgentTypeID: -1372625422
+  m_AgentTypeID: 0
   m_Radius: 0.5000001
-  m_Speed: 4
+  m_Speed: 6
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 80
-  m_StoppingDistance: 10
+  m_StoppingDistance: 3.5
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
   m_AutoRepath: 1
   m_Height: 2
-  m_BaseOffset: 8
+  m_BaseOffset: 1
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
 --- !u!33 &4856548986638711857
