@@ -24,6 +24,9 @@ public class GameManager : MonoBehaviour
     public TMP_Text playerHPText;
     public TMP_Text playerAmmoText;
     public Image playerStaminaBar;
+    [SerializeField] private TMPro.TMP_Text winSummaryText;
+    [SerializeField] private TMPro.TMP_Text loseSummaryText;
+    [SerializeField] private TMPro.TMP_Text deathReasonText;
 
     [SerializeField] GameObject menuActive;
     [SerializeField] GameObject menuPause;
@@ -39,6 +42,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] public TMP_Text bossNameText;
 
     [SerializeField] CanvasGroup OptionPanel;
+
+    [SerializeField] TutorialPrompt tutorialPrompt;
 
     int minutes;
     public TMP_Text TimerMinutes;
@@ -197,9 +202,15 @@ if (menuItemUnlock)
         if (menuLose) menuLose.SetActive(false);
         if (menuWin) menuWin.SetActive(true);
         menuActive = menuWin;
+
+        if (winSummaryText != null)
+        {
+            string timeResult = TimerMinutes.text + TimerSeconds.text + TimerMiliseconds.text;
+            winSummaryText.text = "Clear Time: " + timeResult;
+        }
     }
 
-    public void YouLose()
+    public void YouLose(string cause = "Unknown")
     {
         isPaused = true;
         Time.timeScale = 0f;
@@ -209,6 +220,24 @@ if (menuItemUnlock)
         if (menuWin) menuWin.SetActive(false);
         if (menuLose) menuLose.SetActive(true);
         menuActive = menuLose;
+
+        if (loseSummaryText != null)
+        {
+            string timeResult = TimerMinutes.text + TimerSeconds.text + TimerMiliseconds.text;
+            loseSummaryText.text = "Time Survived: " + timeResult;
+        }
+
+        if (deathReasonText != null)
+        {
+            if (cause == "Unknown")
+            {
+                deathReasonText.text = "Cause Of Death: Unknown";
+            }
+            else
+            {
+                deathReasonText.text = cause;
+            }
+        }
     }
 
     public void ContinueFromWin()   // Next Level
@@ -360,5 +389,13 @@ if (menuItemUnlock)
     {
         if (playerStaminaBar != null)
             playerStaminaBar.fillAmount = currentStamina / maxStamina;
+    }
+
+    public void ShowTutorial(string msg, float seconds = 3f)
+    {
+        if (!tutorialPrompt) return;
+        // don’t show over win/lose
+        if ((menuWin && menuWin.activeSelf) || (menuLose && menuLose.activeSelf)) return;
+        tutorialPrompt.Show(msg, seconds);
     }
 }

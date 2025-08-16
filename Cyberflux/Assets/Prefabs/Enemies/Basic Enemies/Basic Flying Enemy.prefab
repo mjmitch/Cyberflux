@@ -148,6 +148,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7453827202340416212}
+  - component: {fileID: -6795609240008296272}
   - component: {fileID: 4374264777453802300}
   - component: {fileID: 5205435808787254736}
   - component: {fileID: 4856548986638711857}
@@ -179,6 +180,19 @@ Transform:
   - {fileID: 2809460162186761285}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &-6795609240008296272
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5361638801964433537}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 66c79b4d30e74a140a9714f32b45879d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  causeMessage: Flying enemies shouldnt be that hard...
 --- !u!114 &4374264777453802300
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -214,7 +228,7 @@ MonoBehaviour:
   explosionSound: {fileID: 0}
   minFlyHeight: 2
   maxFlyHeight: 6
-  attackRange: 10
+  circleRange: 5
   type: 4
   dropChance: 0
 --- !u!195 &5205435808787254736
