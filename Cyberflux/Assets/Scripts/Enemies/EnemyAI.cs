@@ -57,7 +57,7 @@ public class EnemyAI : MonoBehaviour, IDamage
     [SerializeField] int dropChance;
     private GameObject player;
     private Vector3 playerDirection;
-    private AudioSource audioPlayer;
+    [SerializeField] AudioSource audioPlayer;
     
     float attackTimer;
     float angleToPlayer;
@@ -207,7 +207,7 @@ public class EnemyAI : MonoBehaviour, IDamage
         if (!isExploding)
         {
             Instantiate(explosionEffect, transform.position, Quaternion.identity);
-            GameManager.instance.globalAudioSource.PlayOneShot(explosionSound, GameManager.instance.playerScript.sfxVol * GameManager.instance.playerScript.masterVol);
+           audioPlayer.PlayOneShot(explosionSound, GameManager.instance.playerScript.sfxVol * GameManager.instance.playerScript.masterVol);
             
         }
         isExploding = true;

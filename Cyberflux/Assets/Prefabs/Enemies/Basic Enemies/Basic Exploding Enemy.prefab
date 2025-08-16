@@ -79,6 +79,7 @@ MonoBehaviour:
   circleRange: 5
   type: 2
   dropChance: 0
+  audioPlayer: {fileID: 4618339226518742392}
 --- !u!33 &375834084111833412
 MeshFilter:
   m_ObjectHideFlags: 0

@@ -74,6 +74,7 @@ public class InputFieldHandler : MonoBehaviour
        JumpInputReady = true;
        // tempText = JumpKeyInput.GetComponentInChildren<TMP_Text>().text;
         JumpKeyInput.GetComponentInChildren<TMP_Text>().text = "";
+        GameManager.instance.UIAudioSource.Play();
     }
     void JumpChange()
     {
@@ -102,6 +103,7 @@ public class InputFieldHandler : MonoBehaviour
         CrouchInputReady = true;
        // tempText = JumpKeyInput.GetComponentInChildren<TMP_Text>().text;
         CrouchKeyInput.GetComponentInChildren<TMP_Text>().text = "";
+        GameManager.instance.UIAudioSource.Play();
     }
     void CrouchChange()
     {
@@ -130,6 +132,7 @@ public class InputFieldHandler : MonoBehaviour
         SprintInputReady = true;
         // tempText = JumpKeyInput.GetComponentInChildren<TMP_Text>().text;
         SprintKeyInput.GetComponentInChildren<TMP_Text>().text = "";
+        GameManager.instance.UIAudioSource.Play();
     }
     void SprintChange()
     {

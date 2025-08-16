@@ -43,7 +43,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] public GameObject optionsControls;
     [SerializeField] public GameObject optionsAudio;
 
-    [SerializeField] public AudioSource globalAudioSource;
+    [SerializeField] public AudioSource UIAudioSource;
     [SerializeField] public AudioMixer audioMixer;
     int minutes;
     public TMP_Text TimerMinutes;
@@ -171,6 +171,7 @@ if (menuItemUnlock)
         Cursor.lockState = CursorLockMode.Locked;
 
         menuActive = null;
+        UIAudioSource.Play();
     }
 
     public void StartGame()
@@ -183,6 +184,7 @@ if (menuItemUnlock)
 
     public void Option()
     {
+        UIAudioSource.Play();
         OptionPanel.gameObject.SetActive(true);
         OptionPanel.alpha = 1;
         OptionPanel.blocksRaycasts = true;
@@ -192,6 +194,7 @@ if (menuItemUnlock)
     }
     public void Back()
     {
+        UIAudioSource.Play();
         OptionPanel.gameObject.SetActive(false);
         OptionPanel.alpha= 0;
         OptionPanel.blocksRaycasts = false;
@@ -199,6 +202,7 @@ if (menuItemUnlock)
      
     public void QuitGame()
     {
+        UIAudioSource.Play();
         Application.Quit();
        
     }
@@ -243,6 +247,7 @@ if (menuItemUnlock)
 
     public void RestartLevel()
     {
+        UIAudioSource.Play();
         if (menuWin) menuWin.SetActive(false);
         if (menuLose) menuLose.SetActive(false);
         isPaused = false;
@@ -253,6 +258,7 @@ if (menuItemUnlock)
 
     public void ReturnToTitle()
     {
+        UIAudioSource.Play();
         if (menuWin) menuWin.SetActive(false);
         if (menuLose) menuLose.SetActive(false);
         isPaused = false;
