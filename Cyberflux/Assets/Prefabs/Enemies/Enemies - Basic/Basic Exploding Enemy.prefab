@@ -74,7 +74,7 @@ MonoBehaviour:
   bullet: {fileID: 0}
   weapon: {fileID: 0}
   attackRate: 0
-  HP: 50
+  HP: 15
   fov: 90
   faceTargetSpeed: 50
   roamDis: 10
@@ -82,8 +82,10 @@ MonoBehaviour:
   slowImmune: 0
   slowModifier: 0.56
   isEliteEnemy: 0
-  moveCoverTime: 0.5
-  score: 0
+  teleportTime: 1
+  maxTeleportDistance: 3
+  teleportSound: {fileID: 0}
+  score: 1
   explosionSize: 3
   explosionDamage: 15
   explosionEffect: {fileID: 7526138629604879622, guid: 020bc07bec3f6c44e819e28eafa59ac0, type: 3}
@@ -93,6 +95,7 @@ MonoBehaviour:
   circleRange: 5
   type: 2
   dropChance: 0
+  audioPlayer: {fileID: 0}
 --- !u!33 &375834084111833412
 MeshFilter:
   m_ObjectHideFlags: 0

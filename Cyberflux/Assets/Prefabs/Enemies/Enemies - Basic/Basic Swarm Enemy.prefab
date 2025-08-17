@@ -4967,7 +4967,8 @@ MonoBehaviour:
   headPosition: {fileID: 945807163639023695}
   bullet: {fileID: 0}
   weapon: {fileID: 0}
-  attackRate: 0.25
+  attackRate: 0.4
+  attackSound: {fileID: 0}
   HP: 15
   fov: 180
   faceTargetSpeed: 50
@@ -4976,8 +4977,10 @@ MonoBehaviour:
   slowImmune: 0
   slowModifier: 0.56
   isEliteEnemy: 0
-  moveCoverTime: 0.5
-  score: 0
+  teleportTime: 1
+  maxTeleportDistance: 3
+  teleportSound: {fileID: 0}
+  score: 2
   explosionSize: 3
   explosionDamage: 15
   explosionEffect: {fileID: 0}
@@ -4987,6 +4990,7 @@ MonoBehaviour:
   circleRange: 5
   type: 3
   dropChance: 0
+  audioPlayer: {fileID: 0}
 --- !u!114 &4254366514349637598
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5003,9 +5007,10 @@ MonoBehaviour:
   rb: {fileID: 0}
   slowEffect: 1
   damageAmount: 2
-  damageRate: 0.25
+  damageRate: 0.5
   speed: 0
   destroyTime: 1
+  enemyBullet: 0
 --- !u!135 &7141401481349220932
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -5059,9 +5064,9 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
-  m_Resource: {fileID: 0}
-  m_PlayOnAwake: 0
+  m_audioClip: {fileID: 8300000, guid: 54b81ae8b0506824788879a0eb089960, type: 3}
+  m_Resource: {fileID: 8300000, guid: 54b81ae8b0506824788879a0eb089960, type: 3}
+  m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
   Loop: 0

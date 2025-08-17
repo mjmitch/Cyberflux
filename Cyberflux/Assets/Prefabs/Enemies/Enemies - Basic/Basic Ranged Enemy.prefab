@@ -257,6 +257,7 @@ MonoBehaviour:
   damageRate: 0
   speed: 0
   destroyTime: 0
+  enemyBullet: 0
 --- !u!33 &4247232435755688530
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -407,7 +408,8 @@ MonoBehaviour:
   bullet: {fileID: 6153881909228287789, guid: f3f5aa592fca633438b4dc7799e01f92, type: 3}
   weapon: {fileID: 1674377931744703433}
   attackRate: 1
-  HP: 25
+  attackSound: {fileID: 8300000, guid: 6f1de3bb2bffbbb47a87ffccd72cd83e, type: 3}
+  HP: 20
   fov: 100
   faceTargetSpeed: 80
   roamDis: 15
@@ -415,17 +417,20 @@ MonoBehaviour:
   slowImmune: 0
   slowModifier: 0.56
   isEliteEnemy: 0
-  moveCoverTime: 2.5
-  score: 0
+  teleportTime: 1
+  maxTeleportDistance: 3
+  teleportSound: {fileID: 0}
+  score: 3
   explosionSize: 0
   explosionDamage: 5
   explosionEffect: {fileID: 0}
   explosionSound: {fileID: 0}
   minFlyHeight: 0
-  maxFlyHeight: 5
+  maxFlyHeight: 2
   circleRange: 5
-  type: 0
+  type: 1
   dropChance: 0
+  audioPlayer: {fileID: 0}
 --- !u!195 &5763905321607710119
 NavMeshAgent:
   m_ObjectHideFlags: 0

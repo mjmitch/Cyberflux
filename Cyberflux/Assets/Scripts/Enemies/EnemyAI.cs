@@ -19,6 +19,7 @@ public class EnemyAI : MonoBehaviour, IDamage
     [SerializeField] GameObject bullet;
     [SerializeField] private GameObject weapon;
     [SerializeField] float attackRate;
+    [SerializeField] AudioClip attackSound;
     [SerializeField] int HP;
     [SerializeField] int fov;
     [SerializeField] int faceTargetSpeed;
@@ -27,9 +28,16 @@ public class EnemyAI : MonoBehaviour, IDamage
     [SerializeField] private bool slowImmune;
     [Range(0f, 1f)] [SerializeField] private float slowModifier;
     private bool isSlowed;
+    [Header("Elite Enemy Stuff")]
     [SerializeField] private bool isEliteEnemy;
-    [Range(0.5f, 3f)] [SerializeField] private float moveCoverTime;
-    float moveCoverTimer;
+    //[Range(0.5f, 3f)] [SerializeField] private float moveCoverTime;
+    //[SerializeField] private int attackDistance;
+    [Range(1, 5)] [SerializeField] private int teleportTime;
+    [Range(3, 10)] [SerializeField] private int maxTeleportDistance;
+    [SerializeField] private AudioClip teleportSound;
+    float teleportTimer;
+    private bool initMovement = true;
+    //float moveCoverTimer;
     [Header("How much score do you get from killing this enemy?")]
     [SerializeField] public int score;
     [Header("Exploding Enemy Stuff\nLeave blank if not Exploding enemy")]
@@ -44,8 +52,8 @@ public class EnemyAI : MonoBehaviour, IDamage
     //[Range(4, 15)] [SerializeField] private int attackRange;
     [Range(5, 25)] [SerializeField] private int circleRange;
     private bool isBobbing = false;
-    private bool findingCover = false;
-    private bool foundCover = false;
+    private bool eliteAttackingPlayer = false;
+    
     
     private enum enemyType
     {
@@ -61,6 +69,7 @@ public class EnemyAI : MonoBehaviour, IDamage
     [SerializeField] int dropChance;
     private GameObject player;
     private Vector3 playerDirection;
+    private Vector3 attackPlayerDirection;
     [SerializeField] AudioSource audioPlayer;
     
     float attackTimer;
@@ -71,7 +80,6 @@ public class EnemyAI : MonoBehaviour, IDamage
     Vector3 startPos;
     bool playerInTrigger;
     private bool isInCombat;
-    private bool hasFoundCover;
     
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -91,14 +99,15 @@ public class EnemyAI : MonoBehaviour, IDamage
             roamDis = circleRange;
         }
         agentStopDisOrig = agent.stoppingDistance;
-        
+        audioPlayer.volume = GameManager.instance.playerScript.masterVol * GameManager.instance.playerScript.sfxVol;
+        teleportTimer = 0;
     }
 
     // Update is called once per frame
     void Update()
     {
         playerDirection = player.transform.position - headPosition.position;
-        
+        attackPlayerDirection = player.transform.position - attackPosition.position;
         
         if (isInCombat)
         {
@@ -149,7 +158,7 @@ public class EnemyAI : MonoBehaviour, IDamage
         if (Physics.Raycast(headPosition.position, playerDirection, out hit))
         {
             //Debug.Log(hit.collider.name + " / " + angleToPlayer + " / " + fov);
-            if (hit.collider.CompareTag("Player") && angleToPlayer < fov)
+            if (hit.collider.CompareTag("Player") || hit.collider.CompareTag("PlayerModel") && angleToPlayer < fov)
             {
                 //Debug.Log("CAN SEE PLAYER -- COMBAT");
                 isInCombat = true;
@@ -186,35 +195,31 @@ public class EnemyAI : MonoBehaviour, IDamage
     {
         attackTimer = 0;
         StartCoroutine(SwordSwing());
+        audioPlayer.PlayOneShot(attackSound, GameManager.instance.playerScript.masterVol * GameManager.instance.playerScript.sfxVol);
     }
 
     void RangedAttack()
     {
         attackTimer = 0;
-        GameObject bullet1 = Instantiate(bullet, attackPosition.position, transform.rotation);
-        bullet1.GetComponent<damage>().rb.linearVelocity = (GameManager.instance.player.transform.position - transform.position).normalized * bullet1.GetComponent<damage>().speed;
+        Instantiate(bullet, attackPosition.position, transform.rotation);
+        audioPlayer.PlayOneShot(attackSound, GameManager.instance.playerScript.masterVol * GameManager.instance.playerScript.sfxVol);
+        //bullet1.GetComponent<damage>().rb.linearVelocity = (player.transform.position - transform.position) * bullet1.GetComponent<damage>().speed;
     }
 
     void FlyingAttack()
     {
         attackTimer = 0;
-        if(!isEliteEnemy)
-            RangedAttack();
-        else
-        {
-            // Elite Attack
-        }
+        RangedAttack();
     }
 
     void ExplodingAttack()
     {
         if (!isExploding)
         {
+            isExploding = true;
             Instantiate(explosionEffect, transform.position, Quaternion.identity);
-           audioPlayer.PlayOneShot(explosionSound, GameManager.instance.playerScript.sfxVol * GameManager.instance.playerScript.masterVol);
-            
+            audioPlayer.PlayOneShot(explosionSound, GameManager.instance.playerScript.sfxVol * GameManager.instance.playerScript.masterVol);
         }
-        isExploding = true;
         Destroy(gameObject);
     }
     
@@ -250,37 +255,20 @@ public class EnemyAI : MonoBehaviour, IDamage
 
     void EliteCombatMovement()
     {
-        if (findingCover && !agent.hasPath)
+        teleportTimer += Time.deltaTime;
+        if (teleportTimer >= teleportTime)
         {
-            foundCover = true;
-            findingCover = false;
+            teleportTimer = 0;
+            //Vector2 unitCircle = Random.insideUnitCircle;
+            Vector3 offset = Random.insideUnitCircle.normalized * maxTeleportDistance;
+            offset.z = offset.y;
+            offset.y = 0;
+            Debug.Log(offset);
+            transform.position += offset;
+            if(teleportSound != null)
+                audioPlayer.PlayOneShot(teleportSound, GameManager.instance.playerScript.masterVol * GameManager.instance.playerScript.sfxVol);
         }
-        else if (foundCover)
-        {
-            moveCoverTimer += Time.deltaTime;
-        }
-        switch (type)
-        {
-            case enemyType.melee:
-                //gent.stoppingDistance = 5000;
-                FindCover();
-                break;
-            case enemyType.ranged:
-                //agent.stoppingDistance = 5000;
-                FindCover();
-                break;
-            case enemyType.exploding:
-                //agent.stoppingDistance = 5000;
-                FindCover();
-                break;
-            case enemyType.swarm:
-                //agent.stoppingDistance = 0;
-                break;
-            case enemyType.flying:
-                //FlyingMovement();
-                //agent.stoppingDistance = 5000;
-                break;
-        }
+        BasicCombatMovement();
     }
 
     void Combat()
@@ -289,7 +277,7 @@ public class EnemyAI : MonoBehaviour, IDamage
         switch (type)
         {
             case enemyType.melee:
-                if ((player.transform.position - transform.position).magnitude <= agent.stoppingDistance + 0.5f && attackTimer >= attackRate)
+                if ((player.transform.position - transform.position).magnitude <= agent.stoppingDistance + 0.15f && attackTimer >= attackRate)
                     MeleeAttack();
                 break;
             case enemyType.ranged:
@@ -308,43 +296,6 @@ public class EnemyAI : MonoBehaviour, IDamage
                     FlyingAttack();
                 break;
         }
-    }
-
-    void FindCover()
-    {
-        
-    }
-
-    Vector3 FindNextCover()
-    {
-        List<NavMeshHit> hitList = new List<NavMeshHit>();
-        NavMeshHit hit;
-        Vector3 spawn;
-        Vector2 offset;
-
-        for (int i = 0; i < 10; i++)
-        {
-            spawn = transform.position;
-            offset = Random.insideUnitCircle * i;
-            spawn.x += offset.x;
-            spawn.y += offset.y;
-
-            NavMesh.FindClosestEdge(spawn, out hit, 0);
-            hitList.Add(hit);
-        }
-
-        var sortedHits = hitList.OrderBy(x => x.distance);
-
-        foreach (NavMeshHit tempHit in sortedHits)
-        {
-            if (Vector3.Dot(tempHit.normal, (player.transform.position - transform.position)) < 0)
-            {
-                return tempHit.position;
-                findingCover = true;
-            }
-        }
-
-        return transform.position;
     }
 
     IEnumerator FlyingMovement()
@@ -391,11 +342,21 @@ public class EnemyAI : MonoBehaviour, IDamage
 
     public IEnumerator SwordSwing()
     {
-        weapon.transform.Rotate(45,0,playerDirection.z);
+        weapon.transform.Rotate(15,0, 5);
+        yield return new WaitForSeconds(0.05f);
+        weapon.transform.Rotate(15,0, 5);
+        yield return new WaitForSeconds(0.05f);
+        weapon.transform.Rotate(15,0, 5);
+        yield return new WaitForSeconds(0.05f);
+        weapon.transform.Rotate(15,0, 5);
+        yield return new WaitForSeconds(0.05f);
+        weapon.transform.Rotate(15,0, 5);
+        yield return new WaitForSeconds(0.05f);
+        weapon.transform.Rotate(15,0, 5);
         yield return new WaitForSeconds(0.1f);
-        weapon.transform.Rotate(45,0, playerDirection.z);
+        weapon.transform.Rotate(-25,0, -5);
         yield return new WaitForSeconds(0.1f);
-        weapon.transform.Rotate(-45,0, -playerDirection.z);
+        weapon.transform.Rotate(-25,0, -5);
         yield return new WaitForSeconds(0.1f);
         weapon.transform.localRotation = Quaternion.Euler(0,0,0);
     }

@@ -21,6 +21,7 @@ public class damage : MonoBehaviour
     [SerializeField] public int speed;
     [SerializeField] public float destroyTime;
     bool exploded = false;
+    [SerializeField] bool enemyBullet;
     
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -34,8 +35,10 @@ public class damage : MonoBehaviour
 
             if (type == damagetype.moving)
             {
-                //rb.linearVelocity = (GameManager.instance.player.transform.position - transform.position).normalized * speed;
-                rb.linearVelocity = transform.forward * speed;
+                if(enemyBullet)
+                    rb.linearVelocity = (GameManager.instance.player.transform.position - transform.position).normalized * speed;
+                else
+                    rb.linearVelocity = transform.forward * speed;
             }
         }
     }

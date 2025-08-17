@@ -19,7 +19,12 @@ public class PlayerController : MonoBehaviour, IDamage, IHeal
     [SerializeField] float dashSpeed;
     [Range(0.01f, 0.99f)] [SerializeField] private float slowModifier;
     public Vector3 gravityOrig;
-    
+    float walkSpeedOriginal;
+    float sprintSpeedOriginal;
+    float slideSpeedOriginal;
+    float wallrunSpeedOriginal;
+    float dashSpeedOriginal;
+    float crouchSpeedOriginal;
 
     [Header("Camera")]
     public float NormalFov;
@@ -150,14 +155,19 @@ public class PlayerController : MonoBehaviour, IDamage, IHeal
         gravityOrig = Physics.gravity;
         
 
-        
+        walkSpeedOriginal = walkSpeed;
+        sprintSpeedOriginal = sprintSpeed;
+        slideSpeedOriginal = slideSpeed;
+        wallrunSpeedOriginal = wallrunSpeed;
+        dashSpeedOriginal = dashSpeed;
+        crouchSpeedOriginal = crouchSpeed;
     }
 
     // Update is called once per frame
     void Update()
     {
 
-        Debug.Log(grounded);
+        //Debug.Log(grounded);
 
 
         grounded = Physics.Raycast(transform.position, Vector3.down, playerHeight * 0.5f + 0.2f, whatIsGround);
@@ -503,14 +513,25 @@ public class PlayerController : MonoBehaviour, IDamage, IHeal
         sprintSpeed *= slowModifier;
         slideSpeed *= slowModifier;
         crouchSpeed *= slowModifier;
+        wallrunSpeed += slowModifier;
+        dashSpeed *= slowModifier;
+        StartCoroutine(ResetSpeeds());
+    }
+
+    IEnumerator ResetSpeeds()
+    {
+        yield return new WaitForSeconds(2);
+        RemoveSlow();
     }
 
     public void RemoveSlow()
     {
-        walkSpeed /= slowModifier;
-        sprintSpeed /= slowModifier;
-        slideSpeed /= slowModifier;
-        crouchSpeed /= slowModifier;
+        walkSpeed = walkSpeedOriginal;
+        sprintSpeed = sprintSpeedOriginal;
+        slideSpeed = slideSpeedOriginal;
+        crouchSpeed = crouchSpeedOriginal;
+        wallrunSpeed = wallrunSpeedOriginal;
+        dashSpeed = dashSpeedOriginal;
     }
 
     public bool Heal(int amount)
