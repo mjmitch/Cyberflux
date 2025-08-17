@@ -54,6 +54,19 @@ public class GameManager : MonoBehaviour
     [SerializeField] public AudioSource UIAudioSource;
     [SerializeField] public AudioMixer audioMixer;
 
+    [SerializeField]
+     private List<string> tutorialMessages = new List<string>()
+     {
+    "Press ⭼ (Middle-click) to unleash Momentum’s surge.",
+    "Press LMB (Left-click) to strike with your blade.",
+    "Press RMB (Right-click) to throw the Scythe’s arc",
+    "The Black gauge holds the Scythe’s charge.",
+    "The Blue gauge fuels your momentum. It gives you acess to sliding, jumping, and dashing."
+     };
+
+    private float tutorialTimer = 0f;
+    private int currentTutorialIndex = 0;
+
     [Header("Timers")]
     [HideInInspector] public int minutes;
 
@@ -111,10 +124,7 @@ public class GameManager : MonoBehaviour
         miliseconds = 0;
         UpdateTimerText();
 
-        if (SceneManager.GetActiveScene().name == "Level 1 [The Circuit]")
-        {
-            StartCoroutine(ShowTutorialSequence());
-        }
+        
 
 
     }
@@ -141,6 +151,24 @@ public class GameManager : MonoBehaviour
             else GameStateResume();
         }
 
+        tutorialTimer += Time.deltaTime;
+
+        if (SceneManager.GetActiveScene().name == "Level 1 [The Circuit]")
+        {
+            tutorialTimer += Time.deltaTime;
+
+            if (tutorialTimer >= 15f) // every 15 seconds
+            {
+                Debug.Log("Showing tutorial: " + tutorialMessages[currentTutorialIndex]);
+                ShowTutorial(tutorialMessages[currentTutorialIndex], 5f);
+
+                currentTutorialIndex++;
+                if (currentTutorialIndex >= tutorialMessages.Count)
+                    currentTutorialIndex = 0; // loop back
+
+                tutorialTimer = 0f;
+            }
+        }
     }
 
     public void GameStatePause()
@@ -453,20 +481,5 @@ if (menuItemUnlock)
         tutorialPrompt.Show(msg, seconds);
     }
 
-    IEnumerator ShowTutorialSequence()
-    {
-        ShowTutorial("Press ⭼ (Middle-click) to unleash Momentum’s surge.", 3f);
-        yield return new WaitForSeconds(4f);
-
-        ShowTutorial("Press LMB (Left-click) to strike with your blade.", 3f);
-        yield return new WaitForSeconds(4f);
-
-        ShowTutorial("Press RMB (Right-click) to throw the Scythe’s arc.", 3f);
-        yield return new WaitForSeconds(4f);
-
-        ShowTutorial("Black gauge holds the Scythe’s charge.", 3f);
-        yield return new WaitForSeconds(4f);
-
-        ShowTutorial("Blue gauge fuels momentum: sliding, jumping, dashing-", 3f);
-    }
+    
 }
