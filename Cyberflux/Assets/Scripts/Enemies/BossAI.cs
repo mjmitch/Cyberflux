@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
+using Random = UnityEngine.Random;
 
 public class BossAI : MonoBehaviour, IDamage
 {
@@ -10,13 +11,14 @@ public class BossAI : MonoBehaviour, IDamage
     [SerializeField] private NavMeshAgent agent;
     [SerializeField] private Transform[] attackPositions;
     [SerializeField] private Transform headPosition;
-    [SerializeField] GameObject[] bullets;
+    [SerializeField] private GameObject[] bullets;
     [SerializeField] private float[] shootRates;
     private float[] shootTimers;
     [SerializeField] private int HP;
     [SerializeField] private int score;
     private int maxHP;
     private int phaseNum;
+    [Range(5, 20)] [SerializeField] private float attackDistance;
     [SerializeField] private GameObject[] enemiesToSpawn;
     [SerializeField] private float spawnRate;
     [SerializeField] private int auraDamageNum;
@@ -28,8 +30,10 @@ public class BossAI : MonoBehaviour, IDamage
     private AudioSource audioPlayer;
     [SerializeField] private AudioClip[] shootingSounds;
     [SerializeField] private AudioClip[] musicPerPhase;
-
+    [Range(1, 2f)] [SerializeField] private float fadeTime;
+    [SerializeField] private AudioClip teleportSound;
     [Range(2, 10)] [SerializeField] private float teleportRate;
+    [Range(4, 16)] [SerializeField] private float maxTeleportDistance;
     private float teleportTimer;
 
     private bool playerInTrigger = false;
@@ -48,6 +52,9 @@ public class BossAI : MonoBehaviour, IDamage
         audioPlayer.loop = true;
         agent.SetDestination(Vector3.Lerp(transform.position, playerPosition.position, 0.5f));
         teleportTimer = 0;
+        shootTimers = new float[2];
+        agent.stoppingDistance = 0;
+        GameManager.instance.bossHPUI.SetActive(true);
     }
 
     // Update is called once per frame
@@ -62,23 +69,47 @@ public class BossAI : MonoBehaviour, IDamage
                 player.GetComponent<PlayerController>().TakeDamage(auraDamageNum);
             }
         }
-        
-        
+        Movement();
+        Combat();
     }
 
     public void Movement()
     {
-        
+        transform.LookAt(new Vector3(playerPosition.position.x, 2, playerPosition.position.z));
+        float distanceToPlayer = (player.transform.position - transform.position).magnitude;
+        //Debug.Log(distanceToPlayer + " / " + agent.stoppingDistance);
+        if (distanceToPlayer <= attackDistance)
+        {
+            Vector2 direction = transform.position - playerPosition.position;
+            direction.Normalize();
+            Vector3 newPosition = transform.position;
+            newPosition.x += direction.x;
+            newPosition.z += direction.y;
+            //Debug.Log(transform.position + "/"+ newPosition);
+            agent.SetDestination(newPosition);
+        }
+        else
+        {
+            agent.SetDestination(playerPosition.position);
+        }
+
+        if (phaseNum == 2)
+            Teleport();
     }
 
     public void Combat()
     {
+        //Debug.Log(shootTimers.Length);
         for(int i = 0; i < shootTimers.Length; i++)
         {
+            //Debug.Log(i);
             shootTimers[i] += Time.deltaTime;
             if (shootTimers[i] > shootRates[i])
             {
+                Debug.Log(i);
+                shootTimers[i] = 0;
                 Instantiate(bullets[i], attackPositions[i].position, Quaternion.identity);
+                audioPlayer.PlayOneShot(shootingSounds[i], GameManager.instance.playerScript.masterVol * GameManager.instance.playerScript.sfxVol);
             }
         }
     }
@@ -87,6 +118,7 @@ public class BossAI : MonoBehaviour, IDamage
     {
         //throw new System.NotImplementedException();
         HP -= dmg;
+        UpdateBossUI();
         if (HP <= 0)
         {
             score += GameManager.instance.playerScript.GetHP();
@@ -103,9 +135,27 @@ public class BossAI : MonoBehaviour, IDamage
             for (int i = 0; i < shootRates.Length; i++)
             {
                 shootRates[i] *= 0.75f;
-                bullets[i].GetComponent<damage>().damageAmount += 2;
+                //bullets[i].GetComponent<damage>().damageAmount += 2;
             }
             StartCoroutine(PhaseMusic());
+            
+        }
+    }
+
+    void Teleport()
+    {
+        teleportTimer += Time.deltaTime;
+        if (teleportTimer >= teleportRate)
+        {
+            teleportTimer = 0;
+            //Vector2 unitCircle = Random.insideUnitCircle;
+            Vector3 offset = Random.insideUnitCircle.normalized * maxTeleportDistance;
+            offset.z = offset.y;
+            offset.y = 0;
+            Debug.Log(offset);
+            transform.position += offset;
+            if(teleportSound != null)
+                audioPlayer.PlayOneShot(teleportSound, GameManager.instance.playerScript.masterVol * GameManager.instance.playerScript.sfxVol);
         }
     }
 
@@ -146,20 +196,25 @@ public class BossAI : MonoBehaviour, IDamage
 
     IEnumerator PhaseMusic()
     {
-        while (audioPlayer.volume >= 0)
+        float startVolume = audioPlayer.volume;
+        
+        while (audioPlayer.volume > 0)
         {
-            audioPlayer.volume -= 0.25f;
-            yield return new WaitForSeconds(0.01f);
-        }
-        audioPlayer.Stop();
-        audioPlayer.clip = musicPerPhase[1];
-        audioPlayer.Play();
-        while (audioPlayer.volume <
-               GameManager.instance.playerScript.masterVol * GameManager.instance.playerScript.musicVol)
-        {
-            audioPlayer.volume += 0.25f;
-            yield return new WaitForSeconds(0.01f);
+            audioPlayer.volume -= startVolume * Time.deltaTime / fadeTime;
         }
 
+        audioPlayer.clip = musicPerPhase[1];
+        audioPlayer.Play();
+        while (audioPlayer.volume < startVolume)
+        {
+            audioPlayer.volume += startVolume * Time.deltaTime / fadeTime;
+        }
+        yield return null;
     }
+
+    void UpdateBossUI()
+    {
+        GameManager.instance.bossHPBar.fillAmount = (float) HP / maxHP;
+    }
+
 }

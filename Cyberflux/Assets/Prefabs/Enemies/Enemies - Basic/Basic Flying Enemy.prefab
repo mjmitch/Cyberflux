@@ -209,7 +209,7 @@ MonoBehaviour:
   agent: {fileID: 5205435808787254736}
   attackPosition: {fileID: 4812252409772851108}
   headPosition: {fileID: 4812252409772851108}
-  bullet: {fileID: 6153881909228287789, guid: 72d3bf019640ba441bdd5db6fb851e91, type: 3}
+  bullet: {fileID: 6153881909228287789, guid: 60404785377941743862f2108166e021, type: 3}
   weapon: {fileID: 0}
   attackRate: 1.5
   attackSound: {fileID: 8300000, guid: a1613c8ff025e6542adeb39356bd9078, type: 3}

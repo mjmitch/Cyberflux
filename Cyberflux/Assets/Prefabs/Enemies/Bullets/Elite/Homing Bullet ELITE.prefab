@@ -50,10 +50,10 @@ MonoBehaviour:
   type: 3
   rb: {fileID: 3757407806995392865}
   slowEffect: 0
-  damageAmount: 7
+  damageAmount: 4
   damageRate: 0
   speed: 40
-  destroyTime: 4
+  destroyTime: 5
   enemyBullet: 1
 --- !u!135 &5453810256532564497
 SphereCollider:
