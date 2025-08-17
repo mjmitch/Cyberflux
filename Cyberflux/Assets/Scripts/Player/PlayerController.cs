@@ -160,6 +160,9 @@ public class PlayerController : MonoBehaviour, IDamage, IHeal
         gravityOrig = Physics.gravity;
         scytheScript = GetComponentInChildren<ScytheCombat>();
 
+        
+        
+
         walkSpeedOriginal = walkSpeed;
         sprintSpeedOriginal = sprintSpeed;
         slideSpeedOriginal = slideSpeed;
@@ -485,6 +488,21 @@ public class PlayerController : MonoBehaviour, IDamage, IHeal
         return Vector3.ProjectOnPlane(direction, slopeHit.normal).normalized;
     }
 
+    public void SaveSettings()
+    {
+        PlayerPrefs.SetFloat("Master Volume", masterVol);
+        PlayerPrefs.SetFloat("SFX Volume", sfxVol);
+        PlayerPrefs.SetFloat("Music Volume", musicVol);
+    }
+
+    public void LoadSettings()
+    {
+        masterVol = PlayerPrefs.GetFloat("MasterVolume");
+        sfxVol = PlayerPrefs.GetFloat("SFX Volume");
+        musicVol = PlayerPrefs.GetFloat("Music Volume");
+    }
+
+
     //Damage Interface
 
     public void TakeDamage(int dmg)
@@ -504,6 +522,7 @@ public class PlayerController : MonoBehaviour, IDamage, IHeal
         if (HP <= 0)
         {
             GameManager.instance.YouLose(cause);
+            SaveSettings();
         }
     }
     public int GetHP()

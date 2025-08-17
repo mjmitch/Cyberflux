@@ -251,6 +251,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1817517324184699225, guid: 969f6e751948d92408b069af1b441fc0, type: 3}
+      propertyPath: bossHP
+      value: 500
+      objectReference: {fileID: 0}
     - target: {fileID: 5182629214773297863, guid: 969f6e751948d92408b069af1b441fc0, type: 3}
       propertyPath: m_Name
       value: Boss
@@ -2111,6 +2115,22 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 939daa1023fa0b9479c4613b125aea39, type: 3}
+--- !u!1 &1952930990 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4474230038134236655, guid: 2a43059ae07f44340b28e40e2efb2107, type: 3}
+  m_PrefabInstance: {fileID: 1985237279}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1952930992 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6086707596308907680, guid: 2a43059ae07f44340b28e40e2efb2107, type: 3}
+  m_PrefabInstance: {fileID: 1985237279}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1952930990}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1985237279
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2119,6 +2139,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 592616984963267092, guid: 2a43059ae07f44340b28e40e2efb2107, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -437
+      objectReference: {fileID: 0}
+    - target: {fileID: 592616984963267092, guid: 2a43059ae07f44340b28e40e2efb2107, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 117
+      objectReference: {fileID: 0}
     - target: {fileID: 1014074056099352219, guid: 2a43059ae07f44340b28e40e2efb2107, type: 3}
       propertyPath: m_LocalPosition.x
       value: -30.7
@@ -2166,6 +2194,18 @@ PrefabInstance:
     - target: {fileID: 4967382356259595116, guid: 2a43059ae07f44340b28e40e2efb2107, type: 3}
       propertyPath: m_Name
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 6773875172127682266, guid: 2a43059ae07f44340b28e40e2efb2107, type: 3}
+      propertyPath: bossHPUI
+      value: 
+      objectReference: {fileID: 1952930990}
+    - target: {fileID: 6773875172127682266, guid: 2a43059ae07f44340b28e40e2efb2107, type: 3}
+      propertyPath: bossHPBar
+      value: 
+      objectReference: {fileID: 1952930992}
+    - target: {fileID: 7199931394847485644, guid: 2a43059ae07f44340b28e40e2efb2107, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8030542079564838891, guid: 2a43059ae07f44340b28e40e2efb2107, type: 3}
       propertyPath: m_AnchorMax.x
