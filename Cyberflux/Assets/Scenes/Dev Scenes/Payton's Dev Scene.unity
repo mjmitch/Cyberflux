@@ -2948,14 +2948,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: PLAYER
       objectReference: {fileID: 0}
-    - target: {fileID: 5679366219045235223, guid: 2a43059ae07f44340b28e40e2efb2107, type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7913739223683945199, guid: 2a43059ae07f44340b28e40e2efb2107, type: 3}
-      propertyPath: specialAttackObject
-      value: 
-      objectReference: {fileID: 5997626053026929138, guid: c1b18c9fe41b9684c8ece339ac732ad4, type: 3}
     - target: {fileID: 8030542079564838891, guid: 2a43059ae07f44340b28e40e2efb2107, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0

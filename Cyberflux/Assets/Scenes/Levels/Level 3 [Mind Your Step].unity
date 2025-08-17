@@ -1517,6 +1517,7 @@ MonoBehaviour:
   damageRate: 0.01
   speed: 0
   destroyTime: 0
+  enemyBullet: 0
 --- !u!1 &433288490
 GameObject:
   m_ObjectHideFlags: 0
@@ -4126,9 +4127,25 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1122570759863882868, guid: 2a43059ae07f44340b28e40e2efb2107, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4967382356259595116, guid: 2a43059ae07f44340b28e40e2efb2107, type: 3}
       propertyPath: m_Name
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 5679366219045235223, guid: 2a43059ae07f44340b28e40e2efb2107, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8030542079564838891, guid: 2a43059ae07f44340b28e40e2efb2107, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8030542079564838891, guid: 2a43059ae07f44340b28e40e2efb2107, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -9662,7 +9679,7 @@ GameObject:
   - component: {fileID: 1920271992}
   - component: {fileID: 1920271991}
   - component: {fileID: 1920271990}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Main Tower
   m_TagString: Untagged
   m_Icon: {fileID: 0}

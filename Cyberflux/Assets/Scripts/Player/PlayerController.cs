@@ -167,8 +167,6 @@ public class PlayerController : MonoBehaviour, IDamage, IHeal
     void Update()
     {
 
-        //Debug.Log(grounded);
-
 
         grounded = Physics.Raycast(transform.position, Vector3.down, playerHeight * 0.5f + 0.2f, whatIsGround);
 
@@ -431,8 +429,6 @@ public class PlayerController : MonoBehaviour, IDamage, IHeal
             }          
            
         }
-
-       
 
         //Making sure that you can't move faster on the ground
         else 

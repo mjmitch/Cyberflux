@@ -1045,10 +1045,12 @@ MonoBehaviour:
     m_Bits: 2048
   isSlamming: 0
   playerScript: {fileID: 280831597712182119}
+  specialAttackObject: {fileID: 5997626053026929138, guid: c1b18c9fe41b9684c8ece339ac732ad4, type: 3}
   specialAttackReady: 0
   audioPlayer: {fileID: 4948431690469598747}
   attackClip: {fileID: 8300000, guid: a7736c1763bd76c4eb0d52aaad581deb, type: 3}
   slashClip: {fileID: 8300000, guid: 180f35aef2ea2654086bcbb52d58ec0b, type: 3}
+  specialAttackClip: {fileID: 0}
   attackKey: 323
   slashKey: 113
   slamAttackKey: 324
@@ -1370,7 +1372,8 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 7913739223683945199}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 6889704537950947164, guid: 48336de922d670f4e9fc9598a557dff7, type: 3}
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 491899036009314493, guid: 48336de922d670f4e9fc9598a557dff7, type: 3}
       insertIndex: -1
