@@ -26,5 +26,7 @@ public class PlayerStats : ScriptableObject
         wallrunningSpeed = baseWallrunSpeed;
     }
 
+    
+
 
 }
