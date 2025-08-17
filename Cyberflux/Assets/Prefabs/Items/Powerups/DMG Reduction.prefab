@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 5342789073196067271}
   - component: {fileID: 5636860328962812934}
   m_Layer: 0
-  m_Name: GameObject
+  m_Name: DMG Reduction
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
