@@ -51,10 +51,11 @@ MonoBehaviour:
   type: 4
   rb: {fileID: 701838788037589602}
   slowEffect: 1
-  damageAmount: 25
+  damageAmount: 30
   damageRate: 0
   speed: 0
   destroyTime: 0.1
+  enemyBullet: 0
 --- !u!33 &4934890823150915480
 MeshFilter:
   m_ObjectHideFlags: 0
