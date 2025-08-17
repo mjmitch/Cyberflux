@@ -14,7 +14,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Levels/Level 2 [Rainstorm].unity
     guid: a870fc65321be684eac4042c23964730
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Levels/Level 3 [Mind Your Step].unity
     guid: ce4f5bc595750c247b67f068070c4ec2
   - enabled: 1
