@@ -18,16 +18,16 @@ EditorBuildSettings:
     path: Assets/Scenes/Levels/Level 3 [Mind Your Step].unity
     guid: ce4f5bc595750c247b67f068070c4ec2
   - enabled: 1
-    path: Assets/Scenes/Levels/Level 4 [Data Surge].unity
+    path: Assets/Scenes/Levels/Level 3 [Data Surge].unity
     guid: 56934a3330e011d41b0f25ceae1d7a4d
   - enabled: 1
-    path: Assets/Scenes/Levels/Level 5 [Forced Spiral].unity
+    path: Assets/Scenes/Levels/Level 4 [Forced Spiral].unity
     guid: 3a5aa145be85fa442b91d16c719ae22f
   - enabled: 1
-    path: Assets/Scenes/Levels/Level 6 [Midnight].unity
+    path: Assets/Scenes/Levels/Level 5 [Midnight].unity
     guid: 1183ccff7751b1a469c0ebfaf2b92aa7
   - enabled: 1
-    path: Assets/Scenes/Levels/Level 7 [End Of Faith].unity
+    path: Assets/Scenes/Levels/Level 6 [End Of Faith].unity
     guid: a20565f5f65560942b386028833f96b2
   - enabled: 1
     path: Assets/Scenes/Levels/Hub Level.unity
