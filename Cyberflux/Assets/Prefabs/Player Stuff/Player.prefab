@@ -191,6 +191,7 @@ MonoBehaviour:
   jumpKey: 32
   sprintKey: 304
   crouchKey: 99
+  stats: {fileID: 11400000, guid: 4f71ca1b7ce1ed947b45f3bad1f17bf6, type: 2}
   HP: 100
   keys: 0
   playerItems: []
@@ -640,13 +641,13 @@ AudioSource:
   m_GameObject: {fileID: 2479340278176392372}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
-  m_Resource: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: -3420730320032785871, guid: 166f7127cd5aad44d840c8cf69142e2b, type: 2}
+  m_audioClip: {fileID: 8300000, guid: 508aabdf297b983479a71638ae343bae, type: 3}
+  m_Resource: {fileID: 8300000, guid: 508aabdf297b983479a71638ae343bae, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 0.25
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
@@ -1173,15 +1174,14 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 128
   attackPoint: {fileID: 2800344208424561887}
-  attackRadius: 1
   attackRate: 2
   attackDamage: 10
+  attackRadius: 1
   scytheModel: {fileID: 5969235952933304655}
   scytheBar: {fileID: 8759312815185633461}
   playerCam: {fileID: 1275377279185660458}
   orientation: {fileID: 2253439677119928108}
   scytheProjectile: {fileID: 5648529967705417229, guid: 383adf614fb357e44af001308b5664dc, type: 3}
-  slashProjectileCharges: 3
   slashRechargeTime: 5
   currentSlashTime: 0
   nextSlashTime: 0
