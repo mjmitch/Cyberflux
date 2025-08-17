@@ -43,7 +43,7 @@ public class PlayerController : MonoBehaviour, IDamage, IHeal
     private float targetTilt;
     private Coroutine tiltRoutine;
     private WallRunning wallRunScript;
-    private ScytheCombat scytheScript;
+    public ScytheCombat scytheScript;
     
 
 
@@ -75,7 +75,7 @@ public class PlayerController : MonoBehaviour, IDamage, IHeal
 
     [Header("Stat Modifiers")]
     //  [SerializeField] float sdf;
-
+    public float dmgReduction = 0;
     [Header("Item Stuff")]
     public int keys = 0;
     [SerializeField] public PlayerItems playerItems;
@@ -513,7 +513,8 @@ public class PlayerController : MonoBehaviour, IDamage, IHeal
     // 2) Custom, adds cause of death text
     public void TakeDamage(int dmg, string cause)
     {
-        HP -= dmg;
+        float temp = dmg * (1 - dmgReduction);
+        HP -= (int)temp;
         if (HP < 0) HP = 0;
 
         stats.currentHealth = HP;
