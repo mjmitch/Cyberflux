@@ -428,6 +428,7 @@ MonoBehaviour:
   minFlyHeight: 0
   maxFlyHeight: 2
   circleRange: 5
+  basedamage: 8
   type: 1
   dropChance: 0
   audioPlayer: {fileID: 0}
