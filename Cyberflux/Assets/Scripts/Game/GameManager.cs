@@ -64,7 +64,7 @@ public class GameManager : MonoBehaviour
     [HideInInspector] public float miliseconds;
 
     public TMP_Text TimerMiliseconds;
-
+    public string levelCompleteTime;
 
     // item stuff
     [SerializeField] public List<Augment> itemPool;
@@ -242,6 +242,11 @@ if (menuItemUnlock)
         {
             string timeResult = TimerMinutes.text + TimerSeconds.text + TimerMiliseconds.text;
             winSummaryText.text = "Clear Time: " + timeResult;
+            
+            //This will save data to local file in computer
+            PlayerPrefs.SetString("Level " + SceneManager.GetActiveScene().buildIndex + " Time", timeResult);
+            PlayerPrefs.Save();
+
         }
     }
 
