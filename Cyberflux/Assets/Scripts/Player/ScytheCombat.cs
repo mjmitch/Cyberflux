@@ -49,7 +49,7 @@ public class ScytheCombat : MonoBehaviour, IDamage
     private Vector3 impactPoint;
     private float nextSlamTime;
 
-    public PlayerController playerScript = GameManager.instance.playerScript;
+    public PlayerController playerScript;
 
     [Header("Momentum Attack")]
     public bool specialAttackReady;
@@ -69,7 +69,10 @@ public class ScytheCombat : MonoBehaviour, IDamage
     [SerializeField] KeyCode slamAttackKey = KeyCode.Mouse1;
     [SerializeField] KeyCode specialAttackKey = KeyCode.Mouse2;
 
-    
+    private void Start()
+    {
+        playerScript = GameManager.instance.playerScript;
+    }
 
     private void Update()
     {
