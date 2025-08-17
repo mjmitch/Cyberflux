@@ -15,7 +15,7 @@ public class BossAI : MonoBehaviour, IDamage
     [SerializeField] private GameObject[] bullets;
     [SerializeField] private float[] shootRates;
     private float[] shootTimers;
-    [SerializeField] private int HP;
+    [SerializeField] private int bossHP;
     [SerializeField] private int score;
     private int maxHP;
     private int phaseNum;
@@ -47,7 +47,7 @@ public class BossAI : MonoBehaviour, IDamage
         player = GameManager.instance.player;
         audioPlayer = GetComponent<AudioSource>();
         audioPlayer.volume = GameManager.instance.playerScript.masterVol;
-        maxHP = HP;
+        maxHP = bossHP;
         phaseNum = 1;
         audioPlayer.clip = musicPerPhase[0];
         audioPlayer.Play();
@@ -139,21 +139,22 @@ public class BossAI : MonoBehaviour, IDamage
     public void TakeDamage(int dmg)
     {
         //throw new System.NotImplementedException();
-        HP -= dmg;
+        bossHP -= dmg;
         UpdateBossUI();
-        if (HP <= 0)
+        
+        if (bossHP <= 0)
         {
             score += GameManager.instance.playerScript.GetHP();
             GameManager.instance.YouWin();
         }
 
-        if (HP <= (maxHP / 2) && phaseNum == 1)
+        if (bossHP <= (maxHP / 2) && phaseNum == 1)
         {
             phaseNum = 2;
             auraDamageRate *= 0.75f;
             auraDamageNum += 1;
             maxHP *= 2;
-            HP *= 2;
+            bossHP *= 2;
             for (int i = 0; i < shootRates.Length; i++)
             {
                 shootRates[i] *= 0.75f;
@@ -201,7 +202,7 @@ public class BossAI : MonoBehaviour, IDamage
     public int GetHP()
     {
         //throw new System.NotImplementedException();
-        return HP;
+        return bossHP;
     }
 
     void OnTriggerEnter(Collider other)
@@ -236,7 +237,7 @@ public class BossAI : MonoBehaviour, IDamage
 
     void UpdateBossUI()
     {
-        GameManager.instance.bossHPBar.fillAmount = (float) HP / maxHP;
+        GameManager.instance.bossHPBar.fillAmount = (float) bossHP / maxHP;
     }
 
 }

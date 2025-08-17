@@ -78,7 +78,7 @@ public class PlayerController : MonoBehaviour, IDamage, IHeal
 
     [Header("Item Stuff")]
     public int keys = 0;
-    [SerializeField] public List<Augment> playerItems;
+    [SerializeField] public PlayerItems playerItems;
     public bool brokenClock = false;
 
 
@@ -145,7 +145,7 @@ public class PlayerController : MonoBehaviour, IDamage, IHeal
     public bool sprinting;
     public bool dashing;
     
-
+    
     void Start()
     {
         HP = stats.maxHealth;
@@ -160,12 +160,17 @@ public class PlayerController : MonoBehaviour, IDamage, IHeal
         gravityOrig = Physics.gravity;
         scytheScript = GetComponentInChildren<ScytheCombat>();
 
+        
+        
+
         walkSpeedOriginal = walkSpeed;
         sprintSpeedOriginal = sprintSpeed;
         slideSpeedOriginal = slideSpeed;
         wallrunSpeedOriginal = wallrunSpeed;
         dashSpeedOriginal = dashSpeed;
         crouchSpeedOriginal = crouchSpeed;
+       
+        playerItems.ReloadItems();
     }
 
     // Update is called once per frame
@@ -483,6 +488,21 @@ public class PlayerController : MonoBehaviour, IDamage, IHeal
         return Vector3.ProjectOnPlane(direction, slopeHit.normal).normalized;
     }
 
+    public void SaveSettings()
+    {
+        PlayerPrefs.SetFloat("Master Volume", masterVol);
+        PlayerPrefs.SetFloat("SFX Volume", sfxVol);
+        PlayerPrefs.SetFloat("Music Volume", musicVol);
+    }
+
+    public void LoadSettings()
+    {
+        masterVol = PlayerPrefs.GetFloat("MasterVolume");
+        sfxVol = PlayerPrefs.GetFloat("SFX Volume");
+        musicVol = PlayerPrefs.GetFloat("Music Volume");
+    }
+
+
     //Damage Interface
 
     public void TakeDamage(int dmg)
@@ -502,6 +522,7 @@ public class PlayerController : MonoBehaviour, IDamage, IHeal
         if (HP <= 0)
         {
             GameManager.instance.YouLose(cause);
+            SaveSettings();
         }
     }
     public int GetHP()
@@ -563,6 +584,6 @@ public class PlayerController : MonoBehaviour, IDamage, IHeal
 
     public void AddItem(Augment item)
     {
-        playerItems.Add(item);
+       playerItems.playeritems.Add(item);
     }
 }

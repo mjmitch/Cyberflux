@@ -106,27 +106,31 @@ public class GameManager : MonoBehaviour
     }
 
     score = 0;
-    //ShowTitle();
+        //ShowTitle();
+        
     }
     
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         //GameStatePause();
-        audioMixer.SetFloat("masterVolume", playerScript.masterVol);
-        audioMixer.SetFloat("sfxVolume", playerScript.sfxVol);
-        audioMixer.SetFloat("musicVolume", playerScript.musicVol);
-        menuItemSelect.SetActive(false);
-        menuItemUnlock.SetActive(false);
-        OptionPanel.gameObject.SetActive(false);
-        minutes = 0;
-        seconds = 0;
-        miliseconds = 0;
-        UpdateTimerText();
+        if (playerScript != null)
+        {
+            audioMixer.SetFloat("masterVolume", playerScript.masterVol);
+            audioMixer.SetFloat("sfxVolume", playerScript.sfxVol);
+            audioMixer.SetFloat("musicVolume", playerScript.musicVol);
+            menuItemSelect.SetActive(false);
+            menuItemUnlock.SetActive(false);
+            OptionPanel.gameObject.SetActive(false);
+            minutes = 0;
+            seconds = 0;
+            miliseconds = 0;
+            UpdateTimerText();
+        }
+
+
 
         
-
-
     }
 
     // Update is called once per frame
@@ -232,6 +236,7 @@ if (menuItemUnlock)
         else
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
         // CHANGE THIS TO LEVEL HUB IF THERE IS SAVE DATA
+        playerScript.LoadSettings();
         stats.ResetAllStats();
     }
 
@@ -255,8 +260,11 @@ if (menuItemUnlock)
      
     public void QuitGame()
     {
+        playerScript.playerItems.playeritems.Clear();
         UIAudioSource.Play();
+        playerScript.SaveSettings();
         Application.Quit();
+
 
       #if UNITY_EDITOR
       UnityEditor.EditorApplication.isPlaying = false;
@@ -302,6 +310,8 @@ if (menuItemUnlock)
         if (menuLose) menuLose.SetActive(true);
         menuActive = menuLose;
 
+        playerScript.SaveSettings();
+
         if (loseSummaryText != null)
         {
             string timeResult = TimerMinutes.text + TimerSeconds.text + TimerMiliseconds.text;
@@ -332,11 +342,16 @@ if (menuItemUnlock)
         int last = SceneManager.sceneCountInBuildSettings - 1;
 
         if (next <= last) LoadLevel(next);
-        else LoadLevel(0);   // loop back to Title when out of levels
+        else LoadLevel(0);
+        playerScript.LoadSettings();// loop back to Title when out of levels
     }
 
     public void RestartLevel()
     {
+        if (playerScript.playerItems.playeritems.Count >= SceneManager.GetActiveScene().buildIndex)
+        {
+            playerScript.playerItems.playeritems.RemoveAt(SceneManager.GetActiveScene().buildIndex - 1);
+        }
         UIAudioSource.Play();
         if (menuWin) menuWin.SetActive(false);
         if (menuLose) menuLose.SetActive(false);
@@ -385,7 +400,7 @@ if (menuItemUnlock)
             }
             else if (seconds < 59)
             {
-                if (playerScript.brokenClock && Random.Range(1,101) <= 10)
+                if (playerScript != null && playerScript.brokenClock && Random.Range(1,101) <= 10)
                 {
                     miliseconds -= 1;
                     seconds -= 1;
@@ -424,6 +439,10 @@ if (menuItemUnlock)
 
     void UpdateTimerText()
     {
+        if (playerScript == null)
+        {
+            return;
+        }
         float temp = miliseconds % 1 * 100;
         int tempmiliseconds = (int)temp;
         TimerMiliseconds.text = tempmiliseconds.ToString();
