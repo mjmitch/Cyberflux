@@ -52,7 +52,7 @@ public class BossAI : MonoBehaviour, IDamage
         audioPlayer.clip = musicPerPhase[0];
         audioPlayer.Play();
         audioPlayer.loop = true;
-        agent.SetDestination(Vector3.Lerp(transform.position, playerPosition.position, 0.5f));
+        //agent.SetDestination(Vector3.Lerp(transform.position, playerPosition.position, 0.5f));
         teleportTimer = 0;
         shootTimers = new float[2];
         agent.stoppingDistance = 0;
