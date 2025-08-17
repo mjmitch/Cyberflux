@@ -232,6 +232,7 @@ if (menuItemUnlock)
         else
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
         // CHANGE THIS TO LEVEL HUB IF THERE IS SAVE DATA
+        playerScript.LoadSettings();
         stats.ResetAllStats();
     }
 
@@ -256,7 +257,9 @@ if (menuItemUnlock)
     public void QuitGame()
     {
         UIAudioSource.Play();
+        playerScript.SaveSettings();
         Application.Quit();
+
 
       #if UNITY_EDITOR
       UnityEditor.EditorApplication.isPlaying = false;
@@ -302,6 +305,8 @@ if (menuItemUnlock)
         if (menuLose) menuLose.SetActive(true);
         menuActive = menuLose;
 
+        playerScript.SaveSettings();
+
         if (loseSummaryText != null)
         {
             string timeResult = TimerMinutes.text + TimerSeconds.text + TimerMiliseconds.text;
@@ -332,7 +337,8 @@ if (menuItemUnlock)
         int last = SceneManager.sceneCountInBuildSettings - 1;
 
         if (next <= last) LoadLevel(next);
-        else LoadLevel(0);   // loop back to Title when out of levels
+        else LoadLevel(0);
+        playerScript.LoadSettings();// loop back to Title when out of levels
     }
 
     public void RestartLevel()
