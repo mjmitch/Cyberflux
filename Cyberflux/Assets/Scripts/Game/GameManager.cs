@@ -7,6 +7,7 @@ using UnityEngine.UI;
 using UnityEngine.InputSystem;
 using Unity.VisualScripting;
 using UnityEngine.Audio;
+using Unity.VisualScripting.Antlr3.Runtime.Misc;
 
 
 public class GameManager : MonoBehaviour
@@ -20,6 +21,7 @@ public class GameManager : MonoBehaviour
 
     public bool isPaused;
 
+    public PlayerStats stats;
     // UI Stuff
     public Image playerHPBar;
     public TMP_Text playerHPText;
@@ -195,6 +197,7 @@ if (menuItemUnlock)
         else
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
         // CHANGE THIS TO LEVEL HUB IF THERE IS SAVE DATA
+        stats.ResetAllStats();
     }
 
     public void Option()
@@ -242,8 +245,10 @@ if (menuItemUnlock)
         {
             string timeResult = TimerMinutes.text + TimerSeconds.text + TimerMiliseconds.text;
             winSummaryText.text = "Clear Time: " + timeResult;
-            
+
+
             //This will save data to local file in computer
+            PlayerPrefs.SetInt("Level " + SceneManager.GetActiveScene().buildIndex + " Score", score); 
             PlayerPrefs.SetString("Level " + SceneManager.GetActiveScene().buildIndex + " Time", timeResult);
             PlayerPrefs.Save();
 

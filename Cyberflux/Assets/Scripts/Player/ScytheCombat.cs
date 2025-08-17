@@ -12,12 +12,19 @@ public class ScytheCombat : MonoBehaviour, IDamage
     public event Action OnSlash;
     public event Action OnSpecialAttack;
 
+
+    [Header("Stat Handling")]
+    
+    
+
+
     [Header("Scythe")]
     [SerializeField] LayerMask enemyLayer;
     public Transform attackPoint;
-    [SerializeField] float attackRadius;
-    [SerializeField] float attackRate;
-    [SerializeField] int attackDamage;
+    public float attackRate;
+    public int attackDamage;
+    public float attackRadius;
+
     [SerializeField] GameObject scytheModel;
     
 
@@ -29,10 +36,11 @@ public class ScytheCombat : MonoBehaviour, IDamage
     [SerializeField] Transform playerCam;
     [SerializeField] Transform orientation;
     [SerializeField] GameObject scytheProjectile;
-    
-    [SerializeField] int slashProjectileCharges;
-    public  float slashRechargeTime;
-    
+    public float slashRechargeTime;
+
+
+
+
     [HideInInspector] public float currentSlashTime; 
     [HideInInspector] public float nextSlashTime;
 
@@ -191,15 +199,11 @@ public class ScytheCombat : MonoBehaviour, IDamage
 
     public void SlashAttack()
     {
-        
-        if (slashProjectileCharges >= 0)
-        {
-            GameObject projectile = Instantiate(scytheProjectile, attackPoint.position, orientation.rotation);
-            //Making sure the projectile goes where the player is facing rather than straight
-            projectile.transform.forward = playerCam.forward;
-        }
 
-        
+        GameObject projectile = Instantiate(scytheProjectile, attackPoint.position, orientation.rotation);
+        //Making sure the projectile goes where the player is facing rather than straight
+        projectile.transform.forward = playerCam.forward;
+
     }
 
     //For Debugging and testing 

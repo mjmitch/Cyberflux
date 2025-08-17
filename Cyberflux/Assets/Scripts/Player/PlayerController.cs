@@ -49,7 +49,7 @@ public class PlayerController : MonoBehaviour, IDamage, IHeal
 
     [Header("Jumping")]
     [SerializeField] int jumpCount;
-    [SerializeField] float jumpForce;
+    public float jumpForce;
     [SerializeField] float jumpCooldown;
     [SerializeField] float airMultiplier;
     bool readyToJump;
@@ -65,7 +65,10 @@ public class PlayerController : MonoBehaviour, IDamage, IHeal
     public KeyCode sprintKey = KeyCode.LeftShift;
     public KeyCode crouchKey = KeyCode.LeftControl;
 
+
+
     [Header("Stats")]
+    public PlayerStats stats;
     [SerializeField] int HP;
 
     [Header("Stat Modifiers")]
@@ -104,6 +107,8 @@ public class PlayerController : MonoBehaviour, IDamage, IHeal
     [Range(0, 1)][SerializeField] public float musicVol;
     [Range(0, 1)][SerializeField] public float sfxVol;
 
+
+    
     
 
     [SerializeField] Transform orientation;
@@ -112,9 +117,7 @@ public class PlayerController : MonoBehaviour, IDamage, IHeal
     float verticalInput;
     
  
-    private int stamina;
-    private int staminaMax = 100;
-    int HPOriginal;
+  
 
     Vector3 moveDir;
 
@@ -143,8 +146,8 @@ public class PlayerController : MonoBehaviour, IDamage, IHeal
 
     void Start()
     {
-        HPOriginal = HP;
-        stamina = staminaMax;
+        HP = stats.maxHealth;
+        
         readyToJump = true;
         rb = GetComponent<Rigidbody>();
         rb.freezeRotation = true;
@@ -491,7 +494,8 @@ public class PlayerController : MonoBehaviour, IDamage, IHeal
         HP -= dmg;
         if (HP < 0) HP = 0;
 
-        GameManager.instance.UpdateHealthUI(HP, HPOriginal);
+        stats.currentHealth = HP;
+        GameManager.instance.UpdateHealthUI(HP, stats.maxHealth);
 
         if (HP <= 0)
         {
@@ -532,12 +536,12 @@ public class PlayerController : MonoBehaviour, IDamage, IHeal
 
     public bool Heal(int amount)
     {
-        if (HP < HPOriginal)
+        if (HP < stats.maxHealth)
         {
             HP += amount;
-            if (HP > HPOriginal) HP = HPOriginal;
+            if (HP > stats.maxHealth) HP = stats.maxHealth;
 
-            GameManager.instance.UpdateHealthUI(HP, HPOriginal);
+            GameManager.instance.UpdateHealthUI(HP, stats.maxHealth);
             return true;
         }
         return false;
@@ -545,7 +549,8 @@ public class PlayerController : MonoBehaviour, IDamage, IHeal
 
     public void SetMaxHP(int val)
     {
-        HPOriginal = HPOriginal + val;
+        stats.maxHealth = stats.maxHealth + val;
+        stats.currentHealth += val;
         HP += val;
     }
 
