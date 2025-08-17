@@ -117,9 +117,9 @@ public class PlayerController : MonoBehaviour, IDamage, IHeal
 
     float horizontalInput;
     float verticalInput;
-    
- 
-  
+
+
+    private float deathTimer;
 
     Vector3 moveDir;
 
@@ -180,11 +180,12 @@ public class PlayerController : MonoBehaviour, IDamage, IHeal
 
         grounded = Physics.Raycast(transform.position, Vector3.down, playerHeight * 0.5f + 0.2f, whatIsGround);
 
-        
+
 
         MyInput();
         SpeedControl();
         StateHandler();
+
 
         //Handle Drag
         if (grounded)
@@ -196,6 +197,16 @@ public class PlayerController : MonoBehaviour, IDamage, IHeal
             rb.linearDamping = 0;
         }
 
+        //if (horizontalInput == 0 && verticalInput == 0)
+        //{
+        //    deathTimer = Time.time;
+        //    DamageIfStill(1);
+        //}
+
+        //if (horizontalInput != 0 || verticalInput != 0)
+        //{
+        //    deathTimer = 0f;
+        //}
         // TEMP: test health bar by pressing H to take 10 damage
         if (Input.GetKeyDown(KeyCode.H))
         {
@@ -504,6 +515,16 @@ public class PlayerController : MonoBehaviour, IDamage, IHeal
 
 
     //Damage Interface
+
+    //public void DamageIfStill(int dmg)
+    //{
+
+    //    if(deathTimer >= 3f)
+    //    {
+    //        TakeDamage(dmg, "You Can't Stay Still Homie");
+    //    }
+        
+    //}
 
     public void TakeDamage(int dmg)
     {
