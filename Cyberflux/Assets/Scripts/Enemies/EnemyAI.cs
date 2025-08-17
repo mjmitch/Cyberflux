@@ -54,7 +54,7 @@ public class EnemyAI : MonoBehaviour, IDamage
     [Range(5, 25)] [SerializeField] private int circleRange;
     private bool isBobbing = false;
     private bool eliteAttackingPlayer = false;
-    
+    [SerializeField] int basedamage;
     
     private enum enemyType
     {
@@ -106,8 +106,10 @@ public class EnemyAI : MonoBehaviour, IDamage
         HP *= (int)(1.05f * (levelNum));
         attackRate *= (1 - (levelNum / 100f));
         if (bullet != null)
-            bullet.GetComponent<damage>().damageAmount *= ((int)1.05f * (levelNum));
-        explosionDamage += levelNum - 1;
+        {
+            bullet.GetComponent<damage>().damageAmount = basedamage * ((int)1.05f * (SceneManager.GetActiveScene().buildIndex));
+        }
+            explosionDamage += levelNum - 1;
     }
 
     // Update is called once per frame
@@ -209,6 +211,8 @@ public class EnemyAI : MonoBehaviour, IDamage
     {
         attackTimer = 0;
         Instantiate(bullet, attackPosition.position, transform.rotation);
+        
+            //bullet.GetComponent<damage>().damageAmount *= ((int)1.05f * (SceneManager.GetActiveScene().buildIndex));
         audioPlayer.PlayOneShot(attackSound, GameManager.instance.playerScript.masterVol * GameManager.instance.playerScript.sfxVol);
         //bullet1.GetComponent<damage>().rb.linearVelocity = (player.transform.position - transform.position) * bullet1.GetComponent<damage>().speed;
     }
