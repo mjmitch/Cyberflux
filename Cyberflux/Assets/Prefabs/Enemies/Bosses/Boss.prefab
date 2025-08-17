@@ -395,7 +395,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d9dc9f86501b114490125d0a6009905, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bossNames: []
+  bossNames:
+  - Nuclear Laboratorium Juggernaut
+  - Digital Horror
+  - Solar Demolition Device
+  - Destructinator
+  - Reaper of Puppies
+  - Bot of the Void
+  - The Boom
+  - Organic's Doom
+  - Steve
   bossModel: {fileID: 2055270124910858203}
   agent: {fileID: 852174584393683555}
   attackPositions:
@@ -416,6 +425,8 @@ MonoBehaviour:
   - {fileID: 8815489685484177564, guid: 5f7eff3ffc9785448a9009f48b0e4280, type: 3}
   - {fileID: 3545258363530479191, guid: 6dea007438f08774dbc7d7d61ea3fc1b, type: 3}
   - {fileID: 542309910822120313, guid: c64acab26a31b354cba88e4f666532e7, type: 3}
+  - {fileID: 7271726348477596054, guid: 50b524d848c4ce34a9554a68be3d11da, type: 3}
+  - {fileID: 8842965198553920588, guid: 4c9eb32fc5f268b4daa45767984e442c, type: 3}
   spawnRate: 5
   auraDamageNum: 1
   auraDamageRate: 2
@@ -426,7 +437,9 @@ MonoBehaviour:
   - {fileID: 8300000, guid: d42b603d5b96def41a0b545b8053ce87, type: 3}
   - {fileID: 8300000, guid: 3add85711350fd64aac543b6a2f53ffb, type: 3}
   fadeTime: 1
-  teleportRate: 3.93
+  teleportSound: {fileID: 8300000, guid: 36b5ee5b26cdceb4aa1cdca8effe6755, type: 3}
+  teleportRate: 4.4
+  maxTeleportDistance: 10.14
 --- !u!195 &852174584393683555
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -437,7 +450,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 3
-  m_Speed: 40
+  m_Speed: 25
   m_Acceleration: 100
   avoidancePriority: 50
   m_AngularSpeed: 120

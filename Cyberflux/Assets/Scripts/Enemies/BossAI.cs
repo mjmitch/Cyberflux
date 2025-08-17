@@ -7,6 +7,7 @@ using Random = UnityEngine.Random;
 public class BossAI : MonoBehaviour, IDamage
 {
     [SerializeField] private string[] bossNames;
+    private string bossName;
     [SerializeField] private GameObject bossModel;
     [SerializeField] private NavMeshAgent agent;
     [SerializeField] private Transform[] attackPositions;
@@ -21,6 +22,7 @@ public class BossAI : MonoBehaviour, IDamage
     [Range(5, 20)] [SerializeField] private float attackDistance;
     [SerializeField] private GameObject[] enemiesToSpawn;
     [SerializeField] private float spawnRate;
+    private float spawnTimer;
     [SerializeField] private int auraDamageNum;
     [SerializeField] private float auraDamageRate;
     private float auraDamageTimer;
@@ -55,6 +57,10 @@ public class BossAI : MonoBehaviour, IDamage
         shootTimers = new float[2];
         agent.stoppingDistance = 0;
         GameManager.instance.bossHPUI.SetActive(true);
+        bossName = bossNames[Random.Range(0, bossNames.Length)];
+        GameManager.instance.bossNameText.text = bossName;
+        UpdateBossUI();
+        spawnTimer = 0;
     }
 
     // Update is called once per frame
@@ -71,6 +77,22 @@ public class BossAI : MonoBehaviour, IDamage
         }
         Movement();
         Combat();
+        if (phaseNum == 2)
+        {
+            spawnTimer += Time.deltaTime;
+            if (spawnTimer >= spawnRate)
+            {
+                spawnTimer = 0;
+                Vector2 direction = player.transform.position - transform.position;
+                direction.Normalize();
+                direction *= 10;
+                Vector3 spawnPosition = player.transform.position;
+                spawnPosition.x += direction.x;
+                spawnPosition.z += direction.y;
+                GameObject enemy = Instantiate(enemiesToSpawn[Random.Range(0, enemiesToSpawn.Length)], spawnPosition, Quaternion.identity);
+                enemy.transform.LookAt(player.transform);
+            }
+        }
     }
 
     public void Movement()
