@@ -7,6 +7,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.Audio;
+using UnityEngine.SceneManagement;
 using Debug = UnityEngine.Debug;
 using Random = UnityEngine.Random;
 
@@ -101,6 +102,12 @@ public class EnemyAI : MonoBehaviour, IDamage
         agentStopDisOrig = agent.stoppingDistance;
         audioPlayer.volume = GameManager.instance.playerScript.masterVol * GameManager.instance.playerScript.sfxVol;
         teleportTimer = 0;
+        int levelNum = SceneManager.GetActiveScene().buildIndex;
+        HP *= (int)(1.05f * (levelNum));
+        attackRate *= (1 - (levelNum / 100f));
+        if (bullet != null)
+            bullet.GetComponent<damage>().damageAmount *= ((int)1.05f * (levelNum));
+        explosionDamage += levelNum - 1;
     }
 
     // Update is called once per frame

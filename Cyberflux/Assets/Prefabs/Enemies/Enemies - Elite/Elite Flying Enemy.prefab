@@ -212,6 +212,7 @@ MonoBehaviour:
   bullet: {fileID: 6153881909228287789, guid: 21ca7995f5b04a84f937bac1830da8df, type: 3}
   weapon: {fileID: 0}
   attackRate: 1.15
+  attackSound: {fileID: 8300000, guid: a1613c8ff025e6542adeb39356bd9078, type: 3}
   HP: 20
   fov: 110
   faceTargetSpeed: 90
@@ -223,7 +224,7 @@ MonoBehaviour:
   teleportTime: 2
   maxTeleportDistance: 6
   teleportSound: {fileID: 8300000, guid: 2c9d339022cf6df4bb49f65850cb2f9c, type: 3}
-  score: 13
+  score: 11
   explosionSize: 0
   explosionDamage: 5
   explosionEffect: {fileID: 0}
