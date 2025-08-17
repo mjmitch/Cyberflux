@@ -170,6 +170,7 @@ MonoBehaviour:
   slideSpeed: 17
   wallrunSpeed: 8
   dashSpeed: 17
+  movementMult: 1
   slowModifier: 0.289
   gravityOrig: {x: 0, y: 0, z: 0}
   NormalFov: 90
@@ -1520,6 +1521,22 @@ PrefabInstance:
       propertyPath: scytheScript
       value: 
       objectReference: {fileID: 7913739223683945199}
+    - target: {fileID: 8120164286636555745, guid: 48336de922d670f4e9fc9598a557dff7, type: 3}
+      propertyPath: itemPool.Array.size
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8120164286636555745, guid: 48336de922d670f4e9fc9598a557dff7, type: 3}
+      propertyPath: 'itemPool.Array.data[1]'
+      value: 
+      objectReference: {fileID: 3998546997724243811, guid: 13ca1f826bc094641a0f01e308a205a7, type: 3}
+    - target: {fileID: 8120164286636555745, guid: 48336de922d670f4e9fc9598a557dff7, type: 3}
+      propertyPath: 'itemPool.Array.data[3]'
+      value: 
+      objectReference: {fileID: 8980419331786841024, guid: 57d07e8294111d248b86a82291a54454, type: 3}
+    - target: {fileID: 8120164286636555745, guid: 48336de922d670f4e9fc9598a557dff7, type: 3}
+      propertyPath: 'itemPool.Array.data[4]'
+      value: 
+      objectReference: {fileID: 5909535773075281617, guid: 0c4e271e2616c2a4bab886089cc0eafc, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects:
     - {fileID: 6889704537950947164, guid: 48336de922d670f4e9fc9598a557dff7, type: 3}
