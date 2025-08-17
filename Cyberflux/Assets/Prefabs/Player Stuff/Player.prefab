@@ -1103,16 +1103,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: UI
       objectReference: {fileID: 0}
-    - target: {fileID: 4518774752551560060, guid: 48336de922d670f4e9fc9598a557dff7, type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 4738642814085309648, guid: 48336de922d670f4e9fc9598a557dff7, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4738642814085309648, guid: 48336de922d670f4e9fc9598a557dff7, type: 3}
       propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6018844961506036761, guid: 48336de922d670f4e9fc9598a557dff7, type: 3}
+      propertyPath: m_AnchorMax.x
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6286578031911793550, guid: 48336de922d670f4e9fc9598a557dff7, type: 3}
