@@ -38,6 +38,8 @@ public class ItemSelection : MonoBehaviour
         }
     }
 
+    
+
     void UpdateItems()
     {
         int temp = Random.Range(0, GameManager.instance.itemPool.Count);
@@ -70,6 +72,7 @@ public class ItemSelection : MonoBehaviour
         }
         GameManager.instance.GameStateResume();
         GameManager.instance.YouWin();
+        Cursor.visible = true;
     }
     public void Item2Select()
     {
@@ -81,5 +84,6 @@ public class ItemSelection : MonoBehaviour
         }
         GameManager.instance.GameStateResume();
         GameManager.instance.YouWin();
+        Cursor.visible = true;
     }
 }
