@@ -69,6 +69,7 @@ public class ItemSelection : MonoBehaviour
             GameManager.instance.itemPool.Remove(Item1);
         }
         GameManager.instance.GameStateResume();
+        GameManager.instance.YouWin();
     }
     public void Item2Select()
     {
@@ -79,5 +80,6 @@ public class ItemSelection : MonoBehaviour
             GameManager.instance.itemPool.Remove(Item2);
         }
         GameManager.instance.GameStateResume();
+        GameManager.instance.YouWin();
     }
 }

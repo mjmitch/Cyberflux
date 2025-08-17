@@ -8,7 +8,7 @@ using UnityEngine.InputSystem;
 using Unity.VisualScripting;
 using UnityEngine.Audio;
 using Unity.VisualScripting.Antlr3.Runtime.Misc;
-
+using System.Collections;
 
 public class GameManager : MonoBehaviour
 {
@@ -110,6 +110,13 @@ public class GameManager : MonoBehaviour
         seconds = 0;
         miliseconds = 0;
         UpdateTimerText();
+
+        if (SceneManager.GetActiveScene().name == "Level 1 [The Circuit]")
+        {
+            StartCoroutine(ShowTutorialSequence());
+        }
+
+
     }
 
     // Update is called once per frame
@@ -444,5 +451,22 @@ if (menuItemUnlock)
         // don�t show over win/lose
         if ((menuWin && menuWin.activeSelf) || (menuLose && menuLose.activeSelf)) return;
         tutorialPrompt.Show(msg, seconds);
+    }
+
+    IEnumerator ShowTutorialSequence()
+    {
+        ShowTutorial("Press ⭼ (Middle-click) to unleash Momentum’s surge.", 3f);
+        yield return new WaitForSeconds(4f);
+
+        ShowTutorial("Press LMB (Left-click) to strike with your blade.", 3f);
+        yield return new WaitForSeconds(4f);
+
+        ShowTutorial("Press RMB (Right-click) to throw the Scythe’s arc.", 3f);
+        yield return new WaitForSeconds(4f);
+
+        ShowTutorial("Black gauge holds the Scythe’s charge.", 3f);
+        yield return new WaitForSeconds(4f);
+
+        ShowTutorial("Blue gauge fuels momentum: sliding, jumping, dashing-", 3f);
     }
 }
