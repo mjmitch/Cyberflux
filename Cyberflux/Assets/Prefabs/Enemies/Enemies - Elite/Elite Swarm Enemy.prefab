@@ -4936,7 +4936,8 @@ MonoBehaviour:
   headPosition: {fileID: 7860404467797429951}
   bullet: {fileID: 0}
   weapon: {fileID: 0}
-  attackRate: 0.4
+  attackRate: 0
+  attackSound: {fileID: 8300000, guid: 54b81ae8b0506824788879a0eb089960, type: 3}
   HP: 40
   fov: 180
   faceTargetSpeed: 50
@@ -4948,7 +4949,7 @@ MonoBehaviour:
   teleportTime: 1
   maxTeleportDistance: 5
   teleportSound: {fileID: 8300000, guid: 85901470718244b4f98d2b8bebb5fb38, type: 3}
-  score: 2
+  score: 8
   explosionSize: 3
   explosionDamage: 15
   explosionEffect: {fileID: 0}

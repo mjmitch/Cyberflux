@@ -223,7 +223,7 @@ MonoBehaviour:
   isEliteEnemy: 0
   teleportTime: 1
   maxTeleportDistance: 3
-  teleportSound: {fileID: 8300000, guid: 85901470718244b4f98d2b8bebb5fb38, type: 3}
+  teleportSound: {fileID: 0}
   score: 4
   explosionSize: 0
   explosionDamage: 5

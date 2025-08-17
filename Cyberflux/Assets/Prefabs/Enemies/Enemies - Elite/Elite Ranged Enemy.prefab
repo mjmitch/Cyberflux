@@ -408,6 +408,7 @@ MonoBehaviour:
   bullet: {fileID: 6153881909228287789, guid: 9733c1bd0c8e04148a8ea3f40553ba99, type: 3}
   weapon: {fileID: 7718222901012292763}
   attackRate: 1
+  attackSound: {fileID: 8300000, guid: 6f1de3bb2bffbbb47a87ffccd72cd83e, type: 3}
   HP: 40
   fov: 100
   faceTargetSpeed: 80
