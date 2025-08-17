@@ -50,10 +50,11 @@ MonoBehaviour:
   type: 0
   rb: {fileID: 701838788037589602}
   slowEffect: 1
-  damageAmount: 50
+  damageAmount: 70
   damageRate: 0.25
   speed: 100
   destroyTime: 3
+  enemyBullet: 0
 --- !u!136 &732021246696690931
 CapsuleCollider:
   m_ObjectHideFlags: 0

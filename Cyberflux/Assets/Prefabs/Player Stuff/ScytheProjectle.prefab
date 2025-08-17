@@ -50,10 +50,11 @@ MonoBehaviour:
   type: 0
   rb: {fileID: 1337664612782785705}
   slowEffect: 1
-  damageAmount: 20
+  damageAmount: 35
   damageRate: 0
   speed: 35
   destroyTime: 2
+  enemyBullet: 0
 --- !u!54 &1337664612782785705
 Rigidbody:
   m_ObjectHideFlags: 0

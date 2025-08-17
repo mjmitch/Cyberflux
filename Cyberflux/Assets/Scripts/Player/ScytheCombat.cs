@@ -15,8 +15,7 @@ public class ScytheCombat : MonoBehaviour, IDamage
 
     [Header("Stat Handling")]
     
-    
-
+   
 
     [Header("Scythe")]
     [SerializeField] LayerMask enemyLayer;
@@ -39,13 +38,10 @@ public class ScytheCombat : MonoBehaviour, IDamage
     public float slashRechargeTime;
 
 
-
-
     [HideInInspector] public float currentSlashTime; 
     [HideInInspector] public float nextSlashTime;
 
     
-
     [Header("Slam Attack")]
     public GameObject slamAttack;
     [SerializeField] float slamForce;

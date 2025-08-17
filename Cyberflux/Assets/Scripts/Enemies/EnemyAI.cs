@@ -100,6 +100,9 @@ public class EnemyAI : MonoBehaviour, IDamage
             roamDis = circleRange;
         }
         agentStopDisOrig = agent.stoppingDistance;
+
+        GameManager.instance.playerScript.LoadSettings();
+
         audioPlayer.volume = GameManager.instance.playerScript.masterVol * GameManager.instance.playerScript.sfxVol;
         teleportTimer = 0;
         int levelNum = SceneManager.GetActiveScene().buildIndex;
