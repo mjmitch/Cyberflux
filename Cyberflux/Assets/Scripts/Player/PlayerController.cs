@@ -78,7 +78,7 @@ public class PlayerController : MonoBehaviour, IDamage, IHeal
 
     [Header("Item Stuff")]
     public int keys = 0;
-    [SerializeField] public List<Augment> playerItems;
+    [SerializeField] public PlayerItems playerItems;
     public bool brokenClock = false;
 
 
@@ -145,7 +145,7 @@ public class PlayerController : MonoBehaviour, IDamage, IHeal
     public bool sprinting;
     public bool dashing;
     
-
+    
     void Start()
     {
         HP = stats.maxHealth;
@@ -169,6 +169,8 @@ public class PlayerController : MonoBehaviour, IDamage, IHeal
         wallrunSpeedOriginal = wallrunSpeed;
         dashSpeedOriginal = dashSpeed;
         crouchSpeedOriginal = crouchSpeed;
+       
+        playerItems.ReloadItems();
     }
 
     // Update is called once per frame
@@ -582,6 +584,6 @@ public class PlayerController : MonoBehaviour, IDamage, IHeal
 
     public void AddItem(Augment item)
     {
-        playerItems.Add(item);
+       playerItems.playeritems.Add(item);
     }
 }

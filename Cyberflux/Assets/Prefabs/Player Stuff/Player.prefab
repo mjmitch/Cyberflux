@@ -195,7 +195,7 @@ MonoBehaviour:
   stats: {fileID: 11400000, guid: 4f71ca1b7ce1ed947b45f3bad1f17bf6, type: 2}
   HP: 100
   keys: 0
-  playerItems: []
+  playerItems: {fileID: 11400000, guid: 19e06fa4fc9491f4f881f821436f17c0, type: 2}
   brokenClock: 0
   playerHeight: 2
   whatIsGround:
