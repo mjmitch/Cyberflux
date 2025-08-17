@@ -72,7 +72,7 @@ public class GameManager : MonoBehaviour
     enum GameState { Title, Playing, Win, Lose }
     GameState _state = GameState.Title;
 
-    private int score;
+    public int score;
     
     void Awake()
     {
