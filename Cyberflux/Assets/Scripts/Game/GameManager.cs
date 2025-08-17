@@ -65,14 +65,13 @@ public class GameManager : MonoBehaviour
 
     public TMP_Text TimerMiliseconds;
 
-
     // item stuff
     [SerializeField] public List<Augment> itemPool;
    
     enum GameState { Title, Playing, Win, Lose }
     GameState _state = GameState.Title;
 
-    private int score;
+    public int score;
     
     void Awake()
     {

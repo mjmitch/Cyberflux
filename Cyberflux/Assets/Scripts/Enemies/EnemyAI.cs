@@ -327,6 +327,8 @@ public class EnemyAI : MonoBehaviour, IDamage
                 Instantiate(explosionEffect, transform.position, Quaternion.identity);
                 //audioPlayer.PlayOneShot(explosionSound, GameManager.instance.playerScript.sfxVol);
             }
+
+            GameManager.instance.score += score;
             
             Destroy(gameObject);
         }
