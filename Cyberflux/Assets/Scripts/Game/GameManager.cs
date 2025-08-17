@@ -163,7 +163,7 @@ public class GameManager : MonoBehaviour
 
             if (tutorialTimer >= 15f) // every 15 seconds
             {
-                Debug.Log("Showing tutorial: " + tutorialMessages[currentTutorialIndex]);
+                
                 ShowTutorial(tutorialMessages[currentTutorialIndex], 5f);
 
                 currentTutorialIndex++;
