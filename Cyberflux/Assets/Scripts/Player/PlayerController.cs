@@ -10,6 +10,7 @@ public class PlayerController : MonoBehaviour, IDamage, IHeal
 {
     [Header("Movement")]
     private float moveSpeed;
+     
     public float desiredMoveSpeed;
     private float lastDesiredMoveSpeed;
     [SerializeField] float walkSpeed;
@@ -17,6 +18,7 @@ public class PlayerController : MonoBehaviour, IDamage, IHeal
     [SerializeField] float slideSpeed;
     [SerializeField] float wallrunSpeed;
     [SerializeField] float dashSpeed;
+    public float movementMult = 1;
     [Range(0.01f, 0.99f)] [SerializeField] private float slowModifier;
     public Vector3 gravityOrig;
     float walkSpeedOriginal;
@@ -156,7 +158,7 @@ public class PlayerController : MonoBehaviour, IDamage, IHeal
         cam = Camera.main.GetComponent<Camera>();
         wallRunScript = this.GetComponent<WallRunning>();
         gravityOrig = Physics.gravity;
-        
+        scytheScript = GetComponentInChildren<ScytheCombat>();
 
         walkSpeedOriginal = walkSpeed;
         sprintSpeedOriginal = sprintSpeed;
@@ -249,7 +251,7 @@ public class PlayerController : MonoBehaviour, IDamage, IHeal
         if(dashing)
         {
             state = MovementState.dashing;
-            desiredMoveSpeed = dashSpeed;
+            desiredMoveSpeed = dashSpeed * movementMult;
 
             cam.fieldOfView = Mathf.Lerp(cam.fieldOfView, dashingFov, Time.deltaTime * fovChangeSpeed);
         }
@@ -258,7 +260,7 @@ public class PlayerController : MonoBehaviour, IDamage, IHeal
         else if(wallrunning)
         {
             state = MovementState.wallrunning;
-            desiredMoveSpeed = wallrunSpeed;
+            desiredMoveSpeed = wallrunSpeed * movementMult;
 
             if (wallRunScript.wallRight)
             {
@@ -310,11 +312,11 @@ public class PlayerController : MonoBehaviour, IDamage, IHeal
 
             if(OnSlope() && rb.linearVelocity.y < 0.1f)
             {
-                desiredMoveSpeed = slideSpeed;
+                desiredMoveSpeed = slideSpeed * movementMult;
             }
             else
             {
-                desiredMoveSpeed = sprintSpeed;
+                desiredMoveSpeed = sprintSpeed * movementMult;
             }
 
         }
@@ -323,7 +325,7 @@ public class PlayerController : MonoBehaviour, IDamage, IHeal
         else if(Input.GetKeyDown(crouchKey))
         {
             state = MovementState.crouching;
-            desiredMoveSpeed = crouchSpeed;
+            desiredMoveSpeed = crouchSpeed * movementMult;
         }
 
         // Sprinting
@@ -331,7 +333,7 @@ public class PlayerController : MonoBehaviour, IDamage, IHeal
         {
             state = MovementState.sprinting;
             cam.fieldOfView = Mathf.Lerp(cam.fieldOfView, sprintingFov, Time.deltaTime * fovChangeSpeed);
-            desiredMoveSpeed = sprintSpeed;
+            desiredMoveSpeed = sprintSpeed * movementMult;
 
             
         }
@@ -340,7 +342,7 @@ public class PlayerController : MonoBehaviour, IDamage, IHeal
         else if(grounded)
         {
             state = MovementState.walking;
-            desiredMoveSpeed = walkSpeed;
+            desiredMoveSpeed = walkSpeed * movementMult;
         }
 
         //In the air
@@ -552,6 +554,11 @@ public class PlayerController : MonoBehaviour, IDamage, IHeal
         stats.maxHealth = stats.maxHealth + val;
         stats.currentHealth += val;
         HP += val;
+    }
+
+    public void IncreaseDMG(int val)
+    {
+        scytheScript.attackDamage += val;
     }
 
     public void AddItem(Augment item)
