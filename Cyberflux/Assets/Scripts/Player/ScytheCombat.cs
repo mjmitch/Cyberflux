@@ -62,6 +62,7 @@ public class ScytheCombat : MonoBehaviour, IDamage
     [SerializeField] AudioSource audioPlayer;
     [SerializeField] AudioClip attackClip;
     [SerializeField] AudioClip slashClip;
+    [SerializeField] AudioClip slamAttackClip;
     [SerializeField] AudioClip specialAttackClip;
 
 
@@ -80,7 +81,6 @@ public class ScytheCombat : MonoBehaviour, IDamage
 
     private void Update()
     {
-        
 
         if (Time.time >= nextAttackTime)
         {
@@ -102,7 +102,11 @@ public class ScytheCombat : MonoBehaviour, IDamage
         if(isSlamming && playerScript.grounded)
         {
             isSlamming = false;
-            Instantiate(slamAttack, attackPoint.position, orientation.rotation);   
+            Instantiate(slamAttack, attackPoint.position, orientation.rotation); 
+            if (!GameManager.instance.isPaused)
+            {
+                audioPlayer.PlayOneShot(slamAttackClip);
+            }
         }
 
         if(specialAttackReady && Input.GetKeyDown(specialAttackKey))
@@ -110,6 +114,10 @@ public class ScytheCombat : MonoBehaviour, IDamage
 
             MomentumAttack();
 
+            if (!GameManager.instance.isPaused)
+            {
+                audioPlayer.PlayOneShot(specialAttackClip);
+            }
             //Invoke the Action if Action isn't null
             OnSpecialAttack?.Invoke();
         }

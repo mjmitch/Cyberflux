@@ -25,12 +25,18 @@ public class ControlOptions : MonoBehaviour
     public void SensXChanged(float sens)
     {
         GameObject.FindWithTag("MainCamera").GetComponent<MainCamera>().sensX = 100 * sens;
-        
+
+        PlayerPrefs.SetFloat("SensX", sens);
+        PlayerPrefs.Save();
+
         sensXValue.text = sens.ToString();
     }
     public void SensYChanged(float sens)
     {
         GameObject.FindWithTag("MainCamera").GetComponent<MainCamera>().sensY = 100 * sens;
+
+        PlayerPrefs.SetFloat("SensY", sens);
+        PlayerPrefs.Save();
 
         sensYValue.text = sens.ToString();
     }
