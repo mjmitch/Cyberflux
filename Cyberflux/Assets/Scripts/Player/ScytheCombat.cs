@@ -52,7 +52,9 @@ public class ScytheCombat : MonoBehaviour, IDamage
     public PlayerController playerScript;
 
     [Header("Momentum Attack")]
+    [SerializeField] GameObject specialAttackObject;
     public bool specialAttackReady;
+    private float timeToDestroy;
 
 
 
@@ -60,6 +62,7 @@ public class ScytheCombat : MonoBehaviour, IDamage
     [SerializeField] AudioSource audioPlayer;
     [SerializeField] AudioClip attackClip;
     [SerializeField] AudioClip slashClip;
+    [SerializeField] AudioClip specialAttackClip;
 
 
     [Header("Input")]
@@ -72,6 +75,7 @@ public class ScytheCombat : MonoBehaviour, IDamage
     private void Start()
     {
         playerScript = GameManager.instance.playerScript;
+        
     }
 
     private void Update()
@@ -99,6 +103,15 @@ public class ScytheCombat : MonoBehaviour, IDamage
         {
             isSlamming = false;
             Instantiate(slamAttack, attackPoint.position, orientation.rotation);   
+        }
+
+        if(specialAttackReady && Input.GetKeyDown(specialAttackKey))
+        {
+
+            MomentumAttack();
+
+            //Invoke the Action if Action isn't null
+            OnSpecialAttack?.Invoke();
         }
 
         if (Time.time >= nextSlashTime) {
@@ -157,10 +170,15 @@ public class ScytheCombat : MonoBehaviour, IDamage
 
     void MomentumAttack()
     {
+        
 
-        //Invoke the Action if Action isn't null
-        OnSpecialAttack?.Invoke();
-
+        GameObject projectile = Instantiate(specialAttackObject, attackPoint.position, orientation.rotation);
+        
+        projectile.transform.forward = playerCam.forward;
+        
+        timeToDestroy = projectile.GetComponent<damage>().destroyTime;
+        
+        Destroy(projectile, timeToDestroy);
     }
 
     public void SlashAttack()

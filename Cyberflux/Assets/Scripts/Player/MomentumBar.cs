@@ -32,6 +32,7 @@ public class MomentumBar : MonoBehaviour
 
         if((horizontalInput != 0 || verticalInput != 0))
         {
+            //0.0003f
             slider.value += 0.0003f;
         }
 
