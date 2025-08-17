@@ -527,6 +527,7 @@ MonoBehaviour:
   player: {fileID: 0}
   playerScript: {fileID: 0}
   isPaused: 0
+  stats: {fileID: 0}
   playerHPBar: {fileID: 0}
   playerHPText: {fileID: 0}
   playerAmmoText: {fileID: 0}
@@ -551,16 +552,25 @@ MonoBehaviour:
   tutorialPrompt: {fileID: 0}
   UIAudioSource: {fileID: 6679334988975775302}
   audioMixer: {fileID: 24100000, guid: 166f7127cd5aad44d840c8cf69142e2b, type: 2}
+  tutorialMessages:
+  - "Press \u2B7C (Middle-click) to unleash Momentum\u2019s surge."
+  - Press LMB (Left-click) to strike with your blade.
+  - "Press RMB (Right-click) to throw the Scythe\u2019s arc"
+  - "The Black gauge holds the Scythe\u2019s charge."
+  - The Blue gauge fuels your momentum. It gives you acess to sliding, jumping, and
+    dashing.
   minutes: 0
   TimerMinutes: {fileID: 0}
   seconds: 0
   TimerSeconds: {fileID: 0}
   miliseconds: 0
   TimerMiliseconds: {fileID: 0}
+  levelCompleteTime: 
   itemPool:
   - {fileID: 149286320662298223, guid: 17a1c6296a268b04290e03cedf82d691, type: 3}
   - {fileID: 0}
   - {fileID: 940455932776282509, guid: d0af5e968407eec4ab8ae951c027474e, type: 3}
+  score: 0
 --- !u!1 &4990290885379338500
 GameObject:
   m_ObjectHideFlags: 0
@@ -695,7 +705,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4967545769658339651, guid: 4ab87e3a90a55ad4fa45ee42cea8082d, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
-      value: 7
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 5214278682634115942, guid: 4ab87e3a90a55ad4fa45ee42cea8082d, type: 3}
       propertyPath: m_Name
