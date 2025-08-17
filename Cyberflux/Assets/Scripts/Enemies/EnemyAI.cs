@@ -1,6 +1,8 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
@@ -42,6 +44,8 @@ public class EnemyAI : MonoBehaviour, IDamage
     //[Range(4, 15)] [SerializeField] private int attackRange;
     [Range(5, 25)] [SerializeField] private int circleRange;
     private bool isBobbing = false;
+    private bool findingCover = false;
+    private bool foundCover = false;
     
     private enum enemyType
     {
@@ -236,38 +240,45 @@ public class EnemyAI : MonoBehaviour, IDamage
                 agent.destination = player.transform.position;
                 break;
             case enemyType.flying:
-                //FlyingMovement();
-                //agent.stoppingDistance = 5000;
-                //agent.destination = transform.position;
-                agent.speed = 0;
-                agent.acceleration = 0;
-                agent.isStopped = true;
+                //agent.speed = 0;
+                //agent.acceleration = 0;
+                //agent.isStopped = true;
+                agent.destination = transform.position;
                 break;
         }
     }
 
     void EliteCombatMovement()
     {
+        if (findingCover && !agent.hasPath)
+        {
+            foundCover = true;
+            findingCover = false;
+        }
+        else if (foundCover)
+        {
+            moveCoverTimer += Time.deltaTime;
+        }
         switch (type)
         {
             case enemyType.melee:
-                agent.stoppingDistance = 5000;
-                FindNextClosestCover();
+                //gent.stoppingDistance = 5000;
+                FindCover();
                 break;
             case enemyType.ranged:
-                agent.stoppingDistance = 5000;
+                //agent.stoppingDistance = 5000;
                 FindCover();
                 break;
             case enemyType.exploding:
-                agent.stoppingDistance = 5000;
-                FindNextClosestCover();
+                //agent.stoppingDistance = 5000;
+                FindCover();
                 break;
             case enemyType.swarm:
-                agent.stoppingDistance = 0;
+                //agent.stoppingDistance = 0;
                 break;
             case enemyType.flying:
                 //FlyingMovement();
-                agent.stoppingDistance = 5000;
+                //agent.stoppingDistance = 5000;
                 break;
         }
     }
@@ -304,9 +315,36 @@ public class EnemyAI : MonoBehaviour, IDamage
         
     }
 
-    void FindNextClosestCover()
+    Vector3 FindNextCover()
     {
-        
+        List<NavMeshHit> hitList = new List<NavMeshHit>();
+        NavMeshHit hit;
+        Vector3 spawn;
+        Vector2 offset;
+
+        for (int i = 0; i < 10; i++)
+        {
+            spawn = transform.position;
+            offset = Random.insideUnitCircle * i;
+            spawn.x += offset.x;
+            spawn.y += offset.y;
+
+            NavMesh.FindClosestEdge(spawn, out hit, 0);
+            hitList.Add(hit);
+        }
+
+        var sortedHits = hitList.OrderBy(x => x.distance);
+
+        foreach (NavMeshHit tempHit in sortedHits)
+        {
+            if (Vector3.Dot(tempHit.normal, (player.transform.position - transform.position)) < 0)
+            {
+                return tempHit.position;
+                findingCover = true;
+            }
+        }
+
+        return transform.position;
     }
 
     IEnumerator FlyingMovement()
