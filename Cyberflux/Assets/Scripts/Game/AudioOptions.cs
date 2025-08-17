@@ -40,7 +40,7 @@ public class AudioOptions : MonoBehaviour
     {
         GameManager.instance.playerScript.masterVol = value;
         masterValue.text = ((int)(value * 100)).ToString();
-        GameManager.instance.audioMixer.SetFloat("masterVolume", value);
+        GameManager.instance.audioMixer.SetFloat("masterVolume", ((value*100) - 80));
         GameManager.instance.UIAudioSource.volume = GameManager.instance.playerScript.masterVol * GameManager.instance.playerScript.sfxVol;
         GameManager.instance.UIAudioSource.Play();
     }
@@ -48,7 +48,7 @@ public class AudioOptions : MonoBehaviour
     {
         GameManager.instance.playerScript.sfxVol = value;
         sfxValue.text = ((int)(value * 100)).ToString();
-        GameManager.instance.audioMixer.SetFloat("sfxVolume", value);
+        GameManager.instance.audioMixer.SetFloat("sfxVolume", ((value * 100) - 80));
         GameManager.instance.UIAudioSource.volume = GameManager.instance.playerScript.masterVol * GameManager.instance.playerScript.sfxVol;
         GameManager.instance.UIAudioSource.Play();
     }
@@ -56,7 +56,7 @@ public class AudioOptions : MonoBehaviour
     {
          GameManager.instance.playerScript.musicVol = value;
         musicValue.text = ((int)(value * 100)).ToString();
-        GameManager.instance.audioMixer.SetFloat("musicVolume", value);
+        GameManager.instance.audioMixer.SetFloat("musicVolume", ((value * 100) - 80));
         GameManager.instance.UIAudioSource.volume = GameManager.instance.playerScript.masterVol * GameManager.instance.playerScript.sfxVol; ;
         GameManager.instance.UIAudioSource.Play();
     }

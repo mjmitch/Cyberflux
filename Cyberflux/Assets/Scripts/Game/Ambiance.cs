@@ -10,11 +10,12 @@ public class Ambiance : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        musicPlayer = GetComponent<AudioSource>();
+       // musicPlayer = GetComponent<AudioSource>();
 
 
-        musicPlayer.clip = musicClip;
-        musicPlayer.Play();
+       // musicPlayer.clip = musicClip;
+        //musicPlayer.volume = GameManager.instance.playerScript.masterVol * GameManager.instance.playerScript.mus
+       // musicPlayer.Play();
     }
 
 
