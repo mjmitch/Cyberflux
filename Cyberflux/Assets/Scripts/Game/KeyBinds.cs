@@ -15,12 +15,25 @@ public class InputFieldHandler : MonoBehaviour
     bool CrouchInputReady = false;
     public Button SprintKeyInput;
     bool SprintInputReady = false;
+    public Button MeleeKeyInput;
+    bool MeleeInputReady = false;
+    public Button SlashKeyInput;
+    bool SlashInputReady = false;
+    public Button SlamKeyInput;
+    bool SlamInputReady = false;
+    public Button SpecialKeyInput;
+    bool SpecialInputReady = false;
     
     void Start()
     {
         JumpKeyInput.GetComponentInChildren<TMP_Text>().text = GameManager.instance.playerScript.jumpKey.ToString();
         CrouchKeyInput.GetComponentInChildren<TMP_Text>().text = GameManager.instance.playerScript.crouchKey.ToString();
         SprintKeyInput.GetComponentInChildren<TMP_Text>().text = GameManager.instance.playerScript.sprintKey.ToString();
+        MeleeKeyInput.GetComponentInChildren<TMP_Text>().text = GameManager.instance.playerScript.scytheScript.attackKey.ToString();
+        SlashKeyInput.GetComponentInChildren<TMP_Text>().text = GameManager.instance.playerScript.scytheScript.slashKey.ToString();
+        SlamKeyInput.GetComponentInChildren<TMP_Text>().text = GameManager.instance.playerScript.scytheScript.slamAttackKey.ToString();
+        SpecialKeyInput.GetComponentInChildren<TMP_Text>().text = GameManager.instance.playerScript.scytheScript.specialAttackKey.ToString();
+        
         
     }
 
@@ -38,6 +51,22 @@ public class InputFieldHandler : MonoBehaviour
         else if (SprintInputReady && Input.anyKeyDown)
         {
             SprintChange();
+        }
+        else if (MeleeInputReady && Input.anyKeyDown)
+        {
+            MeleeChange();
+        }
+        else if (SlamInputReady && Input.anyKeyDown)
+        {
+            SlamChange();
+        }
+        else if (SpecialInputReady && Input.anyKeyDown)
+        {
+            SpecialChange();
+        }
+        else if (SlashInputReady && Input.anyKeyDown)
+        {
+            SlashChange();
         }
     }
 
@@ -157,4 +186,124 @@ public class InputFieldHandler : MonoBehaviour
         }
     }
 
+    public void SetSlamKey()
+    {
+        SlamInputReady = true;
+        // tempText = JumpKeyInput.GetComponentInChildren<TMP_Text>().text;
+        SlamKeyInput.GetComponentInChildren<TMP_Text>().text = "";
+        GameManager.instance.UIAudioSource.Play();
+    }
+    void SlamChange()
+    {
+        foreach (KeyCode vKey in System.Enum.GetValues(typeof(KeyCode)))
+        {
+            if (Input.GetKey(vKey))
+            {
+                if (CheckDuplicateKey(vKey, ""))
+                {
+                    SlamKeyInput.GetComponentInChildren<TMP_Text>().text = GameManager.instance.playerScript.scytheScript.slamAttackKey.ToString();
+                    SlamInputReady = false;
+                    break;
+                }
+                else
+                {
+                    GameManager.instance.playerScript.scytheScript.slamAttackKey = vKey;
+                    SlamKeyInput.GetComponentInChildren<TMP_Text>().text = vKey.ToString();
+                    SlamInputReady = false;
+                    break;
+                }
+            }
+        }
+    }
+    public void SetMeleeKey()
+    {
+        MeleeInputReady = true;
+        // tempText = JumpKeyInput.GetComponentInChildren<TMP_Text>().text;
+        MeleeKeyInput.GetComponentInChildren<TMP_Text>().text = "";
+        GameManager.instance.UIAudioSource.Play();
+    }
+    void MeleeChange()
+    {
+        foreach (KeyCode vKey in System.Enum.GetValues(typeof(KeyCode)))
+        {
+            if (Input.GetKey(vKey))
+            {
+                if (CheckDuplicateKey(vKey, "Sprint"))
+                {
+                    MeleeKeyInput.GetComponentInChildren<TMP_Text>().text = GameManager.instance.playerScript.scytheScript.attackKey.ToString();
+                    MeleeInputReady = false;
+                    break;
+                }
+                else
+                {
+                    GameManager.instance.playerScript.scytheScript.attackKey = vKey;
+                    MeleeKeyInput.GetComponentInChildren<TMP_Text>().text = vKey.ToString();
+                    MeleeInputReady = false;
+                    break;
+                }
+            }
+        }
+    }
+    public void SetSlashKey()
+    {
+        SlashInputReady = true;
+        // tempText = JumpKeyInput.GetComponentInChildren<TMP_Text>().text;
+        SlashKeyInput.GetComponentInChildren<TMP_Text>().text = "";
+        GameManager.instance.UIAudioSource.Play();
+    }
+    void SlashChange()
+    {
+        foreach (KeyCode vKey in System.Enum.GetValues(typeof(KeyCode)))
+        {
+            if (Input.GetKey(vKey))
+            {
+                if (CheckDuplicateKey(vKey, ""))
+                {
+                    SlashKeyInput.GetComponentInChildren<TMP_Text>().text = GameManager.instance.playerScript.scytheScript.slashKey.ToString();
+                    SlashInputReady = false;
+                    break;
+                }
+                else
+                {
+                    GameManager.instance.playerScript.scytheScript.slashKey = vKey;
+                    SlashKeyInput.GetComponentInChildren<TMP_Text>().text = vKey.ToString();
+                    SlashInputReady = false;
+                    break;
+                }
+            }
+        }
+    }
+    public void SetSpecialKey()
+    {
+        SpecialInputReady = true;
+        // tempText = JumpKeyInput.GetComponentInChildren<TMP_Text>().text;
+        SpecialKeyInput.GetComponentInChildren<TMP_Text>().text = "";
+        GameManager.instance.UIAudioSource.Play();
+    }
+    void SpecialChange()
+    {
+        foreach (KeyCode vKey in System.Enum.GetValues(typeof(KeyCode)))
+        {
+            if (Input.GetKey(vKey))
+            {
+                if (CheckDuplicateKey(vKey, ""))
+                {
+                    SpecialKeyInput.GetComponentInChildren<TMP_Text>().text = GameManager.instance.playerScript.scytheScript.specialAttackKey.ToString();
+                    SpecialInputReady = false;
+                    break;
+                }
+                else
+                {
+                    GameManager.instance.playerScript.scytheScript.specialAttackKey = vKey;
+                    SpecialKeyInput.GetComponentInChildren<TMP_Text>().text = vKey.ToString();
+                    SpecialInputReady = false;
+                    break;
+                }
+            }
+        }
+    }
 }
+
+
+
+

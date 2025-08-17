@@ -72,10 +72,10 @@ public class ScytheCombat : MonoBehaviour, IDamage
 
     [Header("Input")]
     //Left Mouse Button
-    [SerializeField] KeyCode attackKey = KeyCode.Mouse0;
-    [SerializeField] KeyCode slashKey = KeyCode.Q;
-    [SerializeField] KeyCode slamAttackKey = KeyCode.Mouse1;
-    [SerializeField] KeyCode specialAttackKey = KeyCode.Mouse2;
+    [SerializeField] public KeyCode attackKey = KeyCode.Mouse0;
+    [SerializeField] public KeyCode slashKey = KeyCode.Q;
+    [SerializeField] public KeyCode slamAttackKey = KeyCode.Mouse1;
+    [SerializeField] public KeyCode specialAttackKey = KeyCode.Mouse2;
 
     private void Start()
     {
@@ -96,6 +96,7 @@ public class ScytheCombat : MonoBehaviour, IDamage
 
                 if (!GameManager.instance.isPaused)
                 {
+                    audioPlayer.volume = GameManager.instance.playerScript.masterVol * GameManager.instance.playerScript.sfxVol;
                     audioPlayer.PlayOneShot(attackClip);
                 }
                 
@@ -109,6 +110,7 @@ public class ScytheCombat : MonoBehaviour, IDamage
             Instantiate(slamAttack, attackPoint.position, orientation.rotation); 
             if (!GameManager.instance.isPaused)
             {
+                audioPlayer.volume = GameManager.instance.playerScript.masterVol * GameManager.instance.playerScript.sfxVol;
                 audioPlayer.PlayOneShot(slamAttackClip);
             }
         }
@@ -120,6 +122,7 @@ public class ScytheCombat : MonoBehaviour, IDamage
 
             if (!GameManager.instance.isPaused)
             {
+                audioPlayer.volume = GameManager.instance.playerScript.masterVol * GameManager.instance.playerScript.sfxVol;
                 audioPlayer.PlayOneShot(specialAttackClip);
             }
             //Invoke the Action if Action isn't null
@@ -137,6 +140,7 @@ public class ScytheCombat : MonoBehaviour, IDamage
                 
                 if (!GameManager.instance.isPaused)
                 {
+                    audioPlayer.volume = GameManager.instance.playerScript.masterVol * GameManager.instance.playerScript.sfxVol;
                     audioPlayer.PlayOneShot(slashClip);
                 }
                 OnSlash?.Invoke();
