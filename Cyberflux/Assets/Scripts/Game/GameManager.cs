@@ -257,12 +257,12 @@ if (menuItemUnlock)
     public void Back()
     {
 
-        Debug.Log("Back() called");
+        Debug.Log("Back() called");  // <-- You should see this in Console
         UIAudioSource.Play();
 
         OptionPanel.alpha = 0;               // invisible
-        OptionPanel.interactable = false;    // can’t be used
-        OptionPanel.blocksRaycasts = false;  // lets clicks pass through
+        OptionPanel.interactable = false;    // no interaction
+        OptionPanel.blocksRaycasts = false;  // no clicks
 
     }
      
