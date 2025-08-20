@@ -277,7 +277,7 @@ public class EnemyAI : MonoBehaviour, IDamage
             Vector3 offset = Random.insideUnitCircle.normalized * maxTeleportDistance;
             offset.z = offset.y;
             offset.y = 0;
-            Debug.Log(offset);
+            
             transform.position += offset;
             if(teleportSound != null)
                 audioPlayer.PlayOneShot(teleportSound, GameManager.instance.playerScript.masterVol * GameManager.instance.playerScript.sfxVol);
