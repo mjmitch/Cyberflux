@@ -121,7 +121,12 @@ public class GameManager : MonoBehaviour
             audioMixer.SetFloat("musicVolume", playerScript.musicVol);
             menuItemSelect.SetActive(false);
             menuItemUnlock.SetActive(false);
-            OptionPanel.gameObject.SetActive(false);
+            
+            // Hide Options menu using CanvasGroup only
+            OptionPanel.alpha = 0f;
+            OptionPanel.interactable = false;
+            OptionPanel.blocksRaycasts = false;
+
             minutes = 0;
             seconds = 0;
             miliseconds = 0;
@@ -242,24 +247,31 @@ if (menuItemUnlock)
 
     public void Option()
     {
+        Debug.Log("Option() called");
         UIAudioSource.Play();
-        OptionPanel.gameObject.SetActive(true);
-        OptionPanel.alpha = 1;
-        OptionPanel.blocksRaycasts = true;
-        optionsControls.SetActive(true);
-        optionsAudio.SetActive(false);
 
+        OptionPanel.alpha = 1;               // fully visible
+        OptionPanel.interactable = true;     // UI elements respond
+        OptionPanel.blocksRaycasts = true;   // catches clicks
     }
     public void Back()
     {
+
+        Debug.Log("Back() called");
         UIAudioSource.Play();
-        OptionPanel.gameObject.SetActive(false);
-        OptionPanel.alpha= 0;
-        OptionPanel.blocksRaycasts = false;
+
+        OptionPanel.alpha = 0;               // invisible
+        OptionPanel.interactable = false;    // can’t be used
+        OptionPanel.blocksRaycasts = false;  // lets clicks pass through
+
     }
      
     public void QuitGame()
     {
+        
+            Debug.Log("Quit!"); // works in editor
+       
+        
         playerScript.playerItems.playeritems.Clear();
         UIAudioSource.Play();
         playerScript.SaveSettings();
