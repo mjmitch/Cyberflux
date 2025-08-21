@@ -131,11 +131,12 @@ public class GameManager : MonoBehaviour
             seconds = 0;
             miliseconds = 0;
             UpdateTimerText();
+            playerScript.LoadSettings();
         }
 
+       
 
 
-        
     }
 
     // Update is called once per frame
@@ -220,6 +221,7 @@ if (menuItemUnlock)
         // Hide options panel if it was opened from pause
         if (OptionPanel)
         {
+            OptionPanel.transform.SetAsFirstSibling(); // Moves panel to back of UI
             OptionPanel.alpha = 0f;
             OptionPanel.blocksRaycasts = false;
         }
@@ -249,7 +251,7 @@ if (menuItemUnlock)
     {
         Debug.Log("Option() called");
         UIAudioSource.Play();
-
+        OptionPanel.transform.SetAsLastSibling(); // Moves panel to front of UI
         OptionPanel.alpha = 1;               // fully visible
         OptionPanel.interactable = true;     // UI elements respond
         OptionPanel.blocksRaycasts = true;   // catches clicks
@@ -259,7 +261,7 @@ if (menuItemUnlock)
 
         Debug.Log("Back() called");  // <-- You should see this in Console
         UIAudioSource.Play();
-
+        OptionPanel.transform.SetAsFirstSibling(); // Moves panel to back of UI
         OptionPanel.alpha = 0;               // invisible
         OptionPanel.interactable = false;    // no interaction
         OptionPanel.blocksRaycasts = false;  // no clicks
