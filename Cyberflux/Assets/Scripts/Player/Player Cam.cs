@@ -14,6 +14,11 @@ public class MainCamera : MonoBehaviour
     float xRotation;
     float yRotation;
 
+
+    [Header("Weapon Animations")]
+    [SerializeField] ScytheCombat scytheScript;
+    [SerializeField] Animator scytheAnimator;
+
     private void Start()
     {
         //Keeps cursor locked and turns it off
@@ -35,6 +40,21 @@ public class MainCamera : MonoBehaviour
         //Rotate Camera and oriendtataion
         transform.rotation = Quaternion.Euler(xRotation, yRotation, 0);
         orientation.rotation = Quaternion.Euler(0, yRotation, 0);
+
+
+        //Animations 
+        ScytheAnimations();
+
     }
+
+
+    private void ScytheAnimations()
+    {
+        if(Input.GetKey(scytheScript.attackKey))
+        {
+            scytheAnimator.SetTrigger("onAttack");
+        }
+    }
+
 
 }
