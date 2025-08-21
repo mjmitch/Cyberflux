@@ -142,7 +142,7 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!isPaused) {
+        if (!isPaused && SceneManager.GetActiveScene().buildIndex != 0) {
             UpdateLevelTimer();
         }
 
@@ -224,6 +224,7 @@ if (menuItemUnlock)
             OptionPanel.transform.SetAsFirstSibling(); // Moves panel to back of UI
             OptionPanel.alpha = 0f;
             OptionPanel.blocksRaycasts = false;
+            
         }
 
         isPaused = false;
@@ -244,6 +245,7 @@ if (menuItemUnlock)
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
         // CHANGE THIS TO LEVEL HUB IF THERE IS SAVE DATA
         playerScript.LoadSettings();
+        playerScript.LoadKeyBinds();
         stats.ResetAllStats();
     }
 
@@ -265,7 +267,7 @@ if (menuItemUnlock)
         OptionPanel.alpha = 0;               // invisible
         OptionPanel.interactable = false;    // no interaction
         OptionPanel.blocksRaycasts = false;  // no clicks
-
+        
     }
      
     public void QuitGame()
@@ -274,6 +276,7 @@ if (menuItemUnlock)
             Debug.Log("Quit!"); // works in editor
 
         playerScript.SaveSettings();
+        
         playerScript.playerItems.playeritems.Clear();
         UIAudioSource.Play();
         
