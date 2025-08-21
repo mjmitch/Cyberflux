@@ -18,9 +18,9 @@ public class AudioOptions : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        masterValue.text = (GameManager.instance.playerScript.masterVol * 100).ToString();
-        sfxValue.text = (GameManager.instance.playerScript.sfxVol * 100).ToString();
-        musicValue.text = (GameManager.instance.playerScript.musicVol * 100).ToString();
+        masterValue.text = ((int)(GameManager.instance.playerScript.masterVol * 100)).ToString();
+        sfxValue.text = ((int)(GameManager.instance.playerScript.sfxVol * 100)).ToString();
+        musicValue.text = ((int)(GameManager.instance.playerScript.musicVol * 100)).ToString();
         masterVolSlider.value = GameManager.instance.playerScript.masterVol;
         sfxVolSlider.value = GameManager.instance.playerScript.sfxVol;
         musicVolSlider.value = GameManager.instance.playerScript.musicVol;
