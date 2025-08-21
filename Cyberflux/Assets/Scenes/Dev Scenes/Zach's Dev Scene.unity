@@ -505,6 +505,14 @@ PrefabInstance:
       propertyPath: m_AnchorMax.x
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7393587004233888613, guid: 2a43059ae07f44340b28e40e2efb2107, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7543977903028085687, guid: 2a43059ae07f44340b28e40e2efb2107, type: 3}
+      propertyPath: m_Alpha
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8030542079564838891, guid: 2a43059ae07f44340b28e40e2efb2107, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0

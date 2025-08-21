@@ -1,8 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Security.Cryptography.X509Certificates;
+//using UnityEditor.SearchService;
 using UnityEngine;
 using UnityEngine.Audio;
+using UnityEngine.SceneManagement;
 using UnityEngine.Tilemaps;
 using UnityEngine.UI; 
 
@@ -151,6 +153,11 @@ public class PlayerController : MonoBehaviour, IDamage, IHeal
     
     void Start()
     {
+        //If player is on Main Menu
+        if (SceneManager.GetActiveScene().buildIndex == 0)
+        {
+            return;
+        }
         HP = stats.maxHealth;
         
         readyToJump = true;
@@ -181,16 +188,21 @@ public class PlayerController : MonoBehaviour, IDamage, IHeal
     // Update is called once per frame
     void Update()
     {
-
+        //If player is on Main Menu
+        if (SceneManager.GetActiveScene().buildIndex == 0)
+        {
+            return;
+        }
 
         grounded = Physics.Raycast(transform.position, Vector3.down, playerHeight * 0.5f + 0.2f, whatIsGround);
 
 
-
-        MyInput();
-        SpeedControl();
-        StateHandler();
-
+        if (!GameManager.instance.isPaused)
+        {
+            MyInput();
+            SpeedControl();
+            StateHandler();
+        }
 
         //Handle Drag
         if (grounded)
@@ -232,6 +244,11 @@ public class PlayerController : MonoBehaviour, IDamage, IHeal
 
     private void FixedUpdate()
     {
+        //If player is on Main Menu
+        if (SceneManager.GetActiveScene().buildIndex == 0)
+        {
+            return;
+        }
         MovePlayer();
     }
 
@@ -566,6 +583,48 @@ public class PlayerController : MonoBehaviour, IDamage, IHeal
         return Vector3.ProjectOnPlane(direction, slopeHit.normal).normalized;
     }
 
+
+    
+
+    public void LoadKeyBinds()
+    {
+        int keycount = 0;
+        foreach (KeyCode vKey in System.Enum.GetValues(typeof(KeyCode)))
+        {
+            if (vKey.ToString() == PlayerPrefs.GetString("Jump Key", KeyCode.Space.ToString())) {
+                jumpKey = vKey;
+                keycount++;
+            }
+            if (vKey.ToString() == PlayerPrefs.GetString("Crouch Key", KeyCode.LeftControl.ToString())) {
+                crouchKey = vKey;
+                keycount++;
+            }
+            if (vKey.ToString() == PlayerPrefs.GetString("Sprint Key", KeyCode.LeftShift.ToString())) {
+                sprintKey = vKey;
+                keycount++;
+            }
+            if (vKey.ToString() == PlayerPrefs.GetString("Attack Key", KeyCode.Mouse0.ToString())) {
+                scytheScript.attackKey = vKey;
+                keycount++;
+            }
+            if (vKey.ToString() == PlayerPrefs.GetString("Slash Key", KeyCode.Q.ToString())) {
+                scytheScript.slashKey = vKey;
+                keycount++;
+            }
+            if (vKey.ToString() == PlayerPrefs.GetString("Slam Key", KeyCode.Mouse1.ToString())) {
+                scytheScript.slamAttackKey = vKey;
+                keycount++;
+            }
+            if (vKey.ToString() == PlayerPrefs.GetString("Special Key", KeyCode.Mouse2.ToString())) {
+                scytheScript.specialAttackKey = vKey;
+                keycount++;
+            }
+            if (keycount == 7)
+            {
+                break;
+            }
+        }
+    }
     public void SaveSettings()
     {
         PlayerPrefs.SetFloat("Master Volume", masterVol);
