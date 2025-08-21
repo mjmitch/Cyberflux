@@ -132,6 +132,7 @@ public class GameManager : MonoBehaviour
             miliseconds = 0;
             UpdateTimerText();
             playerScript.LoadSettings();
+            
         }
 
        
@@ -314,6 +315,7 @@ if (menuItemUnlock)
            // PlayerPrefs.
 
         }
+        PlayerPrefs.SetInt("Level " + SceneManager.GetActiveScene().buildIndex + " Completed", 1);
     }
 
     public void YouLose(string cause = "Unknown")

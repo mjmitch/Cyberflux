@@ -28,7 +28,7 @@ public class InputFieldHandler : MonoBehaviour
     {
         if (GameManager.instance.playerScript != null)
         {
-            GameManager.instance.playerScript.LoadKeyBinds();
+            
             JumpKeyInput.GetComponentInChildren<TMP_Text>().text = GameManager.instance.playerScript.jumpKey.ToString();
             CrouchKeyInput.GetComponentInChildren<TMP_Text>().text = GameManager.instance.playerScript.crouchKey.ToString();
             SprintKeyInput.GetComponentInChildren<TMP_Text>().text = GameManager.instance.playerScript.sprintKey.ToString();
@@ -191,8 +191,9 @@ public class InputFieldHandler : MonoBehaviour
                     break;
                 }
             }
-            PlayerPrefs.SetString("Sprint Key", GameManager.instance.playerScript.sprintKey.ToString());
+            
         }
+        PlayerPrefs.SetString("Sprint Key", GameManager.instance.playerScript.sprintKey.ToString());
     }
         
         
