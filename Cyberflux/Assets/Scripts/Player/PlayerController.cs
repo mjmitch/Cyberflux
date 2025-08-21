@@ -181,7 +181,8 @@ public class PlayerController : MonoBehaviour, IDamage, IHeal
         wallrunSpeedOriginal = wallrunSpeed;
         dashSpeedOriginal = dashSpeed;
         crouchSpeedOriginal = crouchSpeed;
-       
+
+        LoadKeyBinds();
         playerItems.ReloadItems();
     }
 
@@ -197,7 +198,7 @@ public class PlayerController : MonoBehaviour, IDamage, IHeal
         grounded = Physics.Raycast(transform.position, Vector3.down, playerHeight * 0.5f + 0.2f, whatIsGround);
 
 
-        if (!GameManager.instance.isPaused)
+        if (GameManager.instance.playerScript != null)
         {
             MyInput();
             SpeedControl();
@@ -554,7 +555,10 @@ public class PlayerController : MonoBehaviour, IDamage, IHeal
         slopeExit = true;
         //Reset Y vel
         rb.linearVelocity = new Vector3(rb.linearVelocity.x, 0f, rb.linearVelocity.z);
-        audioPlayer.PlayOneShot(audJump[UnityEngine.Random.Range(0, audJump.Length)]);
+
+        //Temporarily commented out until sounds are added
+        //audioPlayer.PlayOneShot(audJump[UnityEngine.Random.Range(0, audJump.Length)]);
+
         //Impulse since it is a sinle action
         rb.AddForce(transform.up * jumpForce, ForceMode.Impulse);
     }
