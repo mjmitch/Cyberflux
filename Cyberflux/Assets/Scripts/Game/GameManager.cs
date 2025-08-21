@@ -59,7 +59,7 @@ public class GameManager : MonoBehaviour
      {
     "Press ⭼ (Middle-click) to unleash Momentum’s surge.",
     "Press LMB (Left-click) to strike with your blade.",
-    "Press RMB (Right-click) to throw the Scythe’s arc",
+    "Press RMB (Q) to throw the Scythe’s arc",
     "The Black gauge holds the Scythe’s charge.",
     "The Blue gauge fuels your momentum. It gives you acess to sliding, jumping, and dashing."
      };

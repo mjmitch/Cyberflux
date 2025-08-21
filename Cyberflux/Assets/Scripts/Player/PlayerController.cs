@@ -93,16 +93,19 @@ public class PlayerController : MonoBehaviour, IDamage, IHeal
     private bool slopeExit;
 
     [Header("Audio")]
+    [Range(0.25f, 1f)][SerializeField] private float footstepDelay;
     [SerializeField] public AudioSource audioPlayer;
-   // [SerializeField] public AudioMixer audioMixer;
-    //[SerializeField] public AudioMixerGroup masterVol;
-    //[SerializeField] public AudioMixerGroup musicVol;
-    //[SerializeField] public AudioMixerGroup sfxVol;
-   
-    //Dont know what all audio we are going to have, just putting these here for now.
+    [SerializeField] AudioClip[] audDeath;
     [SerializeField] AudioClip[] audJump;
     [SerializeField] AudioClip[] audHurt;
     [SerializeField] AudioClip[] audStep;
+    [SerializeField] AudioClip[] audDash;
+    [SerializeField] AudioClip audSlide;
+    [SerializeField] AudioClip audWallrun;
+    private float originalDashDelay;
+    private float dashTimer;
+    private float originalFootstepDelay;
+    private float footstepTimer;
 
 
     [Range(0,1)] [SerializeField] public float masterVol;
@@ -160,8 +163,10 @@ public class PlayerController : MonoBehaviour, IDamage, IHeal
         gravityOrig = Physics.gravity;
         scytheScript = GetComponentInChildren<ScytheCombat>();
 
-        
-        
+
+        originalFootstepDelay = footstepDelay;
+        originalDashDelay = 5f;
+
 
         walkSpeedOriginal = walkSpeed;
         sprintSpeedOriginal = sprintSpeed;
@@ -235,8 +240,14 @@ public class PlayerController : MonoBehaviour, IDamage, IHeal
         horizontalInput = Input.GetAxisRaw("Horizontal");
         verticalInput = Input.GetAxisRaw("Vertical");
 
+        footstepTimer += Time.deltaTime;
+        dashTimer += Time.deltaTime;
+        UpdateFootstepDelay();
+
+
+
         //ready to jump
-        if(Input.GetKey(jumpKey) && readyToJump && grounded)
+        if (Input.GetKey(jumpKey) && readyToJump && grounded)
         {
             readyToJump = false;
 
@@ -258,17 +269,40 @@ public class PlayerController : MonoBehaviour, IDamage, IHeal
             transform.localScale = new Vector3(transform.localScale.x, startingHeight, transform.localScale.z);
         }
 
+        if(grounded)
+        {
+            if(horizontalInput != 0 ||  verticalInput != 0)
+            {
+                if(footstepTimer >= footstepDelay)
+                {
+                    PlayFootstep();
+                    footstepTimer = 0f;
+                }
+            }
+            else
+            {
+                footstepTimer = 0f;
+            }
+        }
+       
+        if(dashing)
+        {
+            if (dashTimer >= 2f)
+            {
+                PlayDash();
+                dashTimer = 0f;
+            }
+        }
     }
 
     private void StateHandler()
     {
-
+        
         //dashing
         if(dashing)
         {
             state = MovementState.dashing;
             desiredMoveSpeed = dashSpeed * movementMult;
-
             cam.fieldOfView = Mathf.Lerp(cam.fieldOfView, dashingFov, Time.deltaTime * fovChangeSpeed);
         }
 
@@ -410,6 +444,8 @@ public class PlayerController : MonoBehaviour, IDamage, IHeal
         //Calculate Movement Direction
         moveDir = orientation.forward * verticalInput + orientation.right * horizontalInput;
 
+        
+
         //Debug.Log(moveSpeed);
         //Slope Handling
 
@@ -465,12 +501,43 @@ public class PlayerController : MonoBehaviour, IDamage, IHeal
         }
     }
 
+    private void PlayDash()
+    {
+        if (audDash.Length > 0)
+        {
+            audioPlayer.PlayOneShot(audDash[UnityEngine.Random.Range(0, audDash.Length)]);
+        }
+    }
+
+    private void PlayFootstep()
+    {
+        if(audStep.Length > 0)
+        {
+            audioPlayer.PlayOneShot(audStep[UnityEngine.Random.Range(0, audStep.Length)]);
+        }    
+    }
+    void UpdateFootstepDelay()
+    {
+        if (state == MovementState.sprinting)
+            footstepDelay = originalFootstepDelay / 2;
+        else if (state == MovementState.walking)
+            footstepDelay = originalFootstepDelay;
+        else if (state == MovementState.crouching)
+            footstepDelay = originalFootstepDelay * 2;
+        else if (state == MovementState.sliding)
+            footstepDelay = 50f;
+        else if (state == MovementState.wallrunning)
+            footstepDelay = 50f;
+        else
+            footstepDelay = originalFootstepDelay;// Default
+    }
+
     private void Jump()
     {
         slopeExit = true;
         //Reset Y vel
         rb.linearVelocity = new Vector3(rb.linearVelocity.x, 0f, rb.linearVelocity.z);
-        
+        audioPlayer.PlayOneShot(audJump[UnityEngine.Random.Range(0, audJump.Length)]);
         //Impulse since it is a sinle action
         rb.AddForce(transform.up * jumpForce, ForceMode.Impulse);
     }
@@ -540,9 +607,11 @@ public class PlayerController : MonoBehaviour, IDamage, IHeal
 
         stats.currentHealth = HP;
         GameManager.instance.UpdateHealthUI(HP, stats.maxHealth);
+        audioPlayer.PlayOneShot(audHurt[UnityEngine.Random.Range(0, audHurt.Length)]);
 
         if (HP <= 0)
         {
+            audioPlayer.PlayOneShot(audDeath[UnityEngine.Random.Range(0, audDeath.Length)]);
             GameManager.instance.YouLose(cause);
             SaveSettings();
         }
