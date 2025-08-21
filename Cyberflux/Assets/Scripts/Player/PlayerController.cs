@@ -575,9 +575,9 @@ public class PlayerController : MonoBehaviour, IDamage, IHeal
 
     public void LoadSettings()
     {
-        masterVol = PlayerPrefs.GetFloat("MasterVolume");
-        sfxVol = PlayerPrefs.GetFloat("SFX Volume");
-        musicVol = PlayerPrefs.GetFloat("Music Volume");
+        masterVol = PlayerPrefs.GetFloat("Master Volume", 50);
+        sfxVol = PlayerPrefs.GetFloat("SFX Volume", 50);
+        musicVol = PlayerPrefs.GetFloat("Music Volume", 50);
     }
 
 

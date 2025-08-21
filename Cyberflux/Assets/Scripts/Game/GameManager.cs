@@ -272,11 +272,11 @@ if (menuItemUnlock)
     {
         
             Debug.Log("Quit!"); // works in editor
-       
-        
+
+        playerScript.SaveSettings();
         playerScript.playerItems.playeritems.Clear();
         UIAudioSource.Play();
-        playerScript.SaveSettings();
+        
         Application.Quit();
 
 
@@ -371,7 +371,7 @@ if (menuItemUnlock)
         if (menuLose) menuLose.SetActive(false);
         isPaused = false;
         Time.timeScale = 1f;
-
+        
         LoadLevel(SceneManager.GetActiveScene().buildIndex);
     }
 
