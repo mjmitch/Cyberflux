@@ -273,22 +273,30 @@ if (menuItemUnlock)
      
     public void QuitGame()
     {
-        
-            Debug.Log("Quit!"); // works in editor
+        Debug.Log("Quit!"); // always logs so you know the button fired
 
-        playerScript.SaveSettings();
-        
-        playerScript.playerItems.playeritems.Clear();
-        UIAudioSource.Play();
-        
-        Application.Quit();
+        // only run these if playerScript exists
+        if (playerScript != null)
+        {
+            playerScript.SaveSettings();
 
+            if (playerScript.playerItems != null && playerScript.playerItems.playeritems != null)
+            {
+                playerScript.playerItems.playeritems.Clear();
+            }
+        }
 
-      #if UNITY_EDITOR
-      UnityEditor.EditorApplication.isPlaying = false;
-      #else
-        Application.Quit();
-      #endif
+        // play quit sound if you have one
+        if (UIAudioSource != null)
+        {
+            UIAudioSource.Play();
+        }
+
+#if UNITY_EDITOR
+    UnityEditor.EditorApplication.isPlaying = false;  // stops Play mode
+#else
+        Application.Quit(); // closes the build
+#endif
     }
 
     public void YouWin()
