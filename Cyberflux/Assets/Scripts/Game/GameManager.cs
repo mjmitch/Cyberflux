@@ -49,7 +49,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] public GameObject optionsAudio;
 
     [SerializeField] TutorialPrompt tutorialPrompt;
-
+    [SerializeField] public ScorePopUp popUp;
     
     [SerializeField] public AudioSource UIAudioSource;
     [SerializeField] public AudioMixer audioMixer;
@@ -315,12 +315,10 @@ if (menuItemUnlock)
             string timeResult = TimerMinutes.text + TimerSeconds.text + TimerMiliseconds.text;
             winSummaryText.text = "Clear Time: " + timeResult;
 
-
             //This will save data to local file in computer
-            PlayerPrefs.SetInt("Level " + SceneManager.GetActiveScene().buildIndex + " Score", score); 
-            PlayerPrefs.SetString("Level " + SceneManager.GetActiveScene().buildIndex + " Time", timeResult);
+            CheckForHighScore();
             PlayerPrefs.Save();
-           // PlayerPrefs.
+          
 
         }
         PlayerPrefs.SetInt("Level " + SceneManager.GetActiveScene().buildIndex + " Completed", 1);
@@ -527,6 +525,26 @@ if (menuItemUnlock)
         if ((menuWin && menuWin.activeSelf) || (menuLose && menuLose.activeSelf)) return;
         tutorialPrompt.Show(msg, seconds);
     }
+
+    void CheckForHighScore()
+    {
+        
+        score += 1000;
+        score -= seconds * 5;
+        score -= minutes * 300;
+
+        if (score > PlayerPrefs.GetInt("Level " + SceneManager.GetActiveScene().buildIndex + " HighScore", 0))
+        {
+            PlayerPrefs.SetInt("Level " + SceneManager.GetActiveScene().buildIndex + " HighScore", score);
+        }
+
+        if ((seconds + (minutes*60)) > PlayerPrefs.GetInt("Level" + SceneManager.GetActiveScene().buildIndex + " TimeInt HighScore"))
+        {
+            PlayerPrefs.SetInt("Level" + SceneManager.GetActiveScene().buildIndex + " TimeInt HighScore", ((seconds + (minutes * 60))));
+            PlayerPrefs.SetString("Level " + SceneManager.GetActiveScene().buildIndex + " Time HighScore", TimerMinutes.text + TimerSeconds.text + TimerMiliseconds.text);
+        }
+    }
+
 
     
 }

@@ -13154,6 +13154,7 @@ MonoBehaviour:
   optionsControls: {fileID: 7745921423644302773}
   optionsAudio: {fileID: 1614033657955201854}
   tutorialPrompt: {fileID: 3022548873682983053}
+  popUp: {fileID: 3166080202433304457, guid: 927820c55109c6e4fa1dbc7c8baaa4b2, type: 3}
   UIAudioSource: {fileID: 7345308948935082373}
   audioMixer: {fileID: 24100000, guid: 166f7127cd5aad44d840c8cf69142e2b, type: 2}
   tutorialMessages:
@@ -17546,7 +17547,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4841870382532518927}
   m_Layer: 0
-  m_Name: PLAYER
+  m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
