@@ -170,7 +170,11 @@ public class ScytheCombat : MonoBehaviour, IDamage
         //Conflict Damage
         foreach (Collider enemy in hitEnemies)
         {
-            enemy.GetComponent<IDamage>().TakeDamage(attackDamage);
+            int damage = attackDamage;
+            if (GameManager.instance.playerScript.overConfident && (float)(GameManager.instance.playerScript.GetHP() / GameManager.instance.playerScript.stats.maxHealth) > .8) {
+                damage += (damage / 2);
+            }
+            enemy.GetComponent<IDamage>().TakeDamage(damage);
         }
 
         
@@ -189,7 +193,11 @@ public class ScytheCombat : MonoBehaviour, IDamage
         
 
         GameObject projectile = Instantiate(specialAttackObject, attackPoint.position, orientation.rotation);
-        
+        if (GameManager.instance.playerScript.overConfident && (float)(GameManager.instance.playerScript.GetHP() / GameManager.instance.playerScript.stats.maxHealth) > .8)
+        {
+            projectile.GetComponent<damage>().damageAmount += (projectile.GetComponent<damage>().damageAmount / 2);
+        }
+
         projectile.transform.forward = playerCam.forward;
         
         timeToDestroy = projectile.GetComponent<damage>().destroyTime;
@@ -201,8 +209,11 @@ public class ScytheCombat : MonoBehaviour, IDamage
     {
 
         GameObject projectile = Instantiate(scytheProjectile, attackPoint.position, orientation.rotation);
-        //Making sure the projectile goes where the player is facing rather than straight
-        projectile.transform.forward = playerCam.forward;
+        if (GameManager.instance.playerScript.overConfident && (float)(GameManager.instance.playerScript.GetHP() / GameManager.instance.playerScript.stats.maxHealth) > .8) {
+            projectile.GetComponent<damage>().damageAmount += (projectile.GetComponent<damage>().damageAmount / 2);
+        }
+            //Making sure the projectile goes where the player is facing rather than straight
+            projectile.transform.forward = playerCam.forward;
 
     }
 
