@@ -145,6 +145,10 @@ public class BossAI : MonoBehaviour, IDamage
         if (bossHP <= 0)
         {
             score += GameManager.instance.playerScript.GetHP();
+            GameManager.instance.score += score;
+            ScorePopUp pop = GameManager.instance.popUp;
+            pop.SetText("+" + score.ToString());
+            Instantiate(pop, transform.position, Quaternion.identity);
             GameManager.instance.YouWin();
         }
 
