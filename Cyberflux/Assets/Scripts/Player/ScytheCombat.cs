@@ -96,7 +96,7 @@ public class ScytheCombat : MonoBehaviour, IDamage
 
                 if (!GameManager.instance.isPaused)
                 {
-                    audioPlayer.volume = GameManager.instance.playerScript.masterVol * GameManager.instance.playerScript.sfxVol;
+                    audioPlayer.volume = GameManager.instance.masterVol * GameManager.instance.sfxVol;
                     audioPlayer.PlayOneShot(attackClip);
                 }
                 
@@ -110,7 +110,7 @@ public class ScytheCombat : MonoBehaviour, IDamage
             Instantiate(slamAttack, attackPoint.position, orientation.rotation); 
             if (!GameManager.instance.isPaused)
             {
-                audioPlayer.volume = GameManager.instance.playerScript.masterVol * GameManager.instance.playerScript.sfxVol;
+                audioPlayer.volume = GameManager.instance.masterVol * GameManager.instance.sfxVol;
                 audioPlayer.PlayOneShot(slamAttackClip);
             }
         }
@@ -122,7 +122,7 @@ public class ScytheCombat : MonoBehaviour, IDamage
 
             if (!GameManager.instance.isPaused)
             {
-                audioPlayer.volume = GameManager.instance.playerScript.masterVol * GameManager.instance.playerScript.sfxVol;
+                audioPlayer.volume = GameManager.instance.masterVol * GameManager.instance.sfxVol;
                 audioPlayer.PlayOneShot(specialAttackClip);
             }
             //Invoke the Action if Action isn't null
@@ -140,7 +140,7 @@ public class ScytheCombat : MonoBehaviour, IDamage
                 
                 if (!GameManager.instance.isPaused)
                 {
-                    audioPlayer.volume = GameManager.instance.playerScript.masterVol * GameManager.instance.playerScript.sfxVol;
+                    audioPlayer.volume = GameManager.instance.masterVol * GameManager.instance.sfxVol;
                     audioPlayer.PlayOneShot(slashClip);
                 }
                 OnSlash?.Invoke();

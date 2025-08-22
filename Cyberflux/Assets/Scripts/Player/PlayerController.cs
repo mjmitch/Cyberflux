@@ -112,9 +112,9 @@ public class PlayerController : MonoBehaviour, IDamage, IHeal
     private float footstepTimer;
 
 
-    [Range(0,1)] [SerializeField] public float masterVol;
-    [Range(0, 1)][SerializeField] public float musicVol;
-    [Range(0, 1)][SerializeField] public float sfxVol;
+    //[Range(0,1)] [SerializeField] public float masterVol;
+    //[Range(0, 1)][SerializeField] public float musicVol;
+    //[Range(0, 1)][SerializeField] public float sfxVol;
 
 
     
@@ -632,19 +632,19 @@ public class PlayerController : MonoBehaviour, IDamage, IHeal
             }
         }
     }
-    public void SaveSettings()
-    {
-        PlayerPrefs.SetFloat("Master Volume", masterVol);
-        PlayerPrefs.SetFloat("SFX Volume", sfxVol);
-        PlayerPrefs.SetFloat("Music Volume", musicVol);
-    }
+    //public void SaveSettings()
+    //{
+    //    PlayerPrefs.SetFloat("Master Volume", masterVol);
+    //    PlayerPrefs.SetFloat("SFX Volume", sfxVol);
+    //    PlayerPrefs.SetFloat("Music Volume", musicVol);
+    //}
 
-    public void LoadSettings()
-    {
-        masterVol = PlayerPrefs.GetFloat("Master Volume", 50);
-        sfxVol = PlayerPrefs.GetFloat("SFX Volume", 50);
-        musicVol = PlayerPrefs.GetFloat("Music Volume", 50);
-    }
+    //public void LoadSettings()
+    //{
+    //    masterVol = PlayerPrefs.GetFloat("Master Volume", 50);
+    //    sfxVol = PlayerPrefs.GetFloat("SFX Volume", 50);
+    //    musicVol = PlayerPrefs.GetFloat("Music Volume", 50);
+    //}
 
 
     //Damage Interface
@@ -679,7 +679,7 @@ public class PlayerController : MonoBehaviour, IDamage, IHeal
         {
             audioPlayer.PlayOneShot(audDeath[UnityEngine.Random.Range(0, audDeath.Length)]);
             GameManager.instance.YouLose(cause);
-            SaveSettings();
+            GameManager.instance.SaveSettings();
         }
     }
     public int GetHP()

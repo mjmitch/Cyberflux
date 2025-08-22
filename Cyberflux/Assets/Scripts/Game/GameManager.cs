@@ -9,6 +9,7 @@ using Unity.VisualScripting;
 using UnityEngine.Audio;
 using Unity.VisualScripting.Antlr3.Runtime.Misc;
 using System.Collections;
+using RangeAttribute = UnityEngine.RangeAttribute;
 
 public class GameManager : MonoBehaviour
 {
@@ -81,6 +82,11 @@ public class GameManager : MonoBehaviour
     public TMP_Text TimerMiliseconds;
     public string levelCompleteTime;
 
+
+    [Range(0, 1)][SerializeField] public float masterVol;
+    [Range(0, 1)][SerializeField] public float musicVol;
+    [Range(0, 1)][SerializeField] public float sfxVol;
+
     // item stuff
     [SerializeField] public List<Augment> itemPool;
    
@@ -116,9 +122,9 @@ public class GameManager : MonoBehaviour
         //GameStatePause();
         if (playerScript != null)
         {
-            audioMixer.SetFloat("masterVolume", playerScript.masterVol);
-            audioMixer.SetFloat("sfxVolume", playerScript.sfxVol);
-            audioMixer.SetFloat("musicVolume", playerScript.musicVol);
+            audioMixer.SetFloat("masterVolume", masterVol);
+            audioMixer.SetFloat("sfxVolume", sfxVol);
+            audioMixer.SetFloat("musicVolume", musicVol);
             menuItemSelect.SetActive(false);
             menuItemUnlock.SetActive(false);
             
@@ -131,11 +137,11 @@ public class GameManager : MonoBehaviour
             seconds = 0;
             miliseconds = 0;
             UpdateTimerText();
-            playerScript.LoadSettings();
+           
             
         }
 
-       
+        LoadSettings();
 
 
     }
@@ -245,7 +251,7 @@ if (menuItemUnlock)
         else
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
         // CHANGE THIS TO LEVEL HUB IF THERE IS SAVE DATA
-        playerScript.LoadSettings();
+        LoadSettings();
         playerScript.LoadKeyBinds();
         stats.ResetAllStats();
     }
@@ -278,7 +284,7 @@ if (menuItemUnlock)
         // only run these if playerScript exists
         if (playerScript != null)
         {
-            playerScript.SaveSettings();
+            SaveSettings();
 
             if (playerScript.playerItems != null && playerScript.playerItems.playeritems != null)
             {
@@ -335,7 +341,7 @@ if (menuItemUnlock)
         if (menuLose) menuLose.SetActive(true);
         menuActive = menuLose;
 
-        playerScript.SaveSettings();
+        SaveSettings();
 
         if (loseSummaryText != null)
         {
@@ -368,7 +374,7 @@ if (menuItemUnlock)
 
         if (next <= last) LoadLevel(next);
         else LoadLevel(0);
-        playerScript.LoadSettings();// loop back to Title when out of levels
+        LoadSettings();// loop back to Title when out of levels
     }
 
     public void RestartLevel()
@@ -546,5 +552,17 @@ if (menuItemUnlock)
     }
 
 
-    
+    public void SaveSettings()
+    {
+        PlayerPrefs.SetFloat("Master Volume", masterVol);
+        PlayerPrefs.SetFloat("SFX Volume", sfxVol);
+        PlayerPrefs.SetFloat("Music Volume", musicVol);
+    }
+
+    public void LoadSettings()
+    {
+        masterVol = PlayerPrefs.GetFloat("Master Volume", .5f);
+        sfxVol = PlayerPrefs.GetFloat("SFX Volume", .5f);
+        musicVol = PlayerPrefs.GetFloat("Music Volume", .5f);
+    }
 }
