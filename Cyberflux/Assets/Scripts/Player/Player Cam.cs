@@ -50,9 +50,19 @@ public class MainCamera : MonoBehaviour
 
     private void ScytheAnimations()
     {
-        if(Input.GetKey(scytheScript.attackKey))
+        if(Input.GetKeyDown(scytheScript.attackKey))
         {
             scytheAnimator.SetTrigger("onAttack");
+        }
+        
+        if(Input.GetKeyDown(scytheScript.slashKey))
+        {
+            scytheAnimator.SetTrigger("onSlash");
+        }
+        
+        if(Input.GetKeyDown(scytheScript.specialAttackKey))
+        {
+            scytheAnimator.SetTrigger("onMomentum");
         }
     }
 

@@ -327,8 +327,9 @@ public class PlayerController : MonoBehaviour, IDamage, IHeal
         //WallRunning 
         else if(wallrunning)
         {
-            state = MovementState.wallrunning;
-            desiredMoveSpeed = wallrunSpeed * movementMult;
+            state = MovementState.wallrunning;  
+            desiredMoveSpeed = wallrunSpeed * movementMult; 
+            //Should be working, I don't know why It wouldn't be 
 
             if (wallRunScript.wallRight)
             {
@@ -556,8 +557,8 @@ public class PlayerController : MonoBehaviour, IDamage, IHeal
         //Reset Y vel
         rb.linearVelocity = new Vector3(rb.linearVelocity.x, 0f, rb.linearVelocity.z);
 
-        //Temporarily commented out until sounds are added
-        //audioPlayer.PlayOneShot(audJump[UnityEngine.Random.Range(0, audJump.Length)]);
+        
+        audioPlayer.PlayOneShot(audJump[UnityEngine.Random.Range(0, audJump.Length)]);
 
         //Impulse since it is a sinle action
         rb.AddForce(transform.up * jumpForce, ForceMode.Impulse);
