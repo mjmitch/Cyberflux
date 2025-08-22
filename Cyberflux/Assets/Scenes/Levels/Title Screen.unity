@@ -129,6 +129,7 @@ GameObject:
   m_Component:
   - component: {fileID: 248690526}
   - component: {fileID: 248690528}
+  - component: {fileID: 248690529}
   - component: {fileID: 248690527}
   m_Layer: 5
   m_Name: Image
@@ -194,6 +195,30 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 248690525}
   m_CullTransparentMesh: 1
+--- !u!114 &248690529
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 248690525}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a325671349c27134e9278dcbcb86c618, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  floatSpeed: 1
+  floatAmount: 10
+  tiltSpeed: 1
+  tiltAmount: 2
+  scytheImage: {fileID: 0}
+  baseColor: {r: 1, g: 1, b: 1, a: 1}
+  glowSpeed: 2
+  glowIntensity: 0.2
+  glitchIntervalMin: 5
+  glitchIntervalMax: 10
+  glitchDuration: 0.1
+  glitchShakeAmount: 5
 --- !u!1 &363301997
 GameObject:
   m_ObjectHideFlags: 0
