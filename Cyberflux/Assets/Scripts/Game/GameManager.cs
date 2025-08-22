@@ -49,7 +49,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] public GameObject optionsAudio;
 
     [SerializeField] TutorialPrompt tutorialPrompt;
-
+    [SerializeField] public ScorePopUp popUp;
     
     [SerializeField] public AudioSource UIAudioSource;
     [SerializeField] public AudioMixer audioMixer;
@@ -59,7 +59,7 @@ public class GameManager : MonoBehaviour
      {
     "Press ⭼ (Middle-click) to unleash Momentum’s surge.",
     "Press LMB (Left-click) to strike with your blade.",
-    "Press RMB (Right-click) to throw the Scythe’s arc",
+    "Press RMB (Q) to throw the Scythe’s arc",
     "The Black gauge holds the Scythe’s charge.",
     "The Blue gauge fuels your momentum. It gives you acess to sliding, jumping, and dashing."
      };
@@ -121,22 +121,29 @@ public class GameManager : MonoBehaviour
             audioMixer.SetFloat("musicVolume", playerScript.musicVol);
             menuItemSelect.SetActive(false);
             menuItemUnlock.SetActive(false);
-            OptionPanel.gameObject.SetActive(false);
+            
+            // Hide Options menu using CanvasGroup only
+            OptionPanel.alpha = 0f;
+            OptionPanel.interactable = false;
+            OptionPanel.blocksRaycasts = false;
+
             minutes = 0;
             seconds = 0;
             miliseconds = 0;
             UpdateTimerText();
+            playerScript.LoadSettings();
+            
         }
 
+       
 
 
-        
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (!isPaused) {
+        if (!isPaused && SceneManager.GetActiveScene().buildIndex != 0) {
             UpdateLevelTimer();
         }
 
@@ -215,8 +222,10 @@ if (menuItemUnlock)
         // Hide options panel if it was opened from pause
         if (OptionPanel)
         {
+            OptionPanel.transform.SetAsFirstSibling(); // Moves panel to back of UI
             OptionPanel.alpha = 0f;
             OptionPanel.blocksRaycasts = false;
+            
         }
 
         isPaused = false;
@@ -237,40 +246,57 @@ if (menuItemUnlock)
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
         // CHANGE THIS TO LEVEL HUB IF THERE IS SAVE DATA
         playerScript.LoadSettings();
+        playerScript.LoadKeyBinds();
         stats.ResetAllStats();
     }
 
     public void Option()
     {
+        Debug.Log("Option() called");
         UIAudioSource.Play();
-        OptionPanel.gameObject.SetActive(true);
-        OptionPanel.alpha = 1;
-        OptionPanel.blocksRaycasts = true;
-        optionsControls.SetActive(true);
-        optionsAudio.SetActive(false);
-
+        OptionPanel.transform.SetAsLastSibling(); // Moves panel to front of UI
+        OptionPanel.alpha = 1;               // fully visible
+        OptionPanel.interactable = true;     // UI elements respond
+        OptionPanel.blocksRaycasts = true;   // catches clicks
     }
     public void Back()
     {
+
+        Debug.Log("Back() called");  // <-- You should see this in Console
         UIAudioSource.Play();
-        OptionPanel.gameObject.SetActive(false);
-        OptionPanel.alpha= 0;
-        OptionPanel.blocksRaycasts = false;
+        OptionPanel.transform.SetAsFirstSibling(); // Moves panel to back of UI
+        OptionPanel.alpha = 0;               // invisible
+        OptionPanel.interactable = false;    // no interaction
+        OptionPanel.blocksRaycasts = false;  // no clicks
+        
     }
      
     public void QuitGame()
     {
-        playerScript.playerItems.playeritems.Clear();
-        UIAudioSource.Play();
-        playerScript.SaveSettings();
-        Application.Quit();
+        Debug.Log("Quit!"); // always logs so you know the button fired
 
+        // only run these if playerScript exists
+        if (playerScript != null)
+        {
+            playerScript.SaveSettings();
 
-      #if UNITY_EDITOR
-      UnityEditor.EditorApplication.isPlaying = false;
-      #else
-        Application.Quit();
-      #endif
+            if (playerScript.playerItems != null && playerScript.playerItems.playeritems != null)
+            {
+                playerScript.playerItems.playeritems.Clear();
+            }
+        }
+
+        // play quit sound if you have one
+        if (UIAudioSource != null)
+        {
+            UIAudioSource.Play();
+        }
+
+#if UNITY_EDITOR
+    UnityEditor.EditorApplication.isPlaying = false;  // stops Play mode
+#else
+        Application.Quit(); // closes the build
+#endif
     }
 
     public void YouWin()
@@ -289,14 +315,13 @@ if (menuItemUnlock)
             string timeResult = TimerMinutes.text + TimerSeconds.text + TimerMiliseconds.text;
             winSummaryText.text = "Clear Time: " + timeResult;
 
-
             //This will save data to local file in computer
-            PlayerPrefs.SetInt("Level " + SceneManager.GetActiveScene().buildIndex + " Score", score); 
-            PlayerPrefs.SetString("Level " + SceneManager.GetActiveScene().buildIndex + " Time", timeResult);
+            CheckForHighScore();
             PlayerPrefs.Save();
-           // PlayerPrefs.
+          
 
         }
+        PlayerPrefs.SetInt("Level " + SceneManager.GetActiveScene().buildIndex + " Completed", 1);
     }
 
     public void YouLose(string cause = "Unknown")
@@ -357,7 +382,7 @@ if (menuItemUnlock)
         if (menuLose) menuLose.SetActive(false);
         isPaused = false;
         Time.timeScale = 1f;
-
+        
         LoadLevel(SceneManager.GetActiveScene().buildIndex);
     }
 
@@ -500,6 +525,26 @@ if (menuItemUnlock)
         if ((menuWin && menuWin.activeSelf) || (menuLose && menuLose.activeSelf)) return;
         tutorialPrompt.Show(msg, seconds);
     }
+
+    void CheckForHighScore()
+    {
+        
+        score += 1000;
+        score -= seconds * 5;
+        score -= minutes * 300;
+
+        if (score > PlayerPrefs.GetInt("Level " + SceneManager.GetActiveScene().buildIndex + " HighScore", 0))
+        {
+            PlayerPrefs.SetInt("Level " + SceneManager.GetActiveScene().buildIndex + " HighScore", score);
+        }
+
+        if ((seconds + (minutes*60)) > PlayerPrefs.GetInt("Level" + SceneManager.GetActiveScene().buildIndex + " TimeInt HighScore"))
+        {
+            PlayerPrefs.SetInt("Level" + SceneManager.GetActiveScene().buildIndex + " TimeInt HighScore", ((seconds + (minutes * 60))));
+            PlayerPrefs.SetString("Level " + SceneManager.GetActiveScene().buildIndex + " Time HighScore", TimerMinutes.text + TimerSeconds.text + TimerMiliseconds.text);
+        }
+    }
+
 
     
 }

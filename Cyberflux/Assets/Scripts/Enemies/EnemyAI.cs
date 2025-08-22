@@ -336,6 +336,9 @@ public class EnemyAI : MonoBehaviour, IDamage
             }
 
             GameManager.instance.score += score;
+            ScorePopUp pop = GameManager.instance.popUp;
+            pop.SetText("+" + score.ToString());
+            Instantiate(pop, transform.position, Quaternion.identity);
             
             Destroy(gameObject);
         }

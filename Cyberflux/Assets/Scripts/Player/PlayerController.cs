@@ -1,8 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Security.Cryptography.X509Certificates;
+//using UnityEditor.SearchService;
 using UnityEngine;
 using UnityEngine.Audio;
+using UnityEngine.SceneManagement;
 using UnityEngine.Tilemaps;
 using UnityEngine.UI; 
 
@@ -76,10 +78,12 @@ public class PlayerController : MonoBehaviour, IDamage, IHeal
     [Header("Stat Modifiers")]
     //  [SerializeField] float sdf;
     public float dmgReduction = 0;
+
     [Header("Item Stuff")]
     public int keys = 0;
     [SerializeField] public PlayerItems playerItems;
     public bool brokenClock = false;
+    public bool overConfident = false;
 
 
     [Header("Ground Check")]
@@ -93,16 +97,19 @@ public class PlayerController : MonoBehaviour, IDamage, IHeal
     private bool slopeExit;
 
     [Header("Audio")]
+    [Range(0.25f, 1f)][SerializeField] private float footstepDelay;
     [SerializeField] public AudioSource audioPlayer;
-   // [SerializeField] public AudioMixer audioMixer;
-    //[SerializeField] public AudioMixerGroup masterVol;
-    //[SerializeField] public AudioMixerGroup musicVol;
-    //[SerializeField] public AudioMixerGroup sfxVol;
-   
-    //Dont know what all audio we are going to have, just putting these here for now.
+    [SerializeField] AudioClip[] audDeath;
     [SerializeField] AudioClip[] audJump;
     [SerializeField] AudioClip[] audHurt;
     [SerializeField] AudioClip[] audStep;
+    [SerializeField] AudioClip[] audDash;
+    [SerializeField] AudioClip audSlide;
+    [SerializeField] AudioClip audWallrun;
+    private float originalDashDelay;
+    private float dashTimer;
+    private float originalFootstepDelay;
+    private float footstepTimer;
 
 
     [Range(0,1)] [SerializeField] public float masterVol;
@@ -148,6 +155,11 @@ public class PlayerController : MonoBehaviour, IDamage, IHeal
     
     void Start()
     {
+        //If player is on Main Menu
+        if (SceneManager.GetActiveScene().buildIndex == 0)
+        {
+            return;
+        }
         HP = stats.maxHealth;
         
         readyToJump = true;
@@ -160,8 +172,10 @@ public class PlayerController : MonoBehaviour, IDamage, IHeal
         gravityOrig = Physics.gravity;
         scytheScript = GetComponentInChildren<ScytheCombat>();
 
-        
-        
+
+        originalFootstepDelay = footstepDelay;
+        originalDashDelay = 5f;
+
 
         walkSpeedOriginal = walkSpeed;
         sprintSpeedOriginal = sprintSpeed;
@@ -169,23 +183,29 @@ public class PlayerController : MonoBehaviour, IDamage, IHeal
         wallrunSpeedOriginal = wallrunSpeed;
         dashSpeedOriginal = dashSpeed;
         crouchSpeedOriginal = crouchSpeed;
-       
+
+        LoadKeyBinds();
         playerItems.ReloadItems();
     }
 
     // Update is called once per frame
     void Update()
     {
-
+        //If player is on Main Menu
+        if (SceneManager.GetActiveScene().buildIndex == 0)
+        {
+            return;
+        }
 
         grounded = Physics.Raycast(transform.position, Vector3.down, playerHeight * 0.5f + 0.2f, whatIsGround);
 
 
-
-        MyInput();
-        SpeedControl();
-        StateHandler();
-
+        if (GameManager.instance.playerScript != null)
+        {
+            MyInput();
+            SpeedControl();
+            StateHandler();
+        }
 
         //Handle Drag
         if (grounded)
@@ -227,6 +247,11 @@ public class PlayerController : MonoBehaviour, IDamage, IHeal
 
     private void FixedUpdate()
     {
+        //If player is on Main Menu
+        if (SceneManager.GetActiveScene().buildIndex == 0)
+        {
+            return;
+        }
         MovePlayer();
     }
 
@@ -235,8 +260,14 @@ public class PlayerController : MonoBehaviour, IDamage, IHeal
         horizontalInput = Input.GetAxisRaw("Horizontal");
         verticalInput = Input.GetAxisRaw("Vertical");
 
+        footstepTimer += Time.deltaTime;
+        dashTimer += Time.deltaTime;
+        UpdateFootstepDelay();
+
+
+
         //ready to jump
-        if(Input.GetKey(jumpKey) && readyToJump && grounded)
+        if (Input.GetKey(jumpKey) && readyToJump && grounded)
         {
             readyToJump = false;
 
@@ -258,25 +289,49 @@ public class PlayerController : MonoBehaviour, IDamage, IHeal
             transform.localScale = new Vector3(transform.localScale.x, startingHeight, transform.localScale.z);
         }
 
+        if(grounded)
+        {
+            if(horizontalInput != 0 ||  verticalInput != 0)
+            {
+                if(footstepTimer >= footstepDelay)
+                {
+                    PlayFootstep();
+                    footstepTimer = 0f;
+                }
+            }
+            else
+            {
+                footstepTimer = 0f;
+            }
+        }
+       
+        if(dashing)
+        {
+            if (dashTimer >= 2f)
+            {
+                PlayDash();
+                dashTimer = 0f;
+            }
+        }
     }
 
     private void StateHandler()
     {
-
+        
         //dashing
         if(dashing)
         {
             state = MovementState.dashing;
             desiredMoveSpeed = dashSpeed * movementMult;
-
             cam.fieldOfView = Mathf.Lerp(cam.fieldOfView, dashingFov, Time.deltaTime * fovChangeSpeed);
         }
 
         //WallRunning 
         else if(wallrunning)
         {
-            state = MovementState.wallrunning;
-            desiredMoveSpeed = wallrunSpeed * movementMult;
+            state = MovementState.wallrunning;  
+            desiredMoveSpeed = wallrunSpeed * movementMult; 
+            //Should be working, I don't know why It wouldn't be 
 
             if (wallRunScript.wallRight)
             {
@@ -410,6 +465,8 @@ public class PlayerController : MonoBehaviour, IDamage, IHeal
         //Calculate Movement Direction
         moveDir = orientation.forward * verticalInput + orientation.right * horizontalInput;
 
+        
+
         //Debug.Log(moveSpeed);
         //Slope Handling
 
@@ -465,12 +522,46 @@ public class PlayerController : MonoBehaviour, IDamage, IHeal
         }
     }
 
+    private void PlayDash()
+    {
+        if (audDash.Length > 0)
+        {
+            audioPlayer.PlayOneShot(audDash[UnityEngine.Random.Range(0, audDash.Length)]);
+        }
+    }
+
+    private void PlayFootstep()
+    {
+        if(audStep.Length > 0)
+        {
+            audioPlayer.PlayOneShot(audStep[UnityEngine.Random.Range(0, audStep.Length)]);
+        }    
+    }
+    void UpdateFootstepDelay()
+    {
+        if (state == MovementState.sprinting)
+            footstepDelay = originalFootstepDelay / 2;
+        else if (state == MovementState.walking)
+            footstepDelay = originalFootstepDelay;
+        else if (state == MovementState.crouching)
+            footstepDelay = originalFootstepDelay * 2;
+        else if (state == MovementState.sliding)
+            footstepDelay = 50f;
+        else if (state == MovementState.wallrunning)
+            footstepDelay = 50f;
+        else
+            footstepDelay = originalFootstepDelay;// Default
+    }
+
     private void Jump()
     {
         slopeExit = true;
         //Reset Y vel
         rb.linearVelocity = new Vector3(rb.linearVelocity.x, 0f, rb.linearVelocity.z);
+
         
+        audioPlayer.PlayOneShot(audJump[UnityEngine.Random.Range(0, audJump.Length)]);
+
         //Impulse since it is a sinle action
         rb.AddForce(transform.up * jumpForce, ForceMode.Impulse);
     }
@@ -499,6 +590,48 @@ public class PlayerController : MonoBehaviour, IDamage, IHeal
         return Vector3.ProjectOnPlane(direction, slopeHit.normal).normalized;
     }
 
+
+    
+
+    public void LoadKeyBinds()
+    {
+        int keycount = 0;
+        foreach (KeyCode vKey in System.Enum.GetValues(typeof(KeyCode)))
+        {
+            if (vKey.ToString() == PlayerPrefs.GetString("Jump Key", KeyCode.Space.ToString())) {
+                jumpKey = vKey;
+                keycount++;
+            }
+            if (vKey.ToString() == PlayerPrefs.GetString("Crouch Key", KeyCode.LeftControl.ToString())) {
+                crouchKey = vKey;
+                keycount++;
+            }
+            if (vKey.ToString() == PlayerPrefs.GetString("Sprint Key", KeyCode.LeftShift.ToString())) {
+                sprintKey = vKey;
+                keycount++;
+            }
+            if (vKey.ToString() == PlayerPrefs.GetString("Attack Key", KeyCode.Mouse0.ToString())) {
+                scytheScript.attackKey = vKey;
+                keycount++;
+            }
+            if (vKey.ToString() == PlayerPrefs.GetString("Slash Key", KeyCode.Q.ToString())) {
+                scytheScript.slashKey = vKey;
+                keycount++;
+            }
+            if (vKey.ToString() == PlayerPrefs.GetString("Slam Key", KeyCode.Mouse1.ToString())) {
+                scytheScript.slamAttackKey = vKey;
+                keycount++;
+            }
+            if (vKey.ToString() == PlayerPrefs.GetString("Special Key", KeyCode.Mouse2.ToString())) {
+                scytheScript.specialAttackKey = vKey;
+                keycount++;
+            }
+            if (keycount == 7)
+            {
+                break;
+            }
+        }
+    }
     public void SaveSettings()
     {
         PlayerPrefs.SetFloat("Master Volume", masterVol);
@@ -508,9 +641,9 @@ public class PlayerController : MonoBehaviour, IDamage, IHeal
 
     public void LoadSettings()
     {
-        masterVol = PlayerPrefs.GetFloat("MasterVolume");
-        sfxVol = PlayerPrefs.GetFloat("SFX Volume");
-        musicVol = PlayerPrefs.GetFloat("Music Volume");
+        masterVol = PlayerPrefs.GetFloat("Master Volume", 50);
+        sfxVol = PlayerPrefs.GetFloat("SFX Volume", 50);
+        musicVol = PlayerPrefs.GetFloat("Music Volume", 50);
     }
 
 
@@ -540,9 +673,11 @@ public class PlayerController : MonoBehaviour, IDamage, IHeal
 
         stats.currentHealth = HP;
         GameManager.instance.UpdateHealthUI(HP, stats.maxHealth);
+        audioPlayer.PlayOneShot(audHurt[UnityEngine.Random.Range(0, audHurt.Length)]);
 
         if (HP <= 0)
         {
+            audioPlayer.PlayOneShot(audDeath[UnityEngine.Random.Range(0, audDeath.Length)]);
             GameManager.instance.YouLose(cause);
             SaveSettings();
         }
@@ -550,6 +685,11 @@ public class PlayerController : MonoBehaviour, IDamage, IHeal
     public int GetHP()
     {
         return HP;
+    }
+
+    public int GetMaxHP()
+    {
+        return stats.maxHealth;
     }
 
     public void TakeSlow()

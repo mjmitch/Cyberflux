@@ -2172,22 +2172,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 939daa1023fa0b9479c4613b125aea39, type: 3}
---- !u!1 &1952930990 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4474230038134236655, guid: 2a43059ae07f44340b28e40e2efb2107, type: 3}
-  m_PrefabInstance: {fileID: 1985237279}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1952930992 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 6086707596308907680, guid: 2a43059ae07f44340b28e40e2efb2107, type: 3}
-  m_PrefabInstance: {fileID: 1985237279}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1952930990}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &1985237279
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2248,6 +2232,18 @@ PrefabInstance:
       propertyPath: m_AnchorMax.x
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4841870382532518927, guid: 2a43059ae07f44340b28e40e2efb2107, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -21.9
+      objectReference: {fileID: 0}
+    - target: {fileID: 4841870382532518927, guid: 2a43059ae07f44340b28e40e2efb2107, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.52
+      objectReference: {fileID: 0}
+    - target: {fileID: 4841870382532518927, guid: 2a43059ae07f44340b28e40e2efb2107, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 16.54
+      objectReference: {fileID: 0}
     - target: {fileID: 4967382356259595116, guid: 2a43059ae07f44340b28e40e2efb2107, type: 3}
       propertyPath: m_Name
       value: Player
@@ -2255,11 +2251,11 @@ PrefabInstance:
     - target: {fileID: 6773875172127682266, guid: 2a43059ae07f44340b28e40e2efb2107, type: 3}
       propertyPath: bossHPUI
       value: 
-      objectReference: {fileID: 1952930990}
+      objectReference: {fileID: 0}
     - target: {fileID: 6773875172127682266, guid: 2a43059ae07f44340b28e40e2efb2107, type: 3}
       propertyPath: bossHPBar
       value: 
-      objectReference: {fileID: 1952930992}
+      objectReference: {fileID: 0}
     - target: {fileID: 7199931394847485644, guid: 2a43059ae07f44340b28e40e2efb2107, type: 3}
       propertyPath: m_IsActive
       value: 0

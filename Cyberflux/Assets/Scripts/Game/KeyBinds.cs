@@ -26,14 +26,17 @@ public class InputFieldHandler : MonoBehaviour
     
     void Start()
     {
-        JumpKeyInput.GetComponentInChildren<TMP_Text>().text = GameManager.instance.playerScript.jumpKey.ToString();
-        CrouchKeyInput.GetComponentInChildren<TMP_Text>().text = GameManager.instance.playerScript.crouchKey.ToString();
-        SprintKeyInput.GetComponentInChildren<TMP_Text>().text = GameManager.instance.playerScript.sprintKey.ToString();
-        MeleeKeyInput.GetComponentInChildren<TMP_Text>().text = GameManager.instance.playerScript.scytheScript.attackKey.ToString();
-        SlashKeyInput.GetComponentInChildren<TMP_Text>().text = GameManager.instance.playerScript.scytheScript.slashKey.ToString();
-        SlamKeyInput.GetComponentInChildren<TMP_Text>().text = GameManager.instance.playerScript.scytheScript.slamAttackKey.ToString();
-        SpecialKeyInput.GetComponentInChildren<TMP_Text>().text = GameManager.instance.playerScript.scytheScript.specialAttackKey.ToString();
-        
+        if (GameManager.instance.playerScript != null)
+        {
+            
+            JumpKeyInput.GetComponentInChildren<TMP_Text>().text = GameManager.instance.playerScript.jumpKey.ToString();
+            CrouchKeyInput.GetComponentInChildren<TMP_Text>().text = GameManager.instance.playerScript.crouchKey.ToString();
+            SprintKeyInput.GetComponentInChildren<TMP_Text>().text = GameManager.instance.playerScript.sprintKey.ToString();
+            MeleeKeyInput.GetComponentInChildren<TMP_Text>().text = GameManager.instance.playerScript.scytheScript.attackKey.ToString();
+            SlashKeyInput.GetComponentInChildren<TMP_Text>().text = GameManager.instance.playerScript.scytheScript.slashKey.ToString();
+            SlamKeyInput.GetComponentInChildren<TMP_Text>().text = GameManager.instance.playerScript.scytheScript.slamAttackKey.ToString();
+            SpecialKeyInput.GetComponentInChildren<TMP_Text>().text = GameManager.instance.playerScript.scytheScript.specialAttackKey.ToString();
+        }
         
     }
 
@@ -126,6 +129,8 @@ public class InputFieldHandler : MonoBehaviour
                 }
             }
         }
+        PlayerPrefs.SetString("Jump Key", GameManager.instance.playerScript.jumpKey.ToString());
+        
     }
     public void SetCrouchKey ()
     {
@@ -155,6 +160,9 @@ public class InputFieldHandler : MonoBehaviour
                 }
             }
         }
+      
+        PlayerPrefs.SetString("Crouch Key", GameManager.instance.playerScript.crouchKey.ToString());
+        
     }
     public void SetSprintKey ()
     {
@@ -183,8 +191,13 @@ public class InputFieldHandler : MonoBehaviour
                     break;
                 }
             }
+            
         }
+        PlayerPrefs.SetString("Sprint Key", GameManager.instance.playerScript.sprintKey.ToString());
     }
+        
+        
+        
 
     public void SetSlamKey()
     {
@@ -214,6 +227,9 @@ public class InputFieldHandler : MonoBehaviour
                 }
             }
         }
+      
+        PlayerPrefs.SetString("Slam Key", GameManager.instance.playerScript.scytheScript.slamAttackKey.ToString());
+        
     }
     public void SetMeleeKey()
     {
@@ -243,6 +259,9 @@ public class InputFieldHandler : MonoBehaviour
                 }
             }
         }
+     
+        PlayerPrefs.SetString("Attack Key", GameManager.instance.playerScript.scytheScript.attackKey.ToString());
+        
     }
     public void SetSlashKey()
     {
@@ -272,6 +291,9 @@ public class InputFieldHandler : MonoBehaviour
                 }
             }
         }
+       
+        PlayerPrefs.SetString("Slash Key", GameManager.instance.playerScript.scytheScript.slashKey.ToString());
+        
     }
     public void SetSpecialKey()
     {
@@ -301,6 +323,8 @@ public class InputFieldHandler : MonoBehaviour
                 }
             }
         }
+        
+        PlayerPrefs.SetString("Special Key", GameManager.instance.playerScript.scytheScript.specialAttackKey.ToString());
     }
 }
 

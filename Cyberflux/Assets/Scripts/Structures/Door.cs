@@ -22,6 +22,7 @@ public class Door : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        
         GetComponentInChildren<DoorTrigger>().transform.parent = null;
         startPos = new Vector3 (transform.position.x,transform.position.y,transform.position.z);
         endPos = new Vector3(moveToWhenOpened.transform.position.x, moveToWhenOpened.transform.position.y, moveToWhenOpened.transform.position.z);
