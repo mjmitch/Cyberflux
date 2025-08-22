@@ -11,12 +11,15 @@ public class ControlOptions : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     private void Start()
     {
-        sensXValue.text = (GameObject.FindWithTag("MainCamera").GetComponent<MainCamera>().sensX / 100).ToString();
-        sensXSlider.value = (GameObject.FindWithTag("MainCamera").GetComponent<MainCamera>().sensX / 100);
-        sensYValue.text = (GameObject.FindWithTag("MainCamera").GetComponent<MainCamera>().sensY / 100).ToString();
-        sensYSlider.value = (GameObject.FindWithTag("MainCamera").GetComponent<MainCamera>().sensY / 100);
-        sensXSlider.onValueChanged.AddListener(SensXChanged);
-        sensYSlider.onValueChanged.AddListener (SensYChanged);
+        if (GameManager.instance.playerScript != null)
+        {
+            sensXValue.text = (GameObject.FindWithTag("MainCamera").GetComponent<MainCamera>().sensX / 100).ToString();
+            sensXSlider.value = (GameObject.FindWithTag("MainCamera").GetComponent<MainCamera>().sensX / 100);
+            sensYValue.text = (GameObject.FindWithTag("MainCamera").GetComponent<MainCamera>().sensY / 100).ToString();
+            sensYSlider.value = (GameObject.FindWithTag("MainCamera").GetComponent<MainCamera>().sensY / 100);
+            sensXSlider.onValueChanged.AddListener(SensXChanged);
+            sensYSlider.onValueChanged.AddListener(SensYChanged);
+        }
     }
     private void Update()
     {
