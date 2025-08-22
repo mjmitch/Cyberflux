@@ -101,9 +101,9 @@ public class EnemyAI : MonoBehaviour, IDamage
         }
         agentStopDisOrig = agent.stoppingDistance;
 
-        GameManager.instance.playerScript.LoadSettings();
+        GameManager.instance.LoadSettings();
 
-        audioPlayer.volume = GameManager.instance.playerScript.masterVol * GameManager.instance.playerScript.sfxVol;
+        audioPlayer.volume = GameManager.instance.masterVol * GameManager.instance.sfxVol;
         teleportTimer = 0;
         int levelNum = SceneManager.GetActiveScene().buildIndex;
         HP *= (int)(1.05f * (levelNum));
@@ -207,7 +207,7 @@ public class EnemyAI : MonoBehaviour, IDamage
     {
         attackTimer = 0;
         StartCoroutine(SwordSwing());
-        audioPlayer.PlayOneShot(attackSound, GameManager.instance.playerScript.masterVol * GameManager.instance.playerScript.sfxVol);
+        audioPlayer.PlayOneShot(attackSound, GameManager.instance.masterVol * GameManager.instance.sfxVol);
     }
 
     void RangedAttack()
@@ -216,7 +216,7 @@ public class EnemyAI : MonoBehaviour, IDamage
         Instantiate(bullet, attackPosition.position, transform.rotation);
         
             //bullet.GetComponent<damage>().damageAmount *= ((int)1.05f * (SceneManager.GetActiveScene().buildIndex));
-        audioPlayer.PlayOneShot(attackSound, GameManager.instance.playerScript.masterVol * GameManager.instance.playerScript.sfxVol);
+        audioPlayer.PlayOneShot(attackSound, GameManager.instance.masterVol * GameManager.instance.sfxVol);
         //bullet1.GetComponent<damage>().rb.linearVelocity = (player.transform.position - transform.position) * bullet1.GetComponent<damage>().speed;
     }
 
@@ -232,7 +232,7 @@ public class EnemyAI : MonoBehaviour, IDamage
         {
             isExploding = true;
             Instantiate(explosionEffect, transform.position, Quaternion.identity);
-            audioPlayer.PlayOneShot(explosionSound, GameManager.instance.playerScript.sfxVol * GameManager.instance.playerScript.masterVol);
+            audioPlayer.PlayOneShot(explosionSound, GameManager.instance.sfxVol * GameManager.instance.masterVol);
         }
         Destroy(gameObject);
     }
@@ -280,7 +280,7 @@ public class EnemyAI : MonoBehaviour, IDamage
             
             transform.position += offset;
             if(teleportSound != null)
-                audioPlayer.PlayOneShot(teleportSound, GameManager.instance.playerScript.masterVol * GameManager.instance.playerScript.sfxVol);
+                audioPlayer.PlayOneShot(teleportSound, GameManager.instance.masterVol * GameManager.instance.sfxVol);
         }
         BasicCombatMovement();
     }

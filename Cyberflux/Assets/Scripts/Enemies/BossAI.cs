@@ -46,7 +46,7 @@ public class BossAI : MonoBehaviour, IDamage
         playerPosition = GameManager.instance.player.transform;
         player = GameManager.instance.player;
         audioPlayer = GetComponent<AudioSource>();
-        audioPlayer.volume = GameManager.instance.playerScript.masterVol;
+        audioPlayer.volume = GameManager.instance.masterVol;
         maxHP = bossHP;
         phaseNum = 1;
         audioPlayer.clip = musicPerPhase[0];
@@ -131,7 +131,7 @@ public class BossAI : MonoBehaviour, IDamage
                 Debug.Log(i);
                 shootTimers[i] = 0;
                 Instantiate(bullets[i], attackPositions[i].position, Quaternion.identity);
-                audioPlayer.PlayOneShot(shootingSounds[i], GameManager.instance.playerScript.masterVol * GameManager.instance.playerScript.sfxVol);
+                audioPlayer.PlayOneShot(shootingSounds[i], GameManager.instance.masterVol * GameManager.instance.sfxVol);
             }
         }
     }
@@ -182,7 +182,7 @@ public class BossAI : MonoBehaviour, IDamage
             Debug.Log(offset);
             transform.position += offset;
             if(teleportSound != null)
-                audioPlayer.PlayOneShot(teleportSound, GameManager.instance.playerScript.masterVol * GameManager.instance.playerScript.sfxVol);
+                audioPlayer.PlayOneShot(teleportSound, GameManager.instance.masterVol * GameManager.instance.sfxVol);
         }
     }
 
