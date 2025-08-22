@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class ButtonFunctions : MonoBehaviour
 {
@@ -23,5 +24,12 @@ public class ButtonFunctions : MonoBehaviour
     public void SelectItem1()
     {
 
+    }
+
+    public void Reset()
+    {
+        PlayerPrefs.DeleteAll();
+        PlayerPrefs.Save();
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 }
