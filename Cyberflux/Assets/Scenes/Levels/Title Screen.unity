@@ -211,8 +211,8 @@ MonoBehaviour:
   floatAmount: 10
   tiltSpeed: 1
   tiltAmount: 2
-  scytheImage: {fileID: 0}
-  baseColor: {r: 1, g: 1, b: 1, a: 1}
+  scytheImage: {fileID: 248690527}
+  baseColor: {r: 0.98194367, g: 0.7528302, b: 1, a: 1}
   glowSpeed: 2
   glowIntensity: 0.2
   glitchIntervalMin: 5
