@@ -78,10 +78,12 @@ public class PlayerController : MonoBehaviour, IDamage, IHeal
     [Header("Stat Modifiers")]
     //  [SerializeField] float sdf;
     public float dmgReduction = 0;
+
     [Header("Item Stuff")]
     public int keys = 0;
     [SerializeField] public PlayerItems playerItems;
     public bool brokenClock = false;
+    public bool overConfident = false;
 
 
     [Header("Ground Check")]
@@ -683,6 +685,11 @@ public class PlayerController : MonoBehaviour, IDamage, IHeal
     public int GetHP()
     {
         return HP;
+    }
+
+    public int GetMaxHP()
+    {
+        return stats.maxHealth;
     }
 
     public void TakeSlow()
