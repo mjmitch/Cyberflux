@@ -290,10 +290,7 @@ if (menuItemUnlock)
         {
             SaveSettings();
 
-            if (playerScript.playerItems != null && playerScript.playerItems.playeritems != null)
-            {
-                playerScript.playerItems.playeritems.Clear();
-            }
+           
         }
 
         // play quit sound if you have one
@@ -332,6 +329,7 @@ if (menuItemUnlock)
 
         }
         PlayerPrefs.SetInt("Level " + SceneManager.GetActiveScene().buildIndex + " Completed", 1);
+        playerScript.SaveItem();
     }
 
     public void YouLose(string cause = "Unknown")
@@ -383,10 +381,10 @@ if (menuItemUnlock)
 
     public void RestartLevel()
     {
-        if (playerScript.playerItems.playeritems.Count >= SceneManager.GetActiveScene().buildIndex)
-        {
-            playerScript.playerItems.playeritems.RemoveAt(SceneManager.GetActiveScene().buildIndex - 1);
-        }
+        //if (playerScript.playerItems.playeritems.Count >= SceneManager.GetActiveScene().buildIndex)
+        //{
+        //    playerScript.playerItems.playeritems.RemoveAt(SceneManager.GetActiveScene().buildIndex - 1);
+        //}
         UIAudioSource.Play();
         if (menuWin) menuWin.SetActive(false);
         if (menuLose) menuLose.SetActive(false);
