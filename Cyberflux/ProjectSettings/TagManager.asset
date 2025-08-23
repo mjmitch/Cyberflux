@@ -8,6 +8,7 @@ TagManager:
   - Hazard
   - BossDoor
   - Boss
+  - UI
   layers:
   - Default
   - TransparentFX

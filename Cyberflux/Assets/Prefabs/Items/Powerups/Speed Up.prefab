@@ -45,7 +45,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ID: 6
-  icon: {fileID: 21300000, guid: 2e44da764c7fc234594bc1b0168711aa, type: 3}
+  icon: {fileID: 21300000, guid: 00d93e870e281474eaffc504915561f0, type: 3}
   itemDescription: Increases movement speed
   itemStats: Movement Speed + 10%
   multipleCopies: 1

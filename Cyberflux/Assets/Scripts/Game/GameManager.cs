@@ -248,10 +248,15 @@ if (menuItemUnlock)
 
     public void StartGame()
     {
+        int sceneToLoad = 1;
+        if (PlayerPrefs.GetInt("Level 1 Completed", 0) == 1)
+        {
+            sceneToLoad = 7;
+        }
         if (fader)
-            fader.FadeToScene(SceneManager.GetActiveScene().buildIndex + 1);
+            fader.FadeToScene(sceneToLoad);
         else
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+            SceneManager.LoadScene(sceneToLoad);
         // CHANGE THIS TO LEVEL HUB IF THERE IS SAVE DATA
         LoadSettings();
        // playerScript.LoadKeyBinds();

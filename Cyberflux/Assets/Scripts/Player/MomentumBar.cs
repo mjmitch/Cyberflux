@@ -14,7 +14,7 @@ public class MomentumBar : MonoBehaviour
     private float horizontalInput;
     private float verticalInput;
 
-
+    public int momemtumMult = 1;
 
     void Start()
     {
@@ -33,7 +33,7 @@ public class MomentumBar : MonoBehaviour
         if((horizontalInput != 0 || verticalInput != 0))
         {
             //0.0003f
-            slider.value += 0.0003f;
+            slider.value += 0.0003f * momemtumMult;
         }
 
         if (slider.value == slider.maxValue)

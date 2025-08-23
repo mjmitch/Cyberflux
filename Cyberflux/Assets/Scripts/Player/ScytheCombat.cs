@@ -203,6 +203,8 @@ public class ScytheCombat : MonoBehaviour, IDamage
         timeToDestroy = projectile.GetComponent<damage>().destroyTime;
         
         Destroy(projectile, timeToDestroy);
+
+        specialAttackReady = false;
     }
 
     public void SlashAttack()

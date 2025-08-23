@@ -45,7 +45,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ID: 1
-  icon: {fileID: 21300000, guid: 2e44da764c7fc234594bc1b0168711aa, type: 3}
+  icon: {fileID: 21300000, guid: 07720b55bb7cb3c45a9e509ca5b5e01c, type: 3}
   itemDescription: Seconds have a chance to tick backwards
   itemStats: Backward TIck Chance + 5%
   multipleCopies: 0

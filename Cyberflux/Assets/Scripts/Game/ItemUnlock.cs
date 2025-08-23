@@ -36,12 +36,9 @@ public class ItemUnlock : MonoBehaviour
 
     public void Continue()
     {
-        item.OnPickup();
+        
         GameManager.instance.playerScript.AddItem(item);
-        if (!item.multipleCopies)
-        {
-            GameManager.instance.itemPool.Remove(item);
-        }
+        
         GameManager.instance.GameStateResume();
     }
 }
