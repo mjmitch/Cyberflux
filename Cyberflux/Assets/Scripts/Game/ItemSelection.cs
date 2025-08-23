@@ -64,18 +64,24 @@ public class ItemSelection : MonoBehaviour
 
     public void Item1Select()
     {
-        
+        Item1.OnPickup();
         GameManager.instance.playerScript.AddItem(Item1);
-       
+        if (!Item1.multipleCopies)
+        {
+            GameManager.instance.itemPool.Remove(Item1);
+        }
         GameManager.instance.GameStateResume();
         GameManager.instance.YouWin();
         Cursor.visible = true;
     }
     public void Item2Select()
     {
-       
+        Item2.OnPickup();
         GameManager.instance.playerScript.AddItem(Item2);
-        
+        if (!Item2.multipleCopies)
+        {
+            GameManager.instance.itemPool.Remove(Item2);
+        }
         GameManager.instance.GameStateResume();
         GameManager.instance.YouWin();
         Cursor.visible = true;

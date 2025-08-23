@@ -44,7 +44,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25155388fd81038439d22fe0aa28f90d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ID: 4
   icon: {fileID: 21300000, guid: 2e44da764c7fc234594bc1b0168711aa, type: 3}
   itemDescription: Increases Max HP
   itemStats: HP + 50

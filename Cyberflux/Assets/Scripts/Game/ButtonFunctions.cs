@@ -21,10 +21,6 @@ public class ButtonFunctions : MonoBehaviour
         GameManager.instance.LoadLevel(9);
     }
 
-    public void ReturnToMainMenu()
-    {
-        SceneManager.LoadScene(0);
-    }
     public void SelectItem1()
     {
 

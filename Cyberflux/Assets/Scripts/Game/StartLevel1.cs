@@ -9,7 +9,7 @@ public class StartLevel : MonoBehaviour
     {
         if (other.CompareTag("PlayerModel"))
         {
-           // GameManager.instance.playerScript.playerItems.playeritems.Clear();
+            GameManager.instance.playerScript.playerItems.playeritems.Clear();
             SceneManager.LoadScene(level);
         }
     }
