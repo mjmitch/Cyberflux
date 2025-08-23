@@ -40,6 +40,10 @@ public class MomentumBar : MonoBehaviour
         {
             scytheScript.specialAttackReady = true;
         }
+        else
+        {
+            scytheScript.specialAttackReady = false;
+        }
 
     }
 

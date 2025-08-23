@@ -171,8 +171,10 @@ public class ScytheCombat : MonoBehaviour, IDamage
         foreach (Collider enemy in hitEnemies)
         {
             int damage = attackDamage;
+            
             if (GameManager.instance.playerScript.overConfident && (float)(GameManager.instance.playerScript.GetHP() / GameManager.instance.playerScript.stats.maxHealth) > .8) {
                 damage += (damage / 2);
+            
             }
             enemy.GetComponent<IDamage>().TakeDamage(damage);
         }
@@ -193,6 +195,7 @@ public class ScytheCombat : MonoBehaviour, IDamage
         
 
         GameObject projectile = Instantiate(specialAttackObject, attackPoint.position, orientation.rotation);
+        
         if (GameManager.instance.playerScript.overConfident && (float)(GameManager.instance.playerScript.GetHP() / GameManager.instance.playerScript.stats.maxHealth) > .8)
         {
             projectile.GetComponent<damage>().damageAmount += (projectile.GetComponent<damage>().damageAmount / 2);
@@ -209,6 +212,7 @@ public class ScytheCombat : MonoBehaviour, IDamage
     {
 
         GameObject projectile = Instantiate(scytheProjectile, attackPoint.position, orientation.rotation);
+        
         if (GameManager.instance.playerScript.overConfident && (float)(GameManager.instance.playerScript.GetHP() / GameManager.instance.playerScript.stats.maxHealth) > .8) {
             projectile.GetComponent<damage>().damageAmount += (projectile.GetComponent<damage>().damageAmount / 2);
         }
