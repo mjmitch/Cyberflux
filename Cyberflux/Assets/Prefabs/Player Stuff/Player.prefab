@@ -11448,7 +11448,7 @@ Transform:
   m_GameObject: {fileID: 5697389925482126995}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -0.25, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -11502,7 +11502,7 @@ MonoBehaviour:
   HP: 100
   dmgReduction: 0
   keys: 0
-  playerItems: {fileID: 11400000, guid: 19e06fa4fc9491f4f881f821436f17c0, type: 2}
+  playerItems: []
   brokenClock: 0
   overConfident: 0
   playerHeight: 2
@@ -12926,8 +12926,9 @@ MonoBehaviour:
   - {fileID: 149286320662298223, guid: 17a1c6296a268b04290e03cedf82d691, type: 3}
   - {fileID: 3998546997724243811, guid: 13ca1f826bc094641a0f01e308a205a7, type: 3}
   - {fileID: 940455932776282509, guid: d0af5e968407eec4ab8ae951c027474e, type: 3}
-  - {fileID: 8980419331786841024, guid: 57d07e8294111d248b86a82291a54454, type: 3}
   - {fileID: 5909535773075281617, guid: 0c4e271e2616c2a4bab886089cc0eafc, type: 3}
+  - {fileID: 5636860328962812934, guid: 377337ecb38fe8447b4c799eb9c75014, type: 3}
+  - {fileID: 6844090887199711353, guid: 82a7c8c2a942a3043bce484e6927936d, type: 3}
   score: 0
 --- !u!82 &7345308948935082373
 AudioSource:

@@ -44,6 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 489a25f889d953e48805c4cd8affaae1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ID: 5
   icon: {fileID: 21300000, guid: 2e44da764c7fc234594bc1b0168711aa, type: 3}
   itemDescription: Increases ALL damage while over 80% HP.
   itemStats: DMG + 50%
