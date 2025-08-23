@@ -19,7 +19,6 @@ public class PlayerStats : ScriptableObject
 
     public void ResetAllStats()
     {
-        maxHealth = 100;
         currentHealth = maxHealth;
         movementSpeed = baseMovemntSpeed;
         jumpForce = baseJumpForce;

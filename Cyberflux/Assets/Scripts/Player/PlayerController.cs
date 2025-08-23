@@ -81,7 +81,7 @@ public class PlayerController : MonoBehaviour, IDamage, IHeal
 
     [Header("Item Stuff")]
     public int keys = 0;
-    [SerializeField] public List<Augment> playerItems;
+    [SerializeField] public PlayerItems playerItems;
     public bool brokenClock = false;
     public bool overConfident = false;
 
@@ -160,7 +160,6 @@ public class PlayerController : MonoBehaviour, IDamage, IHeal
         {
             return;
         }
-        stats.ResetAllStats();
         HP = stats.maxHealth;
         
         readyToJump = true;
@@ -171,7 +170,7 @@ public class PlayerController : MonoBehaviour, IDamage, IHeal
         cam = Camera.main.GetComponent<Camera>();
         wallRunScript = this.GetComponent<WallRunning>();
         gravityOrig = Physics.gravity;
-       // scytheScript = GetComponentInChildren<ScytheCombat>();
+        scytheScript = GetComponentInChildren<ScytheCombat>();
 
 
         originalFootstepDelay = footstepDelay;
@@ -186,8 +185,7 @@ public class PlayerController : MonoBehaviour, IDamage, IHeal
         crouchSpeedOriginal = crouchSpeed;
 
         LoadKeyBinds();
-        LoadItems();
-        
+        playerItems.ReloadItems();
     }
 
     // Update is called once per frame
@@ -748,39 +746,6 @@ public class PlayerController : MonoBehaviour, IDamage, IHeal
 
     public void AddItem(Augment item)
     {
-       playerItems.Add(item);
-
-        item.OnPickup();
-        
-        if (!item.multipleCopies)
-        {
-            GameManager.instance.itemPool.Remove(item);
-        }
+       playerItems.playeritems.Add(item);
     }
-
-    public void SaveItem()
-    {
-       
-        if (SceneManager.GetActiveScene().buildIndex > 0)
-            PlayerPrefs.SetInt("Item " + (SceneManager.GetActiveScene().buildIndex - 1) + " ID", playerItems[SceneManager.GetActiveScene().buildIndex-1].ID);
-        
-    }
-    public void LoadItems()
-    {
-        if (SceneManager.GetActiveScene().buildIndex == 0 )
-        {
-            return;
-        }
-        for (int i = 0;i < SceneManager.GetActiveScene().buildIndex - 1 ;i++)
-        {
-            int id = PlayerPrefs.GetInt("Item " + i + " ID", 0);
-            if (id != 0)
-            {
-                if (GameManager.instance.itemPool.Find(x => x.GetID() == id))
-                AddItem(GameManager.instance.itemPool.Find(x => x.GetID() == id));
-               
-            }
-        }
-    }
-
 }

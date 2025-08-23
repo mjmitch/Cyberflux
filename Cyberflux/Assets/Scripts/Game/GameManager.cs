@@ -48,7 +48,6 @@ public class GameManager : MonoBehaviour
     [SerializeField] CanvasGroup OptionPanel;
     [SerializeField] public GameObject optionsControls;
     [SerializeField] public GameObject optionsAudio;
-    [SerializeField] GameObject optionbutton;
 
     [SerializeField] TutorialPrompt tutorialPrompt;
     [SerializeField] public ScorePopUp popUp;
@@ -123,24 +122,24 @@ public class GameManager : MonoBehaviour
         //GameStatePause();
         if (playerScript != null)
         {
-            
-            minutes = 0;
-            seconds = 0;
-            miliseconds = 0;
-            UpdateTimerText();
-           
-            menuItemSelect.SetActive(false);
-            menuItemUnlock.SetActive(false);
-        }
-
             audioMixer.SetFloat("masterVolume", masterVol);
             audioMixer.SetFloat("sfxVolume", sfxVol);
             audioMixer.SetFloat("musicVolume", musicVol);
+            menuItemSelect.SetActive(false);
+            menuItemUnlock.SetActive(false);
             
             // Hide Options menu using CanvasGroup only
             OptionPanel.alpha = 0f;
             OptionPanel.interactable = false;
             OptionPanel.blocksRaycasts = false;
+
+            minutes = 0;
+            seconds = 0;
+            miliseconds = 0;
+            UpdateTimerText();
+           
+            
+        }
 
         LoadSettings();
 
@@ -229,7 +228,6 @@ if (menuItemUnlock)
         // Hide options panel if it was opened from pause
         if (OptionPanel)
         {
-            optionbutton.SetActive(true);
             OptionPanel.transform.SetAsFirstSibling(); // Moves panel to back of UI
             OptionPanel.alpha = 0f;
             OptionPanel.blocksRaycasts = false;
@@ -259,14 +257,13 @@ if (menuItemUnlock)
             SceneManager.LoadScene(sceneToLoad);
         // CHANGE THIS TO LEVEL HUB IF THERE IS SAVE DATA
         LoadSettings();
-       // playerScript.LoadKeyBinds();
-        // stats.ResetAllStats();
+        playerScript.LoadKeyBinds();
+        stats.ResetAllStats();
     }
 
     public void Option()
     {
         Debug.Log("Option() called");
-        optionbutton.SetActive(false);
         UIAudioSource.Play();
         OptionPanel.transform.SetAsLastSibling(); // Moves panel to front of UI
         OptionPanel.alpha = 1;               // fully visible
@@ -277,7 +274,6 @@ if (menuItemUnlock)
     {
 
         Debug.Log("Back() called");  // <-- You should see this in Console
-        optionbutton.SetActive(true);
         UIAudioSource.Play();
         OptionPanel.transform.SetAsFirstSibling(); // Moves panel to back of UI
         OptionPanel.alpha = 0;               // invisible
@@ -295,7 +291,10 @@ if (menuItemUnlock)
         {
             SaveSettings();
 
-           
+            if (playerScript.playerItems != null && playerScript.playerItems.playeritems != null)
+            {
+                playerScript.playerItems.playeritems.Clear();
+            }
         }
 
         // play quit sound if you have one
@@ -334,7 +333,6 @@ if (menuItemUnlock)
 
         }
         PlayerPrefs.SetInt("Level " + SceneManager.GetActiveScene().buildIndex + " Completed", 1);
-        playerScript.SaveItem();
     }
 
     public void YouLose(string cause = "Unknown")
@@ -386,10 +384,10 @@ if (menuItemUnlock)
 
     public void RestartLevel()
     {
-        //if (playerScript.playerItems.playeritems.Count >= SceneManager.GetActiveScene().buildIndex)
-        //{
-        //    playerScript.playerItems.playeritems.RemoveAt(SceneManager.GetActiveScene().buildIndex - 1);
-        //}
+        if (playerScript.playerItems.playeritems.Count >= SceneManager.GetActiveScene().buildIndex)
+        {
+            playerScript.playerItems.playeritems.RemoveAt(SceneManager.GetActiveScene().buildIndex - 1);
+        }
         UIAudioSource.Play();
         if (menuWin) menuWin.SetActive(false);
         if (menuLose) menuLose.SetActive(false);
