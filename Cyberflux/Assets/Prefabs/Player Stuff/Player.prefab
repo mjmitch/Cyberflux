@@ -2592,6 +2592,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   slider: {fileID: 469822554996641687}
+  clip: {fileID: 8300000, guid: 2fbd7df474c3d534997f26725f8396c1, type: 3}
   scytheScript: {fileID: 7994221920031498661}
 --- !u!114 &469822554996641687
 MonoBehaviour:
@@ -4227,6 +4228,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   slider: {fileID: 897722429821239976}
   scytheScript: {fileID: 7994221920031498661}
+  clip: {fileID: 8300000, guid: ca880d2d72315b541ba7737f7c51fa7c, type: 3}
 --- !u!114 &897722429821239976
 MonoBehaviour:
   m_ObjectHideFlags: 0
