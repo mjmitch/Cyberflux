@@ -11,15 +11,15 @@ public class ControlOptions : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     private void Start()
     {
-        if (GameManager.instance.playerScript != null)
-        {
-            sensXValue.text = (GameObject.FindWithTag("MainCamera").GetComponent<MainCamera>().sensX / 100).ToString();
-            sensXSlider.value = (GameObject.FindWithTag("MainCamera").GetComponent<MainCamera>().sensX / 100);
-            sensYValue.text = (GameObject.FindWithTag("MainCamera").GetComponent<MainCamera>().sensY / 100).ToString();
-            sensYSlider.value = (GameObject.FindWithTag("MainCamera").GetComponent<MainCamera>().sensY / 100);
+        
+        
+            sensXValue.text = (PlayerPrefs.GetFloat("SensX", 50)).ToString();
+            sensXSlider.value = PlayerPrefs.GetFloat("SensX", .5f);
+            sensYValue.text = (PlayerPrefs.GetFloat("SensY", 50)).ToString(); 
+            sensYSlider.value = PlayerPrefs.GetFloat("SensY", .5f);
             sensXSlider.onValueChanged.AddListener(SensXChanged);
             sensYSlider.onValueChanged.AddListener(SensYChanged);
-        }
+        
     }
     private void Update()
     {
@@ -27,6 +27,7 @@ public class ControlOptions : MonoBehaviour
     }
     public void SensXChanged(float sens)
     {
+        if (GameManager.instance.playerScript != null)
         GameObject.FindWithTag("MainCamera").GetComponent<MainCamera>().sensX = 100 * sens;
 
         PlayerPrefs.SetFloat("SensX", sens);
@@ -36,7 +37,8 @@ public class ControlOptions : MonoBehaviour
     }
     public void SensYChanged(float sens)
     {
-        GameObject.FindWithTag("MainCamera").GetComponent<MainCamera>().sensY = 100 * sens;
+        if (GameManager.instance.playerScript != null)
+            GameObject.FindWithTag("MainCamera").GetComponent<MainCamera>().sensY = 100 * sens;
 
         PlayerPrefs.SetFloat("SensY", sens);
         PlayerPrefs.Save();

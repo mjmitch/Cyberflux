@@ -12,13 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4af5357cde943cb4991f78443159d8db, type: 3}
   m_Name: PlayerStats
   m_EditorClassIdentifier: 
-  maxHealth: 100
-  currentHealth: 0
+  maxHealth: 150
+  currentHealth: 150
   baseMovemntSpeed: 7
-  movementSpeed: 0
+  movementSpeed: 7
   baseJumpForce: 12
-  jumpForce: 0
+  jumpForce: 12
   baseSlideSpeed: 17
-  slideSpeed: 0
+  slideSpeed: 17
   baseWallrunSpeed: 8
-  wallrunningSpeed: 0
+  wallrunningSpeed: 8
