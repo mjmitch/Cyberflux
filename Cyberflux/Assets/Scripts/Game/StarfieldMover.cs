@@ -23,8 +23,8 @@ public class StarfieldMover : MonoBehaviour
         if (image == null) return;
 
         // Move UVs
-        uvRect.x += scrollSpeedX * Time.deltaTime;
-        uvRect.y += scrollSpeedY * Time.deltaTime;
+        uvRect.x += scrollSpeedX * Time.unscaledDeltaTime;
+        uvRect.y += scrollSpeedY * Time.unscaledDeltaTime;
 
         // Loop forever by wrapping values between 0–1
         if (uvRect.x > 1) uvRect.x -= 1;
