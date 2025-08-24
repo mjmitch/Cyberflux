@@ -254,9 +254,9 @@ RectTransform:
   - {fileID: 646105053}
   m_Father: {fileID: 4172825302609009222}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 1040.1243, y: -365.22705}
+  m_AnchorMin: {x: 1, y: 0}
+  m_AnchorMax: {x: 1, y: 0}
+  m_AnchoredPosition: {x: -150, y: 135}
   m_SizeDelta: {x: 300, y: 270}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &55794904
@@ -5485,7 +5485,7 @@ MonoBehaviour:
   popUp: {fileID: 0}
   UIAudioSource: {fileID: 6679334988975775302}
   audioMixer: {fileID: 24100000, guid: 166f7127cd5aad44d840c8cf69142e2b, type: 2}
-  scytheCursor: {fileID: 613632089}
+  scytheCursorGroup: {fileID: 0}
   tutorialMessages:
   - "Press \u2B7C (Middle-click) to unleash Momentum\u2019s surge."
   - Press LMB (Left-click) to strike with your blade.
