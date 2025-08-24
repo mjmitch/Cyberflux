@@ -1470,10 +1470,6 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4079929521573970184, guid: 2a43059ae07f44340b28e40e2efb2107, type: 3}
-      propertyPath: scytheCursor
-      value: 
-      objectReference: {fileID: 4510134159880083474, guid: 19ec637cd54623e48ad65b617905433e, type: 3}
     - target: {fileID: 4841870382532518927, guid: 2a43059ae07f44340b28e40e2efb2107, type: 3}
       propertyPath: m_LocalPosition.x
       value: 2.47
