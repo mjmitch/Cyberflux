@@ -249,10 +249,17 @@ if (menuItemUnlock)
 
     public void StartGame()
     {
+        if (PlayerPrefs.GetInt("Level 1 Completed", 0) == 1)
+        {
+            SceneManager.LoadScene(7);
+        }
         if (fader)
             fader.FadeToScene(SceneManager.GetActiveScene().buildIndex + 1);
         else
+        {
+            
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        }
         // CHANGE THIS TO LEVEL HUB IF THERE IS SAVE DATA
         LoadSettings();
        // playerScript.LoadKeyBinds();
@@ -567,5 +574,9 @@ if (menuItemUnlock)
         masterVol = PlayerPrefs.GetFloat("Master Volume", .5f);
         sfxVol = PlayerPrefs.GetFloat("SFX Volume", .5f);
         musicVol = PlayerPrefs.GetFloat("Music Volume", .5f);
+
+        audioMixer.SetFloat("masterVolume", ((masterVol * 100) - 80));
+        audioMixer.SetFloat("sfxVolume", ((sfxVol * 100) - 80));
+        audioMixer.SetFloat("musicVolume", ((musicVol * 100) - 80));
     }
 }

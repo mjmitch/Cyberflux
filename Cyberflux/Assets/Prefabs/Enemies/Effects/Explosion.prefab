@@ -51,7 +51,7 @@ MonoBehaviour:
   type: 4
   rb: {fileID: 3356408127823256355}
   slowEffect: 0
-  damageAmount: 28
+  damageAmount: 22
   damageRate: 0
   speed: 0
   destroyTime: 0.1
