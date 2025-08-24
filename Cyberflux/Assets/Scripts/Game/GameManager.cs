@@ -510,7 +510,7 @@ if (menuItemUnlock)
         isPaused = true;
         Time.timeScale = 0f;
         Time.timeScale = 0f;
-        Cursor.lockState = CursorLockMode.None;
+        if (scytheCursorGroup != null) scytheCursorGroup.alpha = 1f;
 
         menuItemSelect.SetActive(true);
     }
