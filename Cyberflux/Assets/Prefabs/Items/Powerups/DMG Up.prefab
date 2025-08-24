@@ -45,7 +45,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ID: 3
-  icon: {fileID: 21300000, guid: 2e44da764c7fc234594bc1b0168711aa, type: 3}
+  icon: {fileID: 21300000, guid: 83da52182bc637e498b2e0da38d233a7, type: 3}
   itemDescription: Increases Scythe Damage
   itemStats: Scythe Attack DMG +5
   multipleCopies: 1
