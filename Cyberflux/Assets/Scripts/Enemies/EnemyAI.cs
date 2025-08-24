@@ -240,7 +240,7 @@ public class EnemyAI : MonoBehaviour, IDamage
             isExploding = true;
             Transform explodePosition = model.transform;
             Instantiate(explosionEffect, explodePosition.position, Quaternion.identity);
-            audioPlayer.PlayOneShot(explosionSound, GameManager.instance.sfxVol * GameManager.instance.masterVol);
+            audioPlayer.PlayOneShot(explosionSound, GameManager.instance.masterVol);
         }
         Destroy(gameObject);
     }
@@ -340,9 +340,8 @@ public class EnemyAI : MonoBehaviour, IDamage
                 explosionEffect.GetComponent<damage>().damageAmount /= 2;
                 explosionEffect.transform.localScale /= 2;
                 Instantiate(explosionEffect, transform.position, Quaternion.identity);
-                //audioPlayer.PlayOneShot(explosionSound, GameManager.instance.playerScript.sfxVol);
+                audioPlayer.PlayOneShot(explosionSound, GameManager.instance.sfxVol * GameManager.instance.masterVol);
             }
-
             GameManager.instance.score += score;
             ScorePopUp pop = GameManager.instance.popUp;
             pop.SetText("+" + score.ToString());
