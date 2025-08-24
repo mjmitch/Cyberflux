@@ -178,7 +178,7 @@ public class EnemyAI : MonoBehaviour, IDamage
         angleToPlayer = Vector3.Angle(playerDirection, transform.forward);
         RaycastHit hit;
         //Debug.Log("CAN SEE PLAYER");
-        Debug.DrawRay(headPosition.position, playerDirection, Color.red);
+       // Debug.DrawRay(headPosition.position, playerDirection, Color.red);
         if (Physics.Raycast(headPosition.position, playerDirection, out hit))
         {
             //Debug.Log(hit.collider.name + " / " + angleToPlayer + " / " + fov);
