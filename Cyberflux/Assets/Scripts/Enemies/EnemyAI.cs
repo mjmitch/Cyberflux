@@ -254,7 +254,7 @@ public class EnemyAI : MonoBehaviour, IDamage
             Instantiate(explosionEffect, explodePosition.position, Quaternion.identity);
             audioPlayer.PlayOneShot(explosionSound, GameManager.instance.masterVol);
         }
-        Destroy(gameObject);
+        //Destroy(gameObject);
     }
     
     void BasicCombatMovement()
@@ -380,6 +380,7 @@ public class EnemyAI : MonoBehaviour, IDamage
         {
             case enemyType.exploding:
                 animator.Play("Destroyed");
+                model.SetActive(false);
                 break;
             case enemyType.ranged:
                 animator.Play("Die");
