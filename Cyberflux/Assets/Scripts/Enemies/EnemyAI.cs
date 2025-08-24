@@ -155,7 +155,7 @@ public class EnemyAI : MonoBehaviour, IDamage
 
         if (animator != null)
         {
-            animator.speed = agent.velocity.normalized.magnitude;
+            animator.SetFloat("Speed", agent.velocity.normalized.magnitude);
         }
     }
 
@@ -227,7 +227,8 @@ public class EnemyAI : MonoBehaviour, IDamage
     void MeleeAttack()
     {
         attackTimer = 0;
-        StartCoroutine(SwordSwing());
+        animator.SetTrigger("Attack");
+        //animator.ResetTrigger("Attack");
         audioPlayer.PlayOneShot(attackSound, GameManager.instance.masterVol * GameManager.instance.sfxVol);
     }
 
@@ -236,10 +237,10 @@ public class EnemyAI : MonoBehaviour, IDamage
         attackTimer = 0;
         GameObject bullet1 = Instantiate(bullet, attackPosition.position, transform.rotation);
         bullet1.GetComponent<damage>().damageAmount = bulletDamage;
+        if(animator != null)
+            animator.SetTrigger("Attack");
         
-            //bullet.GetComponent<damage>().damageAmount *= ((int)1.05f * (SceneManager.GetActiveScene().buildIndex));
         audioPlayer.PlayOneShot(attackSound, GameManager.instance.masterVol * GameManager.instance.sfxVol);
-        //bullet1.GetComponent<damage>().rb.linearVelocity = (player.transform.position - transform.position) * bullet1.GetComponent<damage>().speed;
     }
 
     void FlyingAttack()
