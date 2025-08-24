@@ -56,6 +56,10 @@ public class GameManager : MonoBehaviour
     [SerializeField] public AudioSource UIAudioSource;
     [SerializeField] public AudioMixer audioMixer;
 
+
+   // [SerializeField] private UICursor scytheCursor;
+    [SerializeField] private CanvasGroup scytheCursorGroup;
+
     [SerializeField]
      private List<string> tutorialMessages = new List<string>()
      {
@@ -143,6 +147,9 @@ public class GameManager : MonoBehaviour
             OptionPanel.interactable = false;
             OptionPanel.blocksRaycasts = false;
 
+        // Hide scythe cursor on start
+        if (scytheCursorGroup != null) scytheCursorGroup.alpha = 0f;
+
         LoadSettings();
       
 
@@ -197,8 +204,8 @@ public class GameManager : MonoBehaviour
         isPaused = true;
         Time.timeScale = 0f;
 
-        Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
+        if (scytheCursorGroup != null) scytheCursorGroup.alpha = 1f;
 
         if (menuPause) menuPause.SetActive(true);
         menuActive = menuPause;
@@ -240,8 +247,8 @@ if (menuItemUnlock)
         isPaused = false;
         Time.timeScale = 1f;
 
-        Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
+        if (scytheCursorGroup != null) scytheCursorGroup.alpha = 0f;
 
         menuActive = null;
         UIAudioSource.Play();
@@ -318,8 +325,8 @@ if (menuItemUnlock)
     {
         isPaused = true;
         Time.timeScale = 0f;
-        Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
+        if (scytheCursorGroup != null) scytheCursorGroup.alpha = 1f;
 
         if (menuLose) menuLose.SetActive(false);
         if (menuWin) menuWin.SetActive(true);
@@ -344,8 +351,8 @@ if (menuItemUnlock)
     {
         isPaused = true;
         Time.timeScale = 0f;
-        Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
+        if (scytheCursorGroup != null) scytheCursorGroup.alpha = 1f;
 
         if (menuWin) menuWin.SetActive(false);
         if (menuLose) menuLose.SetActive(true);
@@ -502,19 +509,19 @@ if (menuItemUnlock)
     {
         isPaused = true;
         Time.timeScale = 0f;
-        Cursor.visible = true;
-        Cursor.lockState = CursorLockMode.None;
-        
+        Time.timeScale = 0f;
+        if (scytheCursorGroup != null) scytheCursorGroup.alpha = 1f;
+
         menuItemSelect.SetActive(true);
     }
     public void UnlockItem()
     {
         isPaused = true;
         Time.timeScale = 0f;
-        Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
-        
-       
+        if (scytheCursorGroup != null) scytheCursorGroup.alpha = 1f;
+
+
         menuItemUnlock.SetActive(true);
     }
 
@@ -574,9 +581,5 @@ if (menuItemUnlock)
         masterVol = PlayerPrefs.GetFloat("Master Volume", .5f);
         sfxVol = PlayerPrefs.GetFloat("SFX Volume", .5f);
         musicVol = PlayerPrefs.GetFloat("Music Volume", .5f);
-
-        audioMixer.SetFloat("masterVolume", ((masterVol * 100) - 80));
-        audioMixer.SetFloat("sfxVolume", ((sfxVol * 100) - 80));
-        audioMixer.SetFloat("musicVolume", ((musicVol * 100) - 80));
     }
 }

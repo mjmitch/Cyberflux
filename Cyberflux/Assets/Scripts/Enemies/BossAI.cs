@@ -130,7 +130,7 @@ public class BossAI : MonoBehaviour, IDamage
             shootTimers[i] += Time.deltaTime;
             if (shootTimers[i] > shootRates[i])
             {
-                Debug.Log(i);
+               // Debug.Log(i);
                 shootTimers[i] = 0;
                 Instantiate(bullets[i], attackPositions[i].position, Quaternion.identity);
                 audioPlayer.PlayOneShot(shootingSounds[i], GameManager.instance.masterVol * GameManager.instance.sfxVol);
@@ -181,7 +181,7 @@ public class BossAI : MonoBehaviour, IDamage
             Vector3 offset = Random.insideUnitCircle.normalized * maxTeleportDistance;
             offset.z = offset.y;
             offset.y = 0;
-            Debug.Log(offset);
+           // Debug.Log(offset);
             transform.position += offset;
             if(teleportSound != null)
                 audioPlayer.PlayOneShot(teleportSound, GameManager.instance.masterVol * GameManager.instance.sfxVol);
