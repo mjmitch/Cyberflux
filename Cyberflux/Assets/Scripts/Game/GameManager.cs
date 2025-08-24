@@ -95,6 +95,7 @@ public class GameManager : MonoBehaviour
     GameState _state = GameState.Title;
 
     public int score;
+    [SerializeField] GameObject backGround;    
     
     void Awake()
     {
@@ -143,7 +144,7 @@ public class GameManager : MonoBehaviour
             OptionPanel.blocksRaycasts = false;
 
         LoadSettings();
-
+      
 
     }
 
