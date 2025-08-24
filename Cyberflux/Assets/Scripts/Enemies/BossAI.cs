@@ -37,6 +37,7 @@ public class BossAI : MonoBehaviour, IDamage
     [Range(2, 10)] [SerializeField] private float teleportRate;
     [Range(4, 16)] [SerializeField] private float maxTeleportDistance;
     private float teleportTimer;
+    private string deathCause;
 
     private bool playerInTrigger = false;
     
@@ -61,6 +62,7 @@ public class BossAI : MonoBehaviour, IDamage
         GameManager.instance.bossNameText.text = bossName;
         UpdateBossUI();
         spawnTimer = 0;
+        deathCause = GetComponentInParent<DeathCause>()?.GetMessage() ?? "Unknown";
     }
 
     // Update is called once per frame
@@ -72,7 +74,7 @@ public class BossAI : MonoBehaviour, IDamage
             if (auraDamageTimer >= auraDamageRate)
             {
                 auraDamageTimer = 0;
-                player.GetComponent<PlayerController>().TakeDamage(auraDamageNum);
+                player.GetComponent<PlayerController>().TakeDamage(auraDamageNum, deathCause);
             }
         }
         Movement();

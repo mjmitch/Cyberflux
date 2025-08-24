@@ -7,7 +7,7 @@ public class InputFieldHandler : MonoBehaviour
 {
     // Start is called once before the first execution of Update after the MonoBehaviour is created
 
-    //string tempText;
+   
 
     public Button JumpKeyInput;
     bool JumpInputReady = false;
@@ -23,20 +23,21 @@ public class InputFieldHandler : MonoBehaviour
     bool SlamInputReady = false;
     public Button SpecialKeyInput;
     bool SpecialInputReady = false;
-    
+
+    private string tempHolder;
     void Start()
     {
-        if (GameManager.instance.playerScript != null)
-        {
+        
+        
             
-            JumpKeyInput.GetComponentInChildren<TMP_Text>().text = GameManager.instance.playerScript.jumpKey.ToString();
-            CrouchKeyInput.GetComponentInChildren<TMP_Text>().text = GameManager.instance.playerScript.crouchKey.ToString();
-            SprintKeyInput.GetComponentInChildren<TMP_Text>().text = GameManager.instance.playerScript.sprintKey.ToString();
-            MeleeKeyInput.GetComponentInChildren<TMP_Text>().text = GameManager.instance.playerScript.scytheScript.attackKey.ToString();
-            SlashKeyInput.GetComponentInChildren<TMP_Text>().text = GameManager.instance.playerScript.scytheScript.slashKey.ToString();
-            SlamKeyInput.GetComponentInChildren<TMP_Text>().text = GameManager.instance.playerScript.scytheScript.slamAttackKey.ToString();
-            SpecialKeyInput.GetComponentInChildren<TMP_Text>().text = GameManager.instance.playerScript.scytheScript.specialAttackKey.ToString();
-        }
+            JumpKeyInput.GetComponentInChildren<TMP_Text>().text = PlayerPrefs.GetString("Jump Key", KeyCode.Space.ToString());
+            CrouchKeyInput.GetComponentInChildren<TMP_Text>().text = PlayerPrefs.GetString("Crouch Key", KeyCode.C.ToString());
+            SprintKeyInput.GetComponentInChildren<TMP_Text>().text = PlayerPrefs.GetString("Sprint Key", KeyCode.LeftShift.ToString());
+            MeleeKeyInput.GetComponentInChildren<TMP_Text>().text = PlayerPrefs.GetString("Melee Key", KeyCode.Mouse0.ToString());
+            SlashKeyInput.GetComponentInChildren<TMP_Text>().text = PlayerPrefs.GetString("Slash Key", KeyCode.Q.ToString());
+            SlamKeyInput.GetComponentInChildren<TMP_Text>().text = PlayerPrefs.GetString("Slam Key", KeyCode.Mouse1.ToString());
+            SpecialKeyInput.GetComponentInChildren<TMP_Text>().text = PlayerPrefs.GetString("Special Key", KeyCode.Mouse2.ToString());
+        
         
     }
 
@@ -73,38 +74,39 @@ public class InputFieldHandler : MonoBehaviour
         }
     }
 
-    bool CheckDuplicateKey(KeyCode key, string str)
-    {
-        if (key == KeyCode.Escape)
-        {
-            return true;
-        }
-        if (str == "Jump")
-        {
-            if (key == GameManager.instance.playerScript.sprintKey || key == GameManager.instance.playerScript.crouchKey)
-            {
-                return true;
-            }
-        }
-        else if (str == "Crouch") {
-            if (key == GameManager.instance.playerScript.sprintKey || key == GameManager.instance.playerScript.jumpKey)
-            {
-                return true;
-            }
-        }
-        else if (str == "Sprint")
-        {
-            if (key == GameManager.instance.playerScript.jumpKey || key == GameManager.instance.playerScript.crouchKey) {
-                return true;
-            }
-        }
-        return false;
-    }
+    //bool CheckDuplicateKey(KeyCode key, string str)
+    //{
+    //    if (key == KeyCode.Escape)
+    //    {
+    //        return true;
+    //    }
+    //    if (str == "Jump")
+    //    {
+    //        if (key == GameManager.instance.playerScript.sprintKey || key == GameManager.instance.playerScript.crouchKey)
+    //        {
+    //            return true;
+    //        }
+    //    }
+    //    else if (str == "Crouch") {
+    //        if (key == GameManager.instance.playerScript.sprintKey || key == GameManager.instance.playerScript.jumpKey)
+    //        {
+    //            return true;
+    //        }
+    //    }
+    //    else if (str == "Sprint")
+    //    {
+    //        if (key == GameManager.instance.playerScript.jumpKey || key == GameManager.instance.playerScript.crouchKey) {
+    //            return true;
+    //        }
+    //    }
+    //    return false;
+    //}
 
     public void SetJumpKey ()
     {
        JumpInputReady = true;
-       // tempText = JumpKeyInput.GetComponentInChildren<TMP_Text>().text;
+        // tempText = JumpKeyInput.GetComponentInChildren<TMP_Text>().text;
+        tempHolder = JumpKeyInput.GetComponentInChildren<TMP_Text>().text;
         JumpKeyInput.GetComponentInChildren<TMP_Text>().text = "";
         GameManager.instance.UIAudioSource.Play();
     }
@@ -114,28 +116,32 @@ public class InputFieldHandler : MonoBehaviour
         {
             if (Input.GetKey(vKey))
             {
-                if (CheckDuplicateKey(vKey, "Jump"))
+                if (vKey == KeyCode.Escape)
                 {
-                    JumpKeyInput.GetComponentInChildren<TMP_Text>().text = GameManager.instance.playerScript.jumpKey.ToString();
+                    
+                        JumpKeyInput.GetComponentInChildren<TMP_Text>().text = tempHolder.ToString();
                     JumpInputReady = false;
                     break;
                 }
                 else
                 {
-                    GameManager.instance.playerScript.jumpKey = vKey;
+                    if (GameManager.instance.playerScript != null)
+                        GameManager.instance.playerScript.jumpKey = vKey;
                     JumpKeyInput.GetComponentInChildren<TMP_Text>().text = vKey.ToString();
                     JumpInputReady = false;
+                    PlayerPrefs.SetString("Jump Key", vKey.ToString());
                     break;
                 }
             }
         }
-        PlayerPrefs.SetString("Jump Key", GameManager.instance.playerScript.jumpKey.ToString());
+        
         
     }
     public void SetCrouchKey ()
     {
         CrouchInputReady = true;
-       // tempText = JumpKeyInput.GetComponentInChildren<TMP_Text>().text;
+        // tempText = JumpKeyInput.GetComponentInChildren<TMP_Text>().text;
+        tempHolder = CrouchKeyInput.GetComponentInChildren<TMP_Text>().text;
         CrouchKeyInput.GetComponentInChildren<TMP_Text>().text = "";
         GameManager.instance.UIAudioSource.Play();
     }
@@ -145,29 +151,33 @@ public class InputFieldHandler : MonoBehaviour
         {
             if (Input.GetKey(vKey))
             {
-                if (CheckDuplicateKey(vKey, "Crouch"))
+                if (vKey == KeyCode.Escape)
                 {
-                    CrouchKeyInput.GetComponentInChildren<TMP_Text>().text = GameManager.instance.playerScript.crouchKey.ToString();
+                  
+                        CrouchKeyInput.GetComponentInChildren<TMP_Text>().text = tempHolder.ToString();
                     CrouchInputReady = false;
+                    
                     break;
                 }
                 else
                 {
-                    GameManager.instance.playerScript.crouchKey = vKey;
+                    if (GameManager.instance.playerScript != null)
+                        GameManager.instance.playerScript.crouchKey = vKey;
                     CrouchKeyInput.GetComponentInChildren<TMP_Text>().text = vKey.ToString();
                     CrouchInputReady = false;
+                    PlayerPrefs.SetString("Crouch Key", vKey.ToString());
                     break;
                 }
             }
         }
       
-        PlayerPrefs.SetString("Crouch Key", GameManager.instance.playerScript.crouchKey.ToString());
+        
         
     }
     public void SetSprintKey ()
     {
         SprintInputReady = true;
-        // tempText = JumpKeyInput.GetComponentInChildren<TMP_Text>().text;
+        tempHolder = SprintKeyInput.GetComponentInChildren<TMP_Text>().text;
         SprintKeyInput.GetComponentInChildren<TMP_Text>().text = "";
         GameManager.instance.UIAudioSource.Play();
     }
@@ -177,23 +187,27 @@ public class InputFieldHandler : MonoBehaviour
         {
             if (Input.GetKey(vKey))
             {
-                if (CheckDuplicateKey(vKey, "Sprint"))
+                if (vKey == KeyCode.Escape)
                 {
-                    SprintKeyInput.GetComponentInChildren<TMP_Text>().text = GameManager.instance.playerScript.sprintKey.ToString();
+                    
+                        SprintKeyInput.GetComponentInChildren<TMP_Text>().text = tempHolder.ToString();
                     SprintInputReady = false;
+                   
                     break;
                 }
                 else
                 {
-                    GameManager.instance.playerScript.sprintKey = vKey;
+                    if (GameManager.instance.playerScript != null)
+                        GameManager.instance.playerScript.sprintKey = vKey;
                     SprintKeyInput.GetComponentInChildren<TMP_Text>().text = vKey.ToString();
                     SprintInputReady = false;
+                    PlayerPrefs.SetString("Sprint Key", vKey.ToString());
                     break;
                 }
             }
             
         }
-        PlayerPrefs.SetString("Sprint Key", GameManager.instance.playerScript.sprintKey.ToString());
+       
     }
         
         
@@ -202,7 +216,7 @@ public class InputFieldHandler : MonoBehaviour
     public void SetSlamKey()
     {
         SlamInputReady = true;
-        // tempText = JumpKeyInput.GetComponentInChildren<TMP_Text>().text;
+        tempHolder = SlamKeyInput.GetComponentInChildren<TMP_Text>().text;
         SlamKeyInput.GetComponentInChildren<TMP_Text>().text = "";
         GameManager.instance.UIAudioSource.Play();
     }
@@ -212,29 +226,33 @@ public class InputFieldHandler : MonoBehaviour
         {
             if (Input.GetKey(vKey))
             {
-                if (CheckDuplicateKey(vKey, ""))
+                if (vKey == KeyCode.Escape)
                 {
-                    SlamKeyInput.GetComponentInChildren<TMP_Text>().text = GameManager.instance.playerScript.scytheScript.slamAttackKey.ToString();
+                   
+                        SlamKeyInput.GetComponentInChildren<TMP_Text>().text = tempHolder.ToString();
                     SlamInputReady = false;
+                    
                     break;
                 }
                 else
                 {
-                    GameManager.instance.playerScript.scytheScript.slamAttackKey = vKey;
+                    if (GameManager.instance.playerScript != null)
+                        GameManager.instance.playerScript.scytheScript.slamAttackKey = vKey;
                     SlamKeyInput.GetComponentInChildren<TMP_Text>().text = vKey.ToString();
                     SlamInputReady = false;
+                    PlayerPrefs.SetString("Slam Key", vKey.ToString());
                     break;
                 }
             }
         }
       
-        PlayerPrefs.SetString("Slam Key", GameManager.instance.playerScript.scytheScript.slamAttackKey.ToString());
+       
         
     }
     public void SetMeleeKey()
     {
         MeleeInputReady = true;
-        // tempText = JumpKeyInput.GetComponentInChildren<TMP_Text>().text;
+        tempHolder = MeleeKeyInput.GetComponentInChildren<TMP_Text>().text;
         MeleeKeyInput.GetComponentInChildren<TMP_Text>().text = "";
         GameManager.instance.UIAudioSource.Play();
     }
@@ -244,29 +262,33 @@ public class InputFieldHandler : MonoBehaviour
         {
             if (Input.GetKey(vKey))
             {
-                if (CheckDuplicateKey(vKey, "Sprint"))
+                if (vKey == KeyCode.Escape)
                 {
-                    MeleeKeyInput.GetComponentInChildren<TMP_Text>().text = GameManager.instance.playerScript.scytheScript.attackKey.ToString();
+                    
+                        MeleeKeyInput.GetComponentInChildren<TMP_Text>().text = tempHolder.ToString();
                     MeleeInputReady = false;
+                   
                     break;
                 }
                 else
                 {
-                    GameManager.instance.playerScript.scytheScript.attackKey = vKey;
+                    if (GameManager.instance.playerScript != null)
+                        GameManager.instance.playerScript.scytheScript.attackKey = vKey;
                     MeleeKeyInput.GetComponentInChildren<TMP_Text>().text = vKey.ToString();
                     MeleeInputReady = false;
+                    PlayerPrefs.SetString("Attack Key", vKey.ToString());
                     break;
                 }
             }
         }
      
-        PlayerPrefs.SetString("Attack Key", GameManager.instance.playerScript.scytheScript.attackKey.ToString());
+        
         
     }
     public void SetSlashKey()
     {
         SlashInputReady = true;
-        // tempText = JumpKeyInput.GetComponentInChildren<TMP_Text>().text;
+        tempHolder = SlashKeyInput.GetComponentInChildren<TMP_Text>().text;
         SlashKeyInput.GetComponentInChildren<TMP_Text>().text = "";
         GameManager.instance.UIAudioSource.Play();
     }
@@ -276,29 +298,33 @@ public class InputFieldHandler : MonoBehaviour
         {
             if (Input.GetKey(vKey))
             {
-                if (CheckDuplicateKey(vKey, ""))
+                if (vKey == KeyCode.Escape)
                 {
-                    SlashKeyInput.GetComponentInChildren<TMP_Text>().text = GameManager.instance.playerScript.scytheScript.slashKey.ToString();
+                    
+                        SlashKeyInput.GetComponentInChildren<TMP_Text>().text = tempHolder.ToString();
                     SlashInputReady = false;
+                    
                     break;
                 }
                 else
                 {
-                    GameManager.instance.playerScript.scytheScript.slashKey = vKey;
+                    if (GameManager.instance.playerScript != null)
+                        GameManager.instance.playerScript.scytheScript.slashKey = vKey;
                     SlashKeyInput.GetComponentInChildren<TMP_Text>().text = vKey.ToString();
                     SlashInputReady = false;
+                    PlayerPrefs.SetString("Slash Key", vKey.ToString());
                     break;
                 }
             }
         }
        
-        PlayerPrefs.SetString("Slash Key", GameManager.instance.playerScript.scytheScript.slashKey.ToString());
+        
         
     }
     public void SetSpecialKey()
     {
         SpecialInputReady = true;
-        // tempText = JumpKeyInput.GetComponentInChildren<TMP_Text>().text;
+        tempHolder = SpecialKeyInput.GetComponentInChildren<TMP_Text>().text;
         SpecialKeyInput.GetComponentInChildren<TMP_Text>().text = "";
         GameManager.instance.UIAudioSource.Play();
     }
@@ -308,23 +334,27 @@ public class InputFieldHandler : MonoBehaviour
         {
             if (Input.GetKey(vKey))
             {
-                if (CheckDuplicateKey(vKey, ""))
+                if (vKey == KeyCode.Escape)
                 {
-                    SpecialKeyInput.GetComponentInChildren<TMP_Text>().text = GameManager.instance.playerScript.scytheScript.specialAttackKey.ToString();
+                    
+                        SpecialKeyInput.GetComponentInChildren<TMP_Text>().text = tempHolder.ToString();
                     SpecialInputReady = false;
+                    
                     break;
                 }
                 else
                 {
-                    GameManager.instance.playerScript.scytheScript.specialAttackKey = vKey;
+                    if (GameManager.instance.playerScript != null)
+                        GameManager.instance.playerScript.scytheScript.specialAttackKey = vKey;
                     SpecialKeyInput.GetComponentInChildren<TMP_Text>().text = vKey.ToString();
                     SpecialInputReady = false;
+                    PlayerPrefs.SetString("Special Key", vKey.ToString());
                     break;
                 }
             }
         }
         
-        PlayerPrefs.SetString("Special Key", GameManager.instance.playerScript.scytheScript.specialAttackKey.ToString());
+        
     }
 }
 

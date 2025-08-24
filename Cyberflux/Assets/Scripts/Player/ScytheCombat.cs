@@ -119,6 +119,7 @@ public class ScytheCombat : MonoBehaviour, IDamage
         {
 
             MomentumAttack();
+            OnSpecialAttack?.Invoke();
 
             if (!GameManager.instance.isPaused)
             {
@@ -126,7 +127,7 @@ public class ScytheCombat : MonoBehaviour, IDamage
                 audioPlayer.PlayOneShot(specialAttackClip);
             }
             //Invoke the Action if Action isn't null
-            OnSpecialAttack?.Invoke();
+            
         }
 
         if (Time.time >= nextSlashTime) {
@@ -193,15 +194,16 @@ public class ScytheCombat : MonoBehaviour, IDamage
         
 
         GameObject projectile = Instantiate(specialAttackObject, attackPoint.position, orientation.rotation);
+        
         if (GameManager.instance.playerScript.overConfident && (float)(GameManager.instance.playerScript.GetHP() / GameManager.instance.playerScript.stats.maxHealth) > .8)
         {
             projectile.GetComponent<damage>().damageAmount += (projectile.GetComponent<damage>().damageAmount / 2);
         }
 
         projectile.transform.forward = playerCam.forward;
-        
+
         timeToDestroy = projectile.GetComponent<damage>().destroyTime;
-        
+
         Destroy(projectile, timeToDestroy);
 
         specialAttackReady = false;

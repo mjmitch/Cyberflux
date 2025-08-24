@@ -45,7 +45,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ID: 4
-  icon: {fileID: 21300000, guid: 766f414c439da9240b103dc468ae0ee5, type: 3}
+  icon: {fileID: 21300000, guid: 2e44da764c7fc234594bc1b0168711aa, type: 3}
   itemDescription: Increases Max HP
   itemStats: HP + 50
   multipleCopies: 1
