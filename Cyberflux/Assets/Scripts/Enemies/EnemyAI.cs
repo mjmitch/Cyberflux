@@ -8,6 +8,7 @@ using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.Audio;
 using UnityEngine.SceneManagement;
+using UnityEngine.UIElements;
 using Debug = UnityEngine.Debug;
 using Random = UnityEngine.Random;
 
@@ -144,8 +145,13 @@ public class EnemyAI : MonoBehaviour, IDamage
                 RoamCheck();
         }
 
-        if (type == enemyType.flying && !isBobbing)
+        if (type == enemyType.flying && !isBobbing && !dead)
             StartCoroutine(FlyingMovement());
+        else if (type == enemyType.flying && dead)
+        {
+            agent.baseOffset -= Time.deltaTime/2;
+            transform.Rotate(Time.deltaTime * 250, Time.deltaTime * 250, Time.deltaTime * 250);
+        }
 
         if (animator != null)
         {
@@ -381,7 +387,7 @@ public class EnemyAI : MonoBehaviour, IDamage
 
                 break;
             case enemyType.flying:
-
+                animator.Play("Destroyed");
                 break;
         }
         if(type != enemyType.swarm)

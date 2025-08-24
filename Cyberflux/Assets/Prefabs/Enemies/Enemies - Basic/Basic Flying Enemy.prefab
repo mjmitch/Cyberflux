@@ -236,12 +236,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ce9c2088fee3cf4bb1fce085887ce78, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  model: {fileID: 0}
+  model: {fileID: 7948077245902428085}
+  animator: {fileID: 0}
   agent: {fileID: 5205435808787254736}
   attackPosition: {fileID: 2424374343865870}
   headPosition: {fileID: 4812252409772851108}
   bullet: {fileID: 6153881909228287789, guid: 60404785377941743862f2108166e021, type: 3}
   weapon: {fileID: 0}
+  basedamage: 4
   attackRate: 1.5
   attackSound: {fileID: 8300000, guid: a1613c8ff025e6542adeb39356bd9078, type: 3}
   HP: 10
@@ -263,10 +265,7 @@ MonoBehaviour:
   minFlyHeight: 0
   maxFlyHeight: 2
   circleRange: 5
-  basedamage: 4
   type: 4
-  dropChance: 0
-  audioPlayer: {fileID: 0}
 --- !u!195 &5205435808787254736
 NavMeshAgent:
   m_ObjectHideFlags: 0
