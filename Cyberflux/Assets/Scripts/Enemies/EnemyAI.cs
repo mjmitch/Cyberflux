@@ -57,6 +57,7 @@ public class EnemyAI : MonoBehaviour, IDamage
     [Range(5, 25)] [SerializeField] private int circleRange;
     private bool isBobbing = false;
     private bool eliteAttackingPlayer = false;
+    private bool dead = false;
     
     
     private enum enemyType
@@ -145,6 +146,11 @@ public class EnemyAI : MonoBehaviour, IDamage
 
         if (type == enemyType.flying && !isBobbing)
             StartCoroutine(FlyingMovement());
+
+        if (animator != null)
+        {
+            animator.speed = agent.velocity.normalized.magnitude;
+        }
     }
 
     void RoamCheck()
@@ -247,6 +253,8 @@ public class EnemyAI : MonoBehaviour, IDamage
     
     void BasicCombatMovement()
     {
+        if (dead)
+            return;
         FaceTarget();
         
         switch (type)
@@ -277,6 +285,8 @@ public class EnemyAI : MonoBehaviour, IDamage
 
     void EliteCombatMovement()
     {
+        if (dead)
+            return;
         teleportTimer += Time.deltaTime;
         if (teleportTimer >= teleportTime)
         {
@@ -295,6 +305,8 @@ public class EnemyAI : MonoBehaviour, IDamage
 
     void Combat()
     {
+        if (dead)
+            return;
         attackTimer += Time.deltaTime;
         switch (type)
         {
@@ -347,8 +359,39 @@ public class EnemyAI : MonoBehaviour, IDamage
             pop.SetText("+" + score.ToString());
             Instantiate(pop, transform.position, Quaternion.identity);
             
-            Destroy(gameObject);
+            Death();
         }
+    }
+
+    void Death()
+    {
+        dead = true;
+        switch (type)
+        {
+            case enemyType.exploding:
+                animator.Play("Destroyed");
+                break;
+            case enemyType.ranged:
+                animator.Play("Die");
+                break;
+            case enemyType.swarm:
+                Destroy(gameObject);
+                break;
+            case enemyType.melee:
+
+                break;
+            case enemyType.flying:
+
+                break;
+        }
+        if(type != enemyType.swarm)
+            StartCoroutine(RemoveGameObject());
+    }
+
+    IEnumerator RemoveGameObject()
+    {
+        yield return new WaitForSeconds(5f);
+        Destroy(gameObject);
     }
 
     public int GetHP()

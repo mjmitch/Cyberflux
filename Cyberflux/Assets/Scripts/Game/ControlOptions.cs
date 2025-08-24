@@ -13,10 +13,10 @@ public class ControlOptions : MonoBehaviour
     {
         
         
-            sensXValue.text = (PlayerPrefs.GetFloat("SensX", 50)).ToString();
-            sensXSlider.value = PlayerPrefs.GetFloat("SensX", .5f);
-            sensYValue.text = (PlayerPrefs.GetFloat("SensY", 50)).ToString(); 
-            sensYSlider.value = PlayerPrefs.GetFloat("SensY", .5f);
+            sensXValue.text = (PlayerPrefs.GetFloat("SensX", 5)).ToString();
+            sensXSlider.value = PlayerPrefs.GetFloat("SensX", 5);
+            sensYValue.text = (PlayerPrefs.GetFloat("SensY", 5)).ToString(); 
+            sensYSlider.value = PlayerPrefs.GetFloat("SensY", 5);
             sensXSlider.onValueChanged.AddListener(SensXChanged);
             sensYSlider.onValueChanged.AddListener(SensYChanged);
         

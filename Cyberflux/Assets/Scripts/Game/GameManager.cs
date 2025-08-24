@@ -577,5 +577,9 @@ if (menuItemUnlock)
         masterVol = PlayerPrefs.GetFloat("Master Volume", .5f);
         sfxVol = PlayerPrefs.GetFloat("SFX Volume", .5f);
         musicVol = PlayerPrefs.GetFloat("Music Volume", .5f);
+
+        audioMixer.SetFloat("masterVolume", ((masterVol * 100) - 80));
+        audioMixer.SetFloat("sfxVolume", ((sfxVol * 100) - 80));
+        audioMixer.SetFloat("musicVolume", ((musicVol * 100) - 80));
     }
 }
