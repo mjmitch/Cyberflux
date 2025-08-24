@@ -229,22 +229,22 @@ public class PlayerController : MonoBehaviour, IDamage, IHeal
         //{
         //    deathTimer = 0f;
         //}
-        // TEMP: test health bar by pressing H to take 10 damage
-        if (Input.GetKeyDown(KeyCode.H))
-        {
-            TakeDamage(10);
-        }
+        //// TEMP: test health bar by pressing H to take 10 damage
+        //if (Input.GetKeyDown(KeyCode.H))
+        //{
+        //    TakeDamage(10);
+        //}
 
-        // TEMP: test heal by pressing J to heal 5 HP
-        if (Input.GetKeyDown(KeyCode.J))
-        {
-            Heal(5);
-        }
+        //// TEMP: test heal by pressing J to heal 5 HP
+        //if (Input.GetKeyDown(KeyCode.J))
+        //{
+        //    Heal(5);
+        //}
 
-        if (Input.GetKeyDown(KeyCode.T))
-        {
-            GameManager.instance.ShowTutorial("Press Shift to Sprint!", 3f);
-        }
+        //if (Input.GetKeyDown(KeyCode.T))
+        //{
+        //    GameManager.instance.ShowTutorial("Press Shift to Sprint!", 3f);
+        //}
     }
 
     private void FixedUpdate()
@@ -528,6 +528,7 @@ public class PlayerController : MonoBehaviour, IDamage, IHeal
     {
         if (audDash.Length > 0)
         {
+            audioPlayer.volume = GameManager.instance.sfxVol * GameManager.instance.masterVol;
             audioPlayer.PlayOneShot(audDash[UnityEngine.Random.Range(0, audDash.Length)]);
         }
     }
@@ -536,6 +537,7 @@ public class PlayerController : MonoBehaviour, IDamage, IHeal
     {
         if(audStep.Length > 0)
         {
+            audioPlayer.volume = GameManager.instance.sfxVol * GameManager.instance.masterVol;
             audioPlayer.PlayOneShot(audStep[UnityEngine.Random.Range(0, audStep.Length)]);
         }    
     }
@@ -561,7 +563,7 @@ public class PlayerController : MonoBehaviour, IDamage, IHeal
         //Reset Y vel
         rb.linearVelocity = new Vector3(rb.linearVelocity.x, 0f, rb.linearVelocity.z);
 
-        
+        audioPlayer.volume = GameManager.instance.sfxVol * GameManager.instance.masterVol;
         audioPlayer.PlayOneShot(audJump[UnityEngine.Random.Range(0, audJump.Length)]);
 
         //Impulse since it is a sinle action
@@ -675,10 +677,12 @@ public class PlayerController : MonoBehaviour, IDamage, IHeal
 
         stats.currentHealth = HP;
         GameManager.instance.UpdateHealthUI(HP, stats.maxHealth);
+        audioPlayer.volume = GameManager.instance.sfxVol * GameManager.instance.masterVol;
         audioPlayer.PlayOneShot(audHurt[UnityEngine.Random.Range(0, audHurt.Length)]);
 
         if (HP <= 0)
         {
+            audioPlayer.volume = GameManager.instance.sfxVol * GameManager.instance.masterVol;
             audioPlayer.PlayOneShot(audDeath[UnityEngine.Random.Range(0, audDeath.Length)]);
             GameManager.instance.YouLose(cause);
             GameManager.instance.SaveSettings();
