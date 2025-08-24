@@ -202,6 +202,9 @@ public class EnemyAI : MonoBehaviour, IDamage
     void FaceTarget()
     {
         transform.LookAt(player.transform);
+        //transform.rotation.Set(0f, transform.rotation.y, transform.rotation.z, transform.rotation.w);
+        //transform.Rotate(-transform.rotation.x, 0, 0);
+        
     }
 
     private void OnTriggerEnter(Collider other)
