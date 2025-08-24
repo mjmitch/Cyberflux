@@ -256,6 +256,67 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &629292110
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 2507547512506639230, guid: bba1ded2948a1f04bbab8a12618da932, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -12.37911
+      objectReference: {fileID: 0}
+    - target: {fileID: 2507547512506639230, guid: bba1ded2948a1f04bbab8a12618da932, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2507547512506639230, guid: bba1ded2948a1f04bbab8a12618da932, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 28.99601
+      objectReference: {fileID: 0}
+    - target: {fileID: 2507547512506639230, guid: bba1ded2948a1f04bbab8a12618da932, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2507547512506639230, guid: bba1ded2948a1f04bbab8a12618da932, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2507547512506639230, guid: bba1ded2948a1f04bbab8a12618da932, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2507547512506639230, guid: bba1ded2948a1f04bbab8a12618da932, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2507547512506639230, guid: bba1ded2948a1f04bbab8a12618da932, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2507547512506639230, guid: bba1ded2948a1f04bbab8a12618da932, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2507547512506639230, guid: bba1ded2948a1f04bbab8a12618da932, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6225355745507169136, guid: bba1ded2948a1f04bbab8a12618da932, type: 3}
+      propertyPath: m_Name
+      value: Elite Exploding Enemy
+      objectReference: {fileID: 0}
+    - target: {fileID: 8225815675764751983, guid: bba1ded2948a1f04bbab8a12618da932, type: 3}
+      propertyPath: teleportTime
+      value: 2
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: bba1ded2948a1f04bbab8a12618da932, type: 3}
 --- !u!1 &1396470164
 GameObject:
   m_ObjectHideFlags: 0
@@ -551,3 +612,4 @@ SceneRoots:
   - {fileID: 279604096}
   - {fileID: 450733061}
   - {fileID: 1853686484}
+  - {fileID: 629292110}
