@@ -13,7 +13,8 @@ using Random = UnityEngine.Random;
 
 public class EnemyAI : MonoBehaviour, IDamage
 {
-    [SerializeField] Renderer model;
+    [SerializeField] GameObject model;
+    [SerializeField] public Animator animator;
     [SerializeField] NavMeshAgent agent;
     [SerializeField] Transform attackPosition;
     [SerializeField] Transform headPosition;
@@ -88,12 +89,14 @@ public class EnemyAI : MonoBehaviour, IDamage
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        int levelNum = SceneManager.GetActiveScene().buildIndex;
         startPos = transform.position;
         agentStopDisOrig = agent.stoppingDistance;
         player = GameObject.FindGameObjectWithTag("Player");
         audioPlayer = GetComponent<AudioSource>();
         if (type == enemyType.exploding && explosionEffect != null)
         {
+            explosionDamage += levelNum - 1;
             explosionEffect.GetComponent<damage>().damageAmount = explosionDamage;
             explosionEffect.transform.localScale = new Vector3(explosionSize*2, explosionSize*2, explosionSize*2);
         }
@@ -108,14 +111,12 @@ public class EnemyAI : MonoBehaviour, IDamage
 
         audioPlayer.volume = GameManager.instance.masterVol * GameManager.instance.sfxVol;
         teleportTimer = 0;
-        int levelNum = SceneManager.GetActiveScene().buildIndex;
         HP *= ((int)(0.05f * (levelNum)) + 1);
         attackRate *= (1 - (levelNum / 100f));
         if (bullet != null)
         {
             bulletDamage = (int)(basedamage * ((0.08f * SceneManager.GetActiveScene().buildIndex) + 1));
         }
-            explosionDamage += levelNum - 1;
     }
 
     // Update is called once per frame
@@ -136,7 +137,9 @@ public class EnemyAI : MonoBehaviour, IDamage
         {
             if(agent.remainingDistance <= 0.01f)
                 roamTime += Time.deltaTime;
-            if (!playerInTrigger || (playerInTrigger && CanSeePlayer()))
+            if (type == enemyType.swarm)
+                CanSeePlayer();
+            else if (!playerInTrigger || (playerInTrigger && CanSeePlayer()))
                 RoamCheck();
         }
 
@@ -235,8 +238,9 @@ public class EnemyAI : MonoBehaviour, IDamage
         if (!isExploding)
         {
             isExploding = true;
-            Instantiate(explosionEffect, transform.position, Quaternion.identity);
-            audioPlayer.PlayOneShot(explosionSound, GameManager.instance.sfxVol * GameManager.instance.masterVol);
+            Transform explodePosition = model.transform;
+            Instantiate(explosionEffect, explodePosition.position, Quaternion.identity);
+            audioPlayer.PlayOneShot(explosionSound, GameManager.instance.masterVol);
         }
         Destroy(gameObject);
     }
@@ -336,9 +340,8 @@ public class EnemyAI : MonoBehaviour, IDamage
                 explosionEffect.GetComponent<damage>().damageAmount /= 2;
                 explosionEffect.transform.localScale /= 2;
                 Instantiate(explosionEffect, transform.position, Quaternion.identity);
-                //audioPlayer.PlayOneShot(explosionSound, GameManager.instance.playerScript.sfxVol);
+                audioPlayer.PlayOneShot(explosionSound, GameManager.instance.sfxVol * GameManager.instance.masterVol);
             }
-
             GameManager.instance.score += score;
             ScorePopUp pop = GameManager.instance.popUp;
             pop.SetText("+" + score.ToString());
