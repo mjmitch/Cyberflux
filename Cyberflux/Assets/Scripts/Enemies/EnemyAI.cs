@@ -360,11 +360,15 @@ public class EnemyAI : MonoBehaviour, IDamage
                 Instantiate(explosionEffect, transform.position, Quaternion.identity);
                 audioPlayer.PlayOneShot(explosionSound, GameManager.instance.sfxVol * GameManager.instance.masterVol);
             }
-            GameManager.instance.score += score;
-            ScorePopUp pop = GameManager.instance.popUp;
-            pop.SetText("+" + score.ToString());
-            Instantiate(pop, transform.position, Quaternion.identity);
-            
+
+            if (!dead)
+            {
+                GameManager.instance.score += score;
+                ScorePopUp pop = GameManager.instance.popUp;
+                pop.SetText("+" + score.ToString());
+                Instantiate(pop, transform.position, Quaternion.identity);
+            }
+
             Death();
         }
     }
@@ -387,7 +391,7 @@ public class EnemyAI : MonoBehaviour, IDamage
 
                 break;
             case enemyType.flying:
-                animator.Play("Destroyed");
+                //animator.Play("Destroyed");
                 break;
         }
         if(type != enemyType.swarm)
