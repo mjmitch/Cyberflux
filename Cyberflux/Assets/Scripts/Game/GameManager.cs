@@ -260,7 +260,7 @@ if (menuItemUnlock)
 
     public void Option()
     {
-        Debug.Log("Option() called");
+        
         optionbutton.SetActive(false);
         UIAudioSource.Play();
         OptionPanel.transform.SetAsLastSibling(); // Moves panel to front of UI
@@ -271,7 +271,7 @@ if (menuItemUnlock)
     public void Back()
     {
 
-        Debug.Log("Back() called");  // <-- You should see this in Console
+          // <-- You should see this in Console
         optionbutton.SetActive(true);
         UIAudioSource.Play();
         OptionPanel.transform.SetAsFirstSibling(); // Moves panel to back of UI
@@ -283,7 +283,7 @@ if (menuItemUnlock)
      
     public void QuitGame()
     {
-        Debug.Log("Quit!"); // always logs so you know the button fired
+         // always logs so you know the button fired
 
         // only run these if playerScript exists
         if (playerScript != null)
