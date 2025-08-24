@@ -56,6 +56,9 @@ public class GameManager : MonoBehaviour
     [SerializeField] public AudioSource UIAudioSource;
     [SerializeField] public AudioMixer audioMixer;
 
+
+    [SerializeField] private UICursor scytheCursor;
+
     [SerializeField]
      private List<string> tutorialMessages = new List<string>()
      {
