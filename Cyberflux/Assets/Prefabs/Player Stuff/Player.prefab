@@ -350,6 +350,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 2737976943242721347}
+        m_TargetAssemblyTypeName: UICursor, Assembly-CSharp
+        m_MethodName: TriggerShake
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &62932999046829570
 GameObject:
   m_ObjectHideFlags: 0
@@ -2985,6 +2997,18 @@ MonoBehaviour:
       - m_Target: {fileID: 2120372011068436657}
         m_TargetAssemblyTypeName: ControlOptions, Assembly-CSharp
         m_MethodName: SwapToAudio
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 2737976943242721347}
+        m_TargetAssemblyTypeName: UICursor, Assembly-CSharp
+        m_MethodName: TriggerShake
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -7531,6 +7555,18 @@ MonoBehaviour:
       - m_Target: {fileID: 4079929521573970184}
         m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
         m_MethodName: Back
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 2737976943242721347}
+        m_TargetAssemblyTypeName: UICursor, Assembly-CSharp
+        m_MethodName: TriggerShake
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -14622,6 +14658,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 2737976943242721347}
+        m_TargetAssemblyTypeName: UICursor, Assembly-CSharp
+        m_MethodName: TriggerShake
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &6649020486308738541
 GameObject:
   m_ObjectHideFlags: 0
@@ -16907,6 +16955,18 @@ MonoBehaviour:
       - m_Target: {fileID: 8484803136040031067}
         m_TargetAssemblyTypeName: AudioOptions, Assembly-CSharp
         m_MethodName: SwapToControls
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 2737976943242721347}
+        m_TargetAssemblyTypeName: UICursor, Assembly-CSharp
+        m_MethodName: TriggerShake
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -19809,6 +19869,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 19ec637cd54623e48ad65b617905433e, type: 3}
+--- !u!114 &2737976943242721347 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4510134159880083474, guid: 19ec637cd54623e48ad65b617905433e, type: 3}
+  m_PrefabInstance: {fileID: 1974837891573014609}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 53ee84f39feca9b44b6064c485158f1a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!224 &8109195429246951870 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 7773686700966707695, guid: 19ec637cd54623e48ad65b617905433e, type: 3}
