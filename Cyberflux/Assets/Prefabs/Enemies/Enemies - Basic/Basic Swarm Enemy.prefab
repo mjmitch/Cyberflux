@@ -4962,11 +4962,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   model: {fileID: 0}
+  animator: {fileID: 0}
   agent: {fileID: 1296881259741589964}
   attackPosition: {fileID: 5452822606425330511}
   headPosition: {fileID: 945807163639023695}
   bullet: {fileID: 0}
   weapon: {fileID: 0}
+  basedamage: 0
   attackRate: 0.4
   attackSound: {fileID: 0}
   HP: 15
@@ -4989,8 +4991,6 @@ MonoBehaviour:
   maxFlyHeight: 5
   circleRange: 5
   type: 3
-  dropChance: 0
-  audioPlayer: {fileID: 0}
 --- !u!114 &4254366514349637598
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5030,7 +5030,7 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 20
+  m_Radius: 2
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!195 &1296881259741589964
 NavMeshAgent:

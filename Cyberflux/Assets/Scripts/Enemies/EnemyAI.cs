@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using Unity.VisualScripting;
+using UnityEditor.AnimatedValues;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.Audio;
@@ -383,17 +384,19 @@ public class EnemyAI : MonoBehaviour, IDamage
         switch (type)
         {
             case enemyType.exploding:
-                animator.Play("Destroyed");
+                animator.SetTrigger("Dead");
+                //animator.Play("Destroyed");
                 model.SetActive(false);
                 break;
             case enemyType.ranged:
-                animator.Play("Die");
+                animator.SetTrigger("Dead");
+                //animator.Play("Die");
                 break;
             case enemyType.swarm:
                 Destroy(gameObject);
                 break;
             case enemyType.melee:
-
+                animator.SetTrigger("Dead");
                 break;
             case enemyType.flying:
                 //animator.Play("Destroyed");
