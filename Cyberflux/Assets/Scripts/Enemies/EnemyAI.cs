@@ -18,7 +18,9 @@ public class EnemyAI : MonoBehaviour, IDamage
     [SerializeField] Transform attackPosition;
     [SerializeField] Transform headPosition;
     [SerializeField] GameObject bullet;
+    private int bulletDamage;
     [SerializeField] private GameObject weapon;
+    [SerializeField] int basedamage;
     [SerializeField] float attackRate;
     [SerializeField] AudioClip attackSound;
     [SerializeField] int HP;
@@ -54,7 +56,7 @@ public class EnemyAI : MonoBehaviour, IDamage
     [Range(5, 25)] [SerializeField] private int circleRange;
     private bool isBobbing = false;
     private bool eliteAttackingPlayer = false;
-    [SerializeField] int basedamage;
+    
     
     private enum enemyType
     {
@@ -65,13 +67,14 @@ public class EnemyAI : MonoBehaviour, IDamage
         flying
     }
 
+    [Header("Enemy Type")]
     [SerializeField] private enemyType type;
-    
-    [SerializeField] int dropChance;
+    [Header("Sounds")]
+    //[SerializeField] int dropChance;
     private GameObject player;
     private Vector3 playerDirection;
     private Vector3 attackPlayerDirection;
-    [SerializeField] AudioSource audioPlayer;
+    AudioSource audioPlayer;
     
     float attackTimer;
     float angleToPlayer;
@@ -106,11 +109,11 @@ public class EnemyAI : MonoBehaviour, IDamage
         audioPlayer.volume = GameManager.instance.masterVol * GameManager.instance.sfxVol;
         teleportTimer = 0;
         int levelNum = SceneManager.GetActiveScene().buildIndex;
-        HP *= (int)(1.05f * (levelNum));
+        HP *= ((int)(0.05f * (levelNum)) + 1);
         attackRate *= (1 - (levelNum / 100f));
         if (bullet != null)
         {
-            bullet.GetComponent<damage>().damageAmount = basedamage * ((int)1.05f * (SceneManager.GetActiveScene().buildIndex));
+            bulletDamage = (int)(basedamage * ((0.08f * SceneManager.GetActiveScene().buildIndex) + 1));
         }
             explosionDamage += levelNum - 1;
     }
@@ -213,7 +216,8 @@ public class EnemyAI : MonoBehaviour, IDamage
     void RangedAttack()
     {
         attackTimer = 0;
-        Instantiate(bullet, attackPosition.position, transform.rotation);
+        GameObject bullet1 = Instantiate(bullet, attackPosition.position, transform.rotation);
+        bullet1.GetComponent<damage>().damageAmount = bulletDamage;
         
             //bullet.GetComponent<damage>().damageAmount *= ((int)1.05f * (SceneManager.GetActiveScene().buildIndex));
         audioPlayer.PlayOneShot(attackSound, GameManager.instance.masterVol * GameManager.instance.sfxVol);
