@@ -288,8 +288,8 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -4.70684, y: 0, z: 15.95728}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 2, y: 2, z: 2}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 1831245697789710787}
   - {fileID: 8896893221448082010}
@@ -323,6 +323,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   model: {fileID: 6777806128311026775}
+  animator: {fileID: 0}
   agent: {fileID: 5379078267530107732}
   attackPosition: {fileID: 7099825038415660602}
   headPosition: {fileID: 1831245697789710787}

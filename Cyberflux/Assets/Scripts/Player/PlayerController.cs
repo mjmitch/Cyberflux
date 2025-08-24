@@ -765,7 +765,7 @@ public class PlayerController : MonoBehaviour, IDamage, IHeal
     public void SaveItem()
     {
        
-        if (SceneManager.GetActiveScene().buildIndex > 0)
+        if (SceneManager.GetActiveScene().buildIndex > 0 && SceneManager.GetActiveScene().buildIndex < 6)
             PlayerPrefs.SetInt("Item " + (SceneManager.GetActiveScene().buildIndex - 1) + " ID", playerItems[SceneManager.GetActiveScene().buildIndex-1].ID);
         
     }
@@ -781,7 +781,7 @@ public class PlayerController : MonoBehaviour, IDamage, IHeal
             if (id != 0)
             {
                 if (GameManager.instance.itemPool.Find(x => x.GetID() == id))
-                AddItem(GameManager.instance.itemPool.Find(x => x.GetID() == id));
+                    AddItem(GameManager.instance.itemPool.Find(x => x.GetID() == id));
                
             }
         }

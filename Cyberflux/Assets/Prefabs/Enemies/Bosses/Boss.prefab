@@ -417,16 +417,16 @@ MonoBehaviour:
   shootRates:
   - 1
   - 1.5
-  HP: 750
+  bossHP: 0
   score: 250
   attackDistance: 15.03
   enemiesToSpawn:
-  - {fileID: 7649154908617531125, guid: e42b587eed582fe4e9986f9c8582701f, type: 3}
+  - {fileID: 7922858350660998479, guid: e42b587eed582fe4e9986f9c8582701f, type: 3}
   - {fileID: 8815489685484177564, guid: 5f7eff3ffc9785448a9009f48b0e4280, type: 3}
-  - {fileID: 3545258363530479191, guid: 6dea007438f08774dbc7d7d61ea3fc1b, type: 3}
+  - {fileID: 4235952328888792852, guid: 6dea007438f08774dbc7d7d61ea3fc1b, type: 3}
   - {fileID: 542309910822120313, guid: c64acab26a31b354cba88e4f666532e7, type: 3}
-  - {fileID: 7271726348477596054, guid: 50b524d848c4ce34a9554a68be3d11da, type: 3}
-  - {fileID: 8842965198553920588, guid: 4c9eb32fc5f268b4daa45767984e442c, type: 3}
+  - {fileID: 6934799255516330810, guid: 50b524d848c4ce34a9554a68be3d11da, type: 3}
+  - {fileID: 419648258141016081, guid: 4c9eb32fc5f268b4daa45767984e442c, type: 3}
   spawnRate: 5
   auraDamageNum: 1
   auraDamageRate: 2
