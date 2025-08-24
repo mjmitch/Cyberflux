@@ -34,6 +34,9 @@ public class ButtonFunctions : MonoBehaviour
     {
         PlayerPrefs.DeleteAll();
         PlayerPrefs.Save();
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        GameManager.instance.isPaused = false;
+        Time.timeScale = 1f;
+
+        GameManager.instance.LoadLevel(1);
     }
 }
