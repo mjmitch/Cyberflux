@@ -4931,11 +4931,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   model: {fileID: 0}
+  animator: {fileID: 0}
   agent: {fileID: 8134793887036152010}
   attackPosition: {fileID: 4877095369086796505}
   headPosition: {fileID: 7860404467797429951}
   bullet: {fileID: 0}
   weapon: {fileID: 0}
+  basedamage: 0
   attackRate: 0
   attackSound: {fileID: 8300000, guid: 54b81ae8b0506824788879a0eb089960, type: 3}
   HP: 40
@@ -4946,7 +4948,7 @@ MonoBehaviour:
   slowImmune: 0
   slowModifier: 0.56
   isEliteEnemy: 1
-  teleportTime: 1
+  teleportTime: 3
   maxTeleportDistance: 5
   teleportSound: {fileID: 8300000, guid: 85901470718244b4f98d2b8bebb5fb38, type: 3}
   score: 8
@@ -4958,8 +4960,6 @@ MonoBehaviour:
   maxFlyHeight: 5
   circleRange: 5
   type: 3
-  dropChance: 0
-  audioPlayer: {fileID: 0}
 --- !u!114 &4764869829776910153
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4976,7 +4976,7 @@ MonoBehaviour:
   rb: {fileID: 0}
   slowEffect: 1
   damageAmount: 1
-  damageRate: 0.15
+  damageRate: 0.2
   speed: 0
   destroyTime: 1
   enemyBullet: 0
@@ -4999,7 +4999,7 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 20
+  m_Radius: 1.5
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!195 &8134793887036152010
 NavMeshAgent:
