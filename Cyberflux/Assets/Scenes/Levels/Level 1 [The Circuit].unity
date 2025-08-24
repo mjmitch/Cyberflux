@@ -24207,10 +24207,10 @@ MonoBehaviour:
   blueRT: {fileID: 1579144283}
   autoOnEnable: 1
   duration: 0.15
-  maxPosJitter: 4
+  maxPosJitter: 15
   maxScaleJitter: 0.08
-  maxRotJitter: 3
-  rgbOffset: 2
+  maxRotJitter: 10
+  rgbOffset: 10
 --- !u!114 &6792719245075084007
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -24224,7 +24224,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   burst: {fileID: 6792719245075084006}
-  minDelay: 0.8
+  minDelay: 0.2
   maxDelay: 2
 --- !u!1 &6813819240231833017
 GameObject:
