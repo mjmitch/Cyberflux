@@ -509,7 +509,10 @@ if (menuItemUnlock)
     {
         isPaused = true;
         Time.timeScale = 0f;
+       
         Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+
         if (scytheCursorGroup != null) scytheCursorGroup.alpha = 1f;
 
         menuItemSelect.SetActive(true);
