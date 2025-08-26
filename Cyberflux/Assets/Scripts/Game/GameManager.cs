@@ -55,6 +55,7 @@ public class GameManager : MonoBehaviour
     
     [SerializeField] public AudioSource UIAudioSource;
     [SerializeField] public AudioMixer audioMixer;
+    [SerializeField] AudioClip mainMenu;
 
 
    // [SerializeField] private UICursor scytheCursor;
@@ -195,6 +196,8 @@ public class GameManager : MonoBehaviour
                 tutorialTimer = 0f;
             }
         }
+
+        UIAudioSource.PlayOneShot(mainMenu, 0.01f);
     }
 
     public void GameStatePause()
