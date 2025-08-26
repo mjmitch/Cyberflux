@@ -1788,7 +1788,7 @@ GameObject:
   - component: {fileID: 3486022140324287006}
   - component: {fileID: 6913048934661821417}
   - component: {fileID: 2813134483432540661}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: PlayerModel
   m_TagString: PlayerModel
   m_Icon: {fileID: 0}
@@ -7221,7 +7221,7 @@ Camera:
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 131007
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -13681,6 +13681,7 @@ MonoBehaviour:
   popUp: {fileID: 3166080202433304457, guid: 927820c55109c6e4fa1dbc7c8baaa4b2, type: 3}
   UIAudioSource: {fileID: 7345308948935082373}
   audioMixer: {fileID: 24100000, guid: 166f7127cd5aad44d840c8cf69142e2b, type: 2}
+  mainMenu: {fileID: 0}
   scytheCursorGroup: {fileID: 653844502374306135}
   tutorialMessages:
   - 'Middle Mouse: Momentum Attack'
@@ -18812,7 +18813,7 @@ MonoBehaviour:
     m_Bits: 128
   attackPoint: {fileID: 2990403851026727900}
   attackRate: 0.75
-  attackDamage: 10
+  attackDamage: 25
   attackRadius: 1
   scytheModel: {fileID: 4516050468712928236}
   scytheBar: {fileID: 2583480069387205973}
