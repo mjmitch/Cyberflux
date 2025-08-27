@@ -259,6 +259,7 @@ GameObject:
   - component: {fileID: 1659857876398200975}
   - component: {fileID: 858355787910182461}
   - component: {fileID: 5003187002880119056}
+  - component: {fileID: 5976203416247419035}
   m_Layer: 5
   m_Name: Options
   m_TagString: Untagged
@@ -362,6 +363,32 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &5976203416247419035
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 51499169105698685}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4571c1af1883107438180e042a8b5f1b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  target: {fileID: 0}
+  hoverAmplitude: 6
+  hoverFrequency: 30
+  settleSpeed: 15
+  clickPunchScale: 1.12
+  clickDuration: 0.09
+  audioSource: {fileID: 0}
+  hoverClip: {fileID: 0}
+  clickClip: {fileID: 0}
+  reduceMotion: 0
+  onClickAfterAnimation:
+    m_PersistentCalls:
+      m_Calls: []
+  postClickDelay: 0.02
 --- !u!1 &62932999046829570
 GameObject:
   m_ObjectHideFlags: 0
@@ -919,6 +946,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7627923699598932622}
+  - component: {fileID: 51541474986359173}
   m_Layer: 5
   m_Name: SFX
   m_TagString: Untagged
@@ -948,6 +976,32 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: -53}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &51541474986359173
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 356204212096086722}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4571c1af1883107438180e042a8b5f1b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  target: {fileID: 0}
+  hoverAmplitude: 6
+  hoverFrequency: 30
+  settleSpeed: 15
+  clickPunchScale: 1.12
+  clickDuration: 0.09
+  audioSource: {fileID: 0}
+  hoverClip: {fileID: 0}
+  clickClip: {fileID: 0}
+  reduceMotion: 0
+  onClickAfterAnimation:
+    m_PersistentCalls:
+      m_Calls: []
+  postClickDelay: 0.02
 --- !u!1 &484272404473633134
 GameObject:
   m_ObjectHideFlags: 0
@@ -1504,6 +1558,7 @@ GameObject:
   - component: {fileID: 1202680129313385539}
   - component: {fileID: 7311907572221561244}
   - component: {fileID: 8529443687442077291}
+  - component: {fileID: 7014105476930239725}
   m_Layer: 5
   m_Name: 'Restart Button '
   m_TagString: Untagged
@@ -1595,6 +1650,32 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &7014105476930239725
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 832608687302559204}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4571c1af1883107438180e042a8b5f1b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  target: {fileID: 0}
+  hoverAmplitude: 6
+  hoverFrequency: 30
+  settleSpeed: 15
+  clickPunchScale: 1.12
+  clickDuration: 0.09
+  audioSource: {fileID: 0}
+  hoverClip: {fileID: 0}
+  clickClip: {fileID: 0}
+  reduceMotion: 0
+  onClickAfterAnimation:
+    m_PersistentCalls:
+      m_Calls: []
+  postClickDelay: 0.02
 --- !u!1 &857872360220909686
 GameObject:
   m_ObjectHideFlags: 0
@@ -1748,6 +1829,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3353142972011058687}
+  - component: {fileID: 5520742647791613969}
   m_Layer: 5
   m_Name: Jump
   m_TagString: Untagged
@@ -1776,6 +1858,32 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &5520742647791613969
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 990038513007275959}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4571c1af1883107438180e042a8b5f1b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  target: {fileID: 0}
+  hoverAmplitude: 6
+  hoverFrequency: 30
+  settleSpeed: 15
+  clickPunchScale: 1.12
+  clickDuration: 0.09
+  audioSource: {fileID: 0}
+  hoverClip: {fileID: 0}
+  clickClip: {fileID: 0}
+  reduceMotion: 0
+  onClickAfterAnimation:
+    m_PersistentCalls:
+      m_Calls: []
+  postClickDelay: 0.02
 --- !u!1 &1105790632237327918
 GameObject:
   m_ObjectHideFlags: 0
@@ -2285,6 +2393,7 @@ GameObject:
   - component: {fileID: 2364620257958941073}
   - component: {fileID: 2110966376135224086}
   - component: {fileID: 3472033786138501784}
+  - component: {fileID: 543724846464382152}
   m_Layer: 5
   m_Name: Title Button
   m_TagString: Untagged
@@ -2376,6 +2485,32 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &543724846464382152
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1410972351653963222}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4571c1af1883107438180e042a8b5f1b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  target: {fileID: 0}
+  hoverAmplitude: 6
+  hoverFrequency: 30
+  settleSpeed: 15
+  clickPunchScale: 1.12
+  clickDuration: 0.09
+  audioSource: {fileID: 0}
+  hoverClip: {fileID: 0}
+  clickClip: {fileID: 0}
+  reduceMotion: 0
+  onClickAfterAnimation:
+    m_PersistentCalls:
+      m_Calls: []
+  postClickDelay: 0.02
 --- !u!1 &1435708262774624187
 GameObject:
   m_ObjectHideFlags: 0
@@ -2813,6 +2948,7 @@ GameObject:
   - component: {fileID: 4776544869001246672}
   - component: {fileID: 6224054023470407697}
   - component: {fileID: 4599069923764345273}
+  - component: {fileID: 4859332977611869050}
   m_Layer: 5
   m_Name: Back Button (1)
   m_TagString: Untagged
@@ -2904,6 +3040,32 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &4859332977611869050
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1594655436109560897}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4571c1af1883107438180e042a8b5f1b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  target: {fileID: 0}
+  hoverAmplitude: 6
+  hoverFrequency: 30
+  settleSpeed: 15
+  clickPunchScale: 1.12
+  clickDuration: 0.09
+  audioSource: {fileID: 0}
+  hoverClip: {fileID: 0}
+  clickClip: {fileID: 0}
+  reduceMotion: 0
+  onClickAfterAnimation:
+    m_PersistentCalls:
+      m_Calls: []
+  postClickDelay: 0.02
 --- !u!1 &1640468384506547915
 GameObject:
   m_ObjectHideFlags: 0
@@ -2915,6 +3077,7 @@ GameObject:
   - component: {fileID: 6969971409840854628}
   - component: {fileID: 3182107710265847426}
   - component: {fileID: 2110612565706080935}
+  - component: {fileID: 1304495141114947377}
   m_Layer: 5
   m_Name: AudioButton
   m_TagString: Untagged
@@ -3018,6 +3181,32 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &1304495141114947377
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1640468384506547915}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4571c1af1883107438180e042a8b5f1b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  target: {fileID: 0}
+  hoverAmplitude: 6
+  hoverFrequency: 30
+  settleSpeed: 15
+  clickPunchScale: 1.12
+  clickDuration: 0.09
+  audioSource: {fileID: 0}
+  hoverClip: {fileID: 0}
+  clickClip: {fileID: 0}
+  reduceMotion: 0
+  onClickAfterAnimation:
+    m_PersistentCalls:
+      m_Calls: []
+  postClickDelay: 0.02
 --- !u!1 &1640775173366583866
 GameObject:
   m_ObjectHideFlags: 0
@@ -3165,6 +3354,7 @@ GameObject:
   - component: {fileID: 2902915621694250554}
   - component: {fileID: 1253165948953497794}
   - component: {fileID: 2199655917505157059}
+  - component: {fileID: 2075603021351814188}
   m_Layer: 5
   m_Name: Quit Button
   m_TagString: Untagged
@@ -3256,6 +3446,32 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &2075603021351814188
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1672345114443306722}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4571c1af1883107438180e042a8b5f1b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  target: {fileID: 0}
+  hoverAmplitude: 6
+  hoverFrequency: 30
+  settleSpeed: 15
+  clickPunchScale: 1.12
+  clickDuration: 0.09
+  audioSource: {fileID: 0}
+  hoverClip: {fileID: 0}
+  clickClip: {fileID: 0}
+  reduceMotion: 0
+  onClickAfterAnimation:
+    m_PersistentCalls:
+      m_Calls: []
+  postClickDelay: 0.02
 --- !u!1 &1722930353770329884
 GameObject:
   m_ObjectHideFlags: 0
@@ -3267,6 +3483,7 @@ GameObject:
   - component: {fileID: 8393715565005103347}
   - component: {fileID: 8817363495425148449}
   - component: {fileID: 7999804855377182026}
+  - component: {fileID: 6690444818496303375}
   m_Layer: 5
   m_Name: Retry Button
   m_TagString: Untagged
@@ -3358,6 +3575,32 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &6690444818496303375
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1722930353770329884}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4571c1af1883107438180e042a8b5f1b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  target: {fileID: 0}
+  hoverAmplitude: 6
+  hoverFrequency: 30
+  settleSpeed: 15
+  clickPunchScale: 1.12
+  clickDuration: 0.09
+  audioSource: {fileID: 0}
+  hoverClip: {fileID: 0}
+  clickClip: {fileID: 0}
+  reduceMotion: 0
+  onClickAfterAnimation:
+    m_PersistentCalls:
+      m_Calls: []
+  postClickDelay: 0.02
 --- !u!1 &1746979139212078860
 GameObject:
   m_ObjectHideFlags: 0
@@ -3656,6 +3899,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1076940746285271377}
+  - component: {fileID: 3026020899922693025}
   m_Layer: 5
   m_Name: Crouch
   m_TagString: Untagged
@@ -3684,6 +3928,32 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: -49}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &3026020899922693025
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1849557720464774800}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4571c1af1883107438180e042a8b5f1b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  target: {fileID: 0}
+  hoverAmplitude: 6
+  hoverFrequency: 30
+  settleSpeed: 15
+  clickPunchScale: 1.12
+  clickDuration: 0.09
+  audioSource: {fileID: 0}
+  hoverClip: {fileID: 0}
+  clickClip: {fileID: 0}
+  reduceMotion: 0
+  onClickAfterAnimation:
+    m_PersistentCalls:
+      m_Calls: []
+  postClickDelay: 0.02
 --- !u!1 &1850209605301550642
 GameObject:
   m_ObjectHideFlags: 0
@@ -4599,6 +4869,7 @@ GameObject:
   - component: {fileID: 194944821888887853}
   - component: {fileID: 7036428310610612945}
   - component: {fileID: 3731878677435389426}
+  - component: {fileID: 1284300034005180774}
   m_Layer: 5
   m_Name: Button
   m_TagString: Untagged
@@ -4720,6 +4991,32 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &1284300034005180774
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2128538631518353690}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4571c1af1883107438180e042a8b5f1b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  target: {fileID: 0}
+  hoverAmplitude: 6
+  hoverFrequency: 30
+  settleSpeed: 15
+  clickPunchScale: 1.12
+  clickDuration: 0.09
+  audioSource: {fileID: 0}
+  hoverClip: {fileID: 0}
+  clickClip: {fileID: 0}
+  reduceMotion: 0
+  onClickAfterAnimation:
+    m_PersistentCalls:
+      m_Calls: []
+  postClickDelay: 0.02
 --- !u!1 &2213490630528329367
 GameObject:
   m_ObjectHideFlags: 0
@@ -4800,6 +5097,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2896176113243353779}
+  - component: {fileID: 3829743338446434176}
   m_Layer: 5
   m_Name: Melee
   m_TagString: Untagged
@@ -4828,6 +5126,32 @@ RectTransform:
   m_AnchoredPosition: {x: 240.69768, y: 0.32557678}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &3829743338446434176
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2240589723917297066}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4571c1af1883107438180e042a8b5f1b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  target: {fileID: 0}
+  hoverAmplitude: 6
+  hoverFrequency: 30
+  settleSpeed: 15
+  clickPunchScale: 1.12
+  clickDuration: 0.09
+  audioSource: {fileID: 0}
+  hoverClip: {fileID: 0}
+  clickClip: {fileID: 0}
+  reduceMotion: 0
+  onClickAfterAnimation:
+    m_PersistentCalls:
+      m_Calls: []
+  postClickDelay: 0.02
 --- !u!1 &2276490832758373075
 GameObject:
   m_ObjectHideFlags: 0
@@ -6318,6 +6642,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5365838389710297041}
+  - component: {fileID: 1733737866472831194}
   m_Layer: 5
   m_Name: SensX
   m_TagString: Untagged
@@ -6347,6 +6672,32 @@ RectTransform:
   m_AnchoredPosition: {x: -12, y: 262.8}
   m_SizeDelta: {x: 1, y: 1}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1733737866472831194
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2855273860498413719}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4571c1af1883107438180e042a8b5f1b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  target: {fileID: 0}
+  hoverAmplitude: 6
+  hoverFrequency: 30
+  settleSpeed: 15
+  clickPunchScale: 1.12
+  clickDuration: 0.09
+  audioSource: {fileID: 0}
+  hoverClip: {fileID: 0}
+  clickClip: {fileID: 0}
+  reduceMotion: 0
+  onClickAfterAnimation:
+    m_PersistentCalls:
+      m_Calls: []
+  postClickDelay: 0.02
 --- !u!1 &2859043657234374209
 GameObject:
   m_ObjectHideFlags: 0
@@ -6901,6 +7252,7 @@ GameObject:
   - component: {fileID: 7192444081555898891}
   - component: {fileID: 2733896328194393839}
   - component: {fileID: 2377110115931746112}
+  - component: {fileID: 1829059634858416903}
   m_Layer: 5
   m_Name: Resume Button
   m_TagString: Untagged
@@ -6992,6 +7344,32 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &1829059634858416903
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2994618667204174956}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4571c1af1883107438180e042a8b5f1b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  target: {fileID: 0}
+  hoverAmplitude: 6
+  hoverFrequency: 30
+  settleSpeed: 15
+  clickPunchScale: 1.12
+  clickDuration: 0.09
+  audioSource: {fileID: 0}
+  hoverClip: {fileID: 0}
+  clickClip: {fileID: 0}
+  reduceMotion: 0
+  onClickAfterAnimation:
+    m_PersistentCalls:
+      m_Calls: []
+  postClickDelay: 0.02
 --- !u!1 &3042143955537853756
 GameObject:
   m_ObjectHideFlags: 0
@@ -7473,6 +7851,7 @@ GameObject:
   - component: {fileID: 7434793055601204093}
   - component: {fileID: 7911270920476226847}
   - component: {fileID: 1803484547272944017}
+  - component: {fileID: 8942769239476894077}
   m_Layer: 5
   m_Name: Back Button
   m_TagString: Untagged
@@ -7576,6 +7955,32 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &8942769239476894077
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3353584503858543035}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4571c1af1883107438180e042a8b5f1b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  target: {fileID: 0}
+  hoverAmplitude: 6
+  hoverFrequency: 30
+  settleSpeed: 15
+  clickPunchScale: 1.12
+  clickDuration: 0.09
+  audioSource: {fileID: 0}
+  hoverClip: {fileID: 0}
+  clickClip: {fileID: 0}
+  reduceMotion: 0
+  onClickAfterAnimation:
+    m_PersistentCalls:
+      m_Calls: []
+  postClickDelay: 0.02
 --- !u!1 &3424826903072541251
 GameObject:
   m_ObjectHideFlags: 0
@@ -10012,6 +10417,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 171249991298255578}
+  - component: {fileID: 8248308762547972502}
   m_Layer: 5
   m_Name: Master
   m_TagString: Untagged
@@ -10041,6 +10447,32 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &8248308762547972502
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4545768837562261677}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4571c1af1883107438180e042a8b5f1b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  target: {fileID: 0}
+  hoverAmplitude: 6
+  hoverFrequency: 30
+  settleSpeed: 15
+  clickPunchScale: 1.12
+  clickDuration: 0.09
+  audioSource: {fileID: 0}
+  hoverClip: {fileID: 0}
+  clickClip: {fileID: 0}
+  reduceMotion: 0
+  onClickAfterAnimation:
+    m_PersistentCalls:
+      m_Calls: []
+  postClickDelay: 0.02
 --- !u!1 &4545794862494651164
 GameObject:
   m_ObjectHideFlags: 0
@@ -10050,6 +10482,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6624382545929854171}
+  - component: {fileID: 8533677415207273485}
   m_Layer: 5
   m_Name: Slash
   m_TagString: Untagged
@@ -10078,6 +10511,32 @@ RectTransform:
   m_AnchoredPosition: {x: 240.69768, y: -49.209305}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &8533677415207273485
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4545794862494651164}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4571c1af1883107438180e042a8b5f1b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  target: {fileID: 0}
+  hoverAmplitude: 6
+  hoverFrequency: 30
+  settleSpeed: 15
+  clickPunchScale: 1.12
+  clickDuration: 0.09
+  audioSource: {fileID: 0}
+  hoverClip: {fileID: 0}
+  clickClip: {fileID: 0}
+  reduceMotion: 0
+  onClickAfterAnimation:
+    m_PersistentCalls:
+      m_Calls: []
+  postClickDelay: 0.02
 --- !u!1 &4569070024648669745
 GameObject:
   m_ObjectHideFlags: 0
@@ -10164,6 +10623,7 @@ GameObject:
   - component: {fileID: 8608377614993831811}
   - component: {fileID: 8506039029575088903}
   - component: {fileID: 8942034529621790888}
+  - component: {fileID: 8424217538709253518}
   m_Layer: 5
   m_Name: Title Button
   m_TagString: Untagged
@@ -10255,6 +10715,32 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &8424217538709253518
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4682505223030636776}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4571c1af1883107438180e042a8b5f1b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  target: {fileID: 0}
+  hoverAmplitude: 6
+  hoverFrequency: 30
+  settleSpeed: 15
+  clickPunchScale: 1.12
+  clickDuration: 0.09
+  audioSource: {fileID: 0}
+  hoverClip: {fileID: 0}
+  clickClip: {fileID: 0}
+  reduceMotion: 0
+  onClickAfterAnimation:
+    m_PersistentCalls:
+      m_Calls: []
+  postClickDelay: 0.02
 --- !u!1 &4897012517924401749
 GameObject:
   m_ObjectHideFlags: 0
@@ -11036,6 +11522,7 @@ GameObject:
   - component: {fileID: 7018548647177896871}
   - component: {fileID: 3136338744543668624}
   - component: {fileID: 7581070209620682479}
+  - component: {fileID: 2779137757178329646}
   m_Layer: 5
   m_Name: Reset
   m_TagString: Untagged
@@ -11127,6 +11614,32 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &2779137757178329646
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5110604632986687616}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4571c1af1883107438180e042a8b5f1b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  target: {fileID: 0}
+  hoverAmplitude: 6
+  hoverFrequency: 30
+  settleSpeed: 15
+  clickPunchScale: 1.12
+  clickDuration: 0.09
+  audioSource: {fileID: 0}
+  hoverClip: {fileID: 0}
+  clickClip: {fileID: 0}
+  reduceMotion: 0
+  onClickAfterAnimation:
+    m_PersistentCalls:
+      m_Calls: []
+  postClickDelay: 0.02
 --- !u!1 &5131779221670678096
 GameObject:
   m_ObjectHideFlags: 0
@@ -13367,6 +13880,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1053930784568628793}
+  - component: {fileID: 500056732775998179}
   m_Layer: 5
   m_Name: Music
   m_TagString: Untagged
@@ -13396,6 +13910,32 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: -104}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &500056732775998179
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6181202168324250774}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4571c1af1883107438180e042a8b5f1b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  target: {fileID: 0}
+  hoverAmplitude: 6
+  hoverFrequency: 30
+  settleSpeed: 15
+  clickPunchScale: 1.12
+  clickDuration: 0.09
+  audioSource: {fileID: 0}
+  hoverClip: {fileID: 0}
+  clickClip: {fileID: 0}
+  reduceMotion: 0
+  onClickAfterAnimation:
+    m_PersistentCalls:
+      m_Calls: []
+  postClickDelay: 0.02
 --- !u!1 &6203029638680535948
 GameObject:
   m_ObjectHideFlags: 0
@@ -13538,6 +14078,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1509627511872786645}
+  - component: {fileID: 8092046493276032769}
   m_Layer: 5
   m_Name: Special
   m_TagString: Untagged
@@ -13566,6 +14107,32 @@ RectTransform:
   m_AnchoredPosition: {x: 240.69768, y: -167.16306}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &8092046493276032769
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6248880459915420858}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4571c1af1883107438180e042a8b5f1b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  target: {fileID: 0}
+  hoverAmplitude: 6
+  hoverFrequency: 30
+  settleSpeed: 15
+  clickPunchScale: 1.12
+  clickDuration: 0.09
+  audioSource: {fileID: 0}
+  hoverClip: {fileID: 0}
+  clickClip: {fileID: 0}
+  reduceMotion: 0
+  onClickAfterAnimation:
+    m_PersistentCalls:
+      m_Calls: []
+  postClickDelay: 0.02
 --- !u!1 &6251194125681175569
 GameObject:
   m_ObjectHideFlags: 0
@@ -13681,7 +14248,6 @@ MonoBehaviour:
   popUp: {fileID: 3166080202433304457, guid: 927820c55109c6e4fa1dbc7c8baaa4b2, type: 3}
   UIAudioSource: {fileID: 7345308948935082373}
   audioMixer: {fileID: 24100000, guid: 166f7127cd5aad44d840c8cf69142e2b, type: 2}
-  mainMenu: {fileID: 0}
   scytheCursorGroup: {fileID: 653844502374306135}
   tutorialMessages:
   - 'Middle Mouse: Momentum Attack'
@@ -14568,6 +15134,7 @@ GameObject:
   - component: {fileID: 4387003442104795840}
   - component: {fileID: 5587430866814949737}
   - component: {fileID: 2701813600226199498}
+  - component: {fileID: 1150370620716978541}
   m_Layer: 5
   m_Name: Restart Button
   m_TagString: Untagged
@@ -14671,6 +15238,32 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &1150370620716978541
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6550083361513856137}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4571c1af1883107438180e042a8b5f1b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  target: {fileID: 0}
+  hoverAmplitude: 6
+  hoverFrequency: 30
+  settleSpeed: 15
+  clickPunchScale: 1.12
+  clickDuration: 0.09
+  audioSource: {fileID: 0}
+  hoverClip: {fileID: 0}
+  clickClip: {fileID: 0}
+  reduceMotion: 0
+  onClickAfterAnimation:
+    m_PersistentCalls:
+      m_Calls: []
+  postClickDelay: 0.02
 --- !u!1 &6649020486308738541
 GameObject:
   m_ObjectHideFlags: 0
@@ -14980,6 +15573,7 @@ GameObject:
   - component: {fileID: 6927926755743346183}
   - component: {fileID: 1254579258968844892}
   - component: {fileID: 2778473874466667524}
+  - component: {fileID: 41519364465525029}
   m_Layer: 5
   m_Name: Continue Button
   m_TagString: Untagged
@@ -15071,6 +15665,32 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &41519364465525029
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6692053982556053920}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4571c1af1883107438180e042a8b5f1b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  target: {fileID: 0}
+  hoverAmplitude: 6
+  hoverFrequency: 30
+  settleSpeed: 15
+  clickPunchScale: 1.12
+  clickDuration: 0.09
+  audioSource: {fileID: 0}
+  hoverClip: {fileID: 0}
+  clickClip: {fileID: 0}
+  reduceMotion: 0
+  onClickAfterAnimation:
+    m_PersistentCalls:
+      m_Calls: []
+  postClickDelay: 0.02
 --- !u!1 &6693352571023936534
 GameObject:
   m_ObjectHideFlags: 0
@@ -15410,6 +16030,7 @@ GameObject:
   - component: {fileID: 7836095726595155799}
   - component: {fileID: 3112305120219798897}
   - component: {fileID: 8376745538638004207}
+  - component: {fileID: 8597656943355685142}
   m_Layer: 5
   m_Name: Title Button
   m_TagString: Untagged
@@ -15501,6 +16122,32 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &8597656943355685142
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6851871186755632151}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4571c1af1883107438180e042a8b5f1b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  target: {fileID: 0}
+  hoverAmplitude: 6
+  hoverFrequency: 30
+  settleSpeed: 15
+  clickPunchScale: 1.12
+  clickDuration: 0.09
+  audioSource: {fileID: 0}
+  hoverClip: {fileID: 0}
+  clickClip: {fileID: 0}
+  reduceMotion: 0
+  onClickAfterAnimation:
+    m_PersistentCalls:
+      m_Calls: []
+  postClickDelay: 0.02
 --- !u!1 &6856252604406097463
 GameObject:
   m_ObjectHideFlags: 0
@@ -16075,6 +16722,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7784169518008309449}
+  - component: {fileID: 8502975690141461239}
   m_Layer: 5
   m_Name: Sprint
   m_TagString: Untagged
@@ -16103,6 +16751,32 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: -97}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &8502975690141461239
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7299673372135797253}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4571c1af1883107438180e042a8b5f1b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  target: {fileID: 0}
+  hoverAmplitude: 6
+  hoverFrequency: 30
+  settleSpeed: 15
+  clickPunchScale: 1.12
+  clickDuration: 0.09
+  audioSource: {fileID: 0}
+  hoverClip: {fileID: 0}
+  clickClip: {fileID: 0}
+  reduceMotion: 0
+  onClickAfterAnimation:
+    m_PersistentCalls:
+      m_Calls: []
+  postClickDelay: 0.02
 --- !u!1 &7337343109791450981
 GameObject:
   m_ObjectHideFlags: 0
@@ -16216,6 +16890,7 @@ GameObject:
   - component: {fileID: 511526939613890325}
   - component: {fileID: 7023800695079566944}
   - component: {fileID: 8572486571804669178}
+  - component: {fileID: 4693222610694583977}
   m_Layer: 5
   m_Name: Quit Button
   m_TagString: Untagged
@@ -16307,6 +16982,32 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &4693222610694583977
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7341864810415847388}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4571c1af1883107438180e042a8b5f1b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  target: {fileID: 0}
+  hoverAmplitude: 6
+  hoverFrequency: 30
+  settleSpeed: 15
+  clickPunchScale: 1.12
+  clickDuration: 0.09
+  audioSource: {fileID: 0}
+  hoverClip: {fileID: 0}
+  clickClip: {fileID: 0}
+  reduceMotion: 0
+  onClickAfterAnimation:
+    m_PersistentCalls:
+      m_Calls: []
+  postClickDelay: 0.02
 --- !u!1 &7367514952365298501
 GameObject:
   m_ObjectHideFlags: 0
@@ -16316,6 +17017,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5343347464411292048}
+  - component: {fileID: 5463212311559398643}
   m_Layer: 5
   m_Name: Slam
   m_TagString: Untagged
@@ -16344,6 +17046,32 @@ RectTransform:
   m_AnchoredPosition: {x: 240.69768, y: -107.64651}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &5463212311559398643
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7367514952365298501}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4571c1af1883107438180e042a8b5f1b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  target: {fileID: 0}
+  hoverAmplitude: 6
+  hoverFrequency: 30
+  settleSpeed: 15
+  clickPunchScale: 1.12
+  clickDuration: 0.09
+  audioSource: {fileID: 0}
+  hoverClip: {fileID: 0}
+  clickClip: {fileID: 0}
+  reduceMotion: 0
+  onClickAfterAnimation:
+    m_PersistentCalls:
+      m_Calls: []
+  postClickDelay: 0.02
 --- !u!1 &7468556482768849686
 GameObject:
   m_ObjectHideFlags: 0
@@ -16874,6 +17602,7 @@ GameObject:
   - component: {fileID: 6231498370624820714}
   - component: {fileID: 5121952994968086097}
   - component: {fileID: 6638394876159624588}
+  - component: {fileID: 5498088419443602580}
   m_Layer: 5
   m_Name: ControlsButton
   m_TagString: Untagged
@@ -16977,6 +17706,32 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &5498088419443602580
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8022302433305591632}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4571c1af1883107438180e042a8b5f1b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  target: {fileID: 0}
+  hoverAmplitude: 6
+  hoverFrequency: 30
+  settleSpeed: 15
+  clickPunchScale: 1.12
+  clickDuration: 0.09
+  audioSource: {fileID: 0}
+  hoverClip: {fileID: 0}
+  clickClip: {fileID: 0}
+  reduceMotion: 0
+  onClickAfterAnimation:
+    m_PersistentCalls:
+      m_Calls: []
+  postClickDelay: 0.02
 --- !u!1 &8040572000572638366
 GameObject:
   m_ObjectHideFlags: 0
@@ -18273,6 +19028,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6423942770626721354}
+  - component: {fileID: 3225871175707664113}
   m_Layer: 5
   m_Name: SensY
   m_TagString: Untagged
@@ -18302,6 +19058,32 @@ RectTransform:
   m_AnchoredPosition: {x: -12, y: 262.8}
   m_SizeDelta: {x: 1, y: 1}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &3225871175707664113
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8435719866697976437}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4571c1af1883107438180e042a8b5f1b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  target: {fileID: 0}
+  hoverAmplitude: 6
+  hoverFrequency: 30
+  settleSpeed: 15
+  clickPunchScale: 1.12
+  clickDuration: 0.09
+  audioSource: {fileID: 0}
+  hoverClip: {fileID: 0}
+  clickClip: {fileID: 0}
+  reduceMotion: 0
+  onClickAfterAnimation:
+    m_PersistentCalls:
+      m_Calls: []
+  postClickDelay: 0.02
 --- !u!1 &8437183411128867916
 GameObject:
   m_ObjectHideFlags: 0
@@ -18874,6 +19656,7 @@ GameObject:
   - component: {fileID: 2495961063053665369}
   - component: {fileID: 2272758863837503958}
   - component: {fileID: 1893749768066280348}
+  - component: {fileID: 626498827249036210}
   m_Layer: 5
   m_Name: Quit Button
   m_TagString: Untagged
@@ -18965,6 +19748,32 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &626498827249036210
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8685167614407441735}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4571c1af1883107438180e042a8b5f1b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  target: {fileID: 0}
+  hoverAmplitude: 6
+  hoverFrequency: 30
+  settleSpeed: 15
+  clickPunchScale: 1.12
+  clickDuration: 0.09
+  audioSource: {fileID: 0}
+  hoverClip: {fileID: 0}
+  clickClip: {fileID: 0}
+  reduceMotion: 0
+  onClickAfterAnimation:
+    m_PersistentCalls:
+      m_Calls: []
+  postClickDelay: 0.02
 --- !u!1 &8728061433712252699
 GameObject:
   m_ObjectHideFlags: 0
