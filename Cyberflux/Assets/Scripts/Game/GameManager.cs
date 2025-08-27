@@ -55,6 +55,7 @@ public class GameManager : MonoBehaviour
     
     [SerializeField] public AudioSource UIAudioSource;
     [SerializeField] public AudioMixer audioMixer;
+    //[SerializeField] AudioClip mainMenu;
 
 
    // [SerializeField] private UICursor scytheCursor;
@@ -195,6 +196,8 @@ public class GameManager : MonoBehaviour
                 tutorialTimer = 0f;
             }
         }
+
+       // UIAudioSource.PlayOneShot(mainMenu, 0.01f);
     }
 
     public void GameStatePause()
@@ -559,13 +562,18 @@ if (menuItemUnlock)
         score += 1000;
         score -= seconds * 5;
         score -= minutes * 300;
-
-        if (score > PlayerPrefs.GetInt("Level " + SceneManager.GetActiveScene().buildIndex + " HighScore", 0))
+        int bestScore = (PlayerPrefs.GetInt("Level " + SceneManager.GetActiveScene().buildIndex + " HighScore", 0));
+        if (score > bestScore)
         {
             PlayerPrefs.SetInt("Level " + SceneManager.GetActiveScene().buildIndex + " HighScore", score);
         }
-
-        if ((seconds + (minutes*60)) > PlayerPrefs.GetInt("Level" + SceneManager.GetActiveScene().buildIndex + " TimeInt HighScore"))
+        int bestTime = PlayerPrefs.GetInt("Level" + SceneManager.GetActiveScene().buildIndex + " TimeInt HighScore", 0);
+        if ((seconds + (minutes*60)) < bestTime && bestScore != 0)
+        {
+            PlayerPrefs.SetInt("Level" + SceneManager.GetActiveScene().buildIndex + " TimeInt HighScore", ((seconds + (minutes * 60))));
+            PlayerPrefs.SetString("Level " + SceneManager.GetActiveScene().buildIndex + " Time HighScore", TimerMinutes.text + TimerSeconds.text + TimerMiliseconds.text);
+        }
+        else if (bestTime == 0)
         {
             PlayerPrefs.SetInt("Level" + SceneManager.GetActiveScene().buildIndex + " TimeInt HighScore", ((seconds + (minutes * 60))));
             PlayerPrefs.SetString("Level " + SceneManager.GetActiveScene().buildIndex + " Time HighScore", TimerMinutes.text + TimerSeconds.text + TimerMiliseconds.text);
@@ -582,8 +590,11 @@ if (menuItemUnlock)
 
     public void LoadSettings()
     {
-        masterVol = PlayerPrefs.GetFloat("Master Volume", .5f);
+        masterVol = PlayerPrefs.GetFloat("Master Volume", 1);
         sfxVol = PlayerPrefs.GetFloat("SFX Volume", .5f);
         musicVol = PlayerPrefs.GetFloat("Music Volume", .5f);
+        audioMixer.SetFloat("masterVolume", ((masterVol * 100) - 80));
+        audioMixer.SetFloat("sfxVolume", ((sfxVol * 100) - 80));
+        audioMixer.SetFloat("musicVolume", ((musicVol * 100) - 80));
     }
 }
