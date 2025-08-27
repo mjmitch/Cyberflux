@@ -232,6 +232,7 @@ GameObject:
   - component: {fileID: 55794903}
   - component: {fileID: 55794905}
   - component: {fileID: 55794904}
+  - component: {fileID: 55794906}
   m_Layer: 5
   m_Name: Reset
   m_TagString: Untagged
@@ -323,6 +324,32 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 55794902}
   m_CullTransparentMesh: 1
+--- !u!114 &55794906
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 55794902}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4571c1af1883107438180e042a8b5f1b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  target: {fileID: 0}
+  hoverAmplitude: 6
+  hoverFrequency: 30
+  settleSpeed: 15
+  clickPunchScale: 1.12
+  clickDuration: 0.09
+  audioSource: {fileID: 0}
+  hoverClip: {fileID: 0}
+  clickClip: {fileID: 0}
+  reduceMotion: 0
+  onClickAfterAnimation:
+    m_PersistentCalls:
+      m_Calls: []
+  postClickDelay: 0.02
 --- !u!1 &147354413
 GameObject:
   m_ObjectHideFlags: 0
@@ -2413,6 +2440,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2621234695027106101}
+  - component: {fileID: 2621234695027106102}
   m_Layer: 5
   m_Name: Crouch
   m_TagString: Untagged
@@ -2687,6 +2715,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5953626681893426018}
+  - component: {fileID: 5953626681893426019}
   m_Layer: 5
   m_Name: SensY
   m_TagString: Untagged
@@ -3617,6 +3646,7 @@ GameObject:
   - component: {fileID: 808388393319573383}
   - component: {fileID: 691378226053892785}
   - component: {fileID: 1413587884006354480}
+  - component: {fileID: 1857063850178737587}
   m_Layer: 5
   m_Name: Back Button
   m_TagString: Untagged
@@ -3624,6 +3654,32 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &1857063850178737587
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1857063850178737586}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4571c1af1883107438180e042a8b5f1b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  target: {fileID: 0}
+  hoverAmplitude: 6
+  hoverFrequency: 30
+  settleSpeed: 15
+  clickPunchScale: 1.12
+  clickDuration: 0.09
+  audioSource: {fileID: 0}
+  hoverClip: {fileID: 0}
+  clickClip: {fileID: 0}
+  reduceMotion: 0
+  onClickAfterAnimation:
+    m_PersistentCalls:
+      m_Calls: []
+  postClickDelay: 0.02
 --- !u!1 &1897758156175471013
 GameObject:
   m_ObjectHideFlags: 0
@@ -3735,6 +3791,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6510000069363651530}
+  - component: {fileID: 6510000069363651531}
   m_Layer: 5
   m_Name: Sprint
   m_TagString: Untagged
@@ -4113,6 +4170,7 @@ GameObject:
   - component: {fileID: 3952197898062601488}
   - component: {fileID: 8863715930718821004}
   - component: {fileID: 7075513790498858629}
+  - component: {fileID: 8863715930718821005}
   m_Layer: 5
   m_Name: Options Button
   m_TagString: Untagged
@@ -4317,6 +4375,32 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: -49}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &2621234695027106102
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 276045678521120476}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4571c1af1883107438180e042a8b5f1b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  target: {fileID: 0}
+  hoverAmplitude: 6
+  hoverFrequency: 30
+  settleSpeed: 15
+  clickPunchScale: 1.12
+  clickDuration: 0.09
+  audioSource: {fileID: 0}
+  hoverClip: {fileID: 0}
+  clickClip: {fileID: 0}
+  reduceMotion: 0
+  onClickAfterAnimation:
+    m_PersistentCalls:
+      m_Calls: []
+  postClickDelay: 0.02
 --- !u!1 &2683327394735606185
 GameObject:
   m_ObjectHideFlags: 0
@@ -4353,6 +4437,7 @@ GameObject:
   - component: {fileID: 2950162491237743031}
   - component: {fileID: 7615661986750962653}
   - component: {fileID: 2041975224522655617}
+  - component: {fileID: 7615661986750962654}
   m_Layer: 5
   m_Name: ControlsButton
   m_TagString: Untagged
@@ -4519,6 +4604,7 @@ GameObject:
   - component: {fileID: 4679887937299538108}
   - component: {fileID: 2904476995356112694}
   - component: {fileID: 8784078788261941829}
+  - component: {fileID: 8784078788261941830}
   m_Layer: 5
   m_Name: Quit Button
   m_TagString: Untagged
@@ -5059,6 +5145,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4533978405091079433}
+  - component: {fileID: 4533978405091079434}
   m_Layer: 5
   m_Name: Slam
   m_TagString: Untagged
@@ -5257,6 +5344,7 @@ GameObject:
   - component: {fileID: 2381822092167268486}
   - component: {fileID: 5913246707365094226}
   - component: {fileID: 5643558338018849987}
+  - component: {fileID: 5913246707365094227}
   m_Layer: 5
   m_Name: AudioButton
   m_TagString: Untagged
@@ -5789,6 +5877,32 @@ RectTransform:
   m_AnchoredPosition: {x: 240.69768, y: -98.04651}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &4533978405091079434
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3398530858229452034}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4571c1af1883107438180e042a8b5f1b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  target: {fileID: 0}
+  hoverAmplitude: 6
+  hoverFrequency: 30
+  settleSpeed: 15
+  clickPunchScale: 1.12
+  clickDuration: 0.09
+  audioSource: {fileID: 0}
+  hoverClip: {fileID: 0}
+  clickClip: {fileID: 0}
+  reduceMotion: 0
+  onClickAfterAnimation:
+    m_PersistentCalls:
+      m_Calls: []
+  postClickDelay: 0.02
 --- !u!222 &4556305560282485244
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -5967,6 +6081,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9158807386442771743}
+  - component: {fileID: 9158807386442771744}
   m_Layer: 5
   m_Name: Melee
   m_TagString: Untagged
@@ -6003,6 +6118,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2357692811719038182}
+  - component: {fileID: 4826292526705359476}
   m_Layer: 5
   m_Name: Jump
   m_TagString: Untagged
@@ -6010,6 +6126,32 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &4826292526705359476
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4826292526705359475}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4571c1af1883107438180e042a8b5f1b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  target: {fileID: 0}
+  hoverAmplitude: 6
+  hoverFrequency: 30
+  settleSpeed: 15
+  clickPunchScale: 1.12
+  clickDuration: 0.09
+  audioSource: {fileID: 0}
+  hoverClip: {fileID: 0}
+  clickClip: {fileID: 0}
+  reduceMotion: 0
+  onClickAfterAnimation:
+    m_PersistentCalls:
+      m_Calls: []
+  postClickDelay: 0.02
 --- !u!224 &4903040745311926491
 RectTransform:
   m_ObjectHideFlags: 0
@@ -6237,6 +6379,7 @@ GameObject:
   - component: {fileID: 1902622513352030385}
   - component: {fileID: 4492637559538276050}
   - component: {fileID: 8343033515594600956}
+  - component: {fileID: 8343033515594600957}
   m_Layer: 5
   m_Name: Credits Button
   m_TagString: Untagged
@@ -6253,6 +6396,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7053117504195422906}
+  - component: {fileID: 7053117504195422907}
   m_Layer: 5
   m_Name: Slash
   m_TagString: Untagged
@@ -6825,6 +6969,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5538003463249254125}
+  - component: {fileID: 5538003463249254126}
   m_Layer: 5
   m_Name: Master
   m_TagString: Untagged
@@ -7009,6 +7154,32 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &5538003463249254126
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5381851360961124294}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4571c1af1883107438180e042a8b5f1b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  target: {fileID: 0}
+  hoverAmplitude: 6
+  hoverFrequency: 30
+  settleSpeed: 15
+  clickPunchScale: 1.12
+  clickDuration: 0.09
+  audioSource: {fileID: 0}
+  hoverClip: {fileID: 0}
+  clickClip: {fileID: 0}
+  reduceMotion: 0
+  onClickAfterAnimation:
+    m_PersistentCalls:
+      m_Calls: []
+  postClickDelay: 0.02
 --- !u!114 &5579490754995735726
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7207,6 +7378,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4660987341787055856}
+  - component: {fileID: 5815616401245928876}
   m_Layer: 5
   m_Name: SensX
   m_TagString: Untagged
@@ -7214,6 +7386,32 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &5815616401245928876
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5815616401245928875}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4571c1af1883107438180e042a8b5f1b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  target: {fileID: 0}
+  hoverAmplitude: 6
+  hoverFrequency: 30
+  settleSpeed: 15
+  clickPunchScale: 1.12
+  clickDuration: 0.09
+  audioSource: {fileID: 0}
+  hoverClip: {fileID: 0}
+  clickClip: {fileID: 0}
+  reduceMotion: 0
+  onClickAfterAnimation:
+    m_PersistentCalls:
+      m_Calls: []
+  postClickDelay: 0.02
 --- !u!222 &5832553253215730798
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -7269,6 +7467,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 74822828741282756}
+  - component: {fileID: 5903496802986616112}
   m_Layer: 5
   m_Name: Special
   m_TagString: Untagged
@@ -7276,6 +7475,32 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &5903496802986616112
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5903496802986616111}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4571c1af1883107438180e042a8b5f1b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  target: {fileID: 0}
+  hoverAmplitude: 6
+  hoverFrequency: 30
+  settleSpeed: 15
+  clickPunchScale: 1.12
+  clickDuration: 0.09
+  audioSource: {fileID: 0}
+  hoverClip: {fileID: 0}
+  clickClip: {fileID: 0}
+  reduceMotion: 0
+  onClickAfterAnimation:
+    m_PersistentCalls:
+      m_Calls: []
+  postClickDelay: 0.02
 --- !u!222 &5913246707365094226
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -7284,6 +7509,32 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3642492458402898389}
   m_CullTransparentMesh: 1
+--- !u!114 &5913246707365094227
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3642492458402898389}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4571c1af1883107438180e042a8b5f1b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  target: {fileID: 0}
+  hoverAmplitude: 6
+  hoverFrequency: 30
+  settleSpeed: 15
+  clickPunchScale: 1.12
+  clickDuration: 0.09
+  audioSource: {fileID: 0}
+  hoverClip: {fileID: 0}
+  clickClip: {fileID: 0}
+  reduceMotion: 0
+  onClickAfterAnimation:
+    m_PersistentCalls:
+      m_Calls: []
+  postClickDelay: 0.02
 --- !u!224 &5953626681893426018
 RectTransform:
   m_ObjectHideFlags: 0
@@ -7306,6 +7557,32 @@ RectTransform:
   m_AnchoredPosition: {x: -12, y: 262.8}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &5953626681893426019
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 889806377437340516}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4571c1af1883107438180e042a8b5f1b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  target: {fileID: 0}
+  hoverAmplitude: 6
+  hoverFrequency: 30
+  settleSpeed: 15
+  clickPunchScale: 1.12
+  clickDuration: 0.09
+  audioSource: {fileID: 0}
+  hoverClip: {fileID: 0}
+  clickClip: {fileID: 0}
+  reduceMotion: 0
+  onClickAfterAnimation:
+    m_PersistentCalls:
+      m_Calls: []
+  postClickDelay: 0.02
 --- !u!114 &5990915956299280683
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7563,6 +7840,32 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: -97}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &6510000069363651531
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2030295999030711048}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4571c1af1883107438180e042a8b5f1b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  target: {fileID: 0}
+  hoverAmplitude: 6
+  hoverFrequency: 30
+  settleSpeed: 15
+  clickPunchScale: 1.12
+  clickDuration: 0.09
+  audioSource: {fileID: 0}
+  hoverClip: {fileID: 0}
+  clickClip: {fileID: 0}
+  reduceMotion: 0
+  onClickAfterAnimation:
+    m_PersistentCalls:
+      m_Calls: []
+  postClickDelay: 0.02
 --- !u!114 &6523035625779271085
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8074,6 +8377,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8592130716683802561}
+  - component: {fileID: 8592130716683802562}
   m_Layer: 5
   m_Name: SFX
   m_TagString: Untagged
@@ -8468,6 +8772,32 @@ RectTransform:
   m_AnchoredPosition: {x: 240.69768, y: -49.209305}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &7053117504195422907
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4979658972304989773}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4571c1af1883107438180e042a8b5f1b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  target: {fileID: 0}
+  hoverAmplitude: 6
+  hoverFrequency: 30
+  settleSpeed: 15
+  clickPunchScale: 1.12
+  clickDuration: 0.09
+  audioSource: {fileID: 0}
+  hoverClip: {fileID: 0}
+  clickClip: {fileID: 0}
+  reduceMotion: 0
+  onClickAfterAnimation:
+    m_PersistentCalls:
+      m_Calls: []
+  postClickDelay: 0.02
 --- !u!1 &7070586379798024061
 GameObject:
   m_ObjectHideFlags: 0
@@ -8946,6 +9276,32 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2744540176613266852}
   m_CullTransparentMesh: 1
+--- !u!114 &7615661986750962654
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2744540176613266852}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4571c1af1883107438180e042a8b5f1b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  target: {fileID: 0}
+  hoverAmplitude: 6
+  hoverFrequency: 30
+  settleSpeed: 15
+  clickPunchScale: 1.12
+  clickDuration: 0.09
+  audioSource: {fileID: 0}
+  hoverClip: {fileID: 0}
+  clickClip: {fileID: 0}
+  reduceMotion: 0
+  onClickAfterAnimation:
+    m_PersistentCalls:
+      m_Calls: []
+  postClickDelay: 0.02
 --- !u!114 &7706137165093531883
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9604,6 +9960,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7300402569221152238}
+  - component: {fileID: 8223376456424558282}
   m_Layer: 5
   m_Name: Music
   m_TagString: Untagged
@@ -9611,6 +9968,32 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &8223376456424558282
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8223376456424558281}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4571c1af1883107438180e042a8b5f1b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  target: {fileID: 0}
+  hoverAmplitude: 6
+  hoverFrequency: 30
+  settleSpeed: 15
+  clickPunchScale: 1.12
+  clickDuration: 0.09
+  audioSource: {fileID: 0}
+  hoverClip: {fileID: 0}
+  clickClip: {fileID: 0}
+  reduceMotion: 0
+  onClickAfterAnimation:
+    m_PersistentCalls:
+      m_Calls: []
+  postClickDelay: 0.02
 --- !u!224 &8226550487409825139
 RectTransform:
   m_ObjectHideFlags: 0
@@ -9698,6 +10081,32 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &8343033515594600957
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4956590092902278815}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4571c1af1883107438180e042a8b5f1b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  target: {fileID: 0}
+  hoverAmplitude: 6
+  hoverFrequency: 30
+  settleSpeed: 15
+  clickPunchScale: 1.12
+  clickDuration: 0.09
+  audioSource: {fileID: 0}
+  hoverClip: {fileID: 0}
+  clickClip: {fileID: 0}
+  reduceMotion: 0
+  onClickAfterAnimation:
+    m_PersistentCalls:
+      m_Calls: []
+  postClickDelay: 0.02
 --- !u!224 &8363275279055720560
 RectTransform:
   m_ObjectHideFlags: 0
@@ -9856,6 +10265,32 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: -53}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &8592130716683802562
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6734624766202144199}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4571c1af1883107438180e042a8b5f1b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  target: {fileID: 0}
+  hoverAmplitude: 6
+  hoverFrequency: 30
+  settleSpeed: 15
+  clickPunchScale: 1.12
+  clickDuration: 0.09
+  audioSource: {fileID: 0}
+  hoverClip: {fileID: 0}
+  clickClip: {fileID: 0}
+  reduceMotion: 0
+  onClickAfterAnimation:
+    m_PersistentCalls:
+      m_Calls: []
+  postClickDelay: 0.02
 --- !u!224 &8607792876801653941
 RectTransform:
   m_ObjectHideFlags: 0
@@ -10042,6 +10477,32 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &8784078788261941830
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2899796031476469542}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4571c1af1883107438180e042a8b5f1b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  target: {fileID: 0}
+  hoverAmplitude: 6
+  hoverFrequency: 30
+  settleSpeed: 15
+  clickPunchScale: 1.12
+  clickDuration: 0.09
+  audioSource: {fileID: 0}
+  hoverClip: {fileID: 0}
+  clickClip: {fileID: 0}
+  reduceMotion: 0
+  onClickAfterAnimation:
+    m_PersistentCalls:
+      m_Calls: []
+  postClickDelay: 0.02
 --- !u!224 &8815124711978599384
 RectTransform:
   m_ObjectHideFlags: 0
@@ -10178,6 +10639,32 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2390378603676018207}
   m_CullTransparentMesh: 1
+--- !u!114 &8863715930718821005
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2390378603676018207}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4571c1af1883107438180e042a8b5f1b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  target: {fileID: 0}
+  hoverAmplitude: 6
+  hoverFrequency: 30
+  settleSpeed: 15
+  clickPunchScale: 1.12
+  clickDuration: 0.09
+  audioSource: {fileID: 0}
+  hoverClip: {fileID: 0}
+  clickClip: {fileID: 0}
+  reduceMotion: 0
+  onClickAfterAnimation:
+    m_PersistentCalls:
+      m_Calls: []
+  postClickDelay: 0.02
 --- !u!114 &8926519291708038729
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10630,6 +11117,32 @@ RectTransform:
   m_AnchoredPosition: {x: 240.69768, y: 0.32557678}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &9158807386442771744
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4740205132744629558}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4571c1af1883107438180e042a8b5f1b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  target: {fileID: 0}
+  hoverAmplitude: 6
+  hoverFrequency: 30
+  settleSpeed: 15
+  clickPunchScale: 1.12
+  clickDuration: 0.09
+  audioSource: {fileID: 0}
+  hoverClip: {fileID: 0}
+  clickClip: {fileID: 0}
+  reduceMotion: 0
+  onClickAfterAnimation:
+    m_PersistentCalls:
+      m_Calls: []
+  postClickDelay: 0.02
 --- !u!222 &9164511115696253522
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -10668,6 +11181,7 @@ GameObject:
   - component: {fileID: 2442286574364789055}
   - component: {fileID: 7417849605181240493}
   - component: {fileID: 4949564693856634540}
+  - component: {fileID: 9208593672058937297}
   m_Layer: 5
   m_Name: Start Button
   m_TagString: Untagged
@@ -10675,6 +11189,32 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &9208593672058937297
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9208593672058937296}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4571c1af1883107438180e042a8b5f1b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  target: {fileID: 0}
+  hoverAmplitude: 6
+  hoverFrequency: 30
+  settleSpeed: 15
+  clickPunchScale: 1.12
+  clickDuration: 0.09
+  audioSource: {fileID: 0}
+  hoverClip: {fileID: 0}
+  clickClip: {fileID: 0}
+  reduceMotion: 0
+  onClickAfterAnimation:
+    m_PersistentCalls:
+      m_Calls: []
+  postClickDelay: 0.02
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
