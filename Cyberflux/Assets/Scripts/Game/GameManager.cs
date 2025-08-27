@@ -562,13 +562,13 @@ if (menuItemUnlock)
         score += 1000;
         score -= seconds * 5;
         score -= minutes * 300;
-
-        if (score > PlayerPrefs.GetInt("Level " + SceneManager.GetActiveScene().buildIndex + " HighScore", 0))
+        int bestScore = (PlayerPrefs.GetInt("Level " + SceneManager.GetActiveScene().buildIndex + " HighScore", 0));
+        if (score > bestScore)
         {
             PlayerPrefs.SetInt("Level " + SceneManager.GetActiveScene().buildIndex + " HighScore", score);
         }
-
-        if ((seconds + (minutes*60)) > PlayerPrefs.GetInt("Level" + SceneManager.GetActiveScene().buildIndex + " TimeInt HighScore"))
+        int bestTime = PlayerPrefs.GetInt("Level" + SceneManager.GetActiveScene().buildIndex + " TimeInt HighScore");
+        if ((seconds + (minutes*60)) < bestTime)
         {
             PlayerPrefs.SetInt("Level" + SceneManager.GetActiveScene().buildIndex + " TimeInt HighScore", ((seconds + (minutes * 60))));
             PlayerPrefs.SetString("Level " + SceneManager.GetActiveScene().buildIndex + " Time HighScore", TimerMinutes.text + TimerSeconds.text + TimerMiliseconds.text);
@@ -588,5 +588,6 @@ if (menuItemUnlock)
         masterVol = PlayerPrefs.GetFloat("Master Volume", .5f);
         sfxVol = PlayerPrefs.GetFloat("SFX Volume", .5f);
         musicVol = PlayerPrefs.GetFloat("Music Volume", .5f);
+        audioMixer.SetFloat("masterVolume", masterVol);
     }
 }
