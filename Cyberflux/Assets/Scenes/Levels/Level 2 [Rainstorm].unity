@@ -252,68 +252,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 880496831191665583, guid: 5a05deecbdafd2b41a06cffef30ccf5c, type: 3}
   m_PrefabInstance: {fileID: 25424093}
   m_PrefabAsset: {fileID: 0}
---- !u!1001 &29079658
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 2135277259}
-    m_Modifications:
-    - target: {fileID: 7605051228005241568, guid: 5f7eff3ffc9785448a9009f48b0e4280, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -5.6822443
-      objectReference: {fileID: 0}
-    - target: {fileID: 7605051228005241568, guid: 5f7eff3ffc9785448a9009f48b0e4280, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 36.339462
-      objectReference: {fileID: 0}
-    - target: {fileID: 7605051228005241568, guid: 5f7eff3ffc9785448a9009f48b0e4280, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -103.65
-      objectReference: {fileID: 0}
-    - target: {fileID: 7605051228005241568, guid: 5f7eff3ffc9785448a9009f48b0e4280, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7605051228005241568, guid: 5f7eff3ffc9785448a9009f48b0e4280, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7605051228005241568, guid: 5f7eff3ffc9785448a9009f48b0e4280, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7605051228005241568, guid: 5f7eff3ffc9785448a9009f48b0e4280, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7605051228005241568, guid: 5f7eff3ffc9785448a9009f48b0e4280, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7605051228005241568, guid: 5f7eff3ffc9785448a9009f48b0e4280, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7605051228005241568, guid: 5f7eff3ffc9785448a9009f48b0e4280, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8815489685484177564, guid: 5f7eff3ffc9785448a9009f48b0e4280, type: 3}
-      propertyPath: m_Name
-      value: Basic Swarm Enemy
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 5f7eff3ffc9785448a9009f48b0e4280, type: 3}
---- !u!4 &29079659 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 7605051228005241568, guid: 5f7eff3ffc9785448a9009f48b0e4280, type: 3}
-  m_PrefabInstance: {fileID: 29079658}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &53926409
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7919,7 +7857,6 @@ Transform:
   - {fileID: 1392923490}
   - {fileID: 459639520}
   - {fileID: 1163086696}
-  - {fileID: 29079659}
   - {fileID: 238871843}
   m_Father: {fileID: 1376889818}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
