@@ -751,6 +751,30 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1926971313933483598, guid: 4ab87e3a90a55ad4fa45ee42cea8082d, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1926971313933483598, guid: 4ab87e3a90a55ad4fa45ee42cea8082d, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1926971313933483598, guid: 4ab87e3a90a55ad4fa45ee42cea8082d, type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1926971313933483598, guid: 4ab87e3a90a55ad4fa45ee42cea8082d, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1926971313933483598, guid: 4ab87e3a90a55ad4fa45ee42cea8082d, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -31
+      objectReference: {fileID: 0}
+    - target: {fileID: 1926971313933483598, guid: 4ab87e3a90a55ad4fa45ee42cea8082d, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -402
+      objectReference: {fileID: 0}
     - target: {fileID: 2480299435760252371, guid: 4ab87e3a90a55ad4fa45ee42cea8082d, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
@@ -807,6 +831,30 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
       objectReference: {fileID: 613632089}
+    - target: {fileID: 7918584963094045983, guid: 4ab87e3a90a55ad4fa45ee42cea8082d, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7918584963094045983, guid: 4ab87e3a90a55ad4fa45ee42cea8082d, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7918584963094045983, guid: 4ab87e3a90a55ad4fa45ee42cea8082d, type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7918584963094045983, guid: 4ab87e3a90a55ad4fa45ee42cea8082d, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7918584963094045983, guid: 4ab87e3a90a55ad4fa45ee42cea8082d, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 7918584963094045983, guid: 4ab87e3a90a55ad4fa45ee42cea8082d, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -190
+      objectReference: {fileID: 0}
     - target: {fileID: 8324990312546616851, guid: 4ab87e3a90a55ad4fa45ee42cea8082d, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
@@ -818,6 +866,10 @@ PrefabInstance:
     - target: {fileID: 9026775810455575558, guid: 4ab87e3a90a55ad4fa45ee42cea8082d, type: 3}
       propertyPath: m_Alpha
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9026775810455575558, guid: 4ab87e3a90a55ad4fa45ee42cea8082d, type: 3}
+      propertyPath: m_Interactable
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
