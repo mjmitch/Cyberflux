@@ -404,6 +404,13 @@ public class EnemyAI : MonoBehaviour, IDamage
         }
         if(type != enemyType.swarm)
             StartCoroutine(RemoveGameObject());
+
+        Collider[] colliders = this.GetComponents<Collider>();
+        colliders.Append(this.GetComponentInChildren<Collider>());
+        for (int i = 0; i < colliders.Length; i++)
+        {
+            colliders[i].enabled = false;
+        }
     }
 
     IEnumerator RemoveGameObject()
