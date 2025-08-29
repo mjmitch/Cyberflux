@@ -1514,18 +1514,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
-    - target: {fileID: 8909683345686949709, guid: 2a43059ae07f44340b28e40e2efb2107, type: 3}
-      propertyPath: m_text
-      value: Key
-      objectReference: {fileID: 0}
-    - target: {fileID: 8909683345686949709, guid: 2a43059ae07f44340b28e40e2efb2107, type: 3}
-      propertyPath: m_fontSize
-      value: 31
-      objectReference: {fileID: 0}
-    - target: {fileID: 8909683345686949709, guid: 2a43059ae07f44340b28e40e2efb2107, type: 3}
-      propertyPath: m_fontSizeBase
-      value: 31
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
