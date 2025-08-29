@@ -7912,6 +7912,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Car
       objectReference: {fileID: 0}
+    - target: {fileID: 6574887129370894343, guid: 5a05deecbdafd2b41a06cffef30ccf5c, type: 3}
+      propertyPath: speed
+      value: 30
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
