@@ -18,6 +18,12 @@ public class UICursor : MonoBehaviour
 
     void Update()
     {
+
+        // force OS cursor hidden
+        if (Cursor.visible) Cursor.visible = false;
+
+        
+
         cursorImage.position = Input.mousePosition;
 
         // Handle shaking
