@@ -355,7 +355,9 @@ public class EnemyAI : MonoBehaviour, IDamage
     public void TakeDamage(int dmg)
     {
         HP -= dmg;
-
+        if (!isInCombat)
+            isInCombat = true;
+        
         if (HP <= 0)
         {
             if (type == enemyType.exploding && !isExploding)
