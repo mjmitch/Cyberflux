@@ -53,7 +53,7 @@ public class EnemyAI : MonoBehaviour, IDamage
     [SerializeField] private AudioClip explosionSound;
     private bool isExploding = false;
     [Header("Flying Enemy Stuff\nLeave blank if not Flying enemy")]
-    [Range(0, 5)] [SerializeField] private int minFlyHeight;
+    [Range(0, 5f)] [SerializeField] private float minFlyHeight;
     [Range(2f, 9f)] [SerializeField] private float maxFlyHeight;
     //[Range(4, 15)] [SerializeField] private int attackRange;
     [Range(5, 25)] [SerializeField] private int circleRange;

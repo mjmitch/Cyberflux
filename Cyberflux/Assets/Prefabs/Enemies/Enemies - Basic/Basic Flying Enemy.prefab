@@ -262,9 +262,9 @@ MonoBehaviour:
   explosionDamage: 5
   explosionEffect: {fileID: 0}
   explosionSound: {fileID: 0}
-  minFlyHeight: 0
-  maxFlyHeight: 2
-  circleRange: 5
+  minFlyHeight: 0.5
+  maxFlyHeight: 2.25
+  circleRange: 14
   type: 4
 --- !u!195 &5205435808787254736
 NavMeshAgent:
