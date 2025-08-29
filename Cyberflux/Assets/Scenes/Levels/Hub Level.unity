@@ -6044,6 +6044,10 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2257054594386482048, guid: 2a43059ae07f44340b28e40e2efb2107, type: 3}
+      propertyPath: m_text
+      value: 'Objective: Remember...'
+      objectReference: {fileID: 0}
     - target: {fileID: 3068587818748875186, guid: 2a43059ae07f44340b28e40e2efb2107, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
