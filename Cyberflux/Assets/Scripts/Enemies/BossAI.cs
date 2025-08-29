@@ -146,7 +146,9 @@ public class BossAI : MonoBehaviour, IDamage
         
         if (bossHP <= 0)
         {
-            score += GameManager.instance.playerScript.GetHP();
+            audioPlayer.volume = 0;
+            audioPlayer.Pause();
+            score += GameManager.instance.playerScript.GetHP() * 2;
             GameManager.instance.score += score;
             ScorePopUp pop = GameManager.instance.popUp;
             pop.SetText("+" + score.ToString());

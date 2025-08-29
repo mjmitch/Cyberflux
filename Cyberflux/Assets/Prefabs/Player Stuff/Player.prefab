@@ -19594,9 +19594,9 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 128
   attackPoint: {fileID: 2990403851026727900}
-  attackRate: 0.75
+  attackRate: 1.2
   attackDamage: 25
-  attackRadius: 1
+  attackRadius: 1.5
   scytheModel: {fileID: 4516050468712928236}
   scytheBar: {fileID: 2583480069387205973}
   playerCam: {fileID: 2937618750886286115}
