@@ -1470,6 +1470,27 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4079929521573970184, guid: 2a43059ae07f44340b28e40e2efb2107, type: 3}
+      propertyPath: 'tutorialMessages.Array.data[0]'
+      value: Press LMB (Left-click) to strike with your blade.
+      objectReference: {fileID: 0}
+    - target: {fileID: 4079929521573970184, guid: 2a43059ae07f44340b28e40e2efb2107, type: 3}
+      propertyPath: 'tutorialMessages.Array.data[1]'
+      value: "Press Q to throw the Scythe\u2019s arc"
+      objectReference: {fileID: 0}
+    - target: {fileID: 4079929521573970184, guid: 2a43059ae07f44340b28e40e2efb2107, type: 3}
+      propertyPath: 'tutorialMessages.Array.data[2]'
+      value: "The Black gauge holds the Scythe\u2019s charge"
+      objectReference: {fileID: 0}
+    - target: {fileID: 4079929521573970184, guid: 2a43059ae07f44340b28e40e2efb2107, type: 3}
+      propertyPath: 'tutorialMessages.Array.data[3]'
+      value: The Pink gauge fuels your momentum. It gives you access to sliding,
+        jumping, and dashing.
+      objectReference: {fileID: 0}
+    - target: {fileID: 4079929521573970184, guid: 2a43059ae07f44340b28e40e2efb2107, type: 3}
+      propertyPath: 'tutorialMessages.Array.data[4]'
+      value: "Press \u2B7C (Middle-click) to unleash Momentum\u2019s surge."
+      objectReference: {fileID: 0}
     - target: {fileID: 4841870382532518927, guid: 2a43059ae07f44340b28e40e2efb2107, type: 3}
       propertyPath: m_LocalPosition.x
       value: 2.47
