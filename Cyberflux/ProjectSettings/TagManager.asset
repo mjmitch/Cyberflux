@@ -8,6 +8,7 @@ TagManager:
   - Hazard
   - BossDoor
   - Boss
+  - Secondary Cam
   layers:
   - Default
   - TransparentFX

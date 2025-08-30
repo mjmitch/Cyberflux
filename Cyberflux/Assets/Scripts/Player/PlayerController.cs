@@ -406,6 +406,7 @@ public class PlayerController : MonoBehaviour, IDamage, IHeal
         {
             state = MovementState.sprinting;
             cam.fieldOfView = Mathf.Lerp(cam.fieldOfView, sprintingFov, Time.deltaTime * fovChangeSpeed);
+            GameObject.FindWithTag("Secondary Cam").GetComponent<Camera>().fieldOfView = cam.fieldOfView;
             desiredMoveSpeed = sprintSpeed * movementMult;
 
             
@@ -437,6 +438,7 @@ public class PlayerController : MonoBehaviour, IDamage, IHeal
         }
 
         cam.fieldOfView = Mathf.Lerp(cam.fieldOfView, NormalFov, Time.deltaTime * fovChangeSpeed);
+        GameObject.FindWithTag("Secondary Cam").GetComponent<Camera>().fieldOfView = cam.fieldOfView;
 
         lastDesiredMoveSpeed = desiredMoveSpeed;
     }
