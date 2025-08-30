@@ -14524,11 +14524,12 @@ MonoBehaviour:
   audioMixer: {fileID: 24100000, guid: 166f7127cd5aad44d840c8cf69142e2b, type: 2}
   scytheCursorGroup: {fileID: 653844502374306135}
   tutorialMessages:
-  - 'Middle Mouse: Momentum Attack'
-  - 'Left Mouse: Basic Attack'
-  - 'Right Mouse: Scythe Projectile Attack'
-  - 'Black Bar: Projectile Recharge'
-  - 'Blue Bar: Momentum (Sliding, Wallrunning, Dashing)'
+  - Press LMB (Left-click) to strike with your blade.
+  - "Press Q to throw the Scythe\u2019s arc"
+  - "The Black gauge holds the Scythe\u2019s charge"
+  - The Pink gauge fuels your momentum. It gives you access to sliding, jumping,
+    and dashing.
+  - "Press \u2B7C (Middle-click) to unleash Momentum\u2019s surge."
   minutes: 0
   TimerMinutes: {fileID: 7617154106059651497}
   seconds: 0
