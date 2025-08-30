@@ -8,6 +8,7 @@ public class Keys : MonoBehaviour
         if (other.CompareTag("PlayerModel"))
         {
             GameManager.instance.playerScript.keys++;
+            GameManager.instance.keyImage.gameObject.SetActive(true);
             Destroy(gameObject);
         }
     }
