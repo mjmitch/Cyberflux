@@ -395,7 +395,7 @@ public class PlayerController : MonoBehaviour, IDamage, IHeal
         }
 
         //Crouching
-        else if(Input.GetKeyDown(crouchKey))
+        else if(Input.GetKey(crouchKey))
         {
             state = MovementState.crouching;
             desiredMoveSpeed = crouchSpeed * movementMult;
