@@ -43,6 +43,10 @@ public class Door : MonoBehaviour
                 if (keyRequired && !keyGiven)
                 {
                     GameManager.instance.playerScript.keys--;
+                    if (GameManager.instance.playerScript.keys == 0)
+                    {
+                        GameManager.instance.keyImage.gameObject.SetActive(false);
+                    }
                     keyGiven = true;
                 }
                 {

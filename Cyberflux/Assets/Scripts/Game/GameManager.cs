@@ -55,6 +55,8 @@ public class GameManager : MonoBehaviour
     
     [SerializeField] public AudioSource UIAudioSource;
     [SerializeField] public AudioMixer audioMixer;
+
+    [SerializeField] public Image keyImage;
     //[SerializeField] AudioClip mainMenu;
 
 
@@ -150,7 +152,7 @@ public class GameManager : MonoBehaviour
 
         // Hide scythe cursor on start
         if (scytheCursorGroup != null) scytheCursorGroup.alpha = 0f;
-
+        keyImage.gameObject.SetActive(false);
         LoadSettings();
       
 
