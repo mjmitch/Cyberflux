@@ -510,6 +510,10 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2257054594386482048, guid: 2a43059ae07f44340b28e40e2efb2107, type: 3}
+      propertyPath: m_text
+      value: 'Objective: Fight the system...'
+      objectReference: {fileID: 0}
     - target: {fileID: 4841870382532518927, guid: 2a43059ae07f44340b28e40e2efb2107, type: 3}
       propertyPath: m_LocalPosition.x
       value: -21.9

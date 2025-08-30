@@ -1514,18 +1514,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
-    - target: {fileID: 8909683345686949709, guid: 2a43059ae07f44340b28e40e2efb2107, type: 3}
-      propertyPath: m_text
-      value: Key
-      objectReference: {fileID: 0}
-    - target: {fileID: 8909683345686949709, guid: 2a43059ae07f44340b28e40e2efb2107, type: 3}
-      propertyPath: m_fontSize
-      value: 31
-      objectReference: {fileID: 0}
-    - target: {fileID: 8909683345686949709, guid: 2a43059ae07f44340b28e40e2efb2107, type: 3}
-      propertyPath: m_fontSizeBase
-      value: 31
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -9793,6 +9781,14 @@ PrefabInstance:
     - target: {fileID: 2092710153459797573, guid: 07c1ff3e2483464488629b233b3cfcbb, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4401698081954976079, guid: 07c1ff3e2483464488629b233b3cfcbb, type: 3}
+      propertyPath: m_Size.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4401698081954976079, guid: 07c1ff3e2483464488629b233b3cfcbb, type: 3}
+      propertyPath: m_Size.y
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4592488167301606398, guid: 07c1ff3e2483464488629b233b3cfcbb, type: 3}
       propertyPath: m_Name

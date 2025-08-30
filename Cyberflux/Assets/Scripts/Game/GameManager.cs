@@ -64,11 +64,11 @@ public class GameManager : MonoBehaviour
     [SerializeField]
      private List<string> tutorialMessages = new List<string>()
      {
-    "Press LMB (Left-click) to strike with your blade.",
-    "Press Q to throw the Scythe’s arc",
-    "The Black gauge holds the Scythe’s charge.",
-    "The Pink gauge fuels your momentum. It gives you acess to sliding, jumping, and dashing.",
-    "Press ⭼ (Middle-click) to unleash Momentum’s surge."
+        "Press LMB (Left-click) to strike with your blade.",
+        "Press Q to throw the Scythe’s arc",
+        "The Black gauge holds the Scythe’s charge.",
+        "The Pink gauge fuels your momentum. It gives you acess to sliding, jumping, and dashing.",
+        "Press ⭼ (Middle-click) to unleash Momentum’s surge."
      };
 
     private float tutorialTimer = 0f;
