@@ -417,7 +417,7 @@ MonoBehaviour:
   shootRates:
   - 1
   - 1.5
-  bossHP: 0
+  bossHP: 400
   score: 250
   attackDistance: 15.03
   enemiesToSpawn:
