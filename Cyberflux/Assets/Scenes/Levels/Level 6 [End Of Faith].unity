@@ -127,22 +127,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1817517324184699225, guid: 969f6e751948d92408b069af1b441fc0, type: 3}
-      propertyPath: bossHP
-      value: 500
-      objectReference: {fileID: 0}
-    - target: {fileID: 1817517324184699225, guid: 969f6e751948d92408b069af1b441fc0, type: 3}
-      propertyPath: teleportSound
-      value: 
-      objectReference: {fileID: 8300000, guid: 294c27709a2cb1146a6d98fda919fa42, type: 3}
-    - target: {fileID: 1817517324184699225, guid: 969f6e751948d92408b069af1b441fc0, type: 3}
-      propertyPath: 'musicPerPhase.Array.data[0]'
-      value: 
-      objectReference: {fileID: 8300000, guid: 508aabdf297b983479a71638ae343bae, type: 3}
-    - target: {fileID: 1817517324184699225, guid: 969f6e751948d92408b069af1b441fc0, type: 3}
-      propertyPath: 'musicPerPhase.Array.data[1]'
-      value: 
-      objectReference: {fileID: 8300000, guid: 01ca68242606d7a4f9b8965da5e2882e, type: 3}
     - target: {fileID: 5182629214773297863, guid: 969f6e751948d92408b069af1b441fc0, type: 3}
       propertyPath: m_Name
       value: Boss
