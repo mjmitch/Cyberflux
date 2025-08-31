@@ -417,7 +417,7 @@ MonoBehaviour:
   shootRates:
   - 1
   - 1.5
-  bossHP: 400
+  bossHP: 500
   score: 250
   attackDistance: 15.03
   enemiesToSpawn:
@@ -434,10 +434,10 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 6f1de3bb2bffbbb47a87ffccd72cd83e, type: 3}
   - {fileID: 8300000, guid: 5fb2ae3d6003bf64bb8ccb22254f3948, type: 3}
   musicPerPhase:
-  - {fileID: 8300000, guid: d42b603d5b96def41a0b545b8053ce87, type: 3}
-  - {fileID: 8300000, guid: 3add85711350fd64aac543b6a2f53ffb, type: 3}
+  - {fileID: 8300000, guid: 508aabdf297b983479a71638ae343bae, type: 3}
+  - {fileID: 8300000, guid: 01ca68242606d7a4f9b8965da5e2882e, type: 3}
   fadeTime: 1
-  teleportSound: {fileID: 8300000, guid: 36b5ee5b26cdceb4aa1cdca8effe6755, type: 3}
+  teleportSound: {fileID: 8300000, guid: 294c27709a2cb1146a6d98fda919fa42, type: 3}
   teleportRate: 4.4
   maxTeleportDistance: 10.14
 --- !u!195 &852174584393683555
