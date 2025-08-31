@@ -152,7 +152,8 @@ public class GameManager : MonoBehaviour
 
         // Hide scythe cursor on start
         if (scytheCursorGroup != null) scytheCursorGroup.alpha = 0f;
-        keyImage.gameObject.SetActive(false);
+        if(keyImage)
+            keyImage.gameObject.SetActive(false);
         LoadSettings();
       
 
