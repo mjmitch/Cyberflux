@@ -4974,7 +4974,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   type: 2
   rb: {fileID: 0}
-  slowEffect: 1
+  slowEffect: 0
   damageAmount: 1
   damageRate: 0.2
   speed: 0
